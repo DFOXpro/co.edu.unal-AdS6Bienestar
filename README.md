@@ -6,6 +6,8 @@ Arquitectura de Software semestre 2 2015
 Proyecto Bienestar Grupo 6
 
 Integrantes:
- *
- * Daniel Reinaldo Zorro Forero        2879178
- * Diego Alexander Gerena Quiñones     2879123
+ * JR 								   (Server Master)
+ * CL 								   (GUI Master)
+ * AM 								   (Doc & Test Master)
+ * Daniel Reinaldo Zorro Forero        (Scrum Master)
+ * Diego Alexander Gerena Quiñones     (DB Master)

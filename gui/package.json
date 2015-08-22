@@ -1,0 +1,30 @@
+{
+  "name": "co.edu.unal-AdS6Bienestar/ClienteWEB",
+  "version": "0.0.1",
+  "description": "Testing just that",
+  "homepage": "",
+  "author": "Grupo 6 Arquitectura de Software semestre 2 2015 Bogotá Universidad Nacional de Colombia.",
+  "license": "../LICENCE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DFOXpro/co.edu.unal-AdS6Bienestar.git"
+  },
+  "keywords": [
+    "html5",
+    "programming",
+    "Arquitectura de Software",
+    "Universiad Nacional de Colombia"
+  ],
+  "bugs": {
+    "url": "https://github.com/DFOXpro/co.edu.unal-AdS6Bienestar/issues"
+  },
+  "dependencies": {
+    "grunt": "latest",
+    "bower": "latest",
+    "grunt-contrib-stylus": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-jade": "latest",
+    "load-grunt-tasks": "latest",
+    "grunt-contrib-copy": "~0.7.0"
+  }
+}

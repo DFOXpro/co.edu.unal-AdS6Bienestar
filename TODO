@@ -1,0 +1,22 @@
+TODO
+    fechas
+        * 31 Agosto: Diagrama flujo de datos
+        * 7 Septiembre: Diagramas de capas
+        * 16 Septiembre: Entrega del programa
+    SCRUM
+        * Andrés Mora: (Docs & Testing)
+		* Javier Rincon: Chief (Server) Officer
+        * Diego Gerena: Chief (Sql & persitan) Officer
+        * Carlos: Chief (GUI & WEB) Officer
+        * Daniel Zorro: Chief (Scrum Master) Officer
+        
+
+    ARQUITECTURA
+		* Diseño flujo de datos +
+        * Capas
+
+    DESARROLLO
+		* Login +++
+        * Persistencia en Oracle/JDBM ++
+        * Server JEE ++
+        * Cliente html5 StandAlone Angular ++

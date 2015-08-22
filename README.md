@@ -8,3 +8,4 @@ Proyecto Bienestar Grupo 6
 Integrantes:
  *
  * Daniel Reinaldo Zorro Forero        2879178
+ * Diego Alexander Gerena Quiñones     2879123

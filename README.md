@@ -7,7 +7,7 @@ Proyecto Bienestar Grupo 6
 
 Integrantes:
  * JR 								   (Server Master)
- * CL 								   (GUI Master)
+ * Carlos Leonardo Mahecha Parra (GUI Master)
  * AM 								   (Doc & Test Master)
  * Daniel Reinaldo Zorro Forero        (Scrum Master)
  * Diego Alexander Gerena Quiñones     (DB Master)

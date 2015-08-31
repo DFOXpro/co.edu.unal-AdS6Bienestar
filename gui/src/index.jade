@@ -1,0 +1,29 @@
+//- index.jade
+extends ./main
+
+block title
+	title Bienestar
+
+block content
+	form(
+		action="network/autenticacion"
+		method="post"
+	)
+		h1 Inicia sesión
+		input(
+			type="hidden"
+			name="tipo"
+			value="iniciar"
+		)
+		input(
+			type="text"
+			name="usuario"
+		)
+		input(
+			type="password"
+			name="contrasena"
+		)
+		input(
+			type="submit"
+			value="Entrar"
+		)

@@ -2,3 +2,5 @@ nbproject/
 build/
 dist/
 build.xml
+web/js/
+web/index.html

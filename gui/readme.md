@@ -15,7 +15,7 @@ sudo apt-get install nodejs-legacy
 ##Compiling the project
 ```
 cd <this folder>
-sudo npm install -g grunt-cli bower
+sudo npm install -g
 npm install
 bower install
 grunt;#For dev

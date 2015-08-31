@@ -21,8 +21,8 @@ public class Autenticacion {
 //TEST
         //contrasena = Crifrado.de(contrasena);
         //@TODO: Cifrado
-        if (u.getUsuario() == usuario) {
-            if (u.getContrasena() == contrasena) {
+        if (u.getUsuario().equals(usuario)) {
+            if (u.getContrasena().equals(contrasena)) {
                 ArrayList r = new ArrayList();
                 r.add("exitoso");
                 r.add(u.getNombre());

@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 					filter: 'isFile',
 					flatten: true,
 					cwd: './bower_components/',
-					src: ['Angular/angular.js'],
+					src: ['angular/angular.js','livereload-js/dist/livereload.js'],
 					dest: 'build/js/'
 				},
 				devSrc: {
@@ -20,6 +20,12 @@ module.exports = function(grunt) {
 					cwd: 'src/js/',
 					src: '**',
 					dest: 'build/js/'
+				},
+				toServer: {
+					expand: true,
+					cwd: 'build/',
+					src: '**',
+					dest: '../server/web/'
 				}
 			},
 
@@ -33,7 +39,7 @@ module.exports = function(grunt) {
 					},
 					files: {
 						//"build/decoy.html": 'src/decoy.jade',
-						"build/app.html": 'src/views/main.jade',
+						"build/index.html": 'src/index.jade',
 					}
 				},
 				prod: {
@@ -45,7 +51,7 @@ module.exports = function(grunt) {
 					},
 					files: {
 						//"build/index.html": 'src/index.jade',//decoy
-						"build/~index.html": 'src/views/main.jade',//real app
+						"build/index.html": 'src/index.jade',//real app
 					}
 				}
 			},
@@ -66,7 +72,7 @@ module.exports = function(grunt) {
 
 			watch: {
 				views: {
-					files: ['src/views/**/*.jade','src/views/**/*.svg'],
+					files: ['src/**/*.jade','src/**/*.svg'],
 					tasks: ['jade:dev'],
 					options: {
 						livereload: true
@@ -93,9 +99,8 @@ module.exports = function(grunt) {
 	// Default task(s).
 	grunt.registerTask(
 		'dev', [
-			'copy',
-			'stylus:dev',
 			'jade:dev',
+			'copy',
 			'watch'
 		]
 	);

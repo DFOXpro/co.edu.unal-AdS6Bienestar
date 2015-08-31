@@ -40,7 +40,6 @@ public class Autenticacion extends HttpServlet {
                     JSONObject obj=new JSONObject();
                     obj.put("isError",new Boolean(true));
                     obj.put("errorDescrip","El usuario no está registrado");
-                    System.out.print(obj);
                     out.print(obj);
                 } else if(r.get(1)=="contrasena"){
                     JSONObject obj=new JSONObject();
@@ -51,7 +50,7 @@ public class Autenticacion extends HttpServlet {
             } else if(r.get(0)=="exitoso"){
                 JSONObject obj=new JSONObject();
                 obj.put("nombre",r.get(1));
-                obj.put("rol",r.get(2));
+                obj.put("rol",""+r.get(2));
                 out.print(obj);
             } else errordeRespuesta(r, out);
         } finally {

@@ -1,0 +1,31 @@
+//-- This is the base page
+doctype html
+html
+	head
+		meta(
+			http-equiv="content-type"
+			content="text/html; charset=UTF-8"
+		)
+		link(
+			type="text/css"
+			rel="stylesheet"
+			href="main.css"
+		)
+		if debug
+			//- For dev only
+			script(src="http://localhost:35729/livereload.js")
+			script(src="js/angular.js")
+
+		else
+			script(src="general.js")
+		block title
+			title "Bienestar Estudiantil"
+
+	body
+		include theme/header
+		include theme/content
+		//include theme/footer
+
+		if debug
+			//App
+			//script(src="js/utiles.js")

@@ -1,0 +1,5 @@
+#Temp files from gedit and others
+*~
+bower_components/
+build/
+node_modules/

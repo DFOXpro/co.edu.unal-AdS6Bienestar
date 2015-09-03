@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 					filter: 'isFile',
 					flatten: true,
 					cwd: './bower_components/',
-					src: ['angular/angular.js','livereload-js/dist/livereload.js'],
+					src: ['angular/angular.min.js','livereload-js/dist/livereload.js'],
 					dest: 'build/js/'
 				},
 				devSrc: {

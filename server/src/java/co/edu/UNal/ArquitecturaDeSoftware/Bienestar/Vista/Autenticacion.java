@@ -27,23 +27,24 @@ public class Autenticacion extends HttpServlet {
     protected void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         
-        ArrayList r = co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Autenticacion.autenticar(
+        ArrayList r = co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Autenticacion.autenticar(
                 request.getParameter("usuario"),
-                request.getParameter("contrasena")
+                request.getParameter("contrasena"),//cifrado
+                "1234",//request.getParameter("lp"),//Llave publica
+                "4321"//request.getParameter("chc")//Cookie hashCode
         );
-
-        response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             if(r.get(0)=="error"){
                 if(r.get(1)=="usuario"){
                     JSONObject obj=new JSONObject();
-                    obj.put("isError",new Boolean(true));
+                    obj.put("isError",true);
                     obj.put("errorDescrip","El usuario no está registrado");
                     out.print(obj);
                 } else if(r.get(1)=="contrasena"){
                     JSONObject obj=new JSONObject();
-                    obj.put("isError",new Boolean(true));
+                    obj.put("isError",true);
                     obj.put("errorDescrip","La contraseña no coinside");
                     out.print(obj);
                 } else errordeRespuesta(r, out);
@@ -51,6 +52,7 @@ public class Autenticacion extends HttpServlet {
                 JSONObject obj=new JSONObject();
                 obj.put("nombre",r.get(1));
                 obj.put("rol",""+r.get(2));
+                obj.put("cs",""+r.get(3));
                 out.print(obj);
             } else errordeRespuesta(r, out);
         } finally {
@@ -68,14 +70,15 @@ public class Autenticacion extends HttpServlet {
      */
     protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //@TODO: cerrarSesion
+        //@TODO: cerrarSesion en cliente
+        co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Autenticacion.cerrarSesion(request.getParameter("usuario"),request.getParameter("chc"));
+        response.sendRedirect(Static.HOME);
     }
     private void errordeRespuesta(ArrayList r, PrintWriter out){
         JSONObject obj=new JSONObject();
-        obj.put("isError",new Boolean(true));
+        obj.put("isError",true);
         obj.put("errorDescrip","Error inesperado");
-        org.jboss.logging.Logger.getLogger(Autenticacion.class.getName())
-        .error("Respuesta inesperada del control !! r.size:"+r.size()+"|r0:"+r.get(0)+"|r1:"+r.get(1));
+        System.err.print("Respuesta inesperada del control !! r.size:"+r.size()+"|r0:"+r.get(0)+"|r1:"+r.get(1));
         out.print(obj);
     }
 
@@ -93,8 +96,7 @@ public class Autenticacion extends HttpServlet {
     throws ServletException, IOException {
         //DO NOTHING
         response.sendRedirect(Static.PAGINA_403_NO_DISPONIBLE);
-        org.jboss.logging.Logger.getLogger(Autenticacion.class.getName())
-        .warn("acceso por post: "+request);
+        System.out.print("Warning!: acceso por post: "+request);
     }
 
     /**
@@ -110,8 +112,7 @@ public class Autenticacion extends HttpServlet {
     throws ServletException, IOException {
         if("iniciar".equals(request.getParameter("tipo"))) iniciarSesion(request, response);
         else if("cerrar".equals(request.getParameter("tipo"))) cerrarSesion(request, response);
-        else org.jboss.logging.Logger.getLogger(Autenticacion.class.getName())
-        .error("tipo de request invalido: "+request);
+        else System.err.print("tipo de request invalido: "+request);
     }
 
     /**

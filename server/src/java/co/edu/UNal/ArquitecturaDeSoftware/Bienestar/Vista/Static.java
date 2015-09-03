@@ -10,7 +10,8 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista;
  * @author dfoxpro
  */
 public class Static {
-    static String PAGINA_403_NO_DISPONIBLE ="401.html";
-    static String PAGINA_404_NO_EXISTE ="404.html";
-    static String PAGINA_500_ERROR_DEL_SERVIDOR ="500.html";
+    static String PAGINA_403_NO_DISPONIBLE ="/401.html";
+    static String PAGINA_404_NO_EXISTE ="/404.html";
+    static String PAGINA_500_ERROR_DEL_SERVIDOR ="/500.html";
+    static String HOME = "/index.html";
 }

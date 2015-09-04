@@ -18,7 +18,8 @@
     "tests"
   ],
   "dependencies": {
-    "livereload-js": "~2.2.1",
-    "angular": "latest"
+    "angular": "latest",
+    "cryptico": "*",
+    "livereload-js": "~2.2.1"
   }
 }

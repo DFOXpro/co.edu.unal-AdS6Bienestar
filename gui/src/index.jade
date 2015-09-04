@@ -1,29 +1,36 @@
 //- index.jade
 extends ./main
+block variables
+	- npApp = "app"
+
+block devScriptHead
+	script(src="js/conexion/conexion.js")
+	script(src="js/control/landing.js")
+
+block scriptHead
+	script(src="landing.js")
+
 
 block title
 	title Bienestar
 
 block content
-	form(
-		action="network/autenticacion"
-		method="post"
+	.sesion.iniciar(
+		ng-controller="landing"
 	)
-		h1 Inicia sesión
-		input(
-			type="hidden"
-			name="tipo"
-			value="iniciar"
+		form(
+			ng-submit="iniciarSesion()"
 		)
-		input(
-			type="text"
-			name="usuario"
-		)
-		input(
-			type="password"
-			name="contrasena"
-		)
-		input(
-			type="submit"
-			value="Entrar"
-		)
+			h1 Inicia sesión
+			input(
+				type="text"
+				name="usuario"
+			)
+			input(
+				type="password"
+				name="contrasena"
+			)
+			input(
+				type="submit"
+				value="Entrar"
+			)

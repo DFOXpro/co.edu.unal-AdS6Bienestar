@@ -5,3 +5,7 @@ build.xml
 #Se hace push a los estaticos compilados por si las moscas
 #web/js/
 #web/index.html
+
+#Librerias que netbean puede agregar de alegre
+src/lib/CopyLibs/
+src/lib/javaee-endorsed-api-6.0/

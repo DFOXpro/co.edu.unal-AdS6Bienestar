@@ -1,4 +1,5 @@
 //-- This is the base page
+block variables
 doctype html
 html
 	head
@@ -11,21 +12,28 @@ html
 			rel="stylesheet"
 			href="main.css"
 		)
+
 		if debug
 			//- For dev only
 			script(src="http://localhost:35729/livereload.js")
-			script(src="js/angular.min.js")
-
+			script(src="js/lib/angular.min.js")
+			script(src="js/lib/cryptico.min.js")
+			script(src="js/app.js")
 		else
-			script(src="general.js")
+			script(src="js/general.js")
+			block scriptHead
+
 		block title
 			title "Bienestar Estudiantil"
 
-	body
+	body(
+		ng-app = npApp
+	)
 		include theme/header
 		include theme/content
-		//include theme/footer
+		//- include theme/footer
 
 		if debug
-			//App
-			//script(src="js/utiles.js")
+			//- App
+			block devScriptHead
+			//- script(src="js/utiles.js")

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <script src="http://localhost:35729/livereload.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/cryptico.min.js"></script>
+    <script src="js/app.js"></script>
+    <title>Bienestar</title>
+  </head>
+  <body ng-app="app">
+    <header>
+      <h1>Titulo grande</h1>
+      <button>loggin</button>
+    </header>
+    <section>
+      <div ng-controller="landing" class="sesion iniciar">
+        <form ng-submit="iniciarSesion()">
+          <h1>Inicia sesión</h1>
+          <input type="text" name="usuario">
+          <input type="password" name="contrasena">
+          <input type="submit" value="Entrar">
+        </form>
+      </div>
+    </section>
+    <script src="js/conexion/conexion.js"></script>
+    <script src="js/control/landing.js"></script>
+  </body>
+</html>

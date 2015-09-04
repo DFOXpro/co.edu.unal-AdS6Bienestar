@@ -1,6 +1,6 @@
-app.controller('landing', ['$scope', '$conexion', function ($scope, $conexion) {
+app.controller('landing', function ($scope, $conexion) {
 	console.log("landing");
-	$conexion.innit();
+	$conexion.iniciar();
 	$scope.formData = {
 		tipo: "",
 		llavePublica: $conexion.getLlavePublica(),
@@ -17,4 +17,4 @@ app.controller('landing', ['$scope', '$conexion', function ($scope, $conexion) {
 		console.log("usr ", $scope.formData.usuario);
 		console.log("ctñ ", $scope.formData.contrasena);
 	};
-}]);
+});

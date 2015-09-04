@@ -1,7 +1,7 @@
 /**
  Esta es una interfaz a Cryptico y a todos los procesos POST
 **/
-app.factory('$conexion', function ($scope) {
+app.factory('$conexion', function () {
 //PRIVATE STATIC FINAL
 	var ruta = "network/autenticacion",
 		cookieHashCode = "",
@@ -40,9 +40,9 @@ Funcion inicializa las variables de comunicación
 		}
 		else cookieHashCode = localStorage.getItem("2");
 		llavePublica = cryptico.publicKeyString(llavePrivada);
-		localStorage.setItem("llpr", llavePrivada);
+		localStorage.setItem("1", llavePrivada);
 		localStorage.setItem("llpb", llavePublica);
-		localStorage.setItem("chc", cookieHashCode);
+		localStorage.setItem("2", cookieHashCode);
 		console.log("llpr: ", llavePrivada);
 		console.log("llpb: ", llavePublica);
 		console.log("chc: ", cookieHashCode);

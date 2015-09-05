@@ -9,3 +9,5 @@ build.xml
 #Librerias que netbean puede agregar de alegre
 src/lib/CopyLibs/
 src/lib/javaee-endorsed-api-6.0/
+src/lib/hibernate4-persistence/
+

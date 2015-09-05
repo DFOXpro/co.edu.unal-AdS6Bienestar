@@ -25,6 +25,12 @@ module.exports = function (grunt) {
 				src: '**',
 				dest: 'build/js/'
 			},
+			devThemes: {
+				expand: true,
+				cwd: 'src/css/',
+				src: '**',
+				dest: 'build/css/'
+			},
 			toServer: {
 				expand: true,
 				cwd: 'build/',
@@ -44,6 +50,10 @@ module.exports = function (grunt) {
 				files: {
 					//"build/decoy.html": 'src/decoy.jade',
 					"build/index.html": 'src/index.jade',
+					"build/paneles/panel_admin.html": 'src/theme/Vistas_JADE/admin_main.jade',
+					"build/login_general.html": 'src/theme/Vistas_JADE/login_general.jade',
+					"build/registro_general.html": 'src/theme/Vistas_JADE/registro_general.jade',
+
 				}
 			},
 			prod: {

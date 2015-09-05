@@ -15,22 +15,19 @@ block title
 	title Bienestar
 
 block content
-	.sesion.iniciar(
+	.login-card(
 		ng-controller="landing"
-	)
+      	)
+		h1 Log-in Bienestar
+		br
 		form(
 			ng-submit="iniciarSesion()"
 		)
-			h1 Inicia sesión
-			input(
-				type="text"
-				name="usuario"
-			)
-			input(
-				type="password"
-				name="contrasena"
-			)
-			input(
-				type="submit"
-				value="Entrar"
-			)
+		input(type='text', name='usuario', placeholder='E-mail')
+		input(type='password', name='contrasena', placeholder='Contraseña')
+		input.login.login-submit(type='submit', name='login', value='Login')
+		.login-help
+		a(href	='#') Registrarse
+		|  • 
+		a(href='#') ¿Olvidó su contraseña?
+

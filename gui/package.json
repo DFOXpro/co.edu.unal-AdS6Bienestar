@@ -19,14 +19,14 @@
     "url": "https://github.com/DFOXpro/co.edu.unal-AdS6Bienestar/issues"
   },
   "dependencies": {
+    "bower": "latest",
     "grunt": "latest",
     "grunt-cli": "latest",
-    "bower": "latest",
+    "grunt-contrib-copy": "~0.7.0",
+    "grunt-contrib-jade": "latest",
     "grunt-contrib-stylus": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-contrib-jade": "latest",
-    "load-grunt-tasks": "~3.2.0",
-    "grunt-contrib-copy": "~0.7.0"
+    "load-grunt-tasks": "^3.2.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5"

@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title Log-in
+    link(rel='stylesheet', href='../../gui/build/css/style.css')
+  body
+    .login-card
+      h1 Log-in Bienestar
+      br
+      form
+        input(type='text', name='email', placeholder='E-mail')
+        input(type='password', name='pass', placeholder='Contraseña')
+        input.login.login-submit(type='submit', name='login', value='Login')
+      .login-help
+        a(href='#') Registrarse
+        |  • 
+        a(href='#') ¿Olvidó su contraseña?

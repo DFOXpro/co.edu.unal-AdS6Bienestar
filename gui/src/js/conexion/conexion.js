@@ -1,7 +1,7 @@
 /**
  Esta es una interfaz a Cryptico y a todos los procesos POST
 **/
-app.factory('$conexion', function () {
+app.factory('$conexion', function ($http) {
 //PRIVATE STATIC FINAL
 	var ruta = "network/autenticacion",
 		cookieHashCode = "",
@@ -82,7 +82,19 @@ Funcion asincrona que hace peticiones rest
 	Function se ejecutará tras cualquier respuesta del server
 @return
 **/
-	r.enviar = function (strRuta, strJson, callback) {}
+	r.enviar = function (strRuta, objData, callback) {
+		var req = {
+		method: 'POST',
+		//window.location.host por que no vamos a usar un dominio especifico
+		url: window.location.host+"/network/"+strRuta,
+		headers: {
+			'Cookie': cookieHashCode
+		},
+		data: objData
+}
+
+$http(req).then(function(){...}, function(){...});
+	}
 
 //GETs
 	r.getLlavePublica = function () {

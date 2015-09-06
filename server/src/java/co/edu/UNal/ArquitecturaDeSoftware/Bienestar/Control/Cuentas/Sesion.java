@@ -5,6 +5,7 @@
  */
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
 
+import java.security.KeyPair;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 public class Sesion {
     private final String llaveCliente;
-    private final int[] llavesServer;
+    private final Llaves llavesServer;
     private final String cokieHashCode;
     private final Date finDeSesion;
 
@@ -27,12 +28,16 @@ public class Sesion {
         this.finDeSesion = generarFindeSesion();
     }
 
-    public String getLlaveCliente() {
-        return llaveCliente;
+    private Date generarFindeSesion() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.DATE, 30);//Fecha actual + 30 días
+        return c.getTime();
     }
 
-    public int[] getLlavesServer() {
-        return llavesServer;
+//GETs
+    public String getLlaveCliente() {
+        return llaveCliente;
     }
 
     public String getCokieHashCode() {
@@ -43,20 +48,17 @@ public class Sesion {
         return finDeSesion;
     }
 
+    public Llaves getLlavesServer() {
+        return llavesServer;
+    }
+
     @Override
     public String toString() {
         return 
             "Sesion{" +
             "llaveCliente=" + llaveCliente +
-            ", llavesServer=[" + llavesServer[0]+","+llavesServer[1] +
-            "], cokieHashCode=" + cokieHashCode +
+            ", llavesServer=" + llavesServer +
+            ", cokieHashCode=" + cokieHashCode +
             ", finDeSesion=" + new SimpleDateFormat("HH:mm dd/MM/yyyy").format(finDeSesion) + '}';
-    }
-
-    private Date generarFindeSesion() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.add(Calendar.DATE, 30);//Fecha actual + 30 días
-        return c.getTime();
     }
 }

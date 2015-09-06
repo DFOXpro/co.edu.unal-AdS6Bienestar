@@ -17,7 +17,7 @@ public class Activas {
 
     static public Sesion agregarSesion (String usuario, String llavePublica, String cookieHashTag){
         if (sesionesActivas == null)
-            sesionesActivas = new HashMap<String, Sesion>();
+            sesionesActivas = new HashMap<>();
         //Cierra la sesion anterior
         //@Deprecated: Map.put remplaza al anterior 
         //if(sesionesActivas.get(usuario) != null) sesionesActivas.remove(usuario);

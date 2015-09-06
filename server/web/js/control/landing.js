@@ -21,15 +21,23 @@ app.controller('landing', function ($scope, $conexion) {
 			console.log("usr ", $scope.is.usuario);
 			console.log("ctñ ", $scope.is.contrasena);
 			$conexion.enviar(
-				"asd",
+				"sesion",
 				{
-					"1": $conexion.cifrar($scope.is.usuario),
-					"2": $conexion.cifrar($scope.is.contrasena),
-					"3": $conexion.cifrar($scope.is.cokieHashCode),
-					"4": $scope.is.llavePublica
+					tipo:"iniciar",
+//btoa es un cifrador base64
+					1: window.btoa($scope.is.usuario),
+					2: window.btoa($scope.is.contrasena),
+					3: window.btoa($scope.is.cokieHashCode),
+					4: $scope.is.llavePublica
 				},
-				function(){
-					$scope.is.error="Listo"
+				function(respuesta){
+					console.log("rta: ", respuesta)
+					if(respuesta.data.isError)
+						$scope.is.error=respuesta.data.errorDescrip
+					else {
+						localStorage.setItem("4",respuesta.data.llpbSer);
+						location.replace("network/"+respuesta.data.pagina);
+					}
 				}
 			)
 		}

@@ -97,11 +97,14 @@ Funcion asincrona que hace peticiones rest
 	r.enviar = function (strRuta, objData, callback) {
 		$http({
 			method: 'POST',
-			//window.location.host por que no vamos a usar un dominio especifico
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			url: "/network/"+strRuta,
-			//headers: {
-				//'Cookie': cookieHashCode
-			//},
+			transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+				return str.join('&');
+			},
 			data: objData
 		}).then(callback);
 	}

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="http://localhost:35729/livereload.js"></script>
     <script src="js/lib/angular.min.js"></script>
     <script src="js/lib/cryptico.min.js"></script>
@@ -11,20 +11,17 @@
     <title>Bienestar</title>
   </head>
   <body ng-app="app">
-    <header>
-      <h1>Titulo grande</h1>
-      <button>loggin</button>
-    </header>
-    <section>
-      <div ng-controller="landing" class="sesion iniciar">
-        <form ng-submit="iniciarSesion()">
-          <h1>Inicia sesión</h1>
-          <input type="text" name="usuario">
-          <input type="password" name="contrasena">
-          <input type="submit" value="Entrar">
-        </form>
-      </div>
-    </section>
+    <div ng-controller="landing" class="login-card">
+      <h1>Log-in Bienestar</h1>
+      <form ng-submit="is.submit()" name="isf" novalidate>
+        <input required type="email" name="usuario" placeholder="Correo Electronico" ng-model="is.usuario">
+        <div ng-show="isf.usuario.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
+        <input required type="password" name="contrasena" placeholder="Contraseña" ng-model="is.contrasena" ng-minlength="5">
+        <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta</div>
+        <input type="submit" name="login" value="Iniciar sesión" ng-disabled="isf.$invalid" class="login login-submit">
+        <div ng-show="is.isError" class="login-help">{{ is.error}}</div><a href="#">Registrarse •</a><a href="#">¿Olvidó su contraseña?</a>
+      </form>
+    </div>
     <script src="js/control/landing.js"></script>
   </body>
 </html>

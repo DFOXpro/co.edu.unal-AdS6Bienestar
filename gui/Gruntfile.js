@@ -93,8 +93,14 @@ module.exports = function (grunt) {
 				}
 			},
 			css: {
-				files: 'src/css/*.styl',
-				tasks: ['stylus:dev'],
+				files: [
+					'src/css/*.styl',
+					'src/css/*.css'
+				],
+				tasks: [
+					//'stylus:dev'
+					'copy:devThemes'
+				],
 				options: {
 					livereload: true
 				}
@@ -112,9 +118,11 @@ module.exports = function (grunt) {
 
 	// Default task(s).
 	grunt.registerTask(
-		'dev', [
+		'client', [
 			'jade:dev',
-			'copy',
+			'copy:devLib',
+			'copy:devSrc',
+			'copy:devThemes',
 			'watch'
 		]
 	);

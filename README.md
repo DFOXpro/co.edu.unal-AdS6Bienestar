@@ -6,7 +6,7 @@ Arquitectura de Software semestre 2 2015
 Proyecto Bienestar Grupo 6
 
 Integrantes:
- * ?? (Server Master)
+ * Luis Alfonso Zamora Urrego (Server Master)
  * Carlos Leonardo Mahecha Parra	 (GUI Master)
  * William Andrés Rodríguez Mora  	 (Doc & Test Master)
  * Daniel Reinaldo Zorro Forero      	 (Scrum Master)

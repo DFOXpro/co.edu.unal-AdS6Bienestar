@@ -15,15 +15,15 @@ import org.json.simple.JSONObject;
  */
 public class Sesion extends HttpServlet {
 
-    /**
-     * Processes requests for HTTP <code>GET</code>
-     * methods.
-     *
-	 * @param request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+		/**
+		 * Processes requests for HTTP <code>GET</code>
+		 * methods.
+		 *
+		 * @param request
+		 * @param response servlet response
+		 * @throws ServletException if a servlet-specific error occurs
+		 * @throws IOException if an I/O error occurs
+		 */
     protected void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 		ArrayList r = Autenticacion.autenticar(

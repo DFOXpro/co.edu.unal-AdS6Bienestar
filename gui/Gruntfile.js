@@ -50,6 +50,8 @@ module.exports = function (grunt) {
 				files: {
 					//"build/decoy.html": 'src/decoy.jade',
 					"build/index.html": 'src/index.jade',
+					"build/a.html": 'src/administrador.jade',
+					"build/u.html": 'src/usuario.jade',
 					"build/paneles/panel_admin.html": 'src/theme/Vistas_JADE/admin_main.jade',
 					"build/login_general.html": 'src/theme/Vistas_JADE/login_general.jade',
 					"build/registro_general.html": 'src/theme/Vistas_JADE/registro_general.jade',

@@ -60,7 +60,7 @@ button span span {
 	line-height: 18px;
 	vertical-align: middle;
 	height: 17px;
-	color:#404040;
+	color:#404040;	
 	border: 0;
 	padding: 0px;
 	margin: 0px;
@@ -76,7 +76,7 @@ button span span {
 	position: absolute;
 	top: -2px;
 	left: -4px;
-	height: 26px;
+	height: 26px; 
 }
 
 /* -------------

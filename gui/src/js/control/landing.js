@@ -36,7 +36,7 @@ app.controller('landing', function ($scope, $conexion) {
 						$scope.is.error=respuesta.data.errorDescrip
 					else {
 						localStorage.setItem("4",respuesta.data.llpbSer);
-						location.replace("network/"+respuesta.data.pagina);
+						location.replace("/app/"+respuesta.data.pagina+"?1="+window.btoa($scope.is.cokieHashCode));
 					}
 				}
 			)

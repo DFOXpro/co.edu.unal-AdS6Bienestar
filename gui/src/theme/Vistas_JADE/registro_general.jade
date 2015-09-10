@@ -1,30 +1,93 @@
-doctype html
-html
-  head
-    meta(charset='UTF-8')
-    title Log-in
-    link(rel='stylesheet prefetch', href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css')
-    link(rel='stylesheet', href='style/css/style.css')
-  body
-    .login-card
-      h1 Registro
-      br
-      form
-        input(type='text', name='nombre', placeholder='Nombres')
-        input(type='text', name='apellido', placeholder='Apellidos')
-        input(type='text', name='t_documento', placeholder='Tipo de documento')
-        select(name='t_documento')
-          option(name='op0') Tipo de documento
-          option(name='op1') Tarjeta de identidad
-          option(name='op2') Cédula
-          option(name='op3') Pasaporte
-        input(type='text', name='documento', placeholder='Documento')
-        input(type='text', name='email', placeholder='E-mail')
-        input(type='password', name='pass', placeholder='Contraseña')
-        input(type='password', name='pass_2', placeholder='Repita su contraseña')
-        input.login.login-submit(type='submit', name='login', value='login')
-      .login-help
-        a(href='#') Login
-    // <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div>
-    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
-    script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')
+//- index.jade
+extends ../../main
+block variables
+	- npApp = "app"
+
+block devScriptHead
+	script(src="js/conexion/conexion.js")
+block scriptHead
+	//- el nombre sería así
+	script(src="js/landing.js")
+block devScriptBody
+	script(src="js/control/landing.js")
+
+block title
+	title Bienestar
+
+block content
+	.login-card(
+		ng-controller="registro"
+	)
+		h1 Log-in Bienestar
+		//-
+			action="asd"
+			method="post"
+		form(
+			ng-submit="is.submit()"
+			name="isf"
+			novalidate
+		)
+			input(
+				required
+				type='text'
+				name='nombre'
+				placeholder='Nombres'
+				ng-model="is.nombre"
+			)
+			.login-help(ng-show="isf.nombre.$error.text") Introduzca un nombre valido
+			input(
+				required
+				type='text'
+				name='apellido'
+				placeholder='Apellidos'
+				ng-model="is.apellido"
+			)
+			.login-help(ng-show="isf.apellido.$error.text") Introduzca un apellido valido
+			input(
+				required
+				type='email'
+				name='usuario'
+				placeholder='Correo Electronico'
+				ng-model="is.usuario"
+			)
+			.login-help(ng-show="isf.usuario.$error.email") Usuario no valido, debe ser un correo
+			input(type='text', name='t_documento', placeholder='Tipo de documento', ng-model="is.t_documento")
+			select(name='t_documento')
+				option(name='op0') Tipo de documento
+				option(name='op1') Tarjeta de identidad
+				option(name='op2') Cédula
+				option(name='op3') Pasaporte
+			input(
+				required
+				type='text'
+				name='documento'
+				placeholder='Documento'
+				ng-model="is.documento"
+			)
+			.login-help(ng-show="isf.documento.$error.text") Documento no valido, ingrese su documento sin puntos ni espacios
+			input(
+				required
+				type='password'
+				name='contrasena'
+				placeholder='Contraseña'
+				ng-model="is.contrasena"
+				ng-minlength=5
+			)
+			.login-help(ng-show="isf.contrasena.$error.minlength") Contraseña muy corta o no coincide
+			input(
+				required
+				type='password'
+				name='contrasena_2'
+				placeholder='Ingrese de nuevo su contraseña'
+				ng-model="is.contrasena_2"
+				ng-minlength=5
+			)
+			.login-help(ng-show="isf.contrasena.$error.minlength") Contraseña muy corta o no coincide
+			input.login.login-submit(
+				type='submit'
+				name='login'
+				value='Registrarse'
+				ng-disabled="isf.$invalid"
+			)
+			.login-help(ng-show="is.isError") {{ is.error}}
+			a(href	='#') Iniciar sesión

@@ -11,3 +11,8 @@ src/lib/CopyLibs/
 src/lib/javaee-endorsed-api-6.0/
 src/lib/hibernate4-persistence/
 
+#Configuraciones del glashfish
+setup/
+
+#Conf de la bd
+src/conf/

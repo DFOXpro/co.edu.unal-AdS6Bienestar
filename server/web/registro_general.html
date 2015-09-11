@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Log-in</title>
-    <link rel="stylesheet prefetch" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="style/css/style.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://localhost:35729/livereload.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/cryptico.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/conexion/conexion.js"></script>
+    <title>Bienestar</title>
   </head>
-  <body>
-    <div class="login-card">
-      <h1>Registro</h1><br>
-      <form>
-        <input type="text" name="nombre" placeholder="Nombres">
-        <input type="text" name="apellido" placeholder="Apellidos">
-        <input type="text" name="t_documento" placeholder="Tipo de documento">
+  <body ng-app="app">
+    <div ng-controller="registro" class="login-card">
+      <h1>Log-in Bienestar</h1>
+      <form ng-submit="cs.submit()" name="isf" novalidate>
+        <input required type="text" name="nombre" placeholder="Nombres" ng-model="cs.nombre" ng-minlength="3">
+        <div ng-show="isf.nombre.$error.text" class="login-help">Introduzca un nombre valido</div>
+        <input required type="text" name="apellido" placeholder="Apellidos" ng-model="cs.apellido" ng-minlength="3">
+        <input type="text" name="tipoUsuario" placeholder="Tipo de usuario" ng-model="cs.tipoUsuario">
+        <select name="tipoUsuario">
+          <option name="op1">Docente</option>
+          <option name="op2">Estudiante</option>
+        </select>
+        <input required type="email" name="email" placeholder="Correo Electronico" ng-model="cs.email">
+        <div ng-show="isf.usuario.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
+        <input type="text" name="t_documento" placeholder="Tipo de documento" ng-model="cs.t_documento">
         <select name="t_documento">
           <option name="op0">Tipo de documento</option>
           <option name="op1">Tarjeta de identidad</option>
           <option name="op2">Cédula</option>
           <option name="op3">Pasaporte</option>
         </select>
-        <input type="text" name="documento" placeholder="Documento">
-        <input type="text" name="email" placeholder="E-mail">
-        <input type="password" name="pass" placeholder="Contraseña">
-        <input type="password" name="pass_2" placeholder="Repita su contraseña">
-        <input type="submit" name="login" value="login" class="login login-submit">
+        <input required type="text" name="documento" placeholder="Documento" ng-model="cs.documento">
+        <div ng-show="isf.documento.$error.text" class="login-help">Documento no valido, ingrese su documento sin puntos ni espacios</div>
+        <input required type="password" name="contrasena" placeholder="Contraseña" ng-model="cs.contrasena" ng-minlength="5">
+        <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta o no coincide</div>
+        <input required type="password" name="contrasena_2" placeholder="Ingrese de nuevo su contraseña" ng-model="cs.contrasena_2" ng-minlength="5">
+        <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta o no coincide</div>
+        <input type="submit" name="login" value="Registrarse" ng-disabled="isf.$invalid" class="login login-submit">
+        <div ng-show="cs.isError" class="login-help">{{ cs.error}}</div><a href="#">Iniciar sesión</a>
       </form>
-      <div class="login-help"><a href="#">Login</a></div>
     </div>
-    <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div>-->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="js/control/registro.js"></script>
   </body>
 </html>

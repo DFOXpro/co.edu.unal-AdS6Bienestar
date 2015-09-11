@@ -89,8 +89,7 @@ public class CtrlAutenticacion {
 		return null;
 	}
 
-	public static boolean redirije(
-        String llaveCliente,
-        String cookieHashCode
-    ){return false;}
+	public static boolean redirije(String cookieHashCode){
+		return esperandoLlave.get(cookieHashCode) != null;
+	}
 }

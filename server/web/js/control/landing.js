@@ -1,15 +1,23 @@
 app.controller('landing', function ($scope, $conexion) {
 	console.log("landing");
 
-	var irAROL = function (is){
-		location.replace(localStorage.getItem("4")+"?1="+window.btoa(localStorage.getItem("2")));
+	$scope.is = {escojeRol : false};
+	var irARol = function ($scope){
+		var rol = localStorage.getItem("4");
+		$scope.is.chc = window.btoa(localStorage.getItem("2"));
+		if(rol < 4)
+			location.replace("usuario?1="+$scope.is.chc);
+		if(rol == 4)
+			location.replace("admin?1="+$scope.is.chc);
+		else $scope.is.escojeRol = true;
 	};
 
-	if($conexion.iniciar()) irAROL($scope);
+	if($conexion.iniciar()) irARol($scope);
 	else{
 		//is Iniciar Sesion
+		console.log($scope.is.escojeRol);
 		$scope.is = {
-			tipo: "",
+			escojeRol: false,
 			llavePublica: $conexion.getLlavePublica(),
 			cokieHashCode: $conexion.getCookieHashCode(),
 			usuario: "",
@@ -18,14 +26,8 @@ app.controller('landing', function ($scope, $conexion) {
 			isError : false,
 			submit : function () {
 				console.log("is.submit");
-				$scope.is.tipo = "iniciar";
 				$scope.is.error = "Enviando...";
 				$scope.is.isError = true;
-				console.log("typ ", $scope.is.tipo);
-				console.log("llp ", $scope.is.llavePublica);
-				console.log("chc ", $scope.is.cokieHashCode);
-				console.log("usr ", $scope.is.usuario);
-				console.log("ctñ ", $scope.is.contrasena);
 				$conexion.enviar(
 					"sesion",
 					{
@@ -49,7 +51,7 @@ app.controller('landing', function ($scope, $conexion) {
 							);
 							$conexion.pdc(respuesta.data.llpbSer);
 							localStorage.setItem("4",respuesta.data.pagina);
-							irAROL($scope);
+							irARol($scope);
 						}
 					}
 				)

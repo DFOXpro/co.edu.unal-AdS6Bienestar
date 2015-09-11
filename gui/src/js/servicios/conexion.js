@@ -1,9 +1,13 @@
+/* global cryptico, app */
+
 /**
  Esta es una interfaz a Cryptico y a todos los procesos POST
+@param $http
 **/
 app.factory('$conexion', function ($http) {
 //PRIVATE STATIC FINAL
-	var ruta = "network/autenticacion",
+	var ruta = "/network/",
+		semilla = "",
 		cookieHashCode = "",
 		llavePrivada = "",
 		llavePublica = "",
@@ -12,8 +16,7 @@ app.factory('$conexion', function ($http) {
 
 /**
 Funcion privada que genera una frase aleatorio de tamaño intSize
-@parameters
-	Number intSize
+@param intSize Number tamaño resultante del arreglo
 @return
 	String
 **/
@@ -28,77 +31,74 @@ Funcion privada que genera una frase aleatorio de tamaño intSize
 //PUBLIC
 /**
 Funcion inicializa las variables de comunicación
-@parameters
+@param
 @return
 **/
 	r.iniciar = function () {
-		llaveServer = localStorage.getItem("3");
-		if (llaveServer === null) {//undefined para chrome null para FX
-			$http.get("/network/1").then(function(response){
-				console.log("Serverkey: ",response);
-			});
-			localStorage.setItem("3", llaveServer);
-		}
-		var semilla = localStorage.getItem("1");
-		if (semilla === null) {//undefined para chrome null para FX
+		semilla = localStorage.getItem("1");
+		var iniciado = true;
+		if (semilla === null | semilla === "") {//undefined para chrome null para FX
 			semilla = strAleatorio(10);
 			cookieHashCode = strAleatorio(10);
-			console.log("local storage iniciado");
-			localStorage.setItem("1", semilla);
-			localStorage.setItem("2", cookieHashCode);
-
+			iniciado = false;
 		}
 		else cookieHashCode = localStorage.getItem("2");
 		//Minimo llaves de 512
 		llavePrivada = cryptico.generateRSAKey(semilla, 512);
 		llavePublica = cryptico.publicKeyString(llavePrivada);
 		console.log("semilla: ", semilla);
+		console.log("chc: ", cookieHashCode);
+		return iniciado;
+	};
+
+/**
+ * Persistir Datos de Conexión
+ * @param parllaveServer String llave publica rsa del servidor
+ **/
+	r.pdc = function (parllaveServer){
+		llaveServer = parllaveServer;
+		console.log("local storage iniciado");
+		localStorage.setItem("1", semilla);
+		localStorage.setItem("2", cookieHashCode);
+		localStorage.setItem("3", llaveServer);
+		//Minimo llaves de 512
+		llavePrivada = cryptico.generateRSAKey(semilla, 512);
+		llavePublica = cryptico.publicKeyString(llavePrivada);
 		console.log("llpr: ", llavePrivada);
 		console.log("llpb: ", llavePublica);
-		console.log("chc: ", cookieHashCode);
 		console.log("test: ", r.cifrar("perro"));
-		console.log("test1: ", r.decifrar(r.cifrar("perro")));
+		//console.log("test1: ", r.decifrar(r.cifrar("perro")));
 	};
 
 /**
 Funcion que cifra con la llave RSA generada por el cliente
-@parameters
-	String texto original
-@return
-	String texto cifrado
+@param strOriginal String
+@return	String texto cifrado con rsa
 **/
 	r.cifrar = function (strOriginal) {
-		//console.log("cifrar con: "+llavePublica)
-		return cryptico.encrypt(strOriginal, llavePublica).cipher
-		//La documentación pide la llave publica para cifrar ?
-	}
-
+		return cryptico.encrypt(strOriginal, llaveServer).cipher;
+	};
 
 /**
 Funcion que decifra con la llave RSA del server
-@parameters
-	String texto a decifrar
-@return
-	String texto original
+@param strCifrado String texto a decifrar
+@return String texto original
 **/
 	r.decifrar = function (strCifrado) {
 		return cryptico.decrypt(strCifrado, llavePrivada).plaintext;
-		//0.o la llave privada para decifrar?
-	}
+	};
 
 /**
 Funcion asincrona que hace peticiones rest
-@parameters
-	String https://dominio/network/<strRuta>
-	String parametros del post request
-	Function se ejecutará tras cualquier respuesta del server
-@return
+@param strRuta String https://dominio/network/<strRuta>
+@param objData String parametros del post request
+@param callback Function se ejecutará tras cualquier respuesta del server
 **/
 	r.enviar = function (strRuta, objData, callback) {
 		$http({
 			method: 'POST',
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			url: "/network/"+strRuta,
+			url: ruta+strRuta,
 			transformRequest: function(obj) {
 				var str = [];
 				for(var p in obj)
@@ -107,16 +107,16 @@ Funcion asincrona que hace peticiones rest
 			},
 			data: objData
 		}).then(callback);
-	}
+	};
 
 //GETs
 	r.getLlavePublica = function () {
-		return llavePublica
-	}
+		return llavePublica;
+	};
 	r.getCookieHashCode = function () {
-		return cookieHashCode
-	}
+		return cookieHashCode;
+	};
 
-	return r
+	return r;
 });
-console.log("conexionFactory cargado")
+console.log("conexionFactory cargado");

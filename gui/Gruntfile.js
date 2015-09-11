@@ -89,10 +89,7 @@ module.exports = function (grunt) {
 		watch: {
 			views: {
 				files: ['src/**/*.jade', 'src/**/*.svg'],
-				tasks: ['jade:dev'],
-				options: {
-					livereload: true
-				}
+				tasks: ['jade:dev']
 			},
 			css: {
 				files: [
@@ -102,14 +99,18 @@ module.exports = function (grunt) {
 				tasks: [
 					//'stylus:dev'
 					'copy:devThemes'
-				],
-				options: {
-					livereload: true
-				}
+				]
 			},
 			js: {
 				files: 'src/js/**/*.js',
 				tasks: ['copy:devSrc'],
+			},
+			Server: {
+				files: 'build/**/*',
+				tasks: ['copy:toServer']
+			},
+			Client: {
+				files: 'build/**/*',
 				options: {
 					livereload: true
 				}
@@ -125,13 +126,17 @@ module.exports = function (grunt) {
 			'copy:devLib',
 			'copy:devSrc',
 			'copy:devThemes',
-			'watch'
+			'watch:views',
+			'watch:css',
+			'watch:js',
+			'watch:Client',
 		]
 	);
 	grunt.registerTask(
 		'toServer', [
 			'jade:dev',
-			'copy'
+			'copy',
+			'watch'
 		]
 	);
 	grunt.registerTask('default', 'toServer');

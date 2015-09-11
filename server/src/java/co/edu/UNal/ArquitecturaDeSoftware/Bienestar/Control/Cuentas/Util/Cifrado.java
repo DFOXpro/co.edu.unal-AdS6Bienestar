@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util;
 
 import java.security.PublicKey;
 import java.security.PrivateKey;

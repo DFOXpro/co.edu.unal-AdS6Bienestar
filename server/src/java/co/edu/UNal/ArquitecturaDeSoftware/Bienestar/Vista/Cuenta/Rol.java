@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta;
 
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Autenticacion;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlAutenticacion;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Static;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -32,12 +33,12 @@ public class Rol extends HttpServlet {
 	 * @throws IOException if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			ArrayList r = Autenticacion.autenticar(
-			request.getParameter("1"),
-			request.getParameter("2"),
-			request.getParameter("3"),
-			request.getParameter("4")
-		);
+//		ArrayList r = CtrlAutenticacion.autenticar(
+//			request.getParameter("1"),
+//			request.getParameter("2"),
+//			request.getParameter("3"),
+//			request.getParameter("4")
+//		);
 
 		response.setContentType("application/json;charset=UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
@@ -46,7 +47,7 @@ public class Rol extends HttpServlet {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("<head>");
-			out.println("<title>Servlet Rol</title>");			
+			out.println("<title>Servlet Rol</title>");
 			out.println("</head>");
 			out.println("<body>");
 			out.println("<h1>Servlet Rol at " + request.getContextPath() + "</h1>");
@@ -80,7 +81,7 @@ public class Rol extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	throws ServletException, IOException {
 		//DO NOTHING
         response.sendRedirect(Static.PAGINA_403_NO_DISPONIBLE);
         System.out.print("Warning!: acceso por post: "+request);

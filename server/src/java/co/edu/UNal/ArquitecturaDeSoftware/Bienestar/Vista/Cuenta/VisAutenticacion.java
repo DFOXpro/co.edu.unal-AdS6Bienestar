@@ -1,6 +1,7 @@
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta;
 
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Autenticacion;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlAutenticacion;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Static;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import org.json.simple.JSONObject;
  * url /network/sesion
  * @author dfoxpro
  */
-public class Sesion extends HttpServlet {
+public class VisAutenticacion extends HttpServlet {
 
 		/**
 		 * Processes requests for HTTP <code>GET</code>
@@ -26,11 +27,10 @@ public class Sesion extends HttpServlet {
 		 */
     protected void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-		ArrayList r = Autenticacion.autenticar(
+		ArrayList r = CtrlAutenticacion.autenticar(
 			request.getParameter("1"),
 			request.getParameter("2"),
-			request.getParameter("3"),
-			request.getParameter("4")
+			request.getParameter("3")
 		);
 
 		response.setContentType("application/json;charset=UTF-8");
@@ -46,14 +46,14 @@ public class Sesion extends HttpServlet {
 				obj.put("isError",true);
 				obj.put("errorDescrip","La contraseña no coinside");
 				out.print(obj);
-			} else errordeRespuesta(r, out);
+			} else Static.errordeRespuesta(r, out);
 		} else if(r.get(0)=="exitoso"){
 			JSONObject obj=new JSONObject();
 			obj.put("nombre",r.get(1));
 			obj.put("pagina",""+r.get(2));
 			obj.put("llpbSer",""+r.get(3));
 			out.print(obj);
-		} else errordeRespuesta(r, out);
+		} else Static.errordeRespuesta(r, out);
     }
 
     /**
@@ -67,18 +67,20 @@ public class Sesion extends HttpServlet {
     protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //@TODO: cerrarSesion en cliente
-        Autenticacion.cerrarSesion(""+request.getParameter("usuario"),""+request.getParameter("chc"));
+        CtrlAutenticacion.cerrarSesion(request.getParameter("1"),request.getParameter("2"));
         response.sendRedirect(Static.HOME);
     }
-    private void errordeRespuesta(ArrayList r, PrintWriter out){
-        JSONObject obj=new JSONObject();
-        obj.put("isError",true);
-        obj.put("errorDescrip","Error inesperado");
-        System.err.print("Respuesta inesperada del control !! r.size:"+r.size()+"|r0:"+r.get(0)+"|r1:"+r.get(1));
-        out.print(obj);
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+	/**
+	 *
+	 * @param request
+	 * @param response
+	 */
+	private void confirmarCifrado(HttpServletRequest request, HttpServletResponse response) {
+		CtrlAutenticacion.confirmarCifrado(request.getParameter("1"),request.getParameter("2"));
+	}
+
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -108,6 +110,7 @@ public class Sesion extends HttpServlet {
     throws ServletException, IOException {
 		if("iniciar".equals(request.getParameter("tipo"))) iniciarSesion(request, response);
 		else if("cerrar".equals(request.getParameter("tipo"))) cerrarSesion(request, response);
+		else if("cc".equals(request.getParameter("tipo"))) confirmarCifrado(request, response);
 		else System.err.print("tipo de request invalido: "+request.getParameter("tipo"));
     }
 
@@ -119,6 +122,5 @@ public class Sesion extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Interfaz a la aplicacion cliente para iniciar/terminar seccion";
-    }// </editor-fold>
-
+    }
 }

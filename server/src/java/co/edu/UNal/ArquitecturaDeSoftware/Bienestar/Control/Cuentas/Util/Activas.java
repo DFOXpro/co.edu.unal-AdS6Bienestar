@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,15 +15,10 @@ import java.util.Map;
 public class Activas {
     static private Map<String,Sesion> sesionesActivas;
 
-    static public Sesion agregarSesion (String usuario, String llavePublica, String cookieHashTag){
+    static public Sesion agregarSesion (String usuario, String cookieHashTag){
         if (sesionesActivas == null)
             sesionesActivas = new HashMap<>();
-        //Cierra la sesion anterior
-        //@Deprecated: Map.put remplaza al anterior 
-        //if(sesionesActivas.get(usuario) != null) sesionesActivas.remove(usuario);
-
         Sesion s = new Sesion(
-            llavePublica,
             cookieHashTag
         );
         //System.out.println(usuario+"||"+s);
@@ -34,7 +29,7 @@ public class Activas {
         return sesionesActivas.get(usuario);
     }
 
-    static void cerrarSesion(String usuario, String cookieHashCode) {
+    public static void cerrarSesion(String usuario, String cookieHashCode) {
         Sesion s = sesionesActivas.get(usuario);
         if(s != null & s.getCokieHashCode().equals(cookieHashCode))
             sesionesActivas.remove(usuario);

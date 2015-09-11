@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util;
 
 import java.io.IOException;
 import java.security.KeyFactory;
@@ -54,7 +54,7 @@ public class Llaves{
         return kp.getPrivate();
     }
 
-    String publicaToStr() {
+    public String publicaToStr() {
         return kp.getPublic().getAlgorithm();
     }
 }

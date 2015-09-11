@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util;
 
-import java.security.KeyPair;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,18 +14,17 @@ import java.util.Date;
  * @author dfoxpro
  */
 public class Sesion {
-    private final String llaveCliente;
+    private String llaveCliente;
     private final Llaves llavesServer;
     private final String cokieHashCode;
     private final Date finDeSesion;
 
-    public Sesion(String llaveCliente, String cokieHashCode) {
+    public Sesion(String cokieHashCode) {
         //El ID es administrado por el mapa de sesiones en Cuentas/Activas.java
-        this.llaveCliente = llaveCliente;
         this.llavesServer = Cifrado.generarLlaves();
         this.cokieHashCode = cokieHashCode;//Codigo generado por el cliente
         this.finDeSesion = generarFindeSesion();
-    }
+    };
 
     private Date generarFindeSesion() {
         Calendar c = Calendar.getInstance();
@@ -34,6 +32,11 @@ public class Sesion {
         c.add(Calendar.DATE, 30);//Fecha actual + 30 días
         return c.getTime();
     }
+
+	public void setLlaveCliente(String llaveCliente) {
+		this.llaveCliente = llaveCliente;
+	}
+
 
 //GETs
     public String getLlaveCliente() {
@@ -54,7 +57,7 @@ public class Sesion {
 
     @Override
     public String toString() {
-        return 
+        return
             "Sesion{" +
             "llaveCliente=" + llaveCliente +
             ", llavesServer=" + llavesServer +

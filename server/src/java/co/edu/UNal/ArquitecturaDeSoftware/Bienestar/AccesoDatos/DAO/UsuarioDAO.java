@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -29,25 +30,28 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
      * @param password String containing the password
      * @return Value object with required user information
      */
-    public UsuarioEntity getByUsername(String username) throws Exception {
+    public UsuarioEntity getByUsername(String username) {
         
         EntityManager em;
         EntityManagerFactory emf;
         emf = Persistence.createEntityManagerFactory("co.edu.unal-AdS7BienestarPU");
         em  = emf.createEntityManager();
         em.getTransaction().begin();
-        
-        checkEntityManager(em);
+        UsuarioEntity u = null;
         try {
-            return em.createNamedQuery("Usuario.findByUsername", UsuarioEntity.class).
-                    setParameter("username", username).getSingleResult();
+            checkEntityManager(em);
+            TypedQuery<UsuarioEntity> query = em.createQuery("SELECT * FROM USUARIO WHERE email =:username", UsuarioEntity.class);
+            u = query.setParameter("username", username).getSingleResult();
+            System.out.println("A"+query);
         } catch (NoResultException e) {
+            System.out.println("No hay resultados");
             return null;
         } catch (Exception e) {
-            throw new Exception(e.getMessage(), e.getCause());
+            System.out.println("C"+e.getMessage());
         }finally{
             em.close();
-            return null;
+            System.out.println("finally");
+            return u;
         }
     }
 

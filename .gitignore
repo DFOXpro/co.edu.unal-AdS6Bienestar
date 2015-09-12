@@ -1,2 +1,5 @@
 #Temp files from gedit and others
 *~
+nbproject/
+/build/
+/dist/

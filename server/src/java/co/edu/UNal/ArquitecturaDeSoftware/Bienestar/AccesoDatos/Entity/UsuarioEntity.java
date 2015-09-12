@@ -6,6 +6,8 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,8 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
     @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
     @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
-public class Usuario implements Serializable {
+    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
+    @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = :rol")})
+
+public class UsuarioEntity implements Serializable, Entity{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,18 +75,19 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 1000)
     @Column(name = "PASSWORD")
     private String password;
-    
-    //Roles del usuario
-    char[] Roles;
-    
-    public Usuario() {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ROL")
+    private Character rol;
+
+    public UsuarioEntity() {
     }
 
-    public Usuario(Integer idUsuario) {
+    public UsuarioEntity(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, int documento, String tDocumento, String nombres, String apellidos, String username, String password) {
+    public UsuarioEntity(Integer idUsuario, int documento, String tDocumento, String nombres, String apellidos, String username, String password, Character rol) {
         this.idUsuario = idUsuario;
         this.documento = documento;
         this.tDocumento = tDocumento;
@@ -90,8 +95,43 @@ public class Usuario implements Serializable {
         this.apellidos = apellidos;
         this.username = username;
         this.password = password;
+        this.rol = rol;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.username);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UsuarioEntity other = (UsuarioEntity) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioEntity{" + "idUsuario=" + idUsuario + ", documento=" + documento + ", tDocumento=" + tDocumento + ", nombres=" + nombres + ", apellidos=" + apellidos + ", username=" + username + ", password=" + password + ", rol=" + rol + '}';
+    }
+
+    
+    
+    
+    
+    
+// GETTER AND SETTER
+    
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -148,39 +188,25 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    public char[] getRoles() {
-        return Roles;
+    public Character getRol() {
+        return rol;
     }
 
-    public void setRoles(char[] Roles) {
-        this.Roles = Roles;
+    public void setRol(Character rol) {
+        this.rol = rol;
     }
     
+
+    @Override
+    public String name() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.Usuario[ idUsuario=" + idUsuario + " ]";
-    }
     
 }

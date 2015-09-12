@@ -1,9 +1,10 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
 
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Sesion;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Activas;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Cifrado;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.Usuario;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,16 +27,17 @@ public class CtrlAutenticacion {
         
         //@TODO: Persistencia
 //TEST
-        Usuario u = new Usuario();
+        /*UsuarioEntity u = new UsuarioEntity();
         u.setNombres("Nametest");
         u.setUsername("usertest@unal.edu.co");
-        u.setPassword("test1");
+        u.setPassword("test1");*/
         //u.setRol('a');//a dministrador
 //END TEST
         try {
             usuario = new String(Cifrado.decodeBASE64(usuario), "UTF-8");
             contrasena = new String(Cifrado.decodeBASE64(contrasena), "UTF-8");
-            //Usuario u = Persistencia.getUsuario(usuario);
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioEntity u = udao.getByUsername(usuario);
             cookieHashCode = new String(Cifrado.decodeBASE64(cookieHashCode), "UTF-8");
 			if (u.getUsername().equals(usuario)) {
                 if (u.getPassword().equals(contrasena)) {
@@ -47,7 +49,7 @@ public class CtrlAutenticacion {
                     ArrayList r = new ArrayList();
                     r.add("exitoso");
                     r.add(u.getNombres());
-                    r.add(u.getRoles());
+                    r.add(u.getRol());
                     r.add(s.getLlavesServer().publicaToStr());//Devuelve la llave publica generada
                     return r;
                 } else {

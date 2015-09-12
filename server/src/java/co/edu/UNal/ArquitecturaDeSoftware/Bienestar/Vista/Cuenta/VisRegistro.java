@@ -39,10 +39,10 @@ public class VisRegistro extends HttpServlet {
 			request.getParameter("1"),//Nombre
 			request.getParameter("2"),//Apellidos
 			request.getParameter("3"),//Tipo de documento
-			Long.getLong(request.getParameter("4")),//documento
+			Integer.getInteger(request.getParameter("4")),//documento
 			request.getParameter("5"),//Correo= usuario
 			request.getParameter("6"),//passworld
-			request.getParameter("7")//rol
+			request.getParameter("7").charAt(0)//rol
 		);
 
 		response.setContentType("application/json;charset=UTF-8");
@@ -53,11 +53,23 @@ public class VisRegistro extends HttpServlet {
 				obj.put("isError",true);
 				obj.put("errorDescrip","El usuario ya existe");
 			} else if(r.get(1)=="contrasena"){
-				obj.put("isError",true);
+				obj.put("isError",true); 
 				obj.put("errorDescrip","La contraseña es invalida");
 			} else if(r.get(1)=="documento"){
 				obj.put("isError",true);
 				obj.put("errorDescrip","El documento es invalido");
+			} else if(r.get(1)=="tipoDocumento"){
+				obj.put("isError",true);
+				obj.put("errorDescrip","El tipo de documento es invalido");
+			} else if(r.get(1)=="correo"){
+				obj.put("isError",true);
+				obj.put("errorDescrip","El correo escrito no es valido");
+			} else if(r.get(1)=="nombre"){
+				obj.put("isError",true);
+				obj.put("errorDescrip","Los nombres o apellidos son incorrectos");
+			} else if(r.get(1)=="rol"){
+				obj.put("isError",true);
+				obj.put("errorDescrip","El rol es invalido, los posibles valores son: E, P y A");
 			} else Static.errordeRespuesta(r, out);
 			out.print(obj);
 		} else if(r.get(0)=="isExitoso"){

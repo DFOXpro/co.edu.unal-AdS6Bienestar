@@ -15,6 +15,10 @@ import java.sql.SQLException;
  */
 public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 
+	public static String put(UsuarioEntity u) { // RETORNAR OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
     public UsuarioDAO() {
     }
 
@@ -44,6 +48,8 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
             return new UsuarioEntity();
         }
     }
+	
+	
 
     @Override
     protected Class getEntityClass() {

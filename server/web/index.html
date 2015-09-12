@@ -13,14 +13,15 @@
   <body ng-app="app">
     <div ng-controller="landing" class="login-card">
       <h1>Log-in Bienestar</h1>
-      <form ng-submit="is.submit()" name="isf" novalidate>
+      <form ng-submit="is.submit()" name="isf" ng-hide="is.escojeRol" novalidate>
         <input required type="email" name="usuario" placeholder="Correo Electronico" ng-model="is.usuario">
         <div ng-show="isf.usuario.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
         <input required type="password" name="contrasena" placeholder="Contraseña" ng-model="is.contrasena" ng-minlength="5">
         <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta</div>
         <input type="submit" name="login" value="Iniciar sesión" ng-disabled="isf.$invalid" class="login login-submit">
-        <div ng-show="is.isError" class="login-help">{{ is.error}}</div><a href="#">Registrarse •</a><a href="#">¿Olvidó su contraseña?</a>
+        <div ng-show="is.isError" class="login-help">{{ is.error}}</div><a href="registro_general.html">Registrarse •</a>
       </form>
+      <div ng-show="is.escojeRol"><a href="admin?1={{is.chc}}">Administrador</a><a href="usuario?1={{is.chc}}">Profesor o Estudiante</a></div>
     </div>
     <script src="js/control/landing.js"></script>
   </body>

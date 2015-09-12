@@ -33,12 +33,11 @@ public class Rol extends HttpServlet {
 	 * @throws IOException if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ArrayList r = CtrlAutenticacion.autenticar(
-//			request.getParameter("1"),
-//			request.getParameter("2"),
-//			request.getParameter("3"),
-//			request.getParameter("4")
-//		);
+		System.out.println(request.getRequestURL().toString());
+		if(CtrlAutenticacion.redirije(request.getParameter("1")))
+			response.sendRedirect("administrador.html");
+		else
+			response.sendRedirect(Static.PAGINA_403_NO_DISPONIBLE);
 
 		response.setContentType("application/json;charset=UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
@@ -67,7 +66,7 @@ public class Rol extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	throws ServletException, IOException {
 		processRequest(request, response);
 	}
 

@@ -25,6 +25,7 @@ block content
 		form(
 			ng-submit="is.submit()"
 			name="isf"
+			ng-hide="is.escojeRol"
 			novalidate
 		)
 			input(
@@ -51,5 +52,14 @@ block content
 				ng-disabled="isf.$invalid"
 			)
 			.login-help(ng-show="is.isError") {{ is.error}}
-			a(href	='#') Registrarse •
-			a(href='#') ¿Olvidó su contraseña?
+			a(href	='registro_general.html') Registrarse •
+			//- a(href='#') ¿Olvidó su contraseña?
+		div(
+			ng-show="is.escojeRol"
+		)
+			a(
+				href="admin?1={{is.chc}}"
+			) Administrador
+			a(
+				href="usuario?1={{is.chc}}"
+			) Profesor o Estudiante

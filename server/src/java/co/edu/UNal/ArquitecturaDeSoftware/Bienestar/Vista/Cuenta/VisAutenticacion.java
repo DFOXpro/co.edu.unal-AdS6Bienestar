@@ -48,7 +48,7 @@ public class VisAutenticacion extends HttpServlet {
 				out.print(obj);
 			} else Static.errordeRespuesta(r, out);
 		} else if(r.get(0)=="exitoso"){
-			JSONObject obj=new JSONObject();
+			JSONObject obj = new JSONObject();
 			obj.put("nombre",r.get(1));
 			obj.put("pagina",""+r.get(2));
 			obj.put("llpbSer",""+r.get(3));

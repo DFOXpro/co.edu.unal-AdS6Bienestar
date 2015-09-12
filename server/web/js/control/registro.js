@@ -15,8 +15,8 @@ app.controller('registro', function ($scope, $conexion) {
 			console.log("tid ", $scope.cs.tipoDocumento);
 			console.log("doc ", $scope.cs.documento);
 			console.log("ema ", $scope.cs.email);
-			console.log("cnt ", $scope.cs.contrasena);
-			console.log("tiu ", $scope.cs.tipoUsuario);
+v			console.log("cnt ", $scope.cs.contrasena);
+v			console.log("tiu ", $scope.cs.tipoUsuario);
 			$conexion.enviar(
 				"registro",
 				{

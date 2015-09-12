@@ -29,15 +29,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USUARIO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Usuario.findByDocumento", query = "SELECT u FROM Usuario u WHERE u.documento = :documento"),
-    @NamedQuery(name = "Usuario.findByTDocumento", query = "SELECT u FROM Usuario u WHERE u.tDocumento = :tDocumento"),
-    @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
-    @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
-    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.email = :username"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
-    @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = :rol")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM USUARIO u"),
+    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM USUARIO u WHERE u.idUsuario = :idUsuario"),
+    @NamedQuery(name = "Usuario.findByDocumento", query = "SELECT u FROM USUARIO u WHERE u.documento = :documento"),
+    @NamedQuery(name = "Usuario.findByTDocumento", query = "SELECT u FROM USUARIO u WHERE u.tDocumento = :tDocumento"),
+    @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM USUARIO u WHERE u.nombres = :nombres"),
+    @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM USUARIO u WHERE u.apellidos = :apellidos"),
+    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM USUARIO u WHERE u.email = :username"),
+    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM USUARIO u WHERE u.password = :password"),
+    @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM USUARIO u WHERE u.rol = :rol")})
 
 public class UsuarioEntity implements Serializable, Entity{
     private static final long serialVersionUID = 1L;
@@ -80,11 +80,9 @@ public class UsuarioEntity implements Serializable, Entity{
     @Column(name = "ROL")
     private Character rol;
 
-    public UsuarioEntity() {
-    }
 
-    public UsuarioEntity(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+
+    public UsuarioEntity() {
     }
 
     public UsuarioEntity(Integer idUsuario, int documento, String tDocumento, String nombres, String apellidos, String username, String password, Character rol) {
@@ -148,11 +146,11 @@ public class UsuarioEntity implements Serializable, Entity{
         this.documento = documento;
     }
 
-    public String getTDocumento() {
+    public String gettDocumento() {
         return tDocumento;
     }
 
-    public void setTDocumento(String tDocumento) {
+    public void settDocumento(String tDocumento) {
         this.tDocumento = tDocumento;
     }
 

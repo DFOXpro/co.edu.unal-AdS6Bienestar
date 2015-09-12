@@ -1,0 +1,95 @@
+//- index.jade
+extends ./main
+block variables
+	- npApp = "app"
+
+block devScriptHead
+	script(src="js/conexion/conexion.js")
+block scriptHead
+	//- el nombre sería así
+	script(src="js/registro.js")
+block devScriptBody
+	script(src="js/control/registro.js")
+
+block title
+	title Bienestar
+
+block content
+	.login-card(
+		ng-controller="registro"
+	)
+		h1 Log-in Bienestar
+		//-
+			action="asd"
+			method="post"
+		form(
+			ng-submit="cs.submit()"
+			name="isf"
+			novalidate
+		)
+			input(
+				required
+				type='text'
+				name='nombre'
+				placeholder='Nombres'
+				ng-model="cs.nombre"
+				ng-minlength=3
+			)
+			.login-help(ng-show="isf.nombre.$error.text") Introduzca un nombre valido
+			input(
+				required
+				type='text'
+				name='apellido'
+				placeholder='Apellidos'
+				ng-model="cs.apellido"
+				ng-minlength=3
+			)
+			select(name='tipoUsuario')
+				option(name='op1') Docente
+				option(name='op2') Estudiante
+			input(
+				required
+				type='email'
+				name='email'
+				placeholder='Correo Electronico'
+				ng-model="cs.email"
+			)
+			.login-help(ng-show="isf.usuario.$error.email") Usuario no valido, debe ser un correo
+			select(name='t_documento')
+				option(name='op1') Tarjeta de identidad
+				option(name='op2') Cédula
+				option(name='op3') Pasaporte
+			input(
+				required
+				type='text'
+				name='documento'
+				placeholder='Documento'
+				ng-model="cs.documento"
+			)
+			.login-help(ng-show="isf.documento.$error.text") Documento no valido, ingrese su documento sin puntos ni espacios
+			input(
+				required
+				type='password'
+				name='contrasena'
+				placeholder='Contraseña'
+				ng-model="cs.contrasena"
+				ng-minlength=5
+			)
+			.login-help(ng-show="isf.contrasena.$error.minlength") Contraseña muy corta o no coincide
+			input(
+				required
+				type='password'
+				name='contrasena_2'
+				placeholder='Ingrese de nuevo su contraseña'
+				ng-model="cs.contrasena_2"
+				ng-minlength=5
+			)
+			.login-help(ng-show="isf.contrasena.$error.minlength") Contraseña muy corta o no coincide
+			input.login.login-submit(
+				type='submit'
+				name='login'
+				value='Registrarse'
+				ng-disabled="isf.$invalid"
+			)
+			.login-help(ng-show="cs.isError") {{ cs.error}}
+			a(href	='#') Iniciar sesión

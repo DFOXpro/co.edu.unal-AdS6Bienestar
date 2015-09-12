@@ -51,10 +51,13 @@ module.exports = function (grunt) {
 					//"build/decoy.html": 'src/decoy.jade',
 					"build/index.html": 'src/index.jade',
 					"build/administrador.html": 'src/administrador.jade',
+					"build/error503.html": 'src/error503.jade',
+					"build/error404.html": 'src/error404.jade',
+                                        "build/error500.html": 'src/error500.jade',
 					"build/usuario.html": 'src/usuario.jade',
 					"build/paneles/panel_admin.html": 'src/theme/Vistas_JADE/admin_main.jade',
 					"build/login_general.html": 'src/theme/Vistas_JADE/login_general.jade',
-					"build/registro_general.html": 'src/theme/Vistas_JADE/registro_general.jade',
+					"build/registro_general.html": 'src/registro_general.jade',
 
 				}
 			},

@@ -44,7 +44,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
         checkEntityManager(em);
         try {
             return em.createNamedQuery("Usuario.findByUsername", UsuarioEntity.class).
-                    setParameter("userName", username).getSingleResult();
+                    setParameter("username", username).getSingleResult();
         } catch (NoResultException e) {
             return null;
         } catch (Exception e) {

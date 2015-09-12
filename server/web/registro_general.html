@@ -17,16 +17,13 @@
         <input required type="text" name="nombre" placeholder="Nombres" ng-model="cs.nombre" ng-minlength="3">
         <div ng-show="isf.nombre.$error.text" class="login-help">Introduzca un nombre valido</div>
         <input required type="text" name="apellido" placeholder="Apellidos" ng-model="cs.apellido" ng-minlength="3">
-        <input type="text" name="tipoUsuario" placeholder="Tipo de usuario" ng-model="cs.tipoUsuario">
         <select name="tipoUsuario">
           <option name="op1">Docente</option>
           <option name="op2">Estudiante</option>
         </select>
         <input required type="email" name="email" placeholder="Correo Electronico" ng-model="cs.email">
         <div ng-show="isf.usuario.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
-        <input type="text" name="t_documento" placeholder="Tipo de documento" ng-model="cs.t_documento">
         <select name="t_documento">
-          <option name="op0">Tipo de documento</option>
           <option name="op1">Tarjeta de identidad</option>
           <option name="op2">Cédula</option>
           <option name="op3">Pasaporte</option>

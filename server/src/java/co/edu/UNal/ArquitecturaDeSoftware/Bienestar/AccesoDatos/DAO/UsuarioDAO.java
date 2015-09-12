@@ -6,11 +6,8 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -25,33 +22,26 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
      * Returns a value object that corresponds to the user whose username and
      * password are like the specified ones
      *
-     * @param em the entity manager
      * @param username String containing the username
-     * @param password String containing the password
      * @return Value object with required user information
      */
     public UsuarioEntity getByUsername(String username) {
-        
-        EntityManager em;
-        EntityManagerFactory emf;
-        emf = Persistence.createEntityManagerFactory("co.edu.unal-AdS7BienestarPU");
-        em  = emf.createEntityManager();
-        em.getTransaction().begin();
-        UsuarioEntity u = null;
+        ResultSet rs = super.query("SELECT * FROM USUARIO WHERE EMAIL =?",new String[]{username});
         try {
-            checkEntityManager(em);
-            TypedQuery<UsuarioEntity> query = em.createQuery("SELECT * FROM USUARIO WHERE email =:username", UsuarioEntity.class);
-            u = query.setParameter("username", username).getSingleResult();
-            System.out.println("A"+query);
-        } catch (NoResultException e) {
-            System.out.println("No hay resultados");
-            return null;
-        } catch (Exception e) {
-            System.out.println("C"+e.getMessage());
-        }finally{
-            em.close();
-            System.out.println("finally");
-            return u;
+            rs.first();
+            return new UsuarioEntity(
+                rs.getInt("ID_USUARIO"),
+                rs.getInt("DOCUMENTO"),
+                rs.getString("T_DOCUMENTO"),
+                rs.getString("NOMBRES"),
+                rs.getString("APELLIDOS"),
+                rs.getString("EMAIL"),
+                rs.getString("PASSWORD"),
+                rs.getString("ROL").charAt(0)
+            );
+        } catch (SQLException e) {
+            System.out.println("getByUsername: " + e.getMessage());
+            return new UsuarioEntity();
         }
     }
 

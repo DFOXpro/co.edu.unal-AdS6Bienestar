@@ -17,81 +17,76 @@ import java.util.logging.Logger;
  */
 public class CtrlAutenticacion {
 
-    private static Map<String,String> esperandoLlave;
+    private static Map<String, String> esperandoLlave;
 
     public static ArrayList autenticar(
-        String usuario,
-        String contrasena,
-        String cookieHashCode
-    ){
-//TEST
-        /*UsuarioEntity u = new UsuarioEntity();
-        u.setNombres("Nametest");
-        u.setUsername("usertest@unal.edu.co");
-        u.setPassword("test1");*/
-        //u.setRol('a');//a dministrador
-//END TEST
+            String usuario,
+            String contrasena,
+            String cookieHashCode
+    ) {
         try {
             usuario = new String(Cifrado.decodeBASE64(usuario), "UTF-8");
             contrasena = new String(Cifrado.decodeBASE64(contrasena), "UTF-8");
-
-            UsuarioEntity u = new UsuarioDAO().getByUsername(usuario);
-            System.out.println("asd"+usuario+"::"+u);
             cookieHashCode = new String(Cifrado.decodeBASE64(cookieHashCode), "UTF-8");
-            if (u != null & u.getUsername().equals(usuario)) {
-                if (u.getPassword().equals(contrasena)) {
-                    Sesion s = Activas.agregarSesion(usuario, cookieHashCode);
-					if (esperandoLlave == null)
-						esperandoLlave = new HashMap<>();
-					esperandoLlave.put(cookieHashCode, usuario);
+        } catch (Exception ex) {
+            Logger.getLogger(CtrlAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-                    ArrayList r = new ArrayList();
-                    r.add("exitoso");
-                    r.add(u.getNombres());
-                    r.add(u.getRol());
-                    r.add(s.getLlavesServer().publicaToStr());//Devuelve la llave publica generada
-                    return r;
-                } else {
-                    ArrayList r = new ArrayList();
-                    r.add("error");
-                    r.add("contrasena");
-                    return r;
+        UsuarioEntity u = new UsuarioDAO().getByUsername(usuario);
+        System.out.println("asd" + usuario + "::" + u);
+        try {
+            if (u.getPassword().equals(contrasena)) {
+                Sesion s = Activas.agregarSesion(usuario, cookieHashCode);
+                if (esperandoLlave == null) {
+                    esperandoLlave = new HashMap<>();
                 }
+                esperandoLlave.put(cookieHashCode, usuario);
+
+                ArrayList r = new ArrayList();
+                r.add("exitoso");
+                r.add(u.getNombres());
+                r.add(u.getRol());
+                r.add(s.getLlavesServer().publicaToStr());//Devuelve la llave publica generada
+                return r;
             } else {
                 ArrayList r = new ArrayList();
                 r.add("error");
-                r.add("usuario");
+                r.add("contrasena");
                 return r;
             }
-        } catch (Exception ex) {
-            Logger.getLogger(CtrlAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+        } catch (NullPointerException e) {
+            ArrayList r = new ArrayList();
+            r.add("error");
+            r.add("usuario");
+            return r;
         }
     }
 
     public static void cerrarSesion(String usuario, String cookieHashCode) {
-		try {
-			Activas.cerrarSesion(
-				new String(Cifrado.decodeBASE64(usuario), "UTF-8"),
-				cookieHashCode
-			);
-		} catch (Exception ex) {
-			Logger.getLogger(CtrlAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
-		}
+        try {
+            Activas.cerrarSesion(
+                    new String(Cifrado.decodeBASE64(usuario), "UTF-8"),
+                    cookieHashCode
+            );
+        } catch (Exception ex) {
+            Logger.getLogger(CtrlAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-	public static ArrayList confirmarCifrado(
-        String llaveCliente,
-        String cookieHashCode
-    ){
-		String s = esperandoLlave.get(cookieHashCode);
-        if(s != null)
+    public static ArrayList confirmarCifrado(
+            String llaveCliente,
+            String cookieHashCode
+    ) {
+        String s = esperandoLlave.get(cookieHashCode);
+        if (s != null) {
             Activas.getSesion(s).setLlaveCliente(llaveCliente);
-        else System.out.println("Warning!: posible ataque en confirmarCifrado: "+cookieHashCode);
-		return null;
-	}
+        } else {
+            System.out.println("Warning!: posible ataque en confirmarCifrado: " + cookieHashCode);
+        }
+        return null;
+    }
 
-	public static boolean redirije(String cookieHashCode){
-		return esperandoLlave.get(cookieHashCode) != null;
-	}
+    public static boolean redirije(String cookieHashCode) {
+        return esperandoLlave.get(cookieHashCode) != null;
+    }
 }

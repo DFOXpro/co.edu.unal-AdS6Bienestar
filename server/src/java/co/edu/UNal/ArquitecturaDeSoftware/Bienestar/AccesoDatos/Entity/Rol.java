@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Modelo;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
 	@NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r"),
 	@NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol"),
-	@NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")})
+	@NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre"),
+        @NamedQuery(name = "Rol.findByUsername", query = "SELECT r FROM ROL_BY_USER r WHERE r.USERNAME = :username")})
 public class Rol implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

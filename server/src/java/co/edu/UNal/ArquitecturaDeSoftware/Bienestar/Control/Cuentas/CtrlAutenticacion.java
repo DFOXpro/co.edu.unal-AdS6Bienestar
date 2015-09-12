@@ -24,8 +24,6 @@ public class CtrlAutenticacion {
         String contrasena,
         String cookieHashCode
     ){
-        
-        //@TODO: Persistencia
 //TEST
         /*UsuarioEntity u = new UsuarioEntity();
         u.setNombres("Nametest");
@@ -36,10 +34,11 @@ public class CtrlAutenticacion {
         try {
             usuario = new String(Cifrado.decodeBASE64(usuario), "UTF-8");
             contrasena = new String(Cifrado.decodeBASE64(contrasena), "UTF-8");
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioEntity u = udao.getByUsername(usuario);
+
+            UsuarioEntity u = new UsuarioDAO().getByUsername(usuario);
+            System.out.println("asd"+usuario+"::"+u);
             cookieHashCode = new String(Cifrado.decodeBASE64(cookieHashCode), "UTF-8");
-			if (u.getUsername().equals(usuario)) {
+            if (u != null & u.getUsername().equals(usuario)) {
                 if (u.getPassword().equals(contrasena)) {
                     Sesion s = Activas.agregarSesion(usuario, cookieHashCode);
 					if (esperandoLlave == null)

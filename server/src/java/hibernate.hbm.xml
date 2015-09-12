@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity" table="USUARIO">
+        <id name="idUsuario"  type="int"  column = "ID_USUARIO">
+             <generator class="native"/>
+        </id>
+            <property name="documento" column="DOCUMENTO" type="int"/>
+            <property name="tDocumento" column="T_DOCUMENTO" type="string"/>
+            <property name="nombres" column="NOMBRES" type="string"/>
+            <property name="apellidos" column="APELLIDOS" type="string"/>
+            <property name="username" column="EMAIL" type="string"/>
+            <property name="password" column="PASSWORD" type="string"/>
+            <property name="rol" column="ROL" type="char"/>
+    </class>
+</hibernate-mapping>

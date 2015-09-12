@@ -3,7 +3,7 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Sesion;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Activas;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Cifrado;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Modelo.Usuario;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.Usuario;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,21 +23,22 @@ public class CtrlAutenticacion {
         String contrasena,
         String cookieHashCode
     ){
-        //Usuario u = Persistencia.getUsuario(usuario);
+        
         //@TODO: Persistencia
 //TEST
         Usuario u = new Usuario();
-        u.setNombre("Nametest");
-        u.setUsuario("usertest@unal.edu.co");
-        u.setContrasena("test1");
-        u.setRol('a');//a dministrador
+        u.setNombres("Nametest");
+        u.setUsername("usertest@unal.edu.co");
+        u.setPassword("test1");
+        //u.setRol('a');//a dministrador
 //END TEST
         try {
             usuario = new String(Cifrado.decodeBASE64(usuario), "UTF-8");
             contrasena = new String(Cifrado.decodeBASE64(contrasena), "UTF-8");
+            //Usuario u = Persistencia.getUsuario(usuario);
             cookieHashCode = new String(Cifrado.decodeBASE64(cookieHashCode), "UTF-8");
-			if (u.getUsuario().equals(usuario)) {
-                if (u.getContrasena().equals(contrasena)) {
+			if (u.getUsername().equals(usuario)) {
+                if (u.getPassword().equals(contrasena)) {
                     Sesion s = Activas.agregarSesion(usuario, cookieHashCode);
 					if (esperandoLlave == null)
 						esperandoLlave = new HashMap<>();
@@ -45,8 +46,8 @@ public class CtrlAutenticacion {
 
                     ArrayList r = new ArrayList();
                     r.add("exitoso");
-                    r.add(u.getNombre());
-                    r.add(u.getRol());
+                    r.add(u.getNombres());
+                    r.add(u.getRoles());
                     r.add(s.getLlavesServer().publicaToStr());//Devuelve la llave publica generada
                     return r;
                 } else {

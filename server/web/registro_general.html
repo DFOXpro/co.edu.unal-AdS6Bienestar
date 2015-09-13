@@ -7,37 +7,49 @@
     <script src="js/lib/angular.min.js"></script>
     <script src="js/lib/cryptico.min.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/conexion/conexion.js"></script>
+    <script src="js/servicios/conexion.js"></script>
     <title>Bienestar</title>
   </head>
   <body ng-app="app">
     <div ng-controller="registro" class="login-card">
       <h1>Log-in Bienestar</h1>
       <form ng-submit="cs.submit()" name="isf" novalidate>
-        <input required type="text" name="nombre" placeholder="Nombres" ng-model="cs.nombre" ng-minlength="3">
-        <div ng-show="isf.nombre.$error.text" class="login-help">Introduzca un nombre valido</div>
-        <input required type="text" name="apellido" placeholder="Apellidos" ng-model="cs.apellido" ng-minlength="3">
-        <select name="tipoUsuario">
-          <option name="op1">Docente</option>
-          <option name="op2">Estudiante</option>
+        <input required type="text" name="nombre" placeholder="Nombres" ng-model="cs.nombre" ng-minlength="3" ng-maxlength="100">
+        <div ng-show="isf.nombre.$error.minlength" class="login-help">Nombre muy corto</div>
+        <div ng-show="isf.nombre.$error.maxlength" class="login-help">Nombre muy largo</div>
+        <input required type="text" name="apellido" placeholder="Apellidos" ng-model="cs.apellido" ng-minlength="3" ng-maxlength="100">
+        <div ng-show="isf.apellido.$error.minlength" class="login-help">Apellido muy corto</div>
+        <div ng-show="isf.apellido.$error.maxlength" class="login-help">Apellido muy largo</div>
+        <select required name="tipoUsuario" ng-model="cs.tipoUsuario">
+          <option ng-repeat="option in roles" value="{{option.id}}">{{option.name}}</option>
         </select>
         <input required type="email" name="email" placeholder="Correo Electronico" ng-model="cs.email">
-        <div ng-show="isf.usuario.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
-        <select name="t_documento">
-          <option name="op1">Tarjeta de identidad</option>
-          <option name="op2">Cédula</option>
-          <option name="op3">Pasaporte</option>
+        <div ng-show="isf.email.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
+        <select required name="t_documento" ng-model="cs.tipoDocumento">
+          <option ng-repeat="option in documentos" value="{{option.id}}">{{option.name}}</option>
         </select>
-        <input required type="text" name="documento" placeholder="Documento" ng-model="cs.documento">
+        <input required type="number" name="documento" placeholder="Documento" ng-model="cs.documento" max="2147483647" min="1">
         <div ng-show="isf.documento.$error.text" class="login-help">Documento no valido, ingrese su documento sin puntos ni espacios</div>
-        <input required type="password" name="contrasena" placeholder="Contraseña" ng-model="cs.contrasena" ng-minlength="5">
-        <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta o no coincide</div>
-        <input required type="password" name="contrasena_2" placeholder="Ingrese de nuevo su contraseña" ng-model="cs.contrasena_2" ng-minlength="5">
-        <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta o no coincide</div>
+        <div ng-show="isf.documento.$error.min" class="login-help">Documento no puede ser 0 ni negativo</div>
+        <div ng-show="isf.documento.$error.max" class="login-help">Documento muy grande</div>
+        <input required type="password" name="contrasena" placeholder="Contraseña" ng-model="cs.contrasena" ng-minlength="5" ng-pattern="ascii">
+        <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta</div>
+        <div ng-show="isf.contrasena.$error.pattern" class="login-help">No puede tener tildes o caracteres especiales</div>
+        <input required type="password" name="contrasena_2" placeholder="Ingrese de nuevo su contraseña" ng-model="cs.contrasena_2" data-password-verify="cs.contrasena">
+        <div ng-show="isf.contrasena_2.$error.passwordVerify" class="login-help">la contraseña no coincide</div>
         <input type="submit" name="login" value="Registrarse" ng-disabled="isf.$invalid" class="login login-submit">
+        <div ng-show="isf.nombre.$error.required" class="login-help">Escriba su nombre</div>
+        <div ng-show="isf.apellido.$error.required" class="login-help">Escriba su apellido</div>
+        <div ng-show="isf.tipoUsuario.$error.required" class="login-help">Escoja su rol</div>
+        <div ng-show="isf.email.$error.required" class="login-help">Escriba su correo</div>
+        <div ng-show="isf.t_documento.$error.required" class="login-help">Escoja su tipo de documento</div>
+        <div ng-show="isf.documento.$error.required" class="login-help">Escriba su documento</div>
+        <div ng-show="isf.contrasena.$error.required" class="login-help">Escriba su contrasena</div>
+        <div ng-show="isf.contrasena_2.$error.required" class="login-help">Verifique su contrasena</div>
         <div ng-show="cs.isError" class="login-help">{{ cs.error}}</div><a href="#">Iniciar sesión</a>
       </form>
     </div>
     <script src="js/control/registro.js"></script>
+    <script src="js/directiva/contrasena_igual.js"></script>
   </body>
 </html>

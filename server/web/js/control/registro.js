@@ -1,6 +1,16 @@
 app.controller('registro', function ($scope, $conexion) {
 	console.log("registro");
 	$conexion.iniciar();
+	$scope.documentos = [
+		{ id: "TI", name: 'Tarjeta de identidad' },
+		{ id: "CC", name: 'Cédula' },
+		{ id: "PP", name: 'Pasaporte' }
+	];
+	$scope.roles = [
+		{ id: "E", name: 'Estudiante' },
+		{ id: "D", name: 'Docente' }
+	];
+	$scope.ascii = /^[\x00-\x7F]*$/;
 // Create session
 	$scope.cs = {
 		error : "",
@@ -26,7 +36,7 @@ app.controller('registro', function ($scope, $conexion) {
 					2: $scope.cs.apellido,
 					3: $scope.cs.tipoDocumento,
 					4: $scope.cs.documento,
-					5: $scope.cs.email,
+					5: $scope.cs.email.toLowerCase(),
 					6: $scope.cs.contrasena,
 					7: $scope.cs.tipoUsuario
 				},

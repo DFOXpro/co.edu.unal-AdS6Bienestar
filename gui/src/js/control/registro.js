@@ -8,9 +8,11 @@ app.controller('registro', function ($scope, $conexion) {
 	];
 	$scope.roles = [
 		{ id: "E", name: 'Estudiante' },
-		{ id: "D", name: 'Docente' }
+		{ id: "P", name: 'Profesor' }
 	];
 	$scope.ascii = /^[\x00-\x7F]*$/;
+	$scope.exitoso= false;
+	
 // Create session
 	$scope.cs = {
 		error : "",
@@ -43,9 +45,9 @@ app.controller('registro', function ($scope, $conexion) {
 				function(respuesta){
 					console.log("rta: ", respuesta)
 					if(respuesta.data.isError)
-						$scope.cs.error=respuesta.data.errorDescrip
+						$scope.cs.error=respuesta.data.errorDescrip;
 					else {
-						location.replace("network/"+respuesta.data.pagina);
+						$scope.exitoso= true;
 					}
 				}
 			)

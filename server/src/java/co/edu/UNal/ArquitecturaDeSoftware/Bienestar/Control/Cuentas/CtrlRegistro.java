@@ -24,47 +24,27 @@ public class CtrlRegistro {
 		String contrasena,
 		char rol
 	) {
-		String correo2=correo,nombre2=nombre,apellidos2=apellidos,error="";
-		if(nombre.length()>100)nombre2 = nombre.substring(0, 99);
-		if(apellidos.length()>100)apellidos2 = apellidos.substring(0, 99);
+		String error="";
+		if(nombre.length()>100)nombre = nombre.substring(0, 99);
+		if(apellidos.length()>100)apellidos = apellidos.substring(0, 99);
 		if(tipoDeDocumento.length()!=2)error="tipoD";
-		if(documento>2147483646*2 || documento <1)error="documento";
+		if(documento>Integer.MAX_VALUE || documento <1)error="documento";
 		if(contrasena.length()<5 || contrasena.length()>999)error="contraseña";
 		if(nombre.isEmpty() || apellidos.isEmpty())error="nombre";
-		if(!(rol !='A') && !(rol!='P') && !(rol!='E'))error="rol";
-		if(!isValidEmailAddress(correo))error="correo";
-		else correo2=correo.toLowerCase();
+		if(!(rol =='A' || rol=='P' || rol=='E'))error="rol";
+		if(!isValidEmailAddress(correo))error="correo1";
+		else correo=correo.toLowerCase();
 		
-		if(error.isEmpty()){
-			UsuarioEntity u = new UsuarioEntity(documento, documento, tipoDeDocumento, nombre2, apellidos2, correo2, contrasena, rol);
-			error = UsuarioDAO.put(u);
-		}
+		if(error.isEmpty())
+			error = UsuarioDAO.create(documento, tipoDeDocumento, nombre, apellidos, correo, contrasena, rol);
 		
 		ArrayList r = new ArrayList();
 		if(error.equals("OK")){
 			r.add("isExitoso");
-		} else if(error.equals("usuario")){
+		} else {
 			r.add("error");
-			r.add("usuario");
-		} else if(error.equals("contraseña")){
-			r.add("error");
-			r.add("contrasena");
-		} else if(error.equals("documento")){
-			r.add("error");
-			r.add("documento");
-		} else if(error.equals("correo")){
-			r.add("error");
-			r.add("correo");
-		} else if(error.equals("nombre")){
-			r.add("error");
-			r.add("nombre");
-		} else if(error.equals("tipoD")){
-			r.add("error");
-			r.add("tipoDocumento");
-		} else if(error.equals("rol")){
-			r.add("error");
-			r.add("rol");
-		}else r.add(error);
+			r.add(error);
+		}
 		return r;
 	}
 	

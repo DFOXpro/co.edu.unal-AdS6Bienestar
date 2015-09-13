@@ -35,11 +35,12 @@ public class VisRegistro extends HttpServlet {
 	 */
 	protected void crearSesion(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
+		System.out.println(request.getParameter("5"));
 		ArrayList r = CtrlRegistro.crearCuenta(
 			request.getParameter("1"),//Nombre
 			request.getParameter("2"),//Apellidos
 			request.getParameter("3"),//Tipo de documento
-			Integer.getInteger(request.getParameter("4")),//documento
+			Integer.parseInt(request.getParameter("4")),//documento
 			request.getParameter("5"),//Correo= usuario
 			request.getParameter("6"),//passworld
 			request.getParameter("7").charAt(0)//rol
@@ -57,13 +58,16 @@ public class VisRegistro extends HttpServlet {
 				obj.put("errorDescrip","La contraseña es invalida");
 			} else if(r.get(1)=="documento"){
 				obj.put("isError",true);
-				obj.put("errorDescrip","El documento es invalido");
+				obj.put("errorDescrip","El documento ya está registrado");
 			} else if(r.get(1)=="tipoDocumento"){
 				obj.put("isError",true);
 				obj.put("errorDescrip","El tipo de documento es invalido");
 			} else if(r.get(1)=="correo"){
 				obj.put("isError",true);
-				obj.put("errorDescrip","El correo escrito no es valido");
+				obj.put("errorDescrip","El correo ya está registrado");
+			} else if(r.get(1)=="correo1"){
+				obj.put("isError",true);
+				obj.put("errorDescrip","El correo no es valido");
 			} else if(r.get(1)=="nombre"){
 				obj.put("isError",true);
 				obj.put("errorDescrip","Los nombres o apellidos son incorrectos");
@@ -74,7 +78,7 @@ public class VisRegistro extends HttpServlet {
 			out.print(obj);
 		} else if(r.get(0)=="isExitoso"){
 			JSONObject obj=new JSONObject();
-			obj.put("pagina","/");
+			obj.put("Exitoso",true);
 			out.print(obj);
 		} else Util.errordeRespuesta(r, out);
 	}

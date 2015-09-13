@@ -21,10 +21,10 @@ import javax.persistence.EntityManager;
  * @param <E>
  */
 public abstract class CrudDAO<E extends Entity> {
-    private final String usuario = "bienestar";
-    private final String contrasena = "bienestar";
+    private static final String usuario = "bienestar";
+    private static final String contrasena = "bienestar";
     //private final String url = "jdbc:mysql://localhost:3306/bienestar";
-    private final String url = "jdbc:mysql://localhost:3306/bienestar?zeroDateTimeBehavior=convertToNull";
+    private static final String url = "jdbc:mysql://localhost:3306/bienestar?zeroDateTimeBehavior=convertToNull";
     private static Connection conn;
     
     /**
@@ -35,7 +35,7 @@ public abstract class CrudDAO<E extends Entity> {
      */
     protected abstract E toEntity(ResultSet rs )throws Exception;
 
-    private boolean iniciarConeccion(){
+    private static boolean iniciarConeccion(){
         System.out.println("iniciarConeccion");
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -63,14 +63,19 @@ public abstract class CrudDAO<E extends Entity> {
         }
     }
 
-    protected ResultSet query(String query, String[] values){
+	/**
+	 * Use esta funcion para los gets
+	 * @param query
+	 * @param values
+	 * @return 
+	 */
+    protected static ResultSet query(String query, String[] values){
         if(conn == null)
             iniciarConeccion();
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             for (int i = 0; i < values.length; i++)
                 ps.setString(i+1, values[i]);
-            System.out.println(ps);
             return ps.executeQuery();
         }
         catch (SQLException ex){
@@ -79,48 +84,25 @@ public abstract class CrudDAO<E extends Entity> {
         }
     }
 
-    public void create(EntityManager entityManager, E entity)
-            throws Exception {
-        checkEntityManager(entityManager);
-        try {
-            entityManager.persist(entity);
-        } catch (Exception ex) {
-            throw new Exception(ex.getMessage(), ex.getCause());
+	/**
+	 * Use esta funcion para los sets y deletes
+	 * @param query
+	 * @param values
+	 * @return 
+	 */
+    protected static String update(String query, String[] values){
+        if(conn == null)
+            iniciarConeccion();
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            for (int i = 0; i < values.length; i++)
+                ps.setString(i+1, values[i]);
+            ps.executeUpdate();
+			return "OK";
         }
-    }
-
-    public E update(EntityManager entityManager, E entity)
-            throws Exception {
-        checkEntityManager(entityManager);
-        try {
-            return entityManager.merge(entity);
-        } catch (Exception ex) {
-            throw new Exception(ex.getMessage(), ex.getCause());
-        }
-    }
-
-    public void delete(EntityManager entityManager, Entity entity) 
-            throws Exception {
-        try {
-            entityManager.remove(entity);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage(), e.getCause());
-        }
-    }
-
-    public E read(EntityManager entityManager, long entityId)
-            throws Exception {
-        checkEntityManager(entityManager);
-        try {
-            return (E) entityManager.find(getEntityClass(), entityId);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage(), e.getCause());
-        }
-    }
-
-    protected void checkEntityManager(EntityManager entityManager) throws Exception {
-        if (entityManager == null) {
-            throw new Exception("entityManager.null");
+        catch (SQLException ex){
+            System.out.println("CrudDAO.update: " + ex.getMessage());
+            return ex.getMessage();
         }
     }
 

@@ -13,7 +13,7 @@
   <body ng-app="app">
     <div ng-controller="registro" class="login-card">
       <h1>Log-in Bienestar</h1>
-      <form ng-submit="cs.submit()" name="isf" novalidate>
+      <form ng-submit="cs.submit()" ng-hide="exitoso" name="isf" novalidate>
         <input required type="text" name="nombre" placeholder="Nombres" ng-model="cs.nombre" ng-minlength="3" ng-maxlength="100">
         <div ng-show="isf.nombre.$error.minlength" class="login-help">Nombre muy corto</div>
         <div ng-show="isf.nombre.$error.maxlength" class="login-help">Nombre muy largo</div>
@@ -46,8 +46,11 @@
         <div ng-show="isf.documento.$error.required" class="login-help">Escriba su documento</div>
         <div ng-show="isf.contrasena.$error.required" class="login-help">Escriba su contrasena</div>
         <div ng-show="isf.contrasena_2.$error.required" class="login-help">Verifique su contrasena</div>
-        <div ng-show="cs.isError" class="login-help">{{ cs.error}}</div><a href="#">Iniciar sesión</a>
+        <div ng-show="cs.isError" class="login-help">{{ cs.error}}</div><a href="/">Iniciar sesión</a>
       </form>
+      <div ng-show="exitoso">
+        <h2>{{cs.nombre}} tu registro fue exitoso ya puedes<a href="/">iniciar sesión</a></h2>
+      </div>
     </div>
     <script src="js/control/registro.js"></script>
     <script src="js/directiva/contrasena_igual.js"></script>

@@ -25,6 +25,7 @@ block content
 			method="post"
 		form(
 			ng-submit="cs.submit()"
+			ng-hide="exitoso"
 			name="isf"
 			novalidate
 		)
@@ -125,4 +126,7 @@ block content
 			.login-help(ng-show="isf.contrasena.$error.required") Escriba su contrasena
 			.login-help(ng-show="isf.contrasena_2.$error.required") Verifique su contrasena
 			.login-help(ng-show="cs.isError") {{ cs.error}}
-			a(href	='#') Iniciar sesión
+			a(href	='/') Iniciar sesión
+		div(ng-show ="exitoso")
+			h2 {{cs.nombre}} tu registro fue exitoso ya puedes
+				a(href	='/') iniciar sesión

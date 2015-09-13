@@ -52,14 +52,15 @@ block content
 				ng-disabled="isf.$invalid"
 			)
 			.login-help(ng-show="is.isError") {{ is.error}}
-			a(href	='registro_general.html') Registrarse •
-			//- a(href='#') ¿Olvidó su contraseña?
+			a(href	='registro_general.html') Registrarse
 		div(
 			ng-show="is.escojeRol"
 		)
+			h2 Bienvenido {{usr}} ¿Qué rol deseas usar?
 			a(
-				href="admin"
+				href="admin.html"
 			) Administrador
+			br
 			a(
-				href="usuario"
+				href="usuario.html"
 			) Profesor o Estudiante

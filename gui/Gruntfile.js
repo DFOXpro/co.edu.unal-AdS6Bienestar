@@ -1,3 +1,5 @@
+/* global module */
+
 module.exports = function (grunt) {
 	// load all grunt tasks matching the ['grunt-*', '@*/grunt-*'] patterns
 	require('load-grunt-tasks')(grunt);
@@ -48,16 +50,21 @@ module.exports = function (grunt) {
 					}
 				},
 				files: {
-					//"build/decoy.html": 'src/decoy.jade',
+					//LANDIGN,
 					"build/index.html": 'src/index.jade',
-					"build/administrador.html": 'src/administrador.jade',
-					"build/error503.html": 'src/error503.jade',
-					"build/error404.html": 'src/error404.jade',
-                                        "build/error500.html": 'src/error500.jade',
-					"build/usuario.html": 'src/usuario.jade',
-					"build/paneles/panel_admin.html": 'src/theme/Vistas_JADE/admin_main.jade',
-					"build/login_general.html": 'src/theme/Vistas_JADE/login_general.jade',
 					"build/registro_general.html": 'src/registro_general.jade',
+
+					"build/admin.html": 'src/administrador.jade',
+					"build/usuario.html": 'src/usuario.jade',
+
+					//ERRORES
+					"build/401.html": 'src/paginas_de_error/401.jade',
+					"build/404.html": 'src/paginas_de_error/404.jade',
+					"build/500.html": 'src/paginas_de_error/500.jade',
+					"build/503.html": 'src/paginas_de_error/503.jade'//,
+
+					//"build/paneles/panel_admin.html": 'src/theme/Vistas_JADE/admin_main.jade',
+					//"build/login_general.html": 'src/theme/Vistas_JADE/login_general.jade'
 
 				}
 			},
@@ -69,8 +76,18 @@ module.exports = function (grunt) {
 					}
 				},
 				files: {
-					//"build/index.html": 'src/index.jade',//decoy
-					"build/index.html": 'src/index.jade',//real app
+					//LANDIGN,
+					"build/index.html": 'src/index.jade',
+					"build/registro_general.html": 'src/registro_general.jade',
+
+					"build/admin.html": 'src/administrador.jade',
+					"build/usuario.html": 'src/usuario.jade',
+
+					//ERRORES
+					"build/401.html": 'src/paginas_de_error/401.jade',
+					"build/404.html": 'src/paginas_de_error/404.jade',
+					"build/500.html": 'src/paginas_de_error/500.jade',
+					"build/503.html": 'src/paginas_de_error/503.jade'//,
 				}
 			}
 		},
@@ -82,7 +99,7 @@ module.exports = function (grunt) {
 					'include css': true
 				},
 				files: {
-					'build/main.css': 'src/css/main.styl',
+					'build/main.css': 'src/css/main.styl'
 					//'build/decoy.css': 'src/css/decoy.styl',
 				//'path/to/another.css': ['path/to/sources/*.styl', 'path/to/more/*.styl'] // compile and concat into single file
 				}
@@ -106,7 +123,7 @@ module.exports = function (grunt) {
 			},
 			js: {
 				files: 'src/js/**/*.js',
-				tasks: ['copy:devSrc'],
+				tasks: ['copy:devSrc']
 			},
 			Server: {
 				files: 'build/**/*',
@@ -132,7 +149,7 @@ module.exports = function (grunt) {
 			'watch:views',
 			'watch:css',
 			'watch:js',
-			'watch:Client',
+			'watch:Client'
 		]
 	);
 	grunt.registerTask(

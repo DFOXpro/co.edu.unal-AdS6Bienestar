@@ -12,22 +12,6 @@
         <servlet-name>Registro</servlet-name>
         <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta.VisRegistro</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Rol</servlet-name>
-        <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta.Rol</servlet-class>
-        <init-param>
-            <param-name>tipo</param-name>
-            <param-value>usuario</param-value>
-        </init-param>
-    </servlet>
-    <servlet>
-        <servlet-name>RolAdmin</servlet-name>
-        <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta.Rol</servlet-class>
-        <init-param>
-            <param-name>tipo</param-name>
-            <param-value>admin</param-value>
-        </init-param>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Sesion</servlet-name>
         <url-pattern>/network/sesion</url-pattern>
@@ -35,14 +19,6 @@
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/network/registro</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Rol</servlet-name>
-        <url-pattern>/usuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RolAdmin</servlet-name>
-        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -54,14 +30,18 @@
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
-        <location>/error404.html</location>
+        <location>/404.html</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/error500.html</location>
+        <location>/500.html</location>
     </error-page>
     <error-page>
         <error-code>503</error-code>
-        <location>/error503.html</location>
+        <location>/503.html</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/401.html</location>
     </error-page>
 </web-app>

@@ -6,7 +6,7 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlRegistro;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Static;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -70,13 +70,13 @@ public class VisRegistro extends HttpServlet {
 			} else if(r.get(1)=="rol"){
 				obj.put("isError",true);
 				obj.put("errorDescrip","El rol es invalido, los posibles valores son: E, P y A");
-			} else Static.errordeRespuesta(r, out);
+			} else Util.errordeRespuesta(r, out);
 			out.print(obj);
 		} else if(r.get(0)=="isExitoso"){
 			JSONObject obj=new JSONObject();
-			obj.put("pagina",Static.HOME);
+			obj.put("pagina","/");
 			out.print(obj);
-		} else Static.errordeRespuesta(r, out);
+		} else Util.errordeRespuesta(r, out);
 	}
 
 	/**
@@ -91,8 +91,8 @@ public class VisRegistro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 		//DO NOTHING
-        response.sendRedirect(Static.PAGINA_403_NO_DISPONIBLE);
-        System.out.print("Warning!: acceso por get: "+request);
+		System.out.print("Warning!: acceso por get: "+request);
+		response.sendError(401);
 	}
 
 	/**

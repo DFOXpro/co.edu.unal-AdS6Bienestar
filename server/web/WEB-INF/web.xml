@@ -15,10 +15,18 @@
     <servlet>
         <servlet-name>Rol</servlet-name>
         <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta.Rol</servlet-class>
+        <init-param>
+            <param-name>tipo</param-name>
+            <param-value>usuario</param-value>
+        </init-param>
     </servlet>
     <servlet>
         <servlet-name>RolAdmin</servlet-name>
         <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta.Rol</servlet-class>
+        <init-param>
+            <param-name>tipo</param-name>
+            <param-value>admin</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>Sesion</servlet-name>

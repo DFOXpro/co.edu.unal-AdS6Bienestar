@@ -15,11 +15,11 @@ import java.util.Map;
 public class Activas {
     static private Map<String,Sesion> sesionesActivas;
 
-    static public Sesion agregarSesion (String usuario, String cookieHashTag){
+    static public Sesion agregarSesion (String usuario, String cookieHashCode){
         if (sesionesActivas == null)
             sesionesActivas = new HashMap<>();
         Sesion s = new Sesion(
-            cookieHashTag
+            cookieHashCode
         );
         //System.out.println(usuario+"||"+s);
         sesionesActivas.put(usuario, s);

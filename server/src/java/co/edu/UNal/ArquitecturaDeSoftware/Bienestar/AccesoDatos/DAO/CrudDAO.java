@@ -68,7 +68,7 @@ public abstract class CrudDAO<E extends Entity> {
             return null;
         }
     }
- 
+
     public void create(EntityManager entityManager, E entity)
             throws Exception {
         checkEntityManager(entityManager);

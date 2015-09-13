@@ -21,7 +21,7 @@
         <input type="submit" name="login" value="Iniciar sesión" ng-disabled="isf.$invalid" class="login login-submit">
         <div ng-show="is.isError" class="login-help">{{ is.error}}</div><a href="registro_general.html">Registrarse •</a>
       </form>
-      <div ng-show="is.escojeRol"><a href="admin?1={{is.chc}}">Administrador</a><a href="usuario?1={{is.chc}}">Profesor o Estudiante</a></div>
+      <div ng-show="is.escojeRol"><a href="admin">Administrador</a><a href="usuario">Profesor o Estudiante</a></div>
     </div>
     <script src="js/control/landing.js"></script>
   </body>

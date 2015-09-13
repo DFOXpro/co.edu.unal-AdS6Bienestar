@@ -73,7 +73,7 @@ public class CtrlAutenticacion {
         }
     }
 
-    public static ArrayList confirmarCifrado(
+    public static void confirmarCifrado(
             String llaveCliente,
             String cookieHashCode
     ) {
@@ -83,10 +83,5 @@ public class CtrlAutenticacion {
         } else {
             System.out.println("Warning!: posible ataque en confirmarCifrado: " + cookieHashCode);
         }
-        return null;
-    }
-
-    public static boolean redirije(String cookieHashCode) {
-        return esperandoLlave.get(cookieHashCode) != null;
     }
 }

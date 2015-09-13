@@ -6,54 +6,60 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
+
 /**
  * url /network/sesion
+ *
  * @author dfoxpro
  */
 public class VisAutenticacion extends HttpServlet {
 
-		/**
-		 * Processes requests for HTTP <code>GET</code>
-		 * methods.
-		 *
-		 * @param request
-		 * @param response servlet response
-		 * @throws ServletException if a servlet-specific error occurs
-		 * @throws IOException if an I/O error occurs
-		 */
+    /**
+     * Processes requests for HTTP <code>GET</code> methods.
+     *
+     * @param request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-		ArrayList r = CtrlAutenticacion.autenticar(
-			request.getParameter("1"),
-			request.getParameter("2"),
-			request.getParameter("3")
-		);
+        ArrayList r = CtrlAutenticacion.autenticar(
+            request.getParameter("1"),
+            request.getParameter("2"),
+            request.getParameter("3")
+        );
 
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if(r.get(0)=="error"){
-			if(r.get(1)=="usuario"){
-				JSONObject obj=new JSONObject();
-				obj.put("isError",true);
-				obj.put("errorDescrip","El usuario no está registrado");
-				out.print(obj);
-			} else if(r.get(1)=="contrasena"){
-				JSONObject obj=new JSONObject();
-				obj.put("isError",true);
-				obj.put("errorDescrip","La contraseña no coinside");
-				out.print(obj);
-			} else Static.errordeRespuesta(r, out);
-		} else if(r.get(0)=="exitoso"){
-			JSONObject obj = new JSONObject();
-			obj.put("nombre",r.get(1));
-			obj.put("pagina",""+r.get(2));
-			obj.put("llpbSer",""+r.get(3));
-			out.print(obj);
-		} else Static.errordeRespuesta(r, out);
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if (r.get(0) == "error") {
+            if (r.get(1) == "usuario") {
+                JSONObject obj = new JSONObject();
+                obj.put("isError", true);
+                obj.put("errorDescrip", "El usuario no está registrado");
+                out.print(obj);
+            } else if (r.get(1) == "contrasena") {
+                JSONObject obj = new JSONObject();
+                obj.put("isError", true);
+                obj.put("errorDescrip", "La contraseña no coinside");
+                out.print(obj);
+            } else {
+                Static.errordeRespuesta(r, out);
+            }
+        } else if (r.get(0) == "exitoso") {
+            JSONObject obj = new JSONObject();
+            obj.put("a", r.get(1));//nombre
+            obj.put("b", "" + r.get(2));//rol
+            obj.put("c", "" + r.get(3));//llave publica
+            out.print(obj);
+        } else {
+            Static.errordeRespuesta(r, out);
+        }
     }
 
     /**
@@ -66,20 +72,29 @@ public class VisAutenticacion extends HttpServlet {
      */
     protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //@TODO: cerrarSesion en cliente
-        CtrlAutenticacion.cerrarSesion(request.getParameter("1"),request.getParameter("2"));
+        //Este for por que las cookies no llegan mapeadas
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("2")) {
+                CtrlAutenticacion.cerrarSesion(request.getParameter("1"), cookie.getValue());
+                break;
+            }
+        }
         response.sendRedirect(Static.HOME);
     }
 
-	/**
-	 *
-	 * @param request
-	 * @param response
-	 */
-	private void confirmarCifrado(HttpServletRequest request, HttpServletResponse response) {
-		CtrlAutenticacion.confirmarCifrado(request.getParameter("1"),request.getParameter("2"));
-	}
-
+    /**
+     *
+     * @param request
+     * @param response
+     */
+    private void confirmarCifrado(HttpServletRequest request, HttpServletResponse response) {
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("2")) {
+                CtrlAutenticacion.confirmarCifrado(request.getParameter("1"), request.getParameter("2"));
+                break;
+            }
+        }
+    }
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -91,10 +106,10 @@ public class VisAutenticacion extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         //DO NOTHING
         response.sendRedirect(Static.PAGINA_403_NO_DISPONIBLE);
-        System.out.print("Warning!: acceso por get: "+request);
+        System.out.print("Warning!: acceso por get: " + request);
     }
 
     /**
@@ -107,11 +122,16 @@ public class VisAutenticacion extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-		if("iniciar".equals(request.getParameter("tipo"))) iniciarSesion(request, response);
-		else if("cerrar".equals(request.getParameter("tipo"))) cerrarSesion(request, response);
-		else if("cc".equals(request.getParameter("tipo"))) confirmarCifrado(request, response);
-		else System.err.print("tipo de request invalido: "+request.getParameter("tipo"));
+            throws ServletException, IOException {
+        if ("iniciar".equals(request.getParameter("tipo"))) {
+            iniciarSesion(request, response);
+        } else if ("cerrar".equals(request.getParameter("tipo"))) {
+            cerrarSesion(request, response);
+        } else if ("cc".equals(request.getParameter("tipo"))) {
+            confirmarCifrado(request, response);
+        } else {
+            System.err.print("tipo de request invalido: " + request.getParameter("tipo"));
+        }
     }
 
     /**

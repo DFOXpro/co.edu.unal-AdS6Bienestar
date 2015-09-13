@@ -23,9 +23,18 @@ import javax.persistence.EntityManager;
 public abstract class CrudDAO<E extends Entity> {
     private final String usuario = "bienestar";
     private final String contrasena = "bienestar";
-    private final String url = "jdbc:mysql://localhost:3306/bienestar";
+    //private final String url = "jdbc:mysql://localhost:3306/bienestar";
+    private final String url = "jdbc:mysql://localhost:3306/bienestar?zeroDateTimeBehavior=convertToNull";
     private static Connection conn;
     
+    /**
+     * Retornara una Entity de la clase E,
+     * @param rs ResultSet, de alli se extraeran los datos para crear el Entity
+     * @return
+     * @throws java.lang.Exception
+     */
+    protected abstract E toEntity(ResultSet rs )throws Exception;
+
     private boolean iniciarConeccion(){
         System.out.println("iniciarConeccion");
         try {
@@ -55,7 +64,8 @@ public abstract class CrudDAO<E extends Entity> {
     }
 
     protected ResultSet query(String query, String[] values){
-        if(conn == null) iniciarConeccion();
+        if(conn == null)
+            iniciarConeccion();
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             for (int i = 0; i < values.length; i++)
@@ -79,7 +89,6 @@ public abstract class CrudDAO<E extends Entity> {
         }
     }
 
-    
     public E update(EntityManager entityManager, E entity)
             throws Exception {
         checkEntityManager(entityManager);
@@ -90,7 +99,6 @@ public abstract class CrudDAO<E extends Entity> {
         }
     }
 
-    
     public void delete(EntityManager entityManager, Entity entity) 
             throws Exception {
         try {
@@ -100,9 +108,6 @@ public abstract class CrudDAO<E extends Entity> {
         }
     }
 
-    
-
-    
     public E read(EntityManager entityManager, long entityId)
             throws Exception {
         checkEntityManager(entityManager);
@@ -111,8 +116,6 @@ public abstract class CrudDAO<E extends Entity> {
         } catch (Exception e) {
             throw new Exception(e.getMessage(), e.getCause());
         }
-
-
     }
 
     protected void checkEntityManager(EntityManager entityManager) throws Exception {

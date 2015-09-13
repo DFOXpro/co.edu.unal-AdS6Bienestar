@@ -23,14 +23,24 @@ import javax.persistence.EntityManager;
 public abstract class CrudDAO<E extends Entity> {
     private final String usuario = "bienestar";
     private final String contrasena = "bienestar";
-    private final String url = "jdbc:mysql://localhost:3306/bienestar";
+    //private final String url = "jdbc:mysql://localhost:3306/bienestar";
+    private final String url = "jdbc:mysql://localhost:3306/bienestar?zeroDateTimeBehavior=convertToNull";
     private static Connection conn;
+    
+    /**
+     * Retornara una Entity de la clase E, 
+     * @param rs ResultSet, de alli se extraeran los datos para crear el Entity
+     * @return 
+     * @throws java.lang.Exception 
+     */
+    protected abstract E toEntity(ResultSet rs )throws Exception;
     
     private boolean iniciarConeccion(){
         System.out.println("iniciarConeccion");
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection(url, usuario, contrasena);
+            //conn.setAutoCommit(false);
             return true;
         } catch (
             ClassNotFoundException |
@@ -55,19 +65,49 @@ public abstract class CrudDAO<E extends Entity> {
     }
 
     protected ResultSet query(String query, String[] values){
-        if(conn == null) iniciarConeccion();
+        if(conn == null) 
+            iniciarConeccion();
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             for (int i = 0; i < values.length; i++)
                 ps.setString(i+1, values[i]);
             System.out.println(ps);
-            return ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
+            //conn.commit();
+            //cerrarConeccion();
+            return rs;
         }
         catch (SQLException ex){
+            //cerrarConeccion();
             System.err.println(ex.getMessage());
             return null;
         }
     }
+    
+    /**
+     * Excecute a CUD operation (Create, Update, Delete)
+     * @param query
+     * @param values
+     */
+    protected void CUD(String query, String[] values){
+        if(conn == null) 
+            iniciarConeccion();
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            for (int i = 0; i < values.length; i++)
+                ps.setString(i+1, values[i]);
+            System.out.println(ps);
+            ps.executeUpdate();
+            //conn.commit();
+            //cerrarConeccion();
+        }
+        catch (SQLException ex){
+            //cerrarConeccion();
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    
  
     public void create(EntityManager entityManager, E entity)
             throws Exception {

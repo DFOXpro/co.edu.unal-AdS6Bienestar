@@ -58,6 +58,7 @@ public class CtrlAutenticacion {
             ArrayList r = new ArrayList();
             r.add("error");
             r.add("usuario");
+            
             return r;
         }
     }

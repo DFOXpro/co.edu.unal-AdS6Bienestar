@@ -43,7 +43,8 @@ app.controller('landing', function ($scope, $conexion) {
 							else {
 								$scope.usr = respuesta.data.a;
 								localStorage.setItem("4", respuesta.data.b);//ROL
-								$conexion.pdc("respuesta.data.c");
+								localStorage.setItem("5", window.btoa($scope.is.usuario));//ROL
+								$conexion.pdc(respuesta.data.c);
 								$conexion.enviar(
 										"sesion", {
 											tipo: "cc", //ConfirmarCifrado

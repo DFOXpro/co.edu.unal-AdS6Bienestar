@@ -128,6 +128,10 @@ app.factory('$conexion', function ($http) {
 		return iniciado;
 	};
 
+	r.terminar = function () {
+		docCookies.removeItem("2");
+		localStorage.clear();
+	}
 	/**
 	 * Persistir Datos de Conexión
 	 * @param parllaveServer String llave publica rsa del servidor

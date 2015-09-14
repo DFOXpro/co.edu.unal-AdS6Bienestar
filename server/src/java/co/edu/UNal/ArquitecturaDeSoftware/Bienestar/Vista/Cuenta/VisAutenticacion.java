@@ -55,7 +55,7 @@ public class VisAutenticacion extends HttpServlet {
 			JSONObject obj = new JSONObject();
 			obj.put("a", r.get(1));//nombre
 			obj.put("b", "" + r.get(2));//rol
-			//obj.put("c", "" + r.get(3));//llave publica
+			obj.put("c", "" + "asd");//r.get(3));//llave publica
 			out.print(obj);
 		} else {
 			Util.errordeRespuesta(r, out);
@@ -66,11 +66,10 @@ public class VisAutenticacion extends HttpServlet {
 	 *
 	 *
 	 * @param request servlet request
-	 * @param response servlet response
 	 * @throws ServletException if a servlet-specific error occurs
 	 * @throws IOException if an I/O error occurs
 	 */
-	protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
+	protected void cerrarSesion(HttpServletRequest request)
 	throws ServletException, IOException {
 		//Este for por que las cookies no llegan mapeadas
 		if(request.getCookies() != null)
@@ -80,7 +79,6 @@ public class VisAutenticacion extends HttpServlet {
 					break;
 				}
 			}
-		response.sendRedirect("/");
 	}
 
 	/**
@@ -92,7 +90,7 @@ public class VisAutenticacion extends HttpServlet {
 		if(request.getCookies() != null)
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("2")) {
-					CtrlAutenticacion.confirmarCifrado(request.getParameter("1"), request.getParameter("2"));
+					CtrlAutenticacion.confirmarCifrado(request.getParameter("1"), cookie.getValue());
 					break;
 				}
 			}
@@ -125,16 +123,23 @@ public class VisAutenticacion extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-		if ("iniciar".equals(request.getParameter("tipo"))) {
-			iniciarSesion(request, response);
-		} else if ("cerrar".equals(request.getParameter("tipo"))) {
-			cerrarSesion(request, response);
-		} else if ("cc".equals(request.getParameter("tipo"))) {
-			confirmarCifrado(request);
-		} else {
-			System.err.print("tipo de request invalido: " + request.getParameter("tipo"));
-			response.sendError(503);
-		}
+		if (null != request.getParameter("tipo"))
+			switch (request.getParameter("tipo")) {
+				case "iniciar":{
+					iniciarSesion(request, response);
+					break;
+				} case "cerrar":{
+					cerrarSesion(request);
+					response.setStatus(200);
+					break;
+				} case "cc":{
+					confirmarCifrado(request);
+					response.setStatus(200);
+					break;
+				} default:
+					System.err.print("tipo de request invalido: " + request.getParameter("tipo"));
+			}
+		else System.err.print("VisAutenticación.doPost: request invalido");
 	}
 
 	/**

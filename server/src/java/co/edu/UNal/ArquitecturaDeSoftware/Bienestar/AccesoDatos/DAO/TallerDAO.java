@@ -6,10 +6,8 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.TallerEntity;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  *
@@ -45,9 +43,6 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
 			rs.first();
 			TallerEntity ue = toEntity(rs);
 
-			//this.create(1234, "CC", "probar", "crear", "crear@unal.edu.co", "clave1", 'A');
-			//this.update(12, 1234, "CC", "GATO", "FELIX", "crear@unal.edu.co", "clave1", 'A');
-			//this.delete(12);
 			return ue;
 		} catch (SQLException e) {
 			System.out.println("TallerDAO.getByID: " + e.getMessage());
@@ -121,7 +116,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
                         int COSTO,
                         int CUPOS
 	) {
-            String respuestaSQL = super.update(
+            String respuestaSQL = CrudDAO.update(
                             "UPDATE TALLER\n"
                             + "SET TIPO_TALLER = ?,\n"
                             + "NOMBRE = ?,\n"
@@ -167,7 +162,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
         
 	@Override
 	protected Class getEntityClass() {
-		return UsuarioEntity.class;
+		return TallerEntity.class;
 	}
 
 	@Override

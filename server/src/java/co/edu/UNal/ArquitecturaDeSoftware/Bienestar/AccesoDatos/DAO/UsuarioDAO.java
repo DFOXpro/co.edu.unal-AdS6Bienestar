@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
-
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.TallerEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +16,10 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 
 	public UsuarioDAO() {
 	}
+        
+        //this.create(1234, "CC", "probar", "crear", "crear@unal.edu.co", "clave1", 'A');
+        //this.update(12, 1234, "CC", "GATO", "FELIX", "crear@unal.edu.co", "clave1", 'A');
+        //this.delete(12);
 
 	/**
 	 * Returns a value object that corresponds to the user whose username and
@@ -31,22 +33,8 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 		try {
 			rs.first();
 			UsuarioEntity ue = toEntity(rs);
-                        
-                                                        
-			//this.create(1234, "CC", "probar", "crear", "crear@unal.edu.co", "clave1", 'A');
-			//this.update(12, 1234, "CC", "GATO", "FELIX", "crear@unal.edu.co", "clave1", 'A');
-			//this.delete(12);
+
 			return ue;
-			/*return new UsuarioEntity(
-			 rs.getInt("ID_USUARIO"),
-			 rs.getInt("DOCUMENTO"),
-			 rs.getString("T_DOCUMENTO"),
-			 rs.getString("NOMBRES"),
-			 rs.getString("APELLIDOS"),
-			 rs.getString("EMAIL"),
-			 rs.getString("PASSWORD"),
-			 rs.getString("ROL").charAt(0)
-			 );*/
 		} catch (SQLException e) {
 			System.out.println("getByUsername: " + e.getMessage());
 			return new UsuarioEntity();
@@ -63,7 +51,6 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @param EMAIL
 	 * @param PASSWORD
 	 * @param ROL
-	 * 
 	 * @return  OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
 	 */
 	public static String create(
@@ -108,6 +95,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @param EMAIL
 	 * @param PASSWORD
 	 * @param ROL
+         * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
 	 */
 	public String update(
 			int ID_USUARIO,
@@ -119,7 +107,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 			String PASSWORD,
 			char ROL
 	) {
-            String respuestaSQL = super.update(
+            String respuestaSQL = CrudDAO.update(
                             "UPDATE USUARIO\n"
                             + "SET DOCUMENTO = ?,\n"
                             + "T_DOCUMENTO = ?,\n"

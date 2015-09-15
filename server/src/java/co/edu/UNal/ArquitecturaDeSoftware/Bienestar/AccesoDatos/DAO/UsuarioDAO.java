@@ -5,6 +5,7 @@
  */
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
 
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.TallerEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,11 +27,12 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @return Value object with required user information
 	 */
 	public UsuarioEntity getByUsername(String username) {
-		ResultSet rs = super.query("SELECT * FROM USUARIO WHERE LOWER(EMAIL) =LOWER(?)", new String[]{username});
+		ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO WHERE LOWER(EMAIL) =LOWER(?)", new String[]{username});
 		try {
 			rs.first();
 			UsuarioEntity ue = toEntity(rs);
-
+                        
+                                                        
 			//this.create(1234, "CC", "probar", "crear", "crear@unal.edu.co", "clave1", 'A');
 			//this.update(12, 1234, "CC", "GATO", "FELIX", "crear@unal.edu.co", "clave1", 'A');
 			//this.delete(12);
@@ -107,7 +109,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @param PASSWORD
 	 * @param ROL
 	 */
-	public void update(
+	public String update(
 			int ID_USUARIO,
 			int DOCUMENTO,
 			String T_DOCUMENTO,
@@ -117,38 +119,49 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 			String PASSWORD,
 			char ROL
 	) {
-		super.query(
-				"UPDATE USUARIO\n"
-				+ "SET DOCUMENTO = ?,\n"
-				+ "T_DOCUMENTO = ?,\n"
-				+ "NOMBRES = ?,\n"
-				+ "APELLIDOS = ?,\n"
-				+ "EMAIL = ?,\n"
-				+ "PASSWORD = ?,\n"
-				+ "ROL = ?\n"
-				+ "WHERE ID_USUARIO = ?;",
-				new String[]{
-					Integer.toString(DOCUMENTO),
-					T_DOCUMENTO,
-					NOMBRES,
-					APELLIDOS,
-					EMAIL,
-					PASSWORD,
-					ROL + "",
-					Integer.toString(ID_USUARIO)
-				}
+            String respuestaSQL = super.update(
+                            "UPDATE USUARIO\n"
+                            + "SET DOCUMENTO = ?,\n"
+                            + "T_DOCUMENTO = ?,\n"
+                            + "NOMBRES = ?,\n"
+                            + "APELLIDOS = ?,\n"
+                            + "EMAIL = ?,\n"
+                            + "PASSWORD = ?,\n"
+                            + "ROL = ?\n"
+                            + "WHERE ID_USUARIO = ?;",
+                            new String[]{
+                                    Integer.toString(DOCUMENTO),
+                                    T_DOCUMENTO,
+                                    NOMBRES,
+                                    APELLIDOS,
+                                    EMAIL,
+                                    PASSWORD,
+                                    ROL + "",
+                                    Integer.toString(ID_USUARIO)
+                            }
 		);
+            if (respuestaSQL.contains("Duplicate entry")){
+                    if(respuestaSQL.contains("DOCUMENTO"))
+                            respuestaSQL = "documento";
+                    else if(respuestaSQL.contains("EMAIL"))
+                            respuestaSQL = "correo";
+            }
+            System.out.println("UsuarioDAO.update: "+respuestaSQL);
+            return respuestaSQL;
 	}
 
 	/**
 	 *
 	 * @param ID_USUARIO
+         * @return 
 	 */
-	public void delete(int ID_USUARIO) {
-		super.query(
+	public String delete(int ID_USUARIO) {
+		String respuestaSQL = CrudDAO.update(
 				"DELETE FROM USUARIO WHERE ID_USUARIO = ?;",
 				new String[]{Integer.toString(ID_USUARIO)}
 		);
+                System.out.println("UsuarioDAO.delete: "+respuestaSQL);
+                return respuestaSQL;
 	}
 
 	@Override

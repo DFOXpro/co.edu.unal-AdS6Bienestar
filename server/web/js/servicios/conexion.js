@@ -114,6 +114,7 @@ app.factory('$conexion', function ($http) {
 		semilla = localStorage.getItem("1");
 		var iniciado = true;
 		if (semilla === null | semilla === "") {//undefined para chrome null para FX
+			this.terminar();
 			semilla = strAleatorio(10);
 			cookieHashCode = strAleatorio(10);
 			iniciado = false;

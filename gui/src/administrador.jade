@@ -5,6 +5,11 @@ block variables
 
 block devScriptHead
 	script(src="js/servicios/conexion.js")
+	script(src="js/servicios/sesion.js")
+	link(
+		rel='stylesheet'
+		href='css/transdmin.css'
+	)
 block scriptHead
 	//- el nombre sería así
 	script(src="js/a.js")
@@ -15,10 +20,112 @@ block title
 	title Bienestar - Administración
 
 block content
-	.login-card(
-		ng-controller="admin"
-	)
-		h1 Administración
-		button(
-			ng-click="cerrarSesion()"
-		) Cerrar sesión
+	// You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet
+	ul#mainNav(ng-controller="admin")
+		//- Este navegador tendrá la ruta, ejemplo: Admin/Gestion de usuarios/Usario Pepito
+		li.active
+			a(href='#') inicio
+		// Use the "active" class for the active menu item
+		li
+			a(ng-click="rutaNivel(1)") Ruta nivel 1
+		li
+			a(ng-click="rutaNivel(2)") Ruta nivel 2
+		li
+			a(ng-click="rutaNivel(3)") Ruta nivel 3
+
+		li.logout
+			a(ng-click="cerrarSesion()") Salir
+		li.logout
+			a(ng-click="modoUsuario()") Entrar como usuario
+	#containerHolder
+		#container
+			//- SideNav
+			#sidebar
+				ul.sideNav
+					li
+						a(ng-click="nav_Usuarios()") Gestion de usuarios
+					li
+						a(ng-click="nav_Cursos()") Cursos y Talleres
+					li
+						a(ng-click="nav_Convocatorias()") Convocatorias
+					li
+						a(ng-click="nav_Informes()") Informes
+			//- Contenido
+			#main
+				h2
+					a(href='#') Home
+					|  »
+					a.active(href='#') Actividad Reciente
+				form.jNice(action='')
+					h3 Talleres recientes
+					table(cellpadding='0', cellspacing='0')
+						tr
+							td Evento 1
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr.odd
+							td Evento 2
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr
+							td Evento 3
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr.odd
+							td Evento 4
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr
+							td Evento 5
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+					h3 Convocatorias recientes
+					table(cellpadding='0', cellspacing='0')
+						tr
+							td Convocatoria 1
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr.odd
+							td Convocatoria 2
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr
+							td Convocatoria 3
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr.odd
+							td Convocatoria 4
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+						tr
+							td Convocatoria 5
+							td.action
+								a.view(href='#') Ver
+								a.edit(href='#') Editar
+								a.delete(href='#') Eliminar
+					br
+					br
+			// // #main
+			.clear
+		// // #container
+	// // #containerHolder
+	p#footer Bienestar Universitario - Arquitectura de Software 2015 II
+// // #wrapper

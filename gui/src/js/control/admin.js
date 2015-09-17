@@ -1,18 +1,8 @@
 /* global app */
 
-app.controller('admin', function ($scope, $conexion) {
+app.controller('admin', function ($scope, $conexion, $sesion) {
 	console.log("admin");
-	$scope.cerrarSesion = function (){
-		$conexion.enviar(
-			"sesion",
-			{
-				tipo:"cerrar",
-				1: localStorage.getItem("5")
-			},
-			function(){
-				$conexion.terminar();
-				location.replace("/");
-			}
-		);
-	};
+	$sesion.verificarSesion();
+	$scope.cerrarSesion = $sesion.cerrarSesion;
 });
+console.log("Admin cargado");

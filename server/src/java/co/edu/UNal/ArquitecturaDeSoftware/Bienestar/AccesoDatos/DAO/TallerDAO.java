@@ -8,6 +8,7 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.TallerEntity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -156,6 +157,82 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
                 System.out.println("TallerDAO.delete: "+respuestaSQL);
                 return respuestaSQL;
 	}
+        
+        
+        /**
+         * Ingresa un registro en la tabla PROFESOR_TALLER 
+         * @param ID_USUARIO
+         * @param ID_TALLER
+         * @return 
+         */
+        public String registrarProfesor(int ID_USUARIO, int ID_TALLER){
+                String respuestaSQL = CrudDAO.update(
+				"INSERT INTO PROFESOR_TALLER(ID_USUARIO, ID_TALLER) VALUES (?,?);",
+				new String[]{Integer.toString(ID_USUARIO),Integer.toString(ID_TALLER) }
+		);
+                System.out.println("TallerDAO.registrarProfesor: "+respuestaSQL);
+                return respuestaSQL;
+        }
+        
+        
+        /**
+         * Retorna la lista de registros de la tabla TALLER en un rango
+         * @return 
+         */
+        public ArrayList<TallerEntity> getTodosTalleres(){
+            ArrayList<TallerEntity> talleres = new ArrayList<>();
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER ", new String[]{});
+		try {
+                       while(rs.next()){
+			TallerEntity ue = toEntity(rs);
+			talleres.add(ue);
+                       }
+		} catch (SQLException e) {
+			System.out.println("TallerDAO.getTodosTalleres: " + e.getMessage());
+			return new ArrayList<>();
+		}
+            return talleres;
+        }
+        
+        
+        /**
+         * Retorna la lista de talleres en un rango
+         * @return 
+         */
+        public ArrayList<TallerEntity> getTalleres(){
+            ArrayList<TallerEntity> talleres = new ArrayList<>();
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'T' ", new String[]{});
+		try {
+                       while(rs.next()){
+			TallerEntity ue = toEntity(rs);
+			talleres.add(ue);
+                       }
+		} catch (SQLException e) {
+			System.out.println("TallerDAO.getTalleres: " + e.getMessage());
+			return new ArrayList<>();
+		}
+            return talleres;
+        }
+        
+        
+        /**
+         * Retorna la lista de cursos en un rango
+         * @return 
+         */
+        public ArrayList<TallerEntity> getCursos(){
+            ArrayList<TallerEntity> talleres = new ArrayList<>();
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'C' ", new String[]{});
+		try {
+                       while(rs.next()){
+			TallerEntity ue = toEntity(rs);
+			talleres.add(ue);
+                       }
+		} catch (SQLException e) {
+			System.out.println("TallerDAO.getCursos: " + e.getMessage());
+			return new ArrayList<>();
+		}
+            return talleres;
+        }
 
         
 ////////////////////////        

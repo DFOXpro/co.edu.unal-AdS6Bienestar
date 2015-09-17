@@ -8,6 +8,7 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.ConvocatoriaEntity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -127,6 +128,26 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
                 System.out.println("ConvocatoriaDAO.delete: "+respuestaSQL);
                 return respuestaSQL;
 	}
+        
+        
+        /**
+         * Retorna la lista de registros de la tabla TALLER en un rango
+         * @return 
+         */
+        public ArrayList<ConvocatoriaEntity> getConvocatorias(){
+            ArrayList<ConvocatoriaEntity> convocatorias = new ArrayList<>();
+                ResultSet rs = CrudDAO.query("SELECT * FROM CONVOCATORIA ", new String[]{});
+		try {
+                       while(rs.next()){
+			ConvocatoriaEntity ue = toEntity(rs);
+			convocatorias.add(ue);
+                       }
+		} catch (SQLException e) {
+			System.out.println("ConvocatoriasDAO.getConvocatorias: " + e.getMessage());
+			return new ArrayList<>();
+		}
+            return convocatorias;
+        }
 
         
 ////////////////////////        

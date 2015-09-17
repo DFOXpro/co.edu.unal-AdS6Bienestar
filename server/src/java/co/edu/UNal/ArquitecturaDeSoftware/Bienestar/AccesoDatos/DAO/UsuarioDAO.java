@@ -7,6 +7,7 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,10 +34,10 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 		try {
 			rs.first();
 			UsuarioEntity ue = toEntity(rs);
-
+                        
 			return ue;
 		} catch (SQLException e) {
-			System.out.println("getByUsername: " + e.getMessage());
+			System.out.println("UsuarioDAO.getByUsername: " + e.getMessage());
 			return new UsuarioEntity();
 		}
 	}
@@ -152,6 +153,61 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
                 return respuestaSQL;
 	}
 
+        
+        /**
+         * Ingresa un registro en la tabla USUARIO_TALLER 
+         * @param ID_USUARIO
+         * @param ID_TALLER
+         * @return 
+         */
+        public String registrarTaller(int ID_USUARIO, int ID_TALLER){
+                String respuestaSQL = CrudDAO.update(
+				"INSERT INTO USUARIO_TALLER(ID_USUARIO, ID_TALLER) VALUES (?,?);",
+				new String[]{Integer.toString(ID_USUARIO),Integer.toString(ID_TALLER) }
+		);
+                System.out.println("UsuarioDAO.registrarTaller: "+respuestaSQL);
+                return respuestaSQL;
+        }
+        
+        
+        /**
+         * Ingresa un registro en la tabla USUARIO_CONVOCATORIA
+         * @param ID_USUARIO
+         * @param ID_CONVOCATORIA
+         * @return 
+         */
+        public String registrarConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA){
+                String respuestaSQL = CrudDAO.update(
+				"INSERT INTO USUARIO_CONVOCATORIA(ID_USUARIO, ID_CONVOCATORIA) VALUES (?,?);",
+				new String[]{Integer.toString(ID_USUARIO),Integer.toString(ID_CONVOCATORIA) }
+		);
+                System.out.println("UsuarioDAO.registrarConvocatoria: "+respuestaSQL);
+                return respuestaSQL;
+        }
+        
+        
+        /**
+         * Retorna la lista de usuarios en un rango
+         * @return 
+         */
+        public ArrayList<UsuarioEntity> getUsuraios(){
+            ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+                ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO ", new String[]{});
+		try {
+                       while(rs.next()){
+			UsuarioEntity ue = toEntity(rs);
+			usuarios.add(ue);
+                       }
+		} catch (SQLException e) {
+			System.out.println("UsuarioDAO.getUsuraios: " + e.getMessage());
+			return new ArrayList<>();
+		}
+            return usuarios;
+        }
+        
+        
+        
+        
 	@Override
 	protected Class getEntityClass() {
 		return UsuarioEntity.class;

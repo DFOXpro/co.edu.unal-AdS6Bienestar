@@ -1,0 +1,111 @@
+script(
+	type="text/ng-template"
+	id="crear-usuario-tmplt"
+)
+	form(
+		ng-submit="cu.submit()"
+		ng-hide="exitoso"
+		name="isf"
+		novalidate
+	)
+		input(
+			required
+			type='text'
+			name='nombre'
+			placeholder='Nombres'
+			ng-model="cu.nombre"
+			ng-minlength=3
+			ng-maxlength=100
+		)
+		.login-help(ng-show="isf.nombre.$error.minlength") Nombre muy corto
+		.login-help(ng-show="isf.nombre.$error.maxlength") Nombre muy largo
+		input(
+			required
+			type='text'
+			name='apellido'
+			placeholder='Apellidos'
+			ng-model="cu.apellido"
+			ng-minlength=3
+			ng-maxlength=100
+		)
+		.login-help(ng-show="isf.apellido.$error.minlength") Apellido muy corto
+		.login-help(ng-show="isf.apellido.$error.maxlength") Apellido muy largo
+
+		select(
+			required
+			name='tipoUsuario'
+			ng-model="cu.tipoUsuario"
+		)
+			option(
+				ng-repeat="option in roles" value="{{option.id}}"
+			) {{option.name}}
+		input(
+			required
+			type='email'
+			name='email'
+			placeholder='Correo Electronico'
+			ng-model="cu.email"
+		)
+		.login-help(ng-show="isf.email.$error.email") Usuario no valido, debe ser un correo
+
+		select(
+			required
+			name='t_documento'
+			ng-model="cu.tipoDocumento"
+		)
+			option(
+				ng-repeat="option in documentos" value="{{option.id}}"
+			) {{option.name}}
+		input(
+			required
+			type="number"
+			name='documento'
+			placeholder='Documento'
+			ng-model="cu.documento"
+			max=2147483647
+			min=1
+		)
+		.login-help(ng-show="isf.documento.$error.text") Documento no valido, ingrese su documento sin puntos ni espacios
+		.login-help(ng-show="isf.documento.$error.min") Documento no puede ser 0 ni negativo
+		.login-help(ng-show="isf.documento.$error.max") Documento muy grande
+
+		input(
+			required
+			type='password'
+			name='contrasena'
+			placeholder='Contraseña'
+			ng-model="cu.contrasena"
+			ng-minlength=5
+			ng-pattern="ascii"
+		)
+		.login-help(ng-show="isf.contrasena.$error.minlength") Contraseña muy corta
+		.login-help(ng-show="isf.contrasena.$error.pattern") No puede tener tildes o caracteres especiales
+		input(
+			required
+			type='password'
+			name='contrasena_2'
+			placeholder='Ingrese de nuevo su contraseña'
+			ng-model="cu.contrasena_2"
+			data-password-verify="cu.contrasena"
+		)
+		.login-help(ng-show="isf.contrasena_2.$error.passwordVerify") la contraseña no coincide
+
+		input.login.login-submit(
+			type='submit'
+			name='crear'
+			value='Crear'
+			ng-disabled="isf.$invalid"
+		)
+		.login-help(ng-show="isf.nombre.$error.required") Escriba su nombre
+		.login-help(ng-show="isf.apellido.$error.required") Escriba su apellido
+		.login-help(ng-show="isf.tipoUsuario.$error.required") Escoja su rol
+		.login-help(ng-show="isf.email.$error.required") Escriba su correo
+		.login-help(ng-show="isf.t_documento.$error.required") Escoja su tipo de documento
+		.login-help(ng-show="isf.documento.$error.required") Escriba su documento
+		.login-help(ng-show="isf.contrasena.$error.required") Escriba su contrasena
+		.login-help(ng-show="isf.contrasena_2.$error.required") Verifique su contrasena
+		.login-help(ng-show="cu.isError") {{ cu.error}}
+		a(href	='/') Iniciar sesión
+	div(ng-show ="exitoso")
+		h2 {{cu.nombre}} tu registro fue exitoso ya puedes
+			a(href	='/') iniciar sesión

@@ -7,14 +7,15 @@ app.controller('usuarios', function ($rootScope, $scope, $conexion, $sesion, $ta
 	]));
 	var get = function (diff) {
 		$scope.pagina.pos += diff;
-		$scope.pagina.tabla = $tabla.get(
+		$tabla.get(
 			"admin",
 			"Usuarios",
 			$scope.pagina.pos,
 			10,
-			"/usuarios"
+			"usuarios",
+			function (r){$scope.pagina.tabla = r;}
 		);
-		$scope.pagina.total = ($scope.pagina.tabla.total /10);// - (73%10 === 0)? 1:0;
+		$scope.pagina.total = ($scope.pagina.tabla.total /10);
 
 //TEST
 //		$scope.pagina.usuarios = {
@@ -45,7 +46,8 @@ app.controller('usuarios', function ($rootScope, $scope, $conexion, $sesion, $ta
 		pos: 1,
 		total: 0,
 		tabla: {},
-		get: get
+		get: get,
+		objeto: "usuario"
 	};
 	get(0);
 });

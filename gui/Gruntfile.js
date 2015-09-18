@@ -13,9 +13,12 @@ module.exports = function (grunt) {
 		"build/usuario.html": 'src/usuario.jade',
 
 		//Test de los templates
-		"build/admin1.html": 'src/theme/Vistas_JADE/admin_main.jade',
-		"build/user1.html": 'src/theme/Vistas_JADE/doct_main.jade',
-		"build/user2.html": 'src/theme/Vistas_JADE/estudiante_main.jade',
+//		"build/admin1.html": 'src/theme/Vistas_JADE/admin_main.jade',
+//		"build/user1.html": 'src/theme/Vistas_JADE/doct_main.jade',
+//		"build/user2.html": 'src/theme/Vistas_JADE/estudiante_main.jade',
+//		"build/crearu.html": 'src/creacion_usuario.jade',
+//		"build/crearc.html": 'src/creacion_convocatoria.jade',
+//		"build/creart.html": 'src/creacion_taller.jade',
 
 		//ERRORES
 		"build/401.html": 'src/paginas_de_error/401.jade',
@@ -38,6 +41,7 @@ module.exports = function (grunt) {
 				src: [
 					'angular/angular.min.js',
 					'angular-route/angular-route.min.js',
+					'ez-datetime/dist/ez-datetime.min.*',
 					'livereload-js/dist/livereload.js',
 					'cryptico/cryptico.min.js'
 				],

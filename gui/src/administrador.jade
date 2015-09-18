@@ -8,6 +8,10 @@ block scriptHead
 	//- el nombre sería así
 	script(src="js/a.js")
 block devScriptBody
+	//- Libreria del datepicker
+	script(src="js/lib/ez-datetime.min.js")
+	script(src="js/lib/ez-datetime.min.css")
+
 	script(src="js/control/admin.js")
 	script(src="js/control/admin/inicio.js")
 	script(src="js/control/admin/eventos.js")
@@ -44,9 +48,9 @@ block templates
 		id="tablas-tmplt"
 	)
 		h2 {{pagina.titulo}} {{pagina.subtitulo}}
-		button(
-			ng-click="pagina.crear()"
-		) Crear {{objeto}}
+		a(
+			href="#{{pagina.tabla.verAccion}}/crear"
+		) Crear {{pagina.objeto}}
 		btabla(info="pagina.tabla")
 		button(
 			ng-show="pagina.pos > 1"
@@ -57,3 +61,7 @@ block templates
 			ng-show="pagina.pos < pagina.total"
 			ng-click="pagina.get(1)"
 		) Siguiente
+
+	include html_templates/creacion_convocatoria
+	include html_templates/creacion_usuario
+	include html_templates/creacion_taller

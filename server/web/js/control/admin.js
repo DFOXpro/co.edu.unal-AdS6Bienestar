@@ -1,4 +1,6 @@
 /* global app */
+app.$inject = ['ez.datetime', 'ez.modal', 'ez.dropdown'];
+
 app.config(['$routeProvider',
 	function ($routeProvider) {
 		$routeProvider.
@@ -7,17 +9,21 @@ app.config(['$routeProvider',
 				controller: 'usuarios'
 			}).
 			when('/usuarios/:usarioId', {
-				templateUrl: 'tablas-tmplt',
+				templateUrl: 'crear-usuario-tmplt',
 				controller: 'usuarios'
 			}).
 			when('/evento/:evento', {
 				templateUrl: 'tablas-tmplt',
 				controller: 'eventos'
 			}).
-			when('/evento/:evento/:eventoId', {
-				templateUrl: 'tablas-tmplt',
+			when('/evento/:evento/:eventoId?nombre=":nombre"', {
+				templateUrl: 'crear-taller-tmplt',
 				controller: 'eventos'
 			}).
+//			when('/evento/convocatorias/:eventoId', {
+//				templateUrl: 'crear-convocatoria-tmplt',
+//				controller: 'eventos'
+//			}).
 			when('/inicio', {
 				templateUrl: 'inicio-tmplt',
 				controller: 'inicio'

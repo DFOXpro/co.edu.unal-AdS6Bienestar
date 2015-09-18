@@ -8,7 +8,7 @@ app.controller('inicio', function ($rootScope, $scope, $conexion, $sesion, $tabl
 		//TEST
 		r = {
 			titulo: "Talleres recientes",
-			verAccion: "/eventos",
+			verAccion: "eventos",
 			//editarAccion:"/editareventos",
 			//eliminarAccion:"/eliminareventos",
 			lineas: [
@@ -31,9 +31,9 @@ app.controller('inicio', function ($rootScope, $scope, $conexion, $sesion, $tabl
 		titulo: "Administrador: ",
 		subtitulo: window.atob(localStorage.getItem("6")),
 		talleresRecientes: getTalleresRecientes(),
-		convocatoriasRecientes: $tabla.get("admin", "Convocatorias recientes", 0, 4, "/convocatorias"),
-		cursosRecientes: $tabla.get("admin", "Cursos recientes", 0, 4, "/cursos"),
-		usuariosRecientes: $tabla.get("admin", "Usuarios recientes", 0, 4, "/usuarios")
+		convocatoriasRecientes: $tabla.get("admin", "Talleres recientes", 0, 4, "talleres"),
+		cursosRecientes: $tabla.get("admin", "Cursos recientes", 0, 4, "cursos"),
+		usuariosRecientes: $tabla.get("admin", "Usuarios recientes", 0, 4, "usuarios")
 	};
 });
 console.log("Admin inicio cargado");

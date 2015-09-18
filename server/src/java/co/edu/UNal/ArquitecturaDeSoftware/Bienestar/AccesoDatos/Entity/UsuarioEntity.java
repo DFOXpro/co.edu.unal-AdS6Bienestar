@@ -133,6 +133,10 @@ public class UsuarioEntity implements Serializable, Entity{
     public Integer getIdUsuario() {
         return idUsuario;
     }
+    
+//    public int getIdUsuario() {
+//        return idUsuario;
+//    }
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;

@@ -33,7 +33,7 @@ public abstract class CrudDAO<E extends Entity> {
      * @return
      * @throws java.lang.Exception
      */
-    protected abstract E toEntity(ResultSet rs )throws Exception;
+    //protected abstract E toEntity(ResultSet rs )throws Exception;
 
     private static boolean iniciarConeccion(){
         System.out.println("iniciarConeccion");

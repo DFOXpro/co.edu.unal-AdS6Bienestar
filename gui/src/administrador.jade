@@ -48,7 +48,7 @@ block templates
 	)
 		h2 {{pagina.titulo}} {{pagina.subtitulo}}
 		a(
-			href="#{{pagina.tabla.verAccion}}/crear"
+			href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}"
 		) Crear {{pagina.objeto}}
 		btabla(info="pagina.tabla")
 		button(

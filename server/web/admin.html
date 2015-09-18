@@ -33,14 +33,10 @@
           </ul>
         </div>
         <div id="main" ng-view></div>
-        <!-- // #main-->
         <div class="clear"></div>
       </div>
-      <!-- // #container-->
+      <p id="footer">Bienestar Universitario - Arquitectura de Software 2015 II</p>
     </div>
-    <!-- // #containerHolder-->
-    <p id="footer">Bienestar Universitario - Arquitectura de Software 2015 II</p>
-    <!-- // #wrapper-->
     <script type="text/ng-template" id="inicio-tmplt">
       <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2>
       <btabla info="pagina.talleresRecientes"></btabla>
@@ -48,7 +44,7 @@
       <btabla info="pagina.usuariosRecientes"></btabla>
     </script>
     <script type="text/ng-template" id="tablas-tmplt">
-      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/crear">Crear {{pagina.objeto}}</a>
+      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}">Crear {{pagina.objeto}}</a>
       <btabla info="pagina.tabla"></btabla>
       <button ng-show="pagina.pos &gt; 1" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos}} de {{pagina.total | ceil}} </span>
       <button ng-show="pagina.pos &lt; pagina.total" ng-click="pagina.get(1)">Siguiente</button>
@@ -99,7 +95,7 @@
         <input required type="password" name="contrasena" placeholder="Contraseña" ng-model="cu.contrasena" ng-minlength="5" ng-pattern="ascii">
         <div ng-show="isf.contrasena.$error.minlength" class="login-help">Contraseña muy corta</div>
         <div ng-show="isf.contrasena.$error.pattern" class="login-help">No puede tener tildes o caracteres especiales</div>
-        <input required type="password" name="contrasena_2" placeholder="Ingrese de nuevo su contraseña" ng-model="cu.contrasena_2" data-password-verify="cu.contrasena">
+        <input required type="password" name="contrasena_2" placeholder="Confirme la contraseña" ng-model="cu.contrasena_2" data-password-verify="cu.contrasena">
         <div ng-show="isf.contrasena_2.$error.passwordVerify" class="login-help">la contraseña no coincide</div>
         <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" class="login login-submit">
         <div ng-show="isf.nombre.$error.required" class="login-help">Escriba su nombre</div>
@@ -110,10 +106,10 @@
         <div ng-show="isf.documento.$error.required" class="login-help">Escriba su documento</div>
         <div ng-show="isf.contrasena.$error.required" class="login-help">Escriba su contrasena</div>
         <div ng-show="isf.contrasena_2.$error.required" class="login-help">Verifique su contrasena</div>
-        <div ng-show="cu.isError" class="login-help">{{ cu.error}}</div><a href="/">Iniciar sesión</a>
+        <div // ng-show="cu.isError" class="login-help">{{ cu.error}}</div>
       </form>
       <div ng-show="exitoso">
-        <h2>{{cu.nombre}} tu registro fue exitoso ya puedes<a href="/">iniciar sesión</a></h2>
+        <h2>Usuario creado exitosamente</h2>
       </div>
     </script>
     <script type="text/ng-template" id="crear-taller-tmplt">
@@ -147,7 +143,7 @@
       <table cellpadding="0" cellspacing="0">
         <tr ng-repeat="linea in tabla.lineas" ng-class-odd="'odd'">
           <td>{{linea.titulo}}</td>
-          <td><a href="#{{tabla.verAccion}}/{{linea.id}}?nombre=&quot;{{linea.titulo}}&quot;" class="view">Ver</a>
+          <td><a href="#{{tabla.verAccion}}/{{linea.id}}?nombre={{linea.titulo}}" class="view">Ver</a>
             <!-- a.edit(href='#{{editarAccion}}/{{linea.id}}') Editar-->
             <!-- a.delete(href='#{{eliminarAccion}}/{{linea.id}}') Eliminar-->
             

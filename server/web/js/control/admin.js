@@ -1,5 +1,5 @@
 /* global app */
-app.$inject = ['ez.datetime', 'ez.modal', 'ez.dropdown'];
+app.$inject = ['ngRoute', 'ez.datetime', 'ez.modal', 'ez.dropdown'];
 
 app.config(['$routeProvider',
 	function ($routeProvider) {
@@ -8,7 +8,7 @@ app.config(['$routeProvider',
 				templateUrl: 'tablas-tmplt',
 				controller: 'usuarios'
 			}).
-			when('/usuarios/:usarioId', {
+			when('/usuarios/:usuarioId', {
 				templateUrl: 'crear-usuario-tmplt',
 				controller: 'usuarios'
 			}).

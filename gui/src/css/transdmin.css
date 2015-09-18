@@ -12,3 +12,17 @@
 /* CSS reset by Eric Meyer */
 @import url("reset.css");
 @import url("layout.css");
+
+form {}
+
+form input, form select {
+	display: block;
+	min-width: 30em;
+	max-width: 60em;
+	height: 2em;
+}
+
+form input[disabled] {
+	border: none;
+	background: none;
+}

@@ -1,14 +1,14 @@
 /* global app */
 
-app.controller('eventos', function ($rootScope, $scope,$route, $routeParams, $conexion, $sesion, $tabla) {
+app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion, $sesion, $tabla) {
 	var ruta = [
 			{url:"/inicio",nombre:"Inicio"},
 			{url:"/"+$routeParams.evento,nombre:"Gestión de "+$routeParams.evento}
 		];
 	if($routeParams.eventoId != undefined)
-		ruta[3] = {
+		ruta[2] = {
 			url:"/"+$routeParams.evento+"/"+$routeParams.eventoId,
-			nombre:""+$routeParams.evento
+			nombre:""+$routeParams.nombre
 		};
 
 	console.log(
@@ -26,27 +26,7 @@ app.controller('eventos', function ($rootScope, $scope,$route, $routeParams, $co
 			"/evento/"+$routeParams.evento,
 			function (r){$scope.pagina.tabla = r;}
 		);
-		$scope.pagina.total = ($scope.pagina.tabla.total /10);// - (73%10 === 0)? 1:0;
-		//TEST
-//		$scope.pagina.usuarios = {
-//			titulo: "Usuarios",
-//			verAccion: "/usuarios",
-//			//editarAccion:"/editareventos",
-//			//eliminarAccion:"/eliminareventos",
-//			lineas: [
-//				{titulo: "Pedro Martines", id: 1},
-//				{titulo: "Pepito Perez", id: 2},
-//				{titulo: "Daniel Zorro", id: 3},
-//				{titulo: "Pedro Martines", id: 1},
-//				{titulo: "Pepito Perez", id: 2},
-//				{titulo: "Daniel Zorro", id: 3},
-//				{titulo: "Pedro Martines", id: 1},
-//				{titulo: "Pepito Perez", id: 2},
-//				{titulo: "Daniel Zorro", id: 3},
-//				{titulo: "adasd adadasd", id: 4}
-//			]
-//		};
-		//END TEST
+		$scope.pagina.total = ($scope.pagina.tabla.total /10);
 	};
 
 	$scope.pagina = {

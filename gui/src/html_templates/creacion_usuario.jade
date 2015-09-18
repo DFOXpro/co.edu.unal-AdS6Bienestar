@@ -19,6 +19,7 @@ script(
 		)
 		.login-help(ng-show="isf.nombre.$error.minlength") Nombre muy corto
 		.login-help(ng-show="isf.nombre.$error.maxlength") Nombre muy largo
+
 		input(
 			required
 			type='text'
@@ -39,6 +40,7 @@ script(
 			option(
 				ng-repeat="option in roles" value="{{option.id}}"
 			) {{option.name}}
+
 		input(
 			required
 			type='email'
@@ -56,6 +58,7 @@ script(
 			option(
 				ng-repeat="option in documentos" value="{{option.id}}"
 			) {{option.name}}
+
 		input(
 			required
 			type="number"
@@ -80,11 +83,12 @@ script(
 		)
 		.login-help(ng-show="isf.contrasena.$error.minlength") Contraseña muy corta
 		.login-help(ng-show="isf.contrasena.$error.pattern") No puede tener tildes o caracteres especiales
+
 		input(
 			required
 			type='password'
 			name='contrasena_2'
-			placeholder='Ingrese de nuevo su contraseña'
+			placeholder='Confirme la contraseña'
 			ng-model="cu.contrasena_2"
 			data-password-verify="cu.contrasena"
 		)
@@ -104,8 +108,9 @@ script(
 		.login-help(ng-show="isf.documento.$error.required") Escriba su documento
 		.login-help(ng-show="isf.contrasena.$error.required") Escriba su contrasena
 		.login-help(ng-show="isf.contrasena_2.$error.required") Verifique su contrasena
-		.login-help(ng-show="cu.isError") {{ cu.error}}
-		a(href	='/') Iniciar sesión
+		.login-help(
+			// ng-show="cu.isError"
+		) {{ cu.error}}
+
 	div(ng-show ="exitoso")
-		h2 {{cu.nombre}} tu registro fue exitoso ya puedes
-			a(href	='/') iniciar sesión
+		h2 Usuario creado exitosamente

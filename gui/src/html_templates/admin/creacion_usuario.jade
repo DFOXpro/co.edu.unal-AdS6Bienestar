@@ -38,6 +38,7 @@ script(
 			ng-model="cu.tipoUsuario"
 		)
 			option(
+				ng-selected="$first"
 				ng-repeat="option in roles" value="{{option.id}}"
 			) {{option.name}}
 
@@ -99,18 +100,27 @@ script(
 			name='crear'
 			value='Crear'
 			ng-disabled="isf.$invalid"
+			ng-show="crear"
 		)
-		.login-help(ng-show="isf.nombre.$error.required") Escriba su nombre
-		.login-help(ng-show="isf.apellido.$error.required") Escriba su apellido
-		.login-help(ng-show="isf.tipoUsuario.$error.required") Escoja su rol
-		.login-help(ng-show="isf.email.$error.required") Escriba su correo
-		.login-help(ng-show="isf.t_documento.$error.required") Escoja su tipo de documento
-		.login-help(ng-show="isf.documento.$error.required") Escriba su documento
-		.login-help(ng-show="isf.contrasena.$error.required") Escriba su contrasena
-		.login-help(ng-show="isf.contrasena_2.$error.required") Verifique su contrasena
+		input.login.login-submit(
+			type='submit'
+			name='actualiza'
+			value='Actualizar'
+			ng-disabled="isf.$invalid"
+			ng-show="!crear"
+		)
+		.login-help(ng-show="isf.nombre.$error.required") Escriba el nombre
+		.login-help(ng-show="isf.apellido.$error.required") Escriba el apellido
+		.login-help(ng-show="isf.tipoUsuario.$error.required") Escoja el rol
+		.login-help(ng-show="isf.email.$error.required") Escriba el correo
+		.login-help(ng-show="isf.t_documento.$error.required") Escoja tipo de documento
+		.login-help(ng-show="isf.documento.$error.required") Escriba el documento
+		.login-help(ng-show="isf.contrasena.$error.required") Escriba el contrasena
+		.login-help(ng-show="isf.contrasena_2.$error.required") Verifique la contrasena
 		.login-help(
 			// ng-show="cu.isError"
 		) {{ cu.error}}
-
+		button(ng-show="!crear") Editar
+		button(ng-show="!crear") Eliminar
 	div(ng-show ="exitoso")
 		h2 Usuario creado exitosamente

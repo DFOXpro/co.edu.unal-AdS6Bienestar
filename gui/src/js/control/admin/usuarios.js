@@ -6,7 +6,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		$tabla.get(
 			"admin",
 			"Usuarios",
-			$scope.pagina.pos,
+			0,
 			10,
 			"usuarios",
 			function (r){$scope.pagina.tabla = r;}
@@ -19,13 +19,15 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		{url:"/usuarios",nombre:"Gestión de usuarios."}
 	];
 	if($routeParams.usuarioId !== undefined) {
+//Crear o editar usuario
 		ruta[2] = {
 			url:"/"+$routeParams.evento+"/"+$routeParams.eventoId,
 			nombre:""+$routeParams.nombre
 		};
+
 		$scope.documentos = [
-			{ id: "TI", name: 'Tarjeta de identidad' },
 			{ id: "CC", name: 'Cédula' },
+			{ id: "TI", name: 'Tarjeta de identidad' },
 			{ id: "PP", name: 'Pasaporte' }
 		];
 		$scope.roles = [
@@ -33,11 +35,26 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 			{ id: "P", name: 'Profesor' },
 			{ id: "A", name: 'Administrador' }
 		];
+		$scope.crear = true;
+		if($routeParams.usuarioId > 0){
+//TEST
+var cs = {};
+cs.nombre="qwer";
+cs.apellido="zxcv";
+cs.tipoDocumento="TI";
+cs.documento=1234243;
+cs.email="asdf@qwer";
+cs.contrasena="poiuy";
+cs.tipoUsuario="A";
+//END TEST
+			$scope.crear = false;
+			$scope.cu = cs; 
+		};
 	} else {
 		$scope.pagina = {
 			titulo: "Administrador: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
-			pos: 1,
+			pos: 0,
 			total: 0,
 			tabla: {},
 			get: get,

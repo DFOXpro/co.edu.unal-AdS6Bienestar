@@ -32,7 +32,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 	$scope.pagina = {
 		titulo: "Administrador: ",
 		subtitulo: window.atob(localStorage.getItem("6")),
-		pos: 1,
+		pos: 0,
 		total: 0,
 		tabla: {},
 		get: get,

@@ -19,7 +19,6 @@ form input, form select {
 	display: block;
 	min-width: 30em;
 	max-width: 60em;
-	height: 2em;
 }
 
 form input[disabled] {

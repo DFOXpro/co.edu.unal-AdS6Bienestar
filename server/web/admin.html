@@ -37,16 +37,10 @@
       </div>
       <p id="footer">Bienestar Universitario - Arquitectura de Software 2015 II</p>
     </div>
-    <script type="text/ng-template" id="inicio-tmplt">
-      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2>
-      <btabla info="pagina.talleresRecientes"></btabla>
-      <btabla info="pagina.convocatoriasRecientes"></btabla>
-      <btabla info="pagina.usuariosRecientes"></btabla>
-    </script>
     <script type="text/ng-template" id="tablas-tmplt">
       <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}">Crear {{pagina.objeto}}</a>
       <btabla info="pagina.tabla"></btabla>
-      <button ng-show="pagina.pos &gt; 1" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos}} de {{pagina.total | ceil}} </span>
+      <button ng-show="pagina.pos &gt; 1" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos + 1}} de {{pagina.total | ceil}} </span>
       <button ng-show="pagina.pos &lt; pagina.total" ng-click="pagina.get(1)">Siguiente</button>
     </script>
     <script type="text/ng-template" id="crear-convocatoria-tmplt">
@@ -81,7 +75,7 @@
         <div ng-show="isf.apellido.$error.minlength" class="login-help">Apellido muy corto</div>
         <div ng-show="isf.apellido.$error.maxlength" class="login-help">Apellido muy largo</div>
         <select required name="tipoUsuario" ng-model="cu.tipoUsuario">
-          <option ng-repeat="option in roles" value="{{option.id}}">{{option.name}}</option>
+          <option ng-selected="$first" ng-repeat="option in roles" value="{{option.id}}">{{option.name}}</option>
         </select>
         <input required type="email" name="email" placeholder="Correo Electronico" ng-model="cu.email">
         <div ng-show="isf.email.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
@@ -97,16 +91,19 @@
         <div ng-show="isf.contrasena.$error.pattern" class="login-help">No puede tener tildes o caracteres especiales</div>
         <input required type="password" name="contrasena_2" placeholder="Confirme la contraseña" ng-model="cu.contrasena_2" data-password-verify="cu.contrasena">
         <div ng-show="isf.contrasena_2.$error.passwordVerify" class="login-help">la contraseña no coincide</div>
-        <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" class="login login-submit">
-        <div ng-show="isf.nombre.$error.required" class="login-help">Escriba su nombre</div>
-        <div ng-show="isf.apellido.$error.required" class="login-help">Escriba su apellido</div>
-        <div ng-show="isf.tipoUsuario.$error.required" class="login-help">Escoja su rol</div>
-        <div ng-show="isf.email.$error.required" class="login-help">Escriba su correo</div>
-        <div ng-show="isf.t_documento.$error.required" class="login-help">Escoja su tipo de documento</div>
-        <div ng-show="isf.documento.$error.required" class="login-help">Escriba su documento</div>
-        <div ng-show="isf.contrasena.$error.required" class="login-help">Escriba su contrasena</div>
-        <div ng-show="isf.contrasena_2.$error.required" class="login-help">Verifique su contrasena</div>
+        <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" ng-show="crear" class="login login-submit">
+        <input type="submit" name="actualiza" value="Actualizar" ng-disabled="isf.$invalid" ng-show="!crear" class="login login-submit">
+        <div ng-show="isf.nombre.$error.required" class="login-help">Escriba el nombre</div>
+        <div ng-show="isf.apellido.$error.required" class="login-help">Escriba el apellido</div>
+        <div ng-show="isf.tipoUsuario.$error.required" class="login-help">Escoja el rol</div>
+        <div ng-show="isf.email.$error.required" class="login-help">Escriba el correo</div>
+        <div ng-show="isf.t_documento.$error.required" class="login-help">Escoja tipo de documento</div>
+        <div ng-show="isf.documento.$error.required" class="login-help">Escriba el documento</div>
+        <div ng-show="isf.contrasena.$error.required" class="login-help">Escriba el contrasena</div>
+        <div ng-show="isf.contrasena_2.$error.required" class="login-help">Verifique la contrasena</div>
         <div // ng-show="cu.isError" class="login-help">{{ cu.error}}</div>
+        <button ng-show="!crear">Editar</button>
+        <button ng-show="!crear">Eliminar</button>
       </form>
       <div ng-show="exitoso">
         <h2>Usuario creado exitosamente</h2>
@@ -137,6 +134,12 @@
       <div ng-show="exitoso">
         <h2>{{con.nombre}} Registro exitoso de la convocatoria, ya puedes<a href="/">ver y administrar este evento</a></h2>
       </div>
+    </script>
+    <script type="text/ng-template" id="inicio-tmplt">
+      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2>
+      <btabla info="pagina.talleresRecientes"></btabla>
+      <btabla info="pagina.convocatoriasRecientes"></btabla>
+      <btabla info="pagina.usuariosRecientes"></btabla>
     </script>
     <script type="text/ng-template" id="btabla-tmplt">
       <h3>{{tabla.titulo}}</h3>

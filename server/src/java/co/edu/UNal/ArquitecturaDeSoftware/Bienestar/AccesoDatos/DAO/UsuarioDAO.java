@@ -259,5 +259,4 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
     public int getTotalUsuarios() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
->>>>>>> paginacionDAO
 }

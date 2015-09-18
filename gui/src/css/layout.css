@@ -41,7 +41,7 @@ h1 span { display: none; }
 	padding: 0;
 	margin: 0;
 	border-bottom: 1px solid #ddd;
-	background: url(../img/top-menu-bg.gif) no-repeat left top; 
+	/*background: url(../img/top-menu-bg.gif) no-repeat left top; 
 	/* We used a background image making the thick border and the thin one to keep the html structure simple */
 }
 
@@ -87,7 +87,7 @@ h1 span { display: none; }
 
 
 #containerHolder div{
-	height: 100vh;
+	min-height: 90vh;
 	display: flex;
 }
 

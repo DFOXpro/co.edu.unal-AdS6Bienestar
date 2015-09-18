@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "angular": "latest",
+    "angular-route": "~1.4.6",
     "cryptico": "*",
     "livereload-js": "~2.2.1"
   }

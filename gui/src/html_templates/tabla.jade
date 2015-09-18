@@ -1,0 +1,24 @@
+script(
+	type="text/ng-template"
+	id="btabla-tmplt"
+)
+	h3 {{tabla.titulo}}
+	table(cellpadding='0', cellspacing='0')
+		tr(
+			ng-repeat="linea in tabla.lineas"
+			ng-class-odd="'odd'"
+		)
+			td {{linea.titulo}}
+			td
+				a.view(href='#{{tabla.verAccion}}/{{linea.id}}') Ver
+				// a.edit(href='#{{editarAccion}}/{{linea.id}}') Editar
+				// a.delete(href='#{{eliminarAccion}}/{{linea.id}}') Eliminar
+
+
+//- Ejemplo
+	tr.odd
+		td Convocatoria 2
+		td.action
+			a.view(href='#') Ver
+			a.edit(href='#') Editar
+			a.delete(href='#') Eliminar

@@ -21,9 +21,10 @@ app.controller('eventos', function ($rootScope, $scope,$route, $routeParams, $co
 		$scope.pagina.tabla = $tabla.get(
 			"admin",
 			$routeParams.evento,
-			$scope.pagina.upos,
+			$scope.pagina.pos,
 			10,
-			"/evento/"+$routeParams.evento
+			"/evento/"+$routeParams.evento,
+			function (r){$scope.pagina.tabla = r;}
 		);
 		$scope.pagina.total = ($scope.pagina.tabla.total /10);// - (73%10 === 0)? 1:0;
 		//TEST

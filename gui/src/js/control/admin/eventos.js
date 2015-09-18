@@ -21,31 +21,12 @@ app.controller('eventos', function ($rootScope, $scope,$route, $routeParams, $co
 		$scope.pagina.tabla = $tabla.get(
 			"admin",
 			$routeParams.evento,
-			$scope.pagina.upos,
+			$scope.pagina.pos,
 			10,
-			"/evento/"+$routeParams.evento
+			"/evento/"+$routeParams.evento,
+			function (r){$scope.pagina.tabla = r;}
 		);
-		$scope.pagina.total = ($scope.pagina.tabla.total /10);// - (73%10 === 0)? 1:0;
-		//TEST
-//		$scope.pagina.usuarios = {
-//			titulo: "Usuarios",
-//			verAccion: "/usuarios",
-//			//editarAccion:"/editareventos",
-//			//eliminarAccion:"/eliminareventos",
-//			lineas: [
-//				{titulo: "Pedro Martines", id: 1},
-//				{titulo: "Pepito Perez", id: 2},
-//				{titulo: "Daniel Zorro", id: 3},
-//				{titulo: "Pedro Martines", id: 1},
-//				{titulo: "Pepito Perez", id: 2},
-//				{titulo: "Daniel Zorro", id: 3},
-//				{titulo: "Pedro Martines", id: 1},
-//				{titulo: "Pepito Perez", id: 2},
-//				{titulo: "Daniel Zorro", id: 3},
-//				{titulo: "adasd adadasd", id: 4}
-//			]
-//		};
-		//END TEST
+		$scope.pagina.total = ($scope.pagina.tabla.total /10);
 	};
 
 	$scope.pagina = {

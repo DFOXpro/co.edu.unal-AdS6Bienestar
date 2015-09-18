@@ -14,30 +14,56 @@ import java.util.ArrayList;
  * @author awake
  */
 public class CtrlUsuario {
-    UsuarioDAO usr = new UsuarioDAO();
-    ConvocatoriaDAO conv = new ConvocatoriaDAO();
-    TallerDAO tall = new TallerDAO();
-    
-    public ConvocatoriaEntity leerConvocatoria(String id){
-        return conv.getByID(id);
-    }
-    
-    public TallerEntity leerTaller(String id){
-    return tall.getByID(id);
-    }
-        
-    public UsuarioEntity leerUsuario(String username){
-        return usr.getByUsername(username);
-    }    
-    
-    public UsuarioEntity leerUsuarioId(int idUsuario){
-        return usr.getById(idUsuario);
-    }    
-    
-    public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion){
-        return usr.getUsuarios(posicion, tamano);
-    }   
-    public int obtenerTotalUsuarios(){
-        return usr.getTotalUsuarios();
-    }   
+
+	UsuarioDAO usr = new UsuarioDAO();
+	ConvocatoriaDAO conv = new ConvocatoriaDAO();
+	TallerDAO tall = new TallerDAO();
+
+	public ConvocatoriaEntity leerConvocatoria(String id) {
+		return conv.getByID(id);
+	}
+
+	public TallerEntity leerTaller(String id) {
+		return tall.getByID(id);
+	}
+
+	public UsuarioEntity leerUsuario(String username) {
+		return usr.getByUsername(username);
+	}
+
+	public UsuarioEntity leerUsuarioId(int idUsuario) {
+		return usr.getById(idUsuario);
+	}
+
+	public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion) {
+		//return usr.getUsuarios(posicion, tamano);
+		ArrayList<UsuarioEntity> a = new ArrayList<>(tamano);
+		UsuarioEntity u = new UsuarioEntity();
+		u.setNombres("dsdsd");
+		u.setApellidos("qwerqwer");
+		u.setIdUsuario(1);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		a.add(u);
+		return a;
+	};
+
+	public int obtenerTotalUsuarios() {
+		return usr.getTotalUsuarios();
+	}
 }

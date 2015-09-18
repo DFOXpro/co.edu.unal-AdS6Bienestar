@@ -220,7 +220,7 @@ public class VisAdmin extends VisUsuario{
         PrintWriter out = response.getWriter();
         
         JSONArray list1 = new JSONArray();
-        for(int i = 0; i < usuarios.size() + 1; i++)
+        for(int i = 0; i < usuarios.size(); i++)
         {
             JSONObject obj = new JSONObject();
             obj.put("id", usuarios.get(i).getIdUsuario());

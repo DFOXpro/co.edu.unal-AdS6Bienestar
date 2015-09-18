@@ -4,36 +4,16 @@ app.controller('inicio', function ($rootScope, $scope, $conexion, $sesion, $tabl
 	console.log("inicio", $rootScope.nav([
 		{url:"/inicio",nombre:"Inicio"}
 	]));
-	var getTalleresRecientes = function () {
-		//TEST
-		r = {
-			titulo: "Talleres recientes",
-			verAccion: "eventos",
-			//editarAccion:"/editareventos",
-			//eliminarAccion:"/eliminareventos",
-			lineas: [
-				{titulo: "Quantica para industriales", id: 1},
-				{titulo: "Quantica for dummies", id: 2},
-				{titulo: "Quantica aplicada para ingenieros", id: 3},
-				{titulo: "Quantica avanzada para asiaticos", id: 4}
-			]
-		};
-		//END TEST
-		return r;
-	};
-
-//@TODO gets del cliente admin
-	var getCursosRecientes = getTalleresRecientes;
-	var getConvocatoriasRecientes = getTalleresRecientes;
-
 
 	$scope.pagina = {
 		titulo: "Administrador: ",
 		subtitulo: window.atob(localStorage.getItem("6")),
-		talleresRecientes: getTalleresRecientes(),
-		convocatoriasRecientes: $tabla.get("admin", "Talleres recientes", 0, 4, "talleres"),
-		cursosRecientes: $tabla.get("admin", "Cursos recientes", 0, 4, "cursos"),
-		usuariosRecientes: $tabla.get("admin", "Usuarios recientes", 0, 4, "usuarios")
+		convocatoriasRecientes:[],
+		talleresRecientes:[],
+		usuariosRecientes:[]
 	};
+	$tabla.get("admin", "Convocatorias recientes", 0, 4, "talleres",function (r){$scope.pagina.convocatoriasRecientes = r;console.log($scope.pagina.convocatoriasRecientes)});
+	$tabla.get("admin", "Talleres recientes", 0, 4, "talleres",function (r){$scope.pagina.talleresRecientes = r;});
+	$tabla.get("admin", "Usuarios recientes", 0, 4, "usuarios",function (r){$scope.pagina.usuariosRecientes = r;});
 });
 console.log("Admin inicio cargado");

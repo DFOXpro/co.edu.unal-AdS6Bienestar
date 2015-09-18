@@ -29,7 +29,7 @@ app.factory('$tabla', function ($conexion) {
 			total: 73
 		};
 		$conexion.enviar(
-			"admin",
+			url,
 			{
 				tipo: accion,
 				//btoa es un cifrador base64
@@ -46,7 +46,14 @@ app.factory('$tabla', function ($conexion) {
 				if (respuesta.data.isError)
 					console.log("Error:", respuesta.data.errorDescrip) ;
 				//else callback(respuesta.data);
-				else callback(a);
+				else callback({
+						titulo: tabla,//"Usuarios"
+						verAccion: accion,//"/usuarios",
+						//editarAccion:"/editareventos",
+						//eliminarAccion:"/eliminareventos",
+						lineas: respuesta.data,
+						total: 73
+					});
 			}
 		);
 

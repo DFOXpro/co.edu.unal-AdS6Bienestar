@@ -60,7 +60,7 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
          * @param CUPOS
          * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
          */
-	public static String create(
+	public String create(
 			String NOMBRE,
 			String DESCRIPCION,
 			String FECHA_FIN_REGISTRO,

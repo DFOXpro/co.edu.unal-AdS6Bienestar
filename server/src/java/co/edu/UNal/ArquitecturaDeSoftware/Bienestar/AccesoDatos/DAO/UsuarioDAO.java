@@ -144,7 +144,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @param ID_USUARIO
          * @return 
 	 */
-	public String delete(int ID_USUARIO) {
+	public static String delete(int ID_USUARIO) {
 		String respuestaSQL = CrudDAO.update(
 				"DELETE FROM USUARIO WHERE ID_USUARIO = ?;",
 				new String[]{Integer.toString(ID_USUARIO)}

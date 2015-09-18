@@ -10,12 +10,13 @@ app.controller('usuarios', function ($rootScope, $scope, $conexion, $sesion, $ta
 		$scope.pagina.tabla = $tabla.get(
 			"admin",
 			"Usuarios",
-			$scope.pagina.upos,
+			$scope.pagina.pos,
 			10,
 			"/usuarios"
 		);
 		$scope.pagina.total = ($scope.pagina.tabla.total /10);// - (73%10 === 0)? 1:0;
-		//TEST
+
+//TEST
 //		$scope.pagina.usuarios = {
 //			titulo: "Usuarios",
 //			verAccion: "/usuarios",
@@ -34,7 +35,8 @@ app.controller('usuarios', function ($rootScope, $scope, $conexion, $sesion, $ta
 //				{titulo: "adasd adadasd", id: 4}
 //			]
 //		};
-		//END TEST
+//END TEST
+
 	};
 
 	$scope.pagina = {

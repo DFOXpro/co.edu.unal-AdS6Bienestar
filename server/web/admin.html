@@ -29,9 +29,7 @@
           <ul class="sideNav">
             <li><a href="#/usuarios">Gestion de usuarios</a></li>
             <li><a href="#/evento/convocatorias">Convocatorias</a></li>
-            <li><a href="#/evento/cursos">Cursos</a></li>
             <li><a href="#/evento/talleres">Talleres</a></li>
-            <li><a href="#/informe">Informes</a></li>
           </ul>
         </div>
         <div id="main" ng-view></div>
@@ -52,6 +50,7 @@
     </script>
     <script type="text/ng-template" id="tablas-tmplt">
       <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2>
+      <button ng-click="pagina.crear()">Crear {{objeto}}</button>
       <btabla info="pagina.tabla"></btabla>
       <button ng-show="pagina.pos &gt; 1" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos}} de {{pagina.total | ceil}} </span>
       <button ng-show="pagina.pos &lt; pagina.total" ng-click="pagina.get(1)">Siguiente</button>

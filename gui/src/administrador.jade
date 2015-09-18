@@ -26,11 +26,7 @@ block navSideBar
 	li
 		a(href="#/evento/convocatorias") Convocatorias
 	li
-		a(href="#/evento/cursos") Cursos
-	li
 		a(href="#/evento/talleres") Talleres
-	li
-		a(href="#/informe") Informes
 
 block templates
 	script(
@@ -48,6 +44,9 @@ block templates
 		id="tablas-tmplt"
 	)
 		h2 {{pagina.titulo}} {{pagina.subtitulo}}
+		button(
+			ng-click="pagina.crear()"
+		) Crear {{objeto}}
 		btabla(info="pagina.tabla")
 		button(
 			ng-show="pagina.pos > 1"

@@ -18,10 +18,6 @@ app.config(['$routeProvider',
 				templateUrl: 'tablas-tmplt',
 				controller: 'eventos'
 			}).
-			when('/informe', {
-				templateUrl: 'informe-tmplt',
-				controller: 'informe'
-			}).
 			when('/inicio', {
 				templateUrl: 'inicio-tmplt',
 				controller: 'inicio'

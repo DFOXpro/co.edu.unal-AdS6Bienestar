@@ -157,8 +157,8 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
 		return ConvocatoriaEntity.class;
 	}
 
-	@Override
-	protected ConvocatoriaEntity toEntity(ResultSet rs) throws SQLException {
+	
+	protected static ConvocatoriaEntity toEntity(ResultSet rs) throws SQLException {
 		return new ConvocatoriaEntity(
                                 rs.getInt("ID_CONVOCATORIA"),
                                 rs.getString("NOMBRE"),

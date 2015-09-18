@@ -242,8 +242,8 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
 		return TallerEntity.class;
 	}
 
-	@Override
-	protected TallerEntity toEntity(ResultSet rs) throws SQLException {
+	
+	protected static TallerEntity toEntity(ResultSet rs) throws SQLException {
 		return new TallerEntity(
                                 rs.getInt("ID_TALLER"),
                                 rs.getString("TIPO_TALLER"),

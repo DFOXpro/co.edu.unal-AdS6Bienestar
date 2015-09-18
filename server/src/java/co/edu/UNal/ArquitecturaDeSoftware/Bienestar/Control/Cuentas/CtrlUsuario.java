@@ -35,7 +35,7 @@ public class CtrlUsuario {
     }    
     
     public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion){
-        return usr.getUsuarios(tamano, posicion);
+        return usr.getUsuarios(posicion, tamano);
     }   
     public int obtenerTotalUsuarios(){
         return usr.getTotalUsuarios();

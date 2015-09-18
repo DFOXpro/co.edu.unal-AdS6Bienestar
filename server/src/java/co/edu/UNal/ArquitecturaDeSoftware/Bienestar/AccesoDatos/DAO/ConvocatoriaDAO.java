@@ -134,9 +134,14 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
          * Retorna la lista de registros de la tabla TALLER en un rango
          * @return 
          */
-        public ArrayList<ConvocatoriaEntity> getConvocatorias(){
+        public ArrayList<ConvocatoriaEntity> getConvocatorias(int tamano, int pagina){
+            int posicion = pagina * tamano;
+            ArrayList<Object> param = new ArrayList<>();
+            param.add(posicion);
+            param.add(tamano);
+            
             ArrayList<ConvocatoriaEntity> convocatorias = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM CONVOCATORIA ", new String[]{});
+                ResultSet rs = CrudDAO.query("SELECT * FROM CONVOCATORIA ", param);
 		try {
                        while(rs.next()){
 			ConvocatoriaEntity ue = toEntity(rs);

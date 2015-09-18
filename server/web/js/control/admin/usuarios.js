@@ -6,7 +6,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		$tabla.get(
 			"admin",
 			"Usuarios",
-			$scope.pagina.pos,
+			0,
 			10,
 			"usuarios",
 			function (r){$scope.pagina.tabla = r;}
@@ -37,7 +37,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		$scope.pagina = {
 			titulo: "Administrador: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
-			pos: 1,
+			pos: 0,
 			total: 0,
 			tabla: {},
 			get: get,

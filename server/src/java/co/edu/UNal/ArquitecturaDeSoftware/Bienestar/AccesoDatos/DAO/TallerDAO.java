@@ -179,9 +179,14 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * Retorna la lista de registros de la tabla TALLER en un rango
          * @return 
          */
-        public ArrayList<TallerEntity> getTodosTalleres(){
+        public ArrayList<TallerEntity> getTodosTalleres(int tamano, int pagina){
+            int posicion = pagina * tamano;
+            ArrayList<Object> param = new ArrayList<>();
+            param.add(posicion);
+            param.add(tamano);
+            
             ArrayList<TallerEntity> talleres = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER ", new String[]{});
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER ", param);
 		try {
                        while(rs.next()){
 			TallerEntity ue = toEntity(rs);
@@ -199,9 +204,14 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * Retorna la lista de talleres en un rango
          * @return 
          */
-        public ArrayList<TallerEntity> getTalleres(){
+        public ArrayList<TallerEntity> getTalleres(int tamano, int pagina){
+            int posicion = pagina * tamano;
+            ArrayList<Object> param = new ArrayList<>();
+            param.add(posicion);
+            param.add(tamano);
+            
             ArrayList<TallerEntity> talleres = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'T' ", new String[]{});
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'T' ", param);
 		try {
                        while(rs.next()){
 			TallerEntity ue = toEntity(rs);
@@ -219,9 +229,14 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * Retorna la lista de cursos en un rango
          * @return 
          */
-        public ArrayList<TallerEntity> getCursos(){
+        public ArrayList<TallerEntity> getCursos(int tamano, int pagina){
+            int posicion = pagina * tamano;
+            ArrayList<Object> param = new ArrayList<>();
+            param.add(posicion);
+            param.add(tamano);
+            
             ArrayList<TallerEntity> talleres = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'C' ", new String[]{});
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'C' ", param);
 		try {
                        while(rs.next()){
 			TallerEntity ue = toEntity(rs);

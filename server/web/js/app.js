@@ -2,4 +2,8 @@
  para que este archivo quede universal para los 3 modulos
  admin, landing y usuario
 */
-var app = angular.module('app', []);
+/* global angular */
+
+var app = angular.module('app', [
+	'ngRoute'
+]);

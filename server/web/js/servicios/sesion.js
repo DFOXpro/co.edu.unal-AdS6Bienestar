@@ -2,7 +2,7 @@
 
 app.factory('$sesion', function ($conexion) {
 	var r = {};
-
+	rutas = [];
 	r.verificarSesion = function ($scope) {
 		if(!$conexion.iniciar()){
 			location.replace("/");
@@ -24,7 +24,8 @@ app.factory('$sesion', function ($conexion) {
 			}
 		);
 	};
-
+	r.setRutas = function (rut){rutas = rut;};
+	r.getRutas = rutas;
 	return r;
 });
 console.log("sesiónFactory cargado");

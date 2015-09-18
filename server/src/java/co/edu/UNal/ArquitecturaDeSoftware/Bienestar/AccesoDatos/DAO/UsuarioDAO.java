@@ -32,9 +32,9 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
     public UsuarioEntity getByUsername(String username) {
         ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO WHERE LOWER(EMAIL) =LOWER(?)", new String[]{username});
         try {
+            
             rs.first();
             UsuarioEntity ue = toEntity(rs);
-
             return ue;
         } catch (SQLException e) {
             System.out.println("UsuarioDAO.getByUsername: " + e.getMessage());
@@ -206,11 +206,19 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
     /**
      * Retorna la lista de usuarios en un rango
      *
+     * @param tamano Cantidad de registros a devolver
+     * @param pagina pagina en la que se se está
      * @return
      */
-    public static ArrayList<UsuarioEntity> getUsuarios(int tamano, int posicion) {
+    public static ArrayList<UsuarioEntity> getUsuarios(int tamano, int pagina) {
+        int posicion = pagina * tamano;
+        
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(posicion);
+        param.add(tamano);
+        
         ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
-        ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO LIMIT", new String[]{Integer.toString(posicion), Integer.toString(tamano)});
+        ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO LIMIT ?,?", param);
         try {
             while (rs.next()) {
                 UsuarioEntity ue = toEntity(rs);

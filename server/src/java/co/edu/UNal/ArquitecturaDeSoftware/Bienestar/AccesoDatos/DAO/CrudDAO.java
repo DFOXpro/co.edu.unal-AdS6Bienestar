@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
@@ -74,8 +75,9 @@ public abstract class CrudDAO<E extends Entity> {
             iniciarConeccion();
         try{
             PreparedStatement ps = conn.prepareStatement(query);
-            for (int i = 0; i < values.length; i++)
+            for (int i = 0; i < values.length; i++){
                 ps.setString(i+1, values[i]);
+            }
             return ps.executeQuery();
         }
         catch (SQLException ex){
@@ -83,6 +85,33 @@ public abstract class CrudDAO<E extends Entity> {
             return null;
         }
     }
+    
+    
+    	/**
+	 * Use esta funcion para los gets, recive parámetros de diferentes tipos.
+	 * @param query
+        * @param param
+	 * @return 
+	 */
+    protected static ResultSet query(String query, ArrayList<Object> param){
+        if(conn == null)
+            iniciarConeccion();
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            for (int i = 0; i < param.size(); i++){
+                if(param.get(i).getClass() == Integer.class);
+                    ps.setInt(i+1, (int) param.get(i));
+                if(param.get(i).getClass() == String.class);
+                    ps.setInt(i+1, (int) param.get(i));
+            }
+            return ps.executeQuery();
+        }
+        catch (SQLException ex){
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    
 
 	/**
 	 * Use esta funcion para los sets y deletes

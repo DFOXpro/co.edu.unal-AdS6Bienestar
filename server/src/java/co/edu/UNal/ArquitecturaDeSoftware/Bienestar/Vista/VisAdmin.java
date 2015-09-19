@@ -148,11 +148,11 @@ public class VisAdmin extends VisUsuario{
         
         JSONObject obj = new JSONObject();
         obj.put("id", e.getIdUsuario());
-        obj.put("nombres", e.getNombres());
-        obj.put("apellidos", e.getApellidos());
+        obj.put("nombre", e.getNombres());
+        obj.put("apellido", e.getApellidos());
         obj.put("tipoDocumento", e.gettDocumento());
         obj.put("documento", e.getDocumento());
-        obj.put("password", e.getPassword());
+        obj.put("contrasena", e.getPassword());
         obj.put("rol", e.getRol());
 
         out.print(obj);
@@ -265,7 +265,7 @@ public class VisAdmin extends VisUsuario{
                 }case "eliminarCuenta":{
                         eliminarUsuario(request, response);
                         break;
-                }case "leerUsuario":{
+                }case "Usuario":{
                         leerUsuarioId(request, response);
                         break;
                 }case "usuarios":{
@@ -280,14 +280,17 @@ public class VisAdmin extends VisUsuario{
                 } case "eliminarConvocatoria":{
                         eliminarConvocatoria(request,response);
                         break;
-                } case "leerConvocatoria":{
+                } case "Convocatoria":{
+                        leerConvocatoria(request,response);
+                        break;
+                } case "Taller":{
                         leerConvocatoria(request,response);
                         break;
                 } case "convocatorias":{
-                        (request, response);
+                        //(request, response);
                         break;
                 } case "talleres":{
-                        (request, response);
+                        //(request, response);
                         break;
                 }
                 default:

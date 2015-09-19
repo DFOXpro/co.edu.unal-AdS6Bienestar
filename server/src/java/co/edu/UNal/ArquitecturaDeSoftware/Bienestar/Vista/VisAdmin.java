@@ -18,8 +18,7 @@ import org.json.simple.JSONObject;
 public class VisAdmin extends VisUsuario{
     CtrlAdmin ctrlAdmin = new CtrlAdmin();
 
-    protected void crearUsuario(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    protected void crearUsuario(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         System.out.println(request.getParameter("5"));
         ArrayList r = CtrlAdmin.crearUsuario(
                 request.getParameter("1"),//Nombre
@@ -68,8 +67,7 @@ public class VisAdmin extends VisUsuario{
         } else Util.errordeRespuesta(r, out);
     }
 
-    protected void editarUsuario(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    protected void editarUsuario(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         System.out.println(request.getParameter("5"));
         ArrayList r = CtrlAdmin.editarUsuario(
                 Integer.parseInt(request.getParameter("0")),//IdUsuario
@@ -140,7 +138,6 @@ public class VisAdmin extends VisUsuario{
     }
     
     protected void leerUsuarioId(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        
         UsuarioEntity e = ctrlAdmin.leerUsuarioId(Integer.parseInt(request.getParameter("1"))); // id del usuario
         
         response.setContentType("application/json;charset=UTF-8");
@@ -154,13 +151,27 @@ public class VisAdmin extends VisUsuario{
         obj.put("documento", e.getDocumento());
         obj.put("contrasena", e.getPassword());
         obj.put("rol", e.getRol());
-
         out.print(obj);
+    } 
+    
+    protected void leerUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        UsuarioEntity e = ctrlAdmin.leerUsuario(request.getParameter("1")); // String nombre del usuario
         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        JSONObject obj = new JSONObject();
+        obj.put("id", e.getIdUsuario());
+        obj.put("nombre", e.getNombres());
+        obj.put("apellido", e.getApellidos());
+        obj.put("tipoDocumento", e.gettDocumento());
+        obj.put("documento", e.getDocumento());
+        obj.put("contrasena", e.getPassword());
+        obj.put("rol", e.getRol());
+        out.print(obj);
     }
         
-    protected void leerUsuariosMultiplesId(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        
+    protected void leerUsuariosMultiplesId(HttpServletRequest request, HttpServletResponse response) throws IOException{  
         ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
         usuarios = ctrlAdmin.leerMultiplesUsuarios(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // id del usuario
         
@@ -175,11 +186,17 @@ public class VisAdmin extends VisUsuario{
             obj.put("titulo", usuarios.get(i).getNombres() +" "+usuarios.get(i).getApellidos());
             list1.add(obj);
         }
-        
         out.print(list1);
-        
     }
     
+    protected void obtenerTotalUsuarios(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int numC = ctrlAdmin.obtenerTotalUsuarios();
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject obj = new JSONObject();
+        obj.put("total", numC);
+        out.print(obj);
+    }
     
     protected void crearConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ArrayList r = ctrlAdmin.crearConvocatoria(
@@ -242,6 +259,74 @@ public class VisAdmin extends VisUsuario{
                 out.print(obj);
         } else Util.errordeRespuesta(r, out);  
     }
+        
+    protected void crearTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = ctrlAdmin.crearTaller(
+            request.getParameter("1"), // nombre
+            request.getParameter("2"), // descripción
+            request.getParameter("3"), // fin registro (Fecha hasta donde está permitido registrarse)
+            request.getParameter("4"), // inicio del taller
+            request.getParameter("5"), // fin del taller
+            Integer.parseInt(request.getParameter("6")), // costo
+            Integer.parseInt(request.getParameter("7")) // cupos
+        );
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);
+    }
+    
+    protected void actualizarTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = ctrlAdmin.actualizarTaller(
+            Integer.parseInt(request.getParameter("1")), // id
+            request.getParameter("2"), // nombre
+            request.getParameter("3"), // descripción
+            request.getParameter("4"), // fin registro (Fecha hasta donde está permitido registrarse)
+            request.getParameter("5"), // inicio del taller
+            request.getParameter("6"), // fin del taller
+            Integer.parseInt(request.getParameter("6")), // costo
+            Integer.parseInt(request.getParameter("7")) // cupos
+        );
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);        
+    }
+
+    protected void eliminarTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = ctrlAdmin.eliminarTaller(Integer.parseInt(request.getParameter("1"))); // id
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
     
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -271,6 +356,31 @@ public class VisAdmin extends VisUsuario{
                 }case "usuarios":{
                         leerUsuariosMultiplesId(request, response);
                         break;
+                }
+                case "convocatoria":{
+                        leerConvocatoria(request, response);
+                        break;
+                }case "taller":{
+                        leerTaller(request, response);
+                        break;
+                }case "convocatorias":{
+                        leerMultiplesConvocatorias(request, response);
+                        break;
+                }case "numConvocatorias":{
+                        obtenerTotalConvocatorias(request, response);
+                        break;
+                }case "inscritosConvocatoria":{
+                        obtenerInscritosConv(request, response);
+                        break;
+                }case "talleres":{
+                        leerMultiplesTalleres(request, response);
+                        break;
+                } case "numTalleres":{
+                        obtenerTotalTalleres(request,response);
+                        break;
+                } case "inscritosTaller":{
+                        obtenerInscritosTaller(request,response);
+                        break;
                 } case "crearConvocatoria":{
                         crearConvocatoria(request,response);
                         break;
@@ -280,17 +390,32 @@ public class VisAdmin extends VisUsuario{
                 } case "eliminarConvocatoria":{
                         eliminarConvocatoria(request,response);
                         break;
-                } case "Convocatoria":{
-                        leerConvocatoria(request,response);
+                } case "crearTaller":{
+                        crearTaller(request,response);
                         break;
-                } case "Taller":{
-                        leerConvocatoria(request,response);
+                } case "actualizarTaller":{
+                        actualizarTaller(request,response);
                         break;
-                } case "convocatorias":{
-                        //(request, response);
+                } case "eliminarTaller":{
+                        eliminarTaller(request,response);
                         break;
-                } case "talleres":{
-                        //(request, response);
+                } case "regUsuarioTaller":{
+                        registrarUsuarioTaller(request,response);
+                        break;
+                } case "regUsuarioConv":{
+                        registrarUsuarioConvocatoria(request,response);
+                        break;
+                } case "regDocente":{
+                        registrarDocenteTaller(request, response);
+                        break;
+                } case "regDocenteDocumento":{
+                        registrarATallerDocenteByDoc(request, response);
+                        break;
+                } case "eliminarUsuarioTaller":{
+                        quitarUsuarioTaller(request, response);
+                        break;
+                } case "eleminarUsuarioConv":{
+                        quitarUsuarioConvocatoria(request, response);
                         break;
                 }
                 default:

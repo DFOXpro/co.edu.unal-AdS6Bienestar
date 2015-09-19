@@ -84,36 +84,30 @@ public class VisAdmin extends VisUsuario{
 
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
+		JSONObject obj=new JSONObject();
         if(r.get(0)=="error"){
-                JSONObject obj=new JSONObject();
+				obj.put("isError",true);
                 if(r.get(1)=="usuario"){
-                        //obj.put("isError",true);
-                        //obj.put("errorDescrip","El usuario ya existe");
+                        obj.put("errorDescrip","El usuario ya existe");
                 } else if(r.get(1)=="contrasena"){
-                        obj.put("isError",true); 
                         obj.put("errorDescrip","La contraseña es invalida");
                 } else if(r.get(1)=="documento"){
-                        //obj.put("isError",true);
-                        //obj.put("errorDescrip","El documento ya está registrado");
+                        obj.put("errorDescrip","El documento ya está registrado");
                 } else if(r.get(1)=="tipoDocumento"){
-                        obj.put("isError",true);
                         obj.put("errorDescrip","El tipo de documento es invalido");
                 } else if(r.get(1)=="correo"){
-                        obj.put("isError",true);
                         obj.put("errorDescrip","El correo ya está registrado");
                 } else if(r.get(1)=="correo1"){
-                        obj.put("isError",true);
                         obj.put("errorDescrip","El correo no es valido");
                 } else if(r.get(1)=="nombre"){
-                        obj.put("isError",true);
                         obj.put("errorDescrip","Los nombres o apellidos son incorrectos");
                 } else if(r.get(1)=="rol"){
-                        obj.put("isError",true);
                         obj.put("errorDescrip","El rol es invalido, los posibles valores son: E, P y A");
                 } else Util.errordeRespuesta(r, out);
+				obj.put("errorDescrip",r.get(1));
+				System.out.println(obj);
                 out.print(obj);
         } else if(r.get(0)=="isExitoso"){
-                JSONObject obj=new JSONObject();
                 obj.put("Exitoso",true);
                 out.print(obj);
         } else Util.errordeRespuesta(r, out);
@@ -153,7 +147,8 @@ public class VisAdmin extends VisUsuario{
         obj.put("tipoDocumento", e.gettDocumento());
         obj.put("documento", e.getDocumento());
         obj.put("contrasena", e.getPassword());
-        obj.put("rol", e.getRol());
+        obj.put("rol", ""+e.getRol());
+        obj.put("email", e.getUsername());
 
         out.print(obj);
         
@@ -262,7 +257,7 @@ public class VisAdmin extends VisUsuario{
                 }case "editarUsuario":{
                         editarUsuario(request, response);
                         break;
-                }case "eliminarCuenta":{
+                }case "eliminarUsuario":{
                         eliminarUsuario(request, response);
                         break;
                 }case "Usuario":{

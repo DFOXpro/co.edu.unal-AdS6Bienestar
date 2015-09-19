@@ -63,6 +63,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						"admin",
 						{
 							tipo: $scope.cu.tipo,
+							0: $scope.cu.id,
 							1: $scope.cu.nombre,
 							2: $scope.cu.apellido,
 							3: $scope.cu.tipoDocumento,
@@ -114,8 +115,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						"admin",
 						{
 							tipo: "eliminarUsuario",
-							1: $scope.cu.documento,
-							2: $scope.cu.email.toLowerCase()
+							1: $scope.cu.id
 						},
 						function(respuesta){
 							if(respuesta.data.isError)
@@ -141,6 +141,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						$scope.cu.error=respuesta.data.errorDescrip;
 					else {
 						usuario = respuesta.data;
+						$scope.cu.id = usuario.id;
 						$scope.cu.nombre = usuario.nombre;
 						$scope.cu.apellido = usuario.apellido;
 						$scope.cu.tipoDocumento = usuario.tipoDocumento;
@@ -149,6 +150,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						$scope.cu.contrasena = usuario.contrasena;
 						$scope.cu.rol = usuario.rol;
 						$scope.cu.contrasena_2 = respuesta.data.contrasena;
+						console.log("cu",$scope.cu);
 					}
 				}
 			);

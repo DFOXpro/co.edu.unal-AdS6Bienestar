@@ -1,4 +1,8 @@
-/* global app */
+/* global angular */
+
+var app = angular.module('app', [
+	'ngRoute'
+]);
 
 app.controller('registro', function ($scope, $conexion) {
 	console.log("registro");

@@ -1,6 +1,6 @@
 /* global app */
 
-app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion, $sesion, $tabla) {
+app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion, $tabla) {
 	var get = function (diff) {
 		$scope.pagina.pos += diff;
 		$tabla.get(
@@ -23,7 +23,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 //Crear o editar usuario
 		ruta[2] = {
 			url:"/"+$routeParams.evento+"/"+$routeParams.eventoId,
-			nombre:""+$routeParams.nombre
+			nombre:$routeParams.nombre
 		};
 
 		$scope.documentos = [
@@ -63,7 +63,6 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						"admin",
 						{
 							tipo: $scope.cu.tipo,
-	//btoa es un cifrador base64
 							1: $scope.cu.nombre,
 							2: $scope.cu.apellido,
 							3: $scope.cu.tipoDocumento,
@@ -115,7 +114,6 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						"admin",
 						{
 							tipo: "eliminarUsuario",
-	//btoa es un cifrador base64
 							1: $scope.cu.documento,
 							2: $scope.cu.email.toLowerCase()
 						},
@@ -143,13 +141,13 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						$scope.cu.error=respuesta.data.errorDescrip;
 					else {
 						usuario = respuesta.data;
-						$scope.cu.nombre = respuesta.data.nombre;
-						$scope.cu.apellido = respuesta.data.apellido;
-						$scope.cu.tipoDocumento = respuesta.data.tipoDocumento;
-						$scope.cu.documento = respuesta.data.documento;
-						$scope.cu.email = respuesta.data.email;
-						$scope.cu.contrasena = respuesta.data.contrasena;
-						$scope.cu.tipoUsuario = respuesta.data.tipoUsuario;
+						$scope.cu.nombre = usuario.nombre;
+						$scope.cu.apellido = usuario.apellido;
+						$scope.cu.tipoDocumento = usuario.tipoDocumento;
+						$scope.cu.documento = usuario.documento;
+						$scope.cu.email = usuario.email;
+						$scope.cu.contrasena = usuario.contrasena;
+						$scope.cu.tipoUsuario = usuario.tipoUsuario;
 						$scope.cu.contrasena_2 = respuesta.data.contrasena;
 					}
 				}

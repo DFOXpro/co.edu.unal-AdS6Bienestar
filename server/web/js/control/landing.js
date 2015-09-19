@@ -1,4 +1,8 @@
-/* global app */
+/* global angular */
+
+var app = angular.module('app', [
+	'ngRoute'
+]);
 
 app.controller('landing', function ($scope, $conexion) {
 	console.log("landing");

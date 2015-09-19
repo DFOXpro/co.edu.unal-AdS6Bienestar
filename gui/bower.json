@@ -20,6 +20,7 @@
   "dependencies": {
     "angular": "latest",
     "angular-route": "~1.4.6",
+    "bootstrap": "~3.3.5",
     "cryptico": "*",
     "ez-datetime": "~0.1.7",
     "livereload-js": "~2.2.1"

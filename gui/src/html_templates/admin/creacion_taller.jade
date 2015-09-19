@@ -33,27 +33,22 @@ script(
 
 		input(
 			required
-			type='date'
-			name='fecha'
+			ez-datetime-control
+			type='text'
+			name='fechaInicio'
 			placeholder='Fecha Inicio Registro'
 			ng-model="tal.fechaInicio"
-			ng-minlength=3
+			min-date="tal.fechaFin"
 		)
-		a(
-			ez-datetime-control
-			ng-model="tal.fechaInicio"
-			config="config1"
-			model-format="x"
-			ng-change="modelChanged()"
-		) Q
-		p {{ tal.fechaInicio ? (tal.fechaInicio | ezDate:'MMMM Do, YYYY [at] h:mma') : 'Pick a Date' }}
+		//- value="{{ tal.fechaInicio ? (tal.fechaInicio | ezDate:'MMMM Do, YYYY [at] h:mma') : 'Fecha de inicio' }}"
 		input(
 			required
-			type='date'
-			name='fecha'
+			ez-datetime-control
+			type='text'
+			name='fechaFin'
 			placeholder='Fecha Fin Registro'
 			ng-model="tal.fechaFin"
-			ng-minlength=3
+			min-date="tal.fechaInicio"
 		)
 
 		input(
@@ -86,8 +81,7 @@ script(
 		.login-help(ng-show="isf.fechaFin.$error.required") Indique la fecha de cierre
 		.login-help(ng-show="isf.costo.$error.required") Indique el costo del taller
 		.login-help(ng-show="isf.cupos.$error.required") Indique el numero de cupos ofertados
-		.login-help(ng-show="con.isError") {{ con.error}}
-		a(href	='/') Iniciar sesión
+		.login-help(ng-show="con.isError") {{ tal.error}}
 	div(ng-show ="exitoso")
 		h2 {{con.nombre}} Registro exitoso de la convocatoria, ya puedes
 			a(href	='/') ver y administrar este evento

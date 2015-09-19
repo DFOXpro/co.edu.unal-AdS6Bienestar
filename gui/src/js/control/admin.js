@@ -1,6 +1,5 @@
-/* global app */
-app.$inject = ['ngRoute', 'ez.datetime', 'ez.modal', 'ez.dropdown'];
-
+/* global app, angular */
+var app = angular.module('app', ['ngRoute','ez.datetime', 'ez.modal', 'ez.dropdown']);
 app.config(['$routeProvider',
 	function ($routeProvider) {
 		$routeProvider.

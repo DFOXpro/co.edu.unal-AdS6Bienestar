@@ -4,14 +4,19 @@ block variables
 	- npApp = "app"
 
 block devScriptHead
+	link(
+		href='css/transdmin.css'
+		rel='stylesheet'
+	)
+	block devScriptHead1
+
+block devScriptBody
+	block devScriptBody1
 	script(src="js/servicios/sesion.js")
 	script(src="js/servicios/conexion.js")
 	script(src="js/control/util/navegacion.js")
 	script(src="js/directiva/tabla.js")
-	link(
-		rel='stylesheet'
-		href='css/transdmin.css'
-	)
+
 
 block title
 	title Bienestar - Administración

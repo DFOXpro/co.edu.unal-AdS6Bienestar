@@ -79,7 +79,7 @@
         <input required type="text" name="apellido" placeholder="Apellidos" ng-model="cu.apellido" ng-minlength="3" ng-maxlength="100">
         <div ng-show="isf.apellido.$error.minlength" class="login-help">Apellido muy corto</div>
         <div ng-show="isf.apellido.$error.maxlength" class="login-help">Apellido muy largo</div>
-        <select required name="tipoUsuario" ng-model="cu.tipoUsuario">
+        <select required name="tipoUsuario" ng-model="cu.rol">
           <option ng-repeat="option in roles" value="{{option.id}}">{{option.name}}</option>
         </select>
         <input required type="email" name="email" placeholder="Correo Electronico" ng-model="cu.email">

@@ -46,7 +46,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 				$scope.cu.documento !== usuario.documento |
 				$scope.cu.email.toLowerCase() !== usuario.email |
 				$scope.cu.contrasena !== usuario.contrasena |
-				$scope.cu.tipoUsuario !== usuario.tipoUsuario
+				$scope.cu.rol !== usuario.rol
 			) return false;
 			else return true;
 		};
@@ -69,7 +69,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 							4: $scope.cu.documento,
 							5: $scope.cu.email.toLowerCase(),
 							6: $scope.cu.contrasena,
-							7: $scope.cu.tipoUsuario
+							7: $scope.cu.rol
 						},
 						function(respuesta){
 							if(respuesta.data.isError)
@@ -91,7 +91,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 //usuario.documento=1234243;
 //usuario.email="asdf@qwer";
 //usuario.contrasena="poiuy";
-//usuario.tipoUsuario="A";
+//usuario.rol="A";
 //
 //$scope.cu.nombre = usuario.nombre;
 //$scope.cu.apellido = usuario.apellido;
@@ -99,7 +99,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 //$scope.cu.documento = usuario.documento;
 //$scope.cu.email = usuario.email;
 //$scope.cu.contrasena = usuario.contrasena;
-//$scope.cu.tipoUsuario = usuario.tipoUsuario;
+//$scope.cu.rol = usuario.rol;
 //$scope.cu.contrasena_2 = usuario.contrasena;
 //END TEST
 
@@ -147,7 +147,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 						$scope.cu.documento = usuario.documento;
 						$scope.cu.email = usuario.email;
 						$scope.cu.contrasena = usuario.contrasena;
-						$scope.cu.tipoUsuario = usuario.tipoUsuario;
+						$scope.cu.rol = usuario.rol;
 						$scope.cu.contrasena_2 = respuesta.data.contrasena;
 					}
 				}

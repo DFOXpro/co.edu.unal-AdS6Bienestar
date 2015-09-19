@@ -16,7 +16,7 @@ app.config(['$routeProvider',
 				templateUrl: 'tablas-tmplt',
 				controller: 'eventos'
 			}).
-			when('/evento/:evento/:eventoId?nombre=":nombre"', {
+			when('/evento/:evento/:eventoId', {
 				templateUrl: 'crear-taller-tmplt',
 				controller: 'eventos'
 			}).

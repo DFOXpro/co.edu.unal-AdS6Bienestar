@@ -120,7 +120,8 @@
         <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="tal.descripcion" ng-minlength="3" ng-maxlength="100">
         <div ng-show="isf.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
         <div ng-show="isf.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
-        <input required type="date" name="fecha" placeholder="Fecha Inicio Registro" ng-model="tal.fechaInicio" ng-minlength="3">
+        <input required type="date" name="fecha" placeholder="Fecha Inicio Registro" ng-model="tal.fechaInicio" ng-minlength="3"><a ez-datetime-control ng-model="tal.fechaInicio" config="config1" model-format="x" ng-change="modelChanged()">Q</a>
+        <p>{{ tal.fechaInicio ? (tal.fechaInicio | ezDate:'MMMM Do, YYYY [at] h:mma') : 'Pick a Date' }}</p>
         <input required type="date" name="fecha" placeholder="Fecha Fin Registro" ng-model="tal.fechaFin" ng-minlength="3">
         <input required type="text" name="cupos" placeholder="Costo" ng-model="tal.costo">
         <input required type="text" name="cupos" placeholder="Cupos ofertados" ng-model="tal.cupos" ng-minlength="3">

@@ -6,7 +6,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		$tabla.get(
 			"admin",
 			"Usuarios",
-			0,
+			$scope.pagina.pos,
 			10,
 			"usuarios",
 			function (r){$scope.pagina.tabla = r;}
@@ -84,28 +84,29 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 			}
 		};
 		if($routeParams.usuarioId > 0){//EDITAR
-			
+			var usuario = {};
 //TEST
-var usuario = {};
-usuario.nombre="qwer";
-usuario.apellido="zxcv";
-usuario.tipoDocumento="TI";
-usuario.documento=1234243;
-usuario.email="asdf@qwer";
-usuario.contrasena="poiuy";
-usuario.tipoUsuario="A";
+//usuario.nombre="qwer";
+//usuario.apellido="zxcv";
+//usuario.tipoDocumento="TI";
+//usuario.documento=1234243;
+//usuario.email="asdf@qwer";
+//usuario.contrasena="poiuy";
+//usuario.tipoUsuario="A";
+//
+//$scope.cu.nombre = usuario.nombre;
+//$scope.cu.apellido = usuario.apellido;
+//$scope.cu.tipoDocumento = usuario.tipoDocumento;
+//$scope.cu.documento = usuario.documento;
+//$scope.cu.email = usuario.email;
+//$scope.cu.contrasena = usuario.contrasena;
+//$scope.cu.tipoUsuario = usuario.tipoUsuario;
+//$scope.cu.contrasena_2 = usuario.contrasena;
 //END TEST
+
 			$scope.crear = false;
 			$scope.eliminado = false;
 			$scope.cu.tipo = "editarUsuario";
-			$scope.cu.nombre = usuario.nombre;
-			$scope.cu.apellido = usuario.apellido;
-			$scope.cu.tipoDocumento = usuario.tipoDocumento;
-			$scope.cu.documento = usuario.documento;
-			$scope.cu.email = usuario.email;
-			$scope.cu.contrasena = usuario.contrasena;
-			$scope.cu.tipoUsuario = usuario.tipoUsuario;
-			$scope.cu.contrasena_2 = usuario.contrasena;
 			$scope.eliminar = function (){
 				var tA = $conexion.strAleatorio(5);
 				var tB = prompt("Escriba "+tA+" para confirmar");
@@ -129,6 +130,30 @@ usuario.tipoUsuario="A";
 					);
 				}
 			};
+
+			$conexion.enviar(
+				"admin",
+				{
+					tipo: "Usuario",
+			//btoa es un cifrador base64
+					1: $routeParams.usuarioId
+				},
+				function(respuesta){
+					if(respuesta.data.isError)
+						$scope.cu.error=respuesta.data.errorDescrip;
+					else {
+						usuario = respuesta.data;
+						$scope.cu.nombre = respuesta.data.nombre;
+						$scope.cu.apellido = respuesta.data.apellido;
+						$scope.cu.tipoDocumento = respuesta.data.tipoDocumento;
+						$scope.cu.documento = respuesta.data.documento;
+						$scope.cu.email = respuesta.data.email;
+						$scope.cu.contrasena = respuesta.data.contrasena;
+						$scope.cu.tipoUsuario = respuesta.data.tipoUsuario;
+						$scope.cu.contrasena_2 = respuesta.data.contrasena;
+					}
+				}
+			);
 		} else{//CREAR
 			$scope.cu.tipo = "crearUsuario";
 		};

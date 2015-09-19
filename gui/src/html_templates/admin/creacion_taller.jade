@@ -39,7 +39,14 @@ script(
 			ng-model="tal.fechaInicio"
 			ng-minlength=3
 		)
-
+		a(
+			ez-datetime-control
+			ng-model="tal.fechaInicio"
+			config="config1"
+			model-format="x"
+			ng-change="modelChanged()"
+		) Q
+		p {{ tal.fechaInicio ? (tal.fechaInicio | ezDate:'MMMM Do, YYYY [at] h:mma') : 'Pick a Date' }}
 		input(
 			required
 			type='date'

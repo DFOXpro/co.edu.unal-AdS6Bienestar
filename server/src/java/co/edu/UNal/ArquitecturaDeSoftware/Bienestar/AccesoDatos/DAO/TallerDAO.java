@@ -349,6 +349,9 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
         }
         return count;    
      }
+     
+     
+     
         
 ////////////////////////        
         

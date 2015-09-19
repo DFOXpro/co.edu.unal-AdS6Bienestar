@@ -267,6 +267,69 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
         }
         return usuarios;
     }
+    
+    
+    /**
+     * Retorna la cantidad de registros en la tabla USUARIOS
+     * @return 
+     */
+    public static int getCountUsuarios(){   
+        ArrayList<Object> param = new ArrayList<>();
+        
+        int count;
+        ResultSet rs = CrudDAO.query("SELECT count(*) c FROM USUARIO", param);
+        try {
+            rs.first();
+            count = rs.getInt("c");
+        } catch (SQLException e) {
+            System.out.println("UsuarioDAO.getCountUsuarios: " + e.getMessage());
+            return 0;
+        }
+        return count;    
+    }
+    
+    
+    /**
+    * Retorna la cantidad de Talleres
+    * @return
+    */
+    public static int getCountTalleres(){
+       ArrayList<Object> param = new ArrayList<>();
+
+       int count;
+       ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM TALLER WHERE TIPO_TALLER = 'T'", param);
+
+       try {
+           rs.first();
+           count = rs.getInt("c");
+       } catch (SQLException e) {
+           System.out.println("TallerDAO.getCountTodosTaller: " + e.getMessage());
+           return 0;
+       }
+       return count;    
+    }
+    
+    /**
+     * Retorna la cantidad de USUARIOS inscritos en un Taller
+     * @return 
+     */
+     public static int getCountUsuarioTalleres( int ID_TALLER ){   
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(ID_TALLER);
+
+        int count;
+        ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM USUARIO_TALLER WHERE ID_TALLER = ?", param);
+
+        try {
+            rs.first();
+            count = rs.getInt("c");
+        } catch (SQLException e) {
+            System.out.println("TallerDAO.getCountUsuarioTalleres: " + e.getMessage());
+            return 0;
+        }
+        return count;    
+     }
+    
 
     @Override
     protected Class getEntityClass() {

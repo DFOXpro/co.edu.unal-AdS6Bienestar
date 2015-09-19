@@ -1,24 +1,40 @@
 //- index.jade
-extends ./main
+extends ./user
 block variables
 	- npApp = "app"
+	- npController= "admin"
 
-block devScriptHead
-	script(src="js/servicios/conexion.js")
 block scriptHead
 	//- el nombre sería así
 	script(src="js/a.js")
 block devScriptBody
+	//- Libreria del datepicker
+	script(src="js/lib/ez-datetime.min.js")
+	script(src="js/lib/ez-datetime.min.css")
+
 	script(src="js/control/admin.js")
+	script(src="js/control/admin/inicio.js")
+	script(src="js/control/admin/eventos.js")
+	script(src="js/control/admin/usuarios.js")
 
 block title
 	title Bienestar - Administración
 
-block content
-	.login-card(
-		ng-controller="admin"
-	)
-		h1 Administración
-		button(
-			ng-click="cerrarSesion()"
-		) Cerrar sesión
+block navDerecha
+	li.logout
+		a(href="#/usuario.html") Entrar como usuario
+
+block navSideBar
+	li
+		a(href="#/usuarios") Gestion de usuarios
+	li
+		a(href="#/evento/convocatorias") Convocatorias
+	li
+		a(href="#/evento/talleres") Talleres
+
+block templates
+	include html_templates/consulta
+	include html_templates/admin/creacion_convocatoria
+	include html_templates/admin/creacion_usuario
+	include html_templates/admin/creacion_taller
+	include html_templates/admin/inicio

@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Taller.findByFechaFin", query = "SELECT t FROM Taller t WHERE t.fechaFin = :fechaFin"),
     @NamedQuery(name = "Taller.findByCosto", query = "SELECT t FROM Taller t WHERE t.costo = :costo"),
     @NamedQuery(name = "Taller.findByCupos", query = "SELECT t FROM Taller t WHERE t.cupos = :cupos")})
-public class Taller implements Serializable, Entity{
+public class TallerEntity implements Serializable, Entity{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,14 +81,14 @@ public class Taller implements Serializable, Entity{
     @NotNull
     private int cupos;
 
-    public Taller() {
+    public TallerEntity() {
     }
 
-    public Taller(Integer idTaller) {
+    public TallerEntity(Integer idTaller) {
         this.idTaller = idTaller;
     }
 
-    public Taller(Integer idTaller, String tipoTaller, String nombre, String descripcion, Date fechaFinRegistro, Date fechaInicio, Date fechaFin, int costo, int cupos) {
+    public TallerEntity(Integer idTaller, String tipoTaller, String nombre, String descripcion, Date fechaFinRegistro, Date fechaInicio, Date fechaFin, int costo, int cupos) {
         this.idTaller = idTaller;
         this.tipoTaller = tipoTaller;
         this.nombre = nombre;
@@ -182,10 +182,10 @@ public class Taller implements Serializable, Entity{
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Taller)) {
+        if (!(object instanceof TallerEntity)) {
             return false;
         }
-        Taller other = (Taller) object;
+        TallerEntity other = (TallerEntity) object;
         if ((this.idTaller == null && other.idTaller != null) || (this.idTaller != null && !this.idTaller.equals(other.idTaller))) {
             return false;
         }

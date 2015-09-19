@@ -1,0 +1,18 @@
+script(
+	type="text/ng-template"
+	id="tablas-tmplt"
+)
+	h2 {{pagina.titulo}} {{pagina.subtitulo}}
+	a(
+		href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}"
+	) Crear {{pagina.objeto}}
+	btabla(info="pagina.tabla")
+	button(
+		ng-show="pagina.pos > 1"
+		ng-click="pagina.get(-1)"
+	) Anterior
+	span {{pagina.pos + 1}} de {{pagina.total | ceil}} 
+	button(
+		ng-show="pagina.pos < pagina.total"
+		ng-click="pagina.get(1)"
+	) Siguiente

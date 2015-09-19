@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://localhost:35729/livereload.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-route.min.js"></script>
+    <script src="js/lib/cryptico.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/servicios/conexion.js"></script>
+    <title>Bienestar</title>
+  </head>
+  <body ng-app="app">
+    <div ng-controller="eventos" class="login-card">
+      <h1>Log-in Bienestar</h1>
+      <form ng-submit="tal.submit()" ng-hide="exitoso" name="isf" novalidate>
+        <input required type="text" name="nombre" placeholder="Nombre" ng-model="tal.nombre" ng-minlength="3" ng-maxlength="100">
+        <div ng-show="isf.nombre.$error.minlength" class="login-help">Nombre muy corto</div>
+        <div ng-show="isf.nombre.$error.maxlength" class="login-help">Nombre muy largo</div>
+        <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="tal.descripcion" ng-minlength="3" ng-maxlength="100">
+        <div ng-show="isf.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
+        <div ng-show="isf.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
+        <input required type="date" name="fecha" placeholder="Fecha Inicio Registro" ng-model="tal.fechaInicio" ng-minlength="3">
+        <input required type="date" name="fecha" placeholder="Fecha Fin Registro" ng-model="tal.fechaFin" ng-minlength="3">
+        <input required type="text" name="cupos" placeholder="Costo" ng-model="tal.costo">
+        <input required type="text" name="cupos" placeholder="Cupos ofertados" ng-model="tal.cupos" ng-minlength="3">
+        <div ng-show="isf.cupos.$error.minlength" class="login-help">Descripcion muy corta</div>
+        <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" class="login login-submit">
+        <div ng-show="isf.nombre.$error.required" class="login-help">Escriba el nombre del taller</div>
+        <div ng-show="isf.descripcion.$error.required" class="login-help">Escriba la descripcion</div>
+        <div ng-show="isf.fechaInicio.$error.required" class="login-help">Indique la fecha de inicio</div>
+        <div ng-show="isf.fechaFin.$error.required" class="login-help">Indique la fecha de cierre</div>
+        <div ng-show="isf.costo.$error.required" class="login-help">Indique el costo del taller</div>
+        <div ng-show="isf.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
+        <div ng-show="con.isError" class="login-help">{{ con.error}}</div><a href="/">Iniciar sesión</a>
+      </form>
+      <div ng-show="exitoso">
+        <h2>{{con.nombre}} Registro exitoso de la convocatoria, ya puedes<a href="/">ver y administrar este evento</a></h2>
+      </div>
+    </div>
+    <script src="js/control/eventos.js"></script>
+  </body>
+</html>

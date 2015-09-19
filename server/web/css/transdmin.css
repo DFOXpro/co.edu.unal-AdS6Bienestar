@@ -12,5 +12,16 @@
 /* CSS reset by Eric Meyer */
 @import url("reset.css");
 @import url("layout.css");
-@import url("jNice.css");
-@import url("hack.css");
+
+form {}
+
+form input, form select {
+	display: block;
+	min-width: 30em;
+	max-width: 60em;
+}
+
+form input[disabled] {
+	border: none;
+	background: none;
+}

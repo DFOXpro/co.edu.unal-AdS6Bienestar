@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Convocatoria.findByDescripcion", query = "SELECT c FROM Convocatoria c WHERE c.descripcion = :descripcion"),
     @NamedQuery(name = "Convocatoria.findByFechaFinRegistro", query = "SELECT c FROM Convocatoria c WHERE c.fechaFinRegistro = :fechaFinRegistro"),
     @NamedQuery(name = "Convocatoria.findByCupos", query = "SELECT c FROM Convocatoria c WHERE c.cupos = :cupos")})
-public class Convocatoria implements Serializable, Entity {
+public class ConvocatoriaEntity implements Serializable, Entity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,14 +59,14 @@ public class Convocatoria implements Serializable, Entity {
     @NotNull
     private int cupos;
 
-    public Convocatoria() {
+    public ConvocatoriaEntity() {
     }
 
-    public Convocatoria(Integer idConvocatoria) {
+    public ConvocatoriaEntity(Integer idConvocatoria) {
         this.idConvocatoria = idConvocatoria;
     }
 
-    public Convocatoria(Integer idConvocatoria, String nombre, String descripcion, Date fechaFinRegistro, int cupos) {
+    public ConvocatoriaEntity(Integer idConvocatoria, String nombre, String descripcion, Date fechaFinRegistro, int cupos) {
         this.idConvocatoria = idConvocatoria;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -124,10 +124,10 @@ public class Convocatoria implements Serializable, Entity {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Convocatoria)) {
+        if (!(object instanceof ConvocatoriaEntity)) {
             return false;
         }
-        Convocatoria other = (Convocatoria) object;
+        ConvocatoriaEntity other = (ConvocatoriaEntity) object;
         if ((this.idConvocatoria == null && other.idConvocatoria != null) || (this.idConvocatoria != null && !this.idConvocatoria.equals(other.idConvocatoria))) {
             return false;
         }

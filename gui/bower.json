@@ -19,7 +19,9 @@
   ],
   "dependencies": {
     "angular": "latest",
+    "angular-route": "~1.4.6",
     "cryptico": "*",
+    "ez-datetime": "~0.1.7",
     "livereload-js": "~2.2.1"
   }
 }

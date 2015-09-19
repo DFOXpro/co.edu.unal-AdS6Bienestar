@@ -1,18 +1,35 @@
 /* global app */
+app.$inject = ['ngRoute', 'ez.datetime', 'ez.modal', 'ez.dropdown'];
 
-app.controller('admin', function ($scope, $conexion) {
-	console.log("admin");
-	$scope.cerrarSesion = function (){
-		$conexion.enviar(
-			"sesion",
-			{
-				tipo:"cerrar",
-				1: localStorage.getItem("5")
-			},
-			function(){
-				$conexion.terminar();
-				location.replace("/");
-			}
-		);
-	};
-});
+app.config(['$routeProvider',
+	function ($routeProvider) {
+		$routeProvider.
+			when('/usuarios', {
+				templateUrl: 'tablas-tmplt',
+				controller: 'usuarios'
+			}).
+			when('/usuarios/:usuarioId', {
+				templateUrl: 'crear-usuario-tmplt',
+				controller: 'usuarios'
+			}).
+			when('/evento/:evento', {
+				templateUrl: 'tablas-tmplt',
+				controller: 'eventos'
+			}).
+			when('/evento/:evento/:eventoId?nombre=":nombre"', {
+				templateUrl: 'crear-taller-tmplt',
+				controller: 'eventos'
+			}).
+//			when('/evento/convocatorias/:eventoId', {
+//				templateUrl: 'crear-convocatoria-tmplt',
+//				controller: 'eventos'
+//			}).
+			when('/inicio', {
+				templateUrl: 'inicio-tmplt',
+				controller: 'inicio'
+			}).
+			otherwise({
+				redirectTo: '/inicio'
+			});
+	}]);
+console.log("Admin cargado");

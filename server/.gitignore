@@ -2,6 +2,7 @@ nbproject/
 build/
 dist/
 build.xml
+nbbuild.xml
 #Se hace push a los estaticos compilados por si las moscas
 #web/js/
 #web/index.html

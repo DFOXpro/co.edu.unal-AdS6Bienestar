@@ -4,6 +4,30 @@ module.exports = function (grunt) {
 	// load all grunt tasks matching the ['grunt-*', '@*/grunt-*'] patterns
 	require('load-grunt-tasks')(grunt);
 
+	var paginaARenderizar = {
+		//LANDIGN,
+		"build/index.html": 'src/index.jade',
+		"build/registro_general.html": 'src/registro_general.jade',
+
+		"build/admin.html": 'src/administrador.jade',
+		"build/usuario.html": 'src/usuario.jade',
+
+		//Test de los templates
+//		"build/admin1.html": 'src/theme/Vistas_JADE/admin_main.jade',
+//		"build/user1.html": 'src/theme/Vistas_JADE/doct_main.jade',
+//		"build/user2.html": 'src/theme/Vistas_JADE/estudiante_main.jade',
+//		"build/crearu.html": 'src/creacion_usuario.jade',
+//		"build/crearc.html": 'src/creacion_convocatoria.jade',
+//		"build/creart.html": 'src/creacion_taller.jade',
+
+		//ERRORES
+		"build/401.html": 'src/paginas_de_error/401.jade',
+		"build/404.html": 'src/paginas_de_error/404.jade',
+		"build/500.html": 'src/paginas_de_error/500.jade',
+		"build/503.html": 'src/paginas_de_error/503.jade'//,
+	};
+
+
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -16,6 +40,8 @@ module.exports = function (grunt) {
 				cwd: './bower_components/',
 				src: [
 					'angular/angular.min.js',
+					'angular-route/angular-route.min.js',
+					'ez-datetime/dist/ez-datetime.min.*',
 					'livereload-js/dist/livereload.js',
 					'cryptico/cryptico.min.js'
 				],
@@ -49,24 +75,7 @@ module.exports = function (grunt) {
 						debug: true
 					}
 				},
-				files: {
-					//LANDIGN,
-					"build/index.html": 'src/index.jade',
-					"build/registro_general.html": 'src/registro_general.jade',
-
-					"build/admin.html": 'src/administrador.jade',
-					"build/usuario.html": 'src/usuario.jade',
-
-					//ERRORES
-					"build/401.html": 'src/paginas_de_error/401.jade',
-					"build/404.html": 'src/paginas_de_error/404.jade',
-					"build/500.html": 'src/paginas_de_error/500.jade',
-					"build/503.html": 'src/paginas_de_error/503.jade'//,
-
-					//"build/paneles/panel_admin.html": 'src/theme/Vistas_JADE/admin_main.jade',
-					//"build/login_general.html": 'src/theme/Vistas_JADE/login_general.jade'
-
-				}
+				files: paginaARenderizar
 			},
 			prod: {
 				options: {
@@ -75,20 +84,7 @@ module.exports = function (grunt) {
 						debug: false
 					}
 				},
-				files: {
-					//LANDIGN,
-					"build/index.html": 'src/index.jade',
-					"build/registro_general.html": 'src/registro_general.jade',
-
-					"build/admin.html": 'src/administrador.jade',
-					"build/usuario.html": 'src/usuario.jade',
-
-					//ERRORES
-					"build/401.html": 'src/paginas_de_error/401.jade',
-					"build/404.html": 'src/paginas_de_error/404.jade',
-					"build/500.html": 'src/paginas_de_error/500.jade',
-					"build/503.html": 'src/paginas_de_error/503.jade'//,
-				}
+				files: paginaARenderizar
 			}
 		},
 
@@ -132,6 +128,7 @@ module.exports = function (grunt) {
 			Client: {
 				files: 'build/**/*',
 				options: {
+					debounceDelay: 4000,//tiempo suficiente para que netbeans haga el deploy
 					livereload: true
 				}
 			}

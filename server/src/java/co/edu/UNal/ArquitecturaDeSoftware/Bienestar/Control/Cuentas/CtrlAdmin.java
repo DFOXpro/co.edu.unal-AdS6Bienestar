@@ -131,8 +131,8 @@ public class CtrlAdmin extends CtrlUsuario{
     }
       
         
-    public ArrayList crearTaller(char t, String nombre, String descripcion, String finR, String inicio, String fin, int costo, int cupos){
-        String error = TallerDAO.create(t, nombre, descripcion, finR, inicio, fin, costo, cupos);
+    public ArrayList crearTaller(String nombre, String descripcion, String finR, String inicio, String fin, int costo, int cupos){
+        String error = TallerDAO.create('t', nombre, descripcion, finR, inicio, fin, costo, cupos);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){
             r.add("isExitoso");
@@ -143,8 +143,8 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
     
-    public ArrayList actualizarTaller(int ID_TALLER, char TIPO_TALLER, String NOMBRE, String DESCRIPCION, String FECHA_FIN_REGISTRO, String FECHA_INICIO, String FECHA_FIN, int COSTO, int CUPOS){
-        String error = TallerDAO.update(ID_TALLER, TIPO_TALLER, NOMBRE, DESCRIPCION, FECHA_FIN_REGISTRO, FECHA_INICIO, FECHA_FIN, COSTO, CUPOS);
+    public ArrayList actualizarTaller(int ID_TALLER, String NOMBRE, String DESCRIPCION, String FECHA_FIN_REGISTRO, String FECHA_INICIO, String FECHA_FIN, int COSTO, int CUPOS){
+        String error = TallerDAO.update(ID_TALLER, 't', NOMBRE, DESCRIPCION, FECHA_FIN_REGISTRO, FECHA_INICIO, FECHA_FIN, COSTO, CUPOS);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){
             r.add("isExitoso");

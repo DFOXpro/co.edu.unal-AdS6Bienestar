@@ -106,7 +106,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * @param CUPOS
          * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
          */
-	public String update(
+	public static String update(
                         int    ID_TALLER,
 			char   TIPO_TALLER,
 			String NOMBRE,
@@ -149,7 +149,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
 	 * @param ID_TALLER
          * @return 
 	 */
-	public String delete(int ID_TALLER) {
+	public static String delete(int ID_TALLER) {
 		String respuestaSQL = CrudDAO.update(
 				"DELETE FROM TALLER WHERE ID_TALLER = ?;",
 				new String[]{Integer.toString(ID_TALLER)}
@@ -165,7 +165,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * @param ID_TALLER
          * @return 
          */
-        public String registrarProfesor(int ID_USUARIO, int ID_TALLER){
+        public static String registrarProfesor(int ID_USUARIO, int ID_TALLER){
                 String respuestaSQL = CrudDAO.update(
 				"INSERT INTO PROFESOR_TALLER(ID_USUARIO, ID_TALLER) VALUES (?,?);",
 				new String[]{Integer.toString(ID_USUARIO),Integer.toString(ID_TALLER) }
@@ -174,12 +174,30 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
                 return respuestaSQL;
         }
         
+        /**
+        * Elimina un registro en la tabla PROFESOR_TALLER
+        *
+        * @param ID_PROFESOR
+        * @param ID_TALLER
+        * @return
+        */
+        
+        public static String desvincularProfesor(int ID_PROFESOR, int ID_TALLER) {
+
+            String respuestaSQL = CrudDAO.update(
+                    "DELETE FROM PROFESOR_TALLER WHERE ID_PROFESOR = ? AND ID_TALLER = ?;",
+                    new String[]{Integer.toString(ID_PROFESOR), Integer.toString(ID_TALLER)}
+            );
+            System.out.println("TallerDAO.desvincularProfesor: " + respuestaSQL);
+            return respuestaSQL;
+        }
+        
         
         /**
          * Retorna la lista de registros de la tabla TALLER en un rango
          * @return 
          */
-        public ArrayList<TallerEntity> getTodosTalleres(int tamano, int pagina){
+        public static ArrayList<TallerEntity> getTodosTalleres(int tamano, int pagina){
             int posicion = pagina * tamano;
             ArrayList<Object> param = new ArrayList<>();
             param.add(posicion);
@@ -248,7 +266,92 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
 		}
             return talleres;
         }
+        
+        /**
+        * Retorna la cantidad de registros en la tabla TALLER
+        * @return 
+        */
+       public static int getCountTodosTalleres(){   
+           ArrayList<Object> param = new ArrayList<>();
 
+           int count;
+           ResultSet rs = CrudDAO.query("SELECT count(*) c FROM TALLER", param);
+           try {
+               rs.first();
+               count = rs.getInt("c");
+           } catch (SQLException e) {
+               System.out.println("TallerDAO.getCountTodosTaller: " + e.getMessage());
+               return 0;
+           }
+           return count;    
+        }
+       
+       
+       /**
+        * Retorna la cantidad de Talleres
+        * @return 
+        */
+        public static int getCountTalleres(){   
+           ArrayList<Object> param = new ArrayList<>();
+
+           int count;
+           ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM TALLER WHERE TIPO_TALLER = 'T'", param);
+           
+           try {
+               rs.first();
+               count = rs.getInt("c");
+           } catch (SQLException e) {
+               System.out.println("TallerDAO.getCountTalleres: " + e.getMessage());
+               return 0;
+           }
+           return count;    
+        }
+       
+        
+               /**
+        * Retorna la cantidad de Talleres
+        * @return 
+        */
+        public static int getCountCursos(){   
+           ArrayList<Object> param = new ArrayList<>();
+
+           int count;
+           ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM TALLER WHERE TIPO_TALLER = 'C'", param);
+           
+           try {
+               rs.first();
+               count = rs.getInt("c");
+           } catch (SQLException e) {
+               System.out.println("TallerDAO.getCountCursos: " + e.getMessage());
+               return 0;
+           }
+           return count;    
+        }
+       
+    /**
+     * Retorna la cantidad de USUARIOS inscritos en un Taller
+     * @param ID_TALLER
+     * @return 
+     */
+     public static int getCountUsuarioTalleres( int ID_TALLER ){   
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(ID_TALLER);
+
+        int count;
+        ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM USUARIO_TALLER WHERE ID_TALLER = ?", param);
+
+        try {
+            rs.first();
+            count = rs.getInt("c");
+        } catch (SQLException e) {
+            System.out.println("TallerDAO.getCountUsuarioTalleres: " + e.getMessage());
+            return 0;
+        }
+        return count;    
+     }
+     
+     
+     
         
 ////////////////////////        
         

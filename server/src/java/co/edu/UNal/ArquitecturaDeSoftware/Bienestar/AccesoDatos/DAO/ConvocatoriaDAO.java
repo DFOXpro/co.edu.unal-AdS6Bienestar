@@ -153,6 +153,49 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
 		}
             return convocatorias;
         }
+        
+        
+    /**
+    * Retorna la cantidad de convocatorias
+    * @return
+    */
+    public int getCountConvoctorias(){
+       ArrayList<Object> param = new ArrayList<>();
+
+       int count;
+       ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM CONVOCATORIA", param);
+
+       try {
+           rs.first();
+           count = rs.getInt("c");
+       } catch (SQLException e) {
+           System.out.println("ConvocatoriaDAO.getCountConvocatorias: " + e.getMessage());
+           return 0;
+       }
+       return count;    
+    }
+    
+    /**
+     * Retorna la cantidad de USUARIOS inscritos en una convocatoria
+     * @param ID_CONVOCATORIA
+     * @return 
+     */
+     public int getCountUsuarioConvocatoria( int ID_CONVOCATORIA ){   
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(ID_CONVOCATORIA);
+
+        int count;
+        ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM USUARIO_CONVOCATORIA WHERE ID_CONVOCATORIA = ?", param);
+
+        try {
+            rs.first();
+            count = rs.getInt("c");
+        } catch (SQLException e) {
+            System.out.println("TallerDAO.getCountUsuarioConvocatoria: " + e.getMessage());
+            return 0;
+        }
+        return count;    
+     }
 
         
 ////////////////////////        

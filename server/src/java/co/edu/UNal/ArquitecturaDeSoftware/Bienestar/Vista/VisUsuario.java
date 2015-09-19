@@ -10,6 +10,7 @@ import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlUsuario;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +22,9 @@ import org.json.simple.JSONObject;
  * @author awake
  */
 public class VisUsuario extends HttpServlet {
-    
+    CtrlUsuario cU = new CtrlUsuario();
     protected void leerConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        CtrlUsuario cU = new CtrlUsuario();
+        
         ConvocatoriaEntity e = cU.leerConvocatoria(request.getParameter("1")); // id de la convocatoria
         
         response.setContentType("application/json;charset=UTF-8");
@@ -45,6 +46,107 @@ public class VisUsuario extends HttpServlet {
         }
     }
     
+    protected void registrarUsuarioTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = cU.registrarATallerUsuario(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuario param2: idTaller
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
+    
+    protected void registrarUsuarioConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = cU.registrarAConvocatoriaUsuario(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuario param2: idConv
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
+    
+    protected void registrarDocenteTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = CtrlUsuario.registrarATallerDocente(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuarioDocente param2: idTaller
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
+        
+    protected void quitarDocenteTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = cU.abandonarTallerDocente(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); //1. idUsuario, 2. idEvento
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
+    
+    protected void quitarUsuarioTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = cU.abandonarTallerUsuario(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); //1. idUsuario, 2. idEvento
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
+    
+    protected void quitarUsuarioConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = cU.abandonarConvocatoria(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); //1. idUsuario, 2. idEvento
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
     
     
     

@@ -202,6 +202,43 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
         System.out.println("UsuarioDAO.registrarConvocatoria: " + respuestaSQL);
         return respuestaSQL;
     }
+    
+    
+    /**
+     * Elimina un registro en la tabla USUARIO_CONVOCATORIA
+     *
+     * @param ID_USUARIO
+     * @param ID_CONVOCATORIA
+     * @return
+     */
+    public String desvincularConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA) {
+        
+        String respuestaSQL = CrudDAO.update(
+                "DELETE FROM USUARIO_CONVOCATORIA WHERE ID_USUARIO = ? AND ID_CONVOCTORIA = ?;",
+                new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_CONVOCATORIA)}
+        );
+        System.out.println("UsuarioDAO.desvincularConvocatoria: " + respuestaSQL);
+        return respuestaSQL;
+    }
+    
+    
+    /**
+     * Elimina un registro en la tabla USUARIO_TALLER
+     *
+     * @param ID_USUARIO
+     * @param ID_TALLER
+     * @return
+     */
+    public String desvincularTaller(int ID_USUARIO, int ID_TALLER) {
+        
+        String respuestaSQL = CrudDAO.update(
+                "DELETE FROM USUARIO_TALLER WHERE ID_USUARIO = ? AND ID_TALLER = ?;",
+                new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_TALLER)}
+        );
+        System.out.println("UsuarioDAO.desvincularTaller: " + respuestaSQL);
+        return respuestaSQL;
+    }
+    
 
     /**
      * Retorna la lista de usuarios en un rango
@@ -225,11 +262,74 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
                 usuarios.add(ue);
             }
         } catch (SQLException e) {
-            System.out.println("UsuarioDAO.getUsuraios: " + e.getMessage());
+            System.out.println("UsuarioDAO.getUsuarios: " + e.getMessage());
             return new ArrayList<>();
         }
         return usuarios;
     }
+    
+    
+    /**
+     * Retorna la cantidad de registros en la tabla USUARIOS
+     * @return 
+     */
+    public static int getCountUsuarios(){   
+        ArrayList<Object> param = new ArrayList<>();
+        
+        int count;
+        ResultSet rs = CrudDAO.query("SELECT count(*) c FROM USUARIO", param);
+        try {
+            rs.first();
+            count = rs.getInt("c");
+        } catch (SQLException e) {
+            System.out.println("UsuarioDAO.getCountUsuarios: " + e.getMessage());
+            return 0;
+        }
+        return count;    
+    }
+    
+    
+    /**
+    * Retorna la cantidad de Talleres
+    * @return
+    */
+    public static int getCountTalleres(){
+       ArrayList<Object> param = new ArrayList<>();
+
+       int count;
+       ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM TALLER WHERE TIPO_TALLER = 'T'", param);
+
+       try {
+           rs.first();
+           count = rs.getInt("c");
+       } catch (SQLException e) {
+           System.out.println("TallerDAO.getCountTodosTaller: " + e.getMessage());
+           return 0;
+       }
+       return count;    
+    }
+    
+    /**
+     * Retorna la cantidad de USUARIOS inscritos en un Taller
+     * @return 
+     */
+     public static int getCountUsuarioTalleres( int ID_TALLER ){   
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(ID_TALLER);
+
+        int count;
+        ResultSet rs = CrudDAO.query("SELECT COUNT(*) c FROM USUARIO_TALLER WHERE ID_TALLER = ?", param);
+
+        try {
+            rs.first();
+            count = rs.getInt("c");
+        } catch (SQLException e) {
+            System.out.println("TallerDAO.getCountUsuarioTalleres: " + e.getMessage());
+            return 0;
+        }
+        return count;    
+     }
+    
 
     @Override
     protected Class getEntityClass() {

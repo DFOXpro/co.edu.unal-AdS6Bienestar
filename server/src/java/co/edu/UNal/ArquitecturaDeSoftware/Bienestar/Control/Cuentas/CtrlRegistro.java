@@ -6,7 +6,6 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.util.ArrayList;
 
 /**

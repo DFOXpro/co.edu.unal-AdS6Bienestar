@@ -87,6 +87,7 @@ public class VisAdmin extends VisUsuario{
 		JSONObject obj=new JSONObject();
         if(r.get(0)=="error"){
 				obj.put("isError",true);
+				boolean errorSerio = false;
                 if(r.get(1)=="usuario"){
                         obj.put("errorDescrip","El usuario ya existe");
                 } else if(r.get(1)=="contrasena"){
@@ -103,8 +104,11 @@ public class VisAdmin extends VisUsuario{
                         obj.put("errorDescrip","Los nombres o apellidos son incorrectos");
                 } else if(r.get(1)=="rol"){
                         obj.put("errorDescrip","El rol es invalido, los posibles valores son: E, P y A");
-                } else Util.errordeRespuesta(r, out);
-                out.print(obj);
+                } else {
+					Util.errordeRespuesta(r, out);
+					errorSerio = true;
+				}
+				if(!errorSerio) out.print(obj);
         } else if(r.get(0)=="isExitoso"){
                 obj.put("Exitoso",true);
                 out.print(obj);

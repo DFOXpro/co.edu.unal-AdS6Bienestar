@@ -202,6 +202,43 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
         System.out.println("UsuarioDAO.registrarConvocatoria: " + respuestaSQL);
         return respuestaSQL;
     }
+    
+    
+    /**
+     * Elimina un registro en la tabla USUARIO_CONVOCATORIA
+     *
+     * @param ID_USUARIO
+     * @param ID_CONVOCATORIA
+     * @return
+     */
+    public String desvincularConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA) {
+        
+        String respuestaSQL = CrudDAO.update(
+                "DELETE FROM USUARIO_CONVOCATORIA WHERE ID_USUARIO = ? AND ID_CONVOCTORIA = ?;",
+                new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_CONVOCATORIA)}
+        );
+        System.out.println("UsuarioDAO.desvincularConvocatoria: " + respuestaSQL);
+        return respuestaSQL;
+    }
+    
+    
+    /**
+     * Elimina un registro en la tabla USUARIO_TALLER
+     *
+     * @param ID_USUARIO
+     * @param ID_TALLER
+     * @return
+     */
+    public String desvincularTaller(int ID_USUARIO, int ID_TALLER) {
+        
+        String respuestaSQL = CrudDAO.update(
+                "DELETE FROM USUARIO_TALLER WHERE ID_USUARIO = ? AND ID_TALLER = ?;",
+                new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_TALLER)}
+        );
+        System.out.println("UsuarioDAO.desvincularTaller: " + respuestaSQL);
+        return respuestaSQL;
+    }
+    
 
     /**
      * Retorna la lista de usuarios en un rango
@@ -225,7 +262,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
                 usuarios.add(ue);
             }
         } catch (SQLException e) {
-            System.out.println("UsuarioDAO.getUsuraios: " + e.getMessage());
+            System.out.println("UsuarioDAO.getUsuarios: " + e.getMessage());
             return new ArrayList<>();
         }
         return usuarios;

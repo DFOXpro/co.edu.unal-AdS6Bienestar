@@ -174,6 +174,24 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
                 return respuestaSQL;
         }
         
+        /**
+        * Elimina un registro en la tabla PROFESOR_TALLER
+        *
+        * @param ID_PROFESOR
+        * @param ID_TALLER
+        * @return
+        */
+        
+        public String desvincularProfesor(int ID_PROFESOR, int ID_TALLER) {
+
+            String respuestaSQL = CrudDAO.update(
+                    "DELETE FROM PROFESOR_TALLER WHERE ID_PROFESOR = ? AND ID_TALLER = ?;",
+                    new String[]{Integer.toString(ID_PROFESOR), Integer.toString(ID_TALLER)}
+            );
+            System.out.println("TallerDAO.desvincularProfesor: " + respuestaSQL);
+            return respuestaSQL;
+        }
+        
         
         /**
          * Retorna la lista de registros de la tabla TALLER en un rango

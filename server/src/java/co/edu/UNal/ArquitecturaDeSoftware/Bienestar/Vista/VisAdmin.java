@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
@@ -276,15 +271,6 @@ public class VisAdmin extends VisUsuario{
                 }case "usuarios":{
                         leerUsuariosMultiplesId(request, response);
                         break;
-                }case "talleres":{
-                        (request, response);
-                        break;
-                } case "convocatorias":{
-                        (request, response);
-                        break;
-                } case "leerConvocatoria":{
-                        leerConvocatoria(request,response);
-                        break;
                 } case "crearConvocatoria":{
                         crearConvocatoria(request,response);
                         break;
@@ -294,7 +280,16 @@ public class VisAdmin extends VisUsuario{
                 } case "eliminarConvocatoria":{
                         eliminarConvocatoria(request,response);
                         break;
-                } 
+                } case "leerConvocatoria":{
+                        leerConvocatoria(request,response);
+                        break;
+                } case "convocatorias":{
+                        (request, response);
+                        break;
+                } case "talleres":{
+                        (request, response);
+                        break;
+                }
                 default:
                         System.err.print("tipo de request invalido: " + request.getParameter("tipo"));
             }

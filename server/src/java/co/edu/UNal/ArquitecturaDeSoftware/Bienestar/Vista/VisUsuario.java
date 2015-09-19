@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.ConvocatoriaEntity;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.TallerEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlUsuario;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
@@ -15,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -23,6 +20,7 @@ import org.json.simple.JSONObject;
  */
 public class VisUsuario extends HttpServlet {
     CtrlUsuario cU = new CtrlUsuario();
+    
     protected void leerConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
         
         ConvocatoriaEntity e = cU.leerConvocatoria(request.getParameter("1")); // id de la convocatoria
@@ -44,6 +42,47 @@ public class VisUsuario extends HttpServlet {
                 
                 out.print(obj);
         }
+    }
+    
+    protected void leerTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        
+        TallerEntity e = cU.leerTaller(request.getParameter("1")); // id de la taller
+        
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if (e.getNombre().isEmpty()) {
+                        JSONObject obj = new JSONObject();
+                        obj.put("isError", true);
+                        obj.put("errorDescrip", "La convocatoria no existe");
+                        out.print(obj);
+        } else  {
+                JSONObject obj = new JSONObject();
+                obj.put("id", e.getIdTaller());
+                obj.put("nombre", e.getNombre());
+                obj.put("descrip", e.getDescripcion());
+                obj.put("cupos", e.getCupos());
+                obj.put("fin", e.getFechaFinRegistro());
+                
+                out.print(obj);
+        }
+    }
+        
+    protected void leerMultiplesConvocatorias(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList<ConvocatoriaEntity> convocatorias = new ArrayList<>();
+        convocatorias = cU.leerMultiplesConvocatorias(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // tamaño y posición
+        
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        JSONArray list1 = new JSONArray();
+        for(int i = 0; i < convocatorias.size(); i++)
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("id", convocatorias.get(i).getIdConvocatoria());
+            obj.put("titulo", convocatorias.get(i).getNombre());
+            list1.add(obj);
+        }
+        out.print(list1);
     }
     
     protected void registrarUsuarioTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{

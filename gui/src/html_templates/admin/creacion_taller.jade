@@ -40,7 +40,7 @@ script(
 			ng-model="tal.fechaInicio"
 			min-date="tal.fechaFin"
 		)
-		//- value="{{ tal.fechaInicio ? (tal.fechaInicio | ezDate:'MMMM Do, YYYY [at] h:mma') : 'Fecha de inicio' }}"
+		p {{ tal.fechaInicio.$error}}
 		input(
 			required
 			ez-datetime-control
@@ -50,6 +50,7 @@ script(
 			ng-model="tal.fechaFin"
 			min-date="tal.fechaInicio"
 		)
+		p {{ tal.fechaFin.$error}}
 
 		input(
 			required
@@ -82,6 +83,8 @@ script(
 		.login-help(ng-show="isf.costo.$error.required") Indique el costo del taller
 		.login-help(ng-show="isf.cupos.$error.required") Indique el numero de cupos ofertados
 		.login-help(ng-show="con.isError") {{ tal.error}}
+		hr
+		btabla()
 	div(ng-show ="exitoso")
 		h2 {{con.nombre}} Registro exitoso de la convocatoria, ya puedes
 			a(href	='/') ver y administrar este evento

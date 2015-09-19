@@ -153,8 +153,8 @@ module.exports = function (grunt) {
 	grunt.registerTask(
 		'toServer', [
 			'jade:dev',
-			'copy',
-			'watch'
+			'copy'//,
+			//'watch'
 		]
 	);
 	grunt.registerTask('default', 'toServer');

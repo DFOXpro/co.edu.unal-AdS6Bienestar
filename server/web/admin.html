@@ -126,7 +126,9 @@
         <div ng-show="isf.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
         <div ng-show="isf.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
         <input required ez-datetime-control type="text" name="fechaInicio" placeholder="Fecha Inicio Registro" ng-model="tal.fechaInicio" min-date="tal.fechaFin">
+        <p>{{ tal.fechaInicio.$error}}</p>
         <input required ez-datetime-control type="text" name="fechaFin" placeholder="Fecha Fin Registro" ng-model="tal.fechaFin" min-date="tal.fechaInicio">
+        <p>{{ tal.fechaFin.$error}}</p>
         <input required type="text" name="cupos" placeholder="Costo" ng-model="tal.costo">
         <input required type="text" name="cupos" placeholder="Cupos ofertados" ng-model="tal.cupos" ng-minlength="3">
         <div ng-show="isf.cupos.$error.minlength" class="login-help">Descripcion muy corta</div>
@@ -138,6 +140,8 @@
         <div ng-show="isf.costo.$error.required" class="login-help">Indique el costo del taller</div>
         <div ng-show="isf.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
         <div ng-show="con.isError" class="login-help">{{ tal.error}}</div>
+        <hr>
+        <btabla></btabla>
       </form>
       <div ng-show="exitoso">
         <h2>{{con.nombre}} Registro exitoso de la convocatoria, ya puedes<a href="/">ver y administrar este evento</a></h2>

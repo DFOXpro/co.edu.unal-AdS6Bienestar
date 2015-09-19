@@ -85,6 +85,60 @@ public class VisUsuario extends HttpServlet {
         out.print(list1);
     }
     
+    protected void obtenerTotalConvocatorias(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int numC = cU.obtenerTotalConvocatorias();
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject obj = new JSONObject();
+        obj.put("total", numC);
+        out.print(obj);
+    }    
+    
+    protected void obtenerInscritosConv(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int numC = cU.obtenerInscritosConv(Integer.parseInt(request.getParameter("1")));
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject obj = new JSONObject();
+        obj.put("inscritos", numC);
+        out.print(obj);
+    }
+    
+    protected void leerMultiplesTalleres(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList<TallerEntity> talleres = new ArrayList<>();
+        talleres = cU.leerMultiplesTalleres(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // tamaño y posición
+        
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        JSONArray list1 = new JSONArray();
+        for(int i = 0; i < talleres.size(); i++)
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("id", talleres.get(i).getIdTaller());
+            obj.put("titulo", talleres.get(i).getNombre());
+            list1.add(obj);
+        }
+        out.print(list1);
+    }
+    
+    protected void obtenerTotalTalleres(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int numC = cU.obtenerTotalTalleres();
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject obj = new JSONObject();
+        obj.put("total", numC);
+        out.print(obj);
+    }
+    
+    protected void obtenerInscritosTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int numC = cU.obtenerInscritosTaller(Integer.parseInt(request.getParameter("1")));
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject obj = new JSONObject();
+        obj.put("inscritos", numC);
+        out.print(obj);
+    }    
+    
     protected void registrarUsuarioTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ArrayList r = cU.registrarATallerUsuario(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuario param2: idTaller
          
@@ -121,6 +175,23 @@ public class VisUsuario extends HttpServlet {
     
     protected void registrarDocenteTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ArrayList r = CtrlUsuario.registrarATallerDocente(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuarioDocente param2: idTaller
+         
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(r.get(0)=="error"){
+                JSONObject obj=new JSONObject();
+                obj.put("isError",true);
+                obj.put("errorDescrip",r.get(1));
+                out.print(obj);
+        } else if(r.get(0)=="isExitoso"){
+                JSONObject obj=new JSONObject();
+                obj.put("Exitoso",true);
+                out.print(obj);
+        } else Util.errordeRespuesta(r, out);  
+    }
+            
+    protected void registrarATallerDocenteByDoc(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = CtrlUsuario.registrarATallerDocenteByDoc(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: documentoDocente param2: idTaller
          
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -188,20 +259,64 @@ public class VisUsuario extends HttpServlet {
     }
     
     
-    
-    
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         //DO NOTHING
         System.out.print("Warning!: acceso por get: "+request);
         response.sendError(401);
     }
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-                    throws ServletException, IOException {
-            if("leerConvocatoria".equals(request.getParameter("tipo"))) leerConvocatoria(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        if (null != request.getParameter("tipo"))
+            switch (request.getParameter("tipo")) {
+                case "convocatoria":{
+                        leerConvocatoria(request, response);
+                        break;
+                }case "taller":{
+                        leerTaller(request, response);
+                        break;
+                }case "convocatorias":{
+                        leerMultiplesConvocatorias(request, response);
+                        break;
+                }case "numConvocatorias":{
+                        obtenerTotalConvocatorias(request, response);
+                        break;
+                }case "inscritosConvocatoria":{
+                        obtenerInscritosConv(request, response);
+                        break;
+                }case "talleres":{
+                        leerMultiplesTalleres(request, response);
+                        break;
+                } case "numTalleres":{
+                        obtenerTotalTalleres(request,response);
+                        break;
+                } case "inscritosTaller":{
+                        obtenerInscritosTaller(request,response);
+                        break;
+                } case "regUsuarioTaller":{
+                        registrarUsuarioTaller(request,response);
+                        break;
+                } case "regUsuarioConv":{
+                        registrarUsuarioConvocatoria(request,response);
+                        break;
+                } case "regDocente":{
+                        registrarDocenteTaller(request, response);
+                        break;
+                } case "regDocenteDocumento":{
+                        registrarATallerDocenteByDoc(request, response);
+                        break;
+                } case "eliminarUsuarioTaller":{
+                        quitarUsuarioTaller(request, response);
+                        break;
+                } case "eleminarUsuarioConv":{
+                        quitarUsuarioConvocatoria(request, response);
+                        break;
+                }
+                default:
+                        System.err.print("tipo de request invalido: " + request.getParameter("tipo"));
+            }
+        else System.err.print("VisUsuario.doPost: request inválido");
     }
     
     @Override

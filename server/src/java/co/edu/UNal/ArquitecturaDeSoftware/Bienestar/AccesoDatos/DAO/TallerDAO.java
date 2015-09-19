@@ -204,7 +204,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
             param.add(tamano);
             
             ArrayList<TallerEntity> talleres = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER ", param);
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER LIMIT ?,? ", param);
 		try {
                        while(rs.next()){
 			TallerEntity ue = toEntity(rs);
@@ -229,7 +229,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
             param.add(tamano);
             
             ArrayList<TallerEntity> talleres = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'T' ", param);
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'T' LIMIT ?,? ", param);
 		try {
                        while(rs.next()){
 			TallerEntity ue = toEntity(rs);
@@ -254,7 +254,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
             param.add(tamano);
             
             ArrayList<TallerEntity> talleres = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'C' ", param);
+                ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE TIPO_TALLER = 'C' LIMIT ?,? ", param);
 		try {
                        while(rs.next()){
 			TallerEntity ue = toEntity(rs);

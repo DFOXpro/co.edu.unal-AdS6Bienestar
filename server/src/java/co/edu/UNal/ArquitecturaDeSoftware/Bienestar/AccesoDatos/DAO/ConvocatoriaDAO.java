@@ -141,7 +141,7 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
             param.add(tamano);
             
             ArrayList<ConvocatoriaEntity> convocatorias = new ArrayList<>();
-                ResultSet rs = CrudDAO.query("SELECT * FROM CONVOCATORIA ", param);
+                ResultSet rs = CrudDAO.query("SELECT * FROM CONVOCATORIA LIMIT ?,? ", param);
 		try {
                        while(rs.next()){
 			ConvocatoriaEntity ue = toEntity(rs);

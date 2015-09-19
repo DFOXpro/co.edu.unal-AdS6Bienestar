@@ -104,8 +104,6 @@ public class VisAdmin extends VisUsuario{
                 } else if(r.get(1)=="rol"){
                         obj.put("errorDescrip","El rol es invalido, los posibles valores son: E, P y A");
                 } else Util.errordeRespuesta(r, out);
-				obj.put("errorDescrip",r.get(1));
-				System.out.println(obj);
                 out.print(obj);
         } else if(r.get(0)=="isExitoso"){
                 obj.put("Exitoso",true);

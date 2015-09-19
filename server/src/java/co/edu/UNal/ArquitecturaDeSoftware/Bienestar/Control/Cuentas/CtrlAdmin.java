@@ -15,14 +15,7 @@ import java.util.ArrayList;
 public class CtrlAdmin extends CtrlUsuario{
     UsuarioDAO usr = new UsuarioDAO();
     
-    public static ArrayList crearUsuario(
-    String nombre,
-    String apellidos,
-    String tipoDeDocumento,
-    int documento,
-    String correo,
-    String contrasena,
-    char rol){
+    public static ArrayList crearUsuario(String nombre, String apellidos, String tipoDeDocumento, int documento, String correo, String contrasena, char rol){
         String error="";
         if(nombre.length()>100)nombre = nombre.substring(0, 99);
         if(apellidos.length()>100)apellidos = apellidos.substring(0, 99);
@@ -47,15 +40,7 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
     
-    public static ArrayList editarUsuario(
-    int idUsuario,
-    String nombre,
-    String apellidos,
-    String tipoDeDocumento,
-    int documento,
-    String correo,
-    String contrasena,
-    char rol){
+    public static ArrayList editarUsuario(int idUsuario, String nombre, String apellidos, String tipoDeDocumento, int documento, String correo, String contrasena, char rol){
         String error="";
         if(nombre.length()>100)nombre = nombre.substring(0, 99);
         if(apellidos.length()>100)apellidos = apellidos.substring(0, 99);
@@ -80,20 +65,20 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
 
-    public UsuarioEntity leerUsuario(String username) {
-            return usr.getByUsername(username);
+    public UsuarioEntity leerUsuario(String username){
+        return usr.getByUsername(username);
     }
 
-    public UsuarioEntity leerUsuarioId(int idUsuario) {
-            return usr.getById(idUsuario);
+    public UsuarioEntity leerUsuarioId(int idUsuario){
+        return usr.getById(idUsuario);
     }
 
     public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion) {
-            return usr.getUsuarios(posicion, tamano);
+        return usr.getUsuarios(posicion, tamano);
     };
 
     public int obtenerTotalUsuarios() {
-            return usr.getTotalUsuarios();
+        return usr.getTotalUsuarios();
     }
     
     public static ArrayList eliminarUsuario(int ID_USUARIO){

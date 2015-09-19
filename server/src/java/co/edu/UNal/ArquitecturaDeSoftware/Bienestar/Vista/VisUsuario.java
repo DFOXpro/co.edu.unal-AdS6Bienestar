@@ -80,8 +80,8 @@ public class VisUsuario extends HttpServlet {
         } else Util.errordeRespuesta(r, out);  
     }
     
-        protected void registrarDocenteTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        ArrayList r = cU.registrarATallerDocente(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuarioDocente param2: idTaller
+    protected void registrarDocenteTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        ArrayList r = CtrlUsuario.registrarATallerDocente(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuarioDocente param2: idTaller
          
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -131,7 +131,7 @@ public class VisUsuario extends HttpServlet {
         } else Util.errordeRespuesta(r, out);  
     }
     
-        protected void quitarUsuarioConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    protected void quitarUsuarioConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ArrayList r = cU.abandonarConvocatoria(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); //1. idUsuario, 2. idEvento
          
         response.setContentType("application/json;charset=UTF-8");

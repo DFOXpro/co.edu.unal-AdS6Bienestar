@@ -178,7 +178,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
      * @param ID_TALLER
      * @return
      */
-    public String registrarTaller(int ID_USUARIO, int ID_TALLER) {
+    public static String registrarTaller(int ID_USUARIO, int ID_TALLER) {
         String respuestaSQL = CrudDAO.update(
                 "INSERT INTO USUARIO_TALLER(ID_USUARIO, ID_TALLER) VALUES (?,?);",
                 new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_TALLER)}
@@ -194,7 +194,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
      * @param ID_CONVOCATORIA
      * @return
      */
-    public String registrarConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA) {
+    public static String registrarConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA) {
         String respuestaSQL = CrudDAO.update(
                 "INSERT INTO USUARIO_CONVOCATORIA(ID_USUARIO, ID_CONVOCATORIA) VALUES (?,?);",
                 new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_CONVOCATORIA)}
@@ -211,7 +211,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
      * @param ID_CONVOCATORIA
      * @return
      */
-    public String desvincularConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA) {
+    public static String desvincularConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA) {
         
         String respuestaSQL = CrudDAO.update(
                 "DELETE FROM USUARIO_CONVOCATORIA WHERE ID_USUARIO = ? AND ID_CONVOCTORIA = ?;",
@@ -229,7 +229,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
      * @param ID_TALLER
      * @return
      */
-    public String desvincularTaller(int ID_USUARIO, int ID_TALLER) {
+    public static String desvincularTaller(int ID_USUARIO, int ID_TALLER) {
         
         String respuestaSQL = CrudDAO.update(
                 "DELETE FROM USUARIO_TALLER WHERE ID_USUARIO = ? AND ID_TALLER = ?;",

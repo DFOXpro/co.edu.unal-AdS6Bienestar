@@ -165,7 +165,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * @param ID_TALLER
          * @return 
          */
-        public String registrarProfesor(int ID_USUARIO, int ID_TALLER){
+        public static String registrarProfesor(int ID_USUARIO, int ID_TALLER){
                 String respuestaSQL = CrudDAO.update(
 				"INSERT INTO PROFESOR_TALLER(ID_USUARIO, ID_TALLER) VALUES (?,?);",
 				new String[]{Integer.toString(ID_USUARIO),Integer.toString(ID_TALLER) }
@@ -182,7 +182,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
         * @return
         */
         
-        public String desvincularProfesor(int ID_PROFESOR, int ID_TALLER) {
+        public static String desvincularProfesor(int ID_PROFESOR, int ID_TALLER) {
 
             String respuestaSQL = CrudDAO.update(
                     "DELETE FROM PROFESOR_TALLER WHERE ID_PROFESOR = ? AND ID_TALLER = ?;",

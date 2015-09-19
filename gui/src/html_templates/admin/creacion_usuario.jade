@@ -38,7 +38,6 @@ script(
 			ng-model="cu.tipoUsuario"
 		)
 			option(
-				ng-selected="$first"
 				ng-repeat="option in roles" value="{{option.id}}"
 			) {{option.name}}
 
@@ -117,10 +116,10 @@ script(
 		.login-help(ng-show="isf.documento.$error.required") Escriba el documento
 		.login-help(ng-show="isf.contrasena.$error.required") Escriba el contrasena
 		.login-help(ng-show="isf.contrasena_2.$error.required") Verifique la contrasena
-		.login-help(
-			// ng-show="cu.isError"
-		) {{ cu.error}}
-		button(ng-show="!crear") Editar
-		button(ng-show="!crear") Eliminar
+		.login-help(ng-show="cu.isError") {{ cu.error}}
+		button(ng-hide="crear" ng-click="eliminar()") Eliminar
 	div(ng-show ="exitoso")
-		h2 Usuario creado exitosamente
+		div(ng-show="!eliminado")
+			h2(ng-show="!crear") Usuario actualizado exitosamente
+			h2(ng-show="crear") Usuario creado exitosamente
+		h2(ng-show="eliminado") Usuario eliminado exitosamente

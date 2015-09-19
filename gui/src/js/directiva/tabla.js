@@ -10,11 +10,11 @@ app.directive('btabla', function () {
 	};
 });
 
-app.filter('ceil', function() {
-  return function(input) {
-    input = input || 0;
-    return Math.ceil(input);
-  };
+app.filter('ceil', function () {
+	return function (input) {
+		input = input || 0;
+		return Math.ceil(input);
+	};
 });
 
 app.factory('$tabla', function ($conexion) {
@@ -37,23 +37,17 @@ app.factory('$tabla', function ($conexion) {
 				2: tamano
 			},
 			function (respuesta) {
-				console.log("rta: ", respuesta);
-				//TEST
-				var a = new Array(tamano);
-				for (i = 0; i < tamano; i++)
-					a[i] = {titulo: $conexion.strAleatorio(20), id: i};
-				//END TEST
 				if (respuesta.data.isError)
 					console.log("Error:", respuesta.data.errorDescrip) ;
 				//else callback(respuesta.data);
 				else callback({
-						titulo: tabla,//"Usuarios"
-						verAccion: accion,//"/usuarios",
-						//editarAccion:"/editareventos",
-						//eliminarAccion:"/eliminareventos",
-						lineas: respuesta.data,
-						total: 73
-					});
+					titulo: tabla,//"Usuarios"
+					verAccion: accion,//"/usuarios",
+					//editarAccion:"/editareventos",
+					//eliminarAccion:"/eliminareventos",
+					lineas: respuesta.data,
+					total: 73
+				});
 			}
 		);
 

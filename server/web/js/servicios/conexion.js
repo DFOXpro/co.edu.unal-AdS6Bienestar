@@ -123,8 +123,6 @@ app.factory('$conexion', function ($http) {
 		//Minimo llaves de 512
 		llavePrivada = cryptico.generateRSAKey(semilla, 512);
 		llavePublica = cryptico.publicKeyString(llavePrivada);
-		console.log("semilla: ", semilla);
-		console.log("chc: ", cookieHashCode);
 		return iniciado;
 	};
 

@@ -100,7 +100,7 @@ h1 span { display: none; }
 /* Sidebar ---------------------------------------- */
 
 #sidebar {
-	width: 20em;
+	width: 30em;
 	float: left;
 }
 
@@ -158,7 +158,7 @@ h2 a:hover { text-decoration: underline; }
 #main {
 	display: inline-block !important;
 	min-width: 700px;
-	max-width: calc(100% - 20em);
+	max-width: calc(100% - 30em);
 	float: right;
 	padding: 1em;
 }

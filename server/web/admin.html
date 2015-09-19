@@ -75,7 +75,7 @@
         <div ng-show="isf.apellido.$error.minlength" class="login-help">Apellido muy corto</div>
         <div ng-show="isf.apellido.$error.maxlength" class="login-help">Apellido muy largo</div>
         <select required name="tipoUsuario" ng-model="cu.tipoUsuario">
-          <option ng-selected="$first" ng-repeat="option in roles" value="{{option.id}}">{{option.name}}</option>
+          <option ng-repeat="option in roles" value="{{option.id}}">{{option.name}}</option>
         </select>
         <input required type="email" name="email" placeholder="Correo Electronico" ng-model="cu.email">
         <div ng-show="isf.email.$error.email" class="login-help">Usuario no valido, debe ser un correo</div>
@@ -101,12 +101,15 @@
         <div ng-show="isf.documento.$error.required" class="login-help">Escriba el documento</div>
         <div ng-show="isf.contrasena.$error.required" class="login-help">Escriba el contrasena</div>
         <div ng-show="isf.contrasena_2.$error.required" class="login-help">Verifique la contrasena</div>
-        <div // ng-show="cu.isError" class="login-help">{{ cu.error}}</div>
-        <button ng-show="!crear">Editar</button>
-        <button ng-show="!crear">Eliminar</button>
+        <div ng-show="cu.isError" class="login-help">{{ cu.error}}</div>
+        <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
       </form>
       <div ng-show="exitoso">
-        <h2>Usuario creado exitosamente</h2>
+        <div ng-show="!eliminado">
+          <h2 ng-show="!crear">Usuario actualizado exitosamente</h2>
+          <h2 ng-show="crear">Usuario creado exitosamente</h2>
+        </div>
+        <h2 ng-show="eliminado">Usuario eliminado exitosamente</h2>
       </div>
     </script>
     <script type="text/ng-template" id="crear-taller-tmplt">
@@ -160,5 +163,6 @@
     <script src="js/control/admin/inicio.js"></script>
     <script src="js/control/admin/eventos.js"></script>
     <script src="js/control/admin/usuarios.js"></script>
+    <script src="js/directiva/contrasena_igual.js"></script>
   </body>
 </html>

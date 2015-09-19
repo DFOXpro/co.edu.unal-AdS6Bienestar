@@ -18,6 +18,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		{url:"/inicio",nombre:"Inicio"},
 		{url:"/usuarios",nombre:"Gestión de usuarios."}
 	];
+
 	if($routeParams.usuarioId !== undefined) {
 //Crear o editar usuario
 		ruta[2] = {
@@ -36,21 +37,103 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 			{ id: "A", name: 'Administrador' }
 		];
 		$scope.crear = true;
-		if($routeParams.usuarioId > 0){
+		var revisarCambios = function (){
+			if($scope.crear) return false;
+			else if(
+				$scope.cu.nombre !== usuario.nombre |
+				$scope.cu.apellido !== usuario.apellido |
+				$scope.cu.tipoDocumento !== usuario.tipoDocumento |
+				$scope.cu.documento !== usuario.documento |
+				$scope.cu.email.toLowerCase() !== usuario.email |
+				$scope.cu.contrasena !== usuario.contrasena |
+				$scope.cu.tipoUsuario !== usuario.tipoUsuario
+			) return false;
+			else return true;
+		};
+		$scope.cu = {
+			error : "",
+			isError : false,
+			submit : function () {
+				$scope.cu.isError = true;
+				if(!$scope.crear & revisarCambios()){
+					$scope.cu.error = "No hay ningún cambio";
+				} else {
+					$scope.cu.error = "Enviando...";
+					$conexion.enviar(
+						"admin",
+						{
+							tipo: $scope.cu.tipo,
+	//btoa es un cifrador base64
+							1: $scope.cu.nombre,
+							2: $scope.cu.apellido,
+							3: $scope.cu.tipoDocumento,
+							4: $scope.cu.documento,
+							5: $scope.cu.email.toLowerCase(),
+							6: $scope.cu.contrasena,
+							7: $scope.cu.tipoUsuario
+						},
+						function(respuesta){
+							if(respuesta.data.isError)
+								$scope.cu.error=respuesta.data.errorDescrip;
+							else {
+								$scope.exitoso= true;
+							}
+						}
+					);
+				}
+			}
+		};
+		if($routeParams.usuarioId > 0){//EDITAR
+			
 //TEST
-var cs = {};
-cs.nombre="qwer";
-cs.apellido="zxcv";
-cs.tipoDocumento="TI";
-cs.documento=1234243;
-cs.email="asdf@qwer";
-cs.contrasena="poiuy";
-cs.tipoUsuario="A";
+var usuario = {};
+usuario.nombre="qwer";
+usuario.apellido="zxcv";
+usuario.tipoDocumento="TI";
+usuario.documento=1234243;
+usuario.email="asdf@qwer";
+usuario.contrasena="poiuy";
+usuario.tipoUsuario="A";
 //END TEST
 			$scope.crear = false;
-			$scope.cu = cs; 
+			$scope.eliminado = false;
+			$scope.cu.tipo = "editarUsuario";
+			$scope.cu.nombre = usuario.nombre;
+			$scope.cu.apellido = usuario.apellido;
+			$scope.cu.tipoDocumento = usuario.tipoDocumento;
+			$scope.cu.documento = usuario.documento;
+			$scope.cu.email = usuario.email;
+			$scope.cu.contrasena = usuario.contrasena;
+			$scope.cu.tipoUsuario = usuario.tipoUsuario;
+			$scope.cu.contrasena_2 = usuario.contrasena;
+			$scope.eliminar = function (){
+				var tA = $conexion.strAleatorio(5);
+				var tB = prompt("Escriba "+tA+" para confirmar");
+				if(tA === tB){
+					$conexion.enviar(
+						"admin",
+						{
+							tipo: "eliminarUsuario",
+	//btoa es un cifrador base64
+							1: $scope.cu.documento,
+							2: $scope.cu.email.toLowerCase()
+						},
+						function(respuesta){
+							if(respuesta.data.isError)
+								$scope.cu.error=respuesta.data.errorDescrip;
+							else {
+								$scope.exitoso= true;
+								$scope.eliminado = true;
+							}
+						}
+					);
+				}
+			};
+		} else{//CREAR
+			$scope.cu.tipo = "crearUsuario";
 		};
 	} else {
+//LISTAR USUARIOS
 		$scope.pagina = {
 			titulo: "Administrador: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
@@ -63,7 +146,6 @@ cs.tipoUsuario="A";
 		get(0);
 	}
 	console.log(
-		$routeParams,
 		$rootScope.nav(ruta)
 	);
 });

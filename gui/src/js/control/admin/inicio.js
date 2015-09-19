@@ -12,7 +12,7 @@ app.controller('inicio', function ($rootScope, $scope, $conexion, $sesion, $tabl
 		talleresRecientes:[],
 		usuariosRecientes:[]
 	};
-	$tabla.get("admin", "Convocatorias recientes", 0, 4, "talleres",function (r){$scope.pagina.convocatoriasRecientes = r;console.log($scope.pagina.convocatoriasRecientes)});
+	$tabla.get("admin", "Convocatorias recientes", 0, 4, "convocatorias",function (r){$scope.pagina.convocatoriasRecientes = r;});
 	$tabla.get("admin", "Talleres recientes", 0, 4, "talleres",function (r){$scope.pagina.talleresRecientes = r;});
 	$tabla.get("admin", "Usuarios recientes", 0, 4, "usuarios",function (r){$scope.pagina.usuariosRecientes = r;});
 });

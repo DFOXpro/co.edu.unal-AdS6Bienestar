@@ -1,3 +1,5 @@
+/* global app */
+
 app.controller('registro', function ($scope, $conexion) {
 	console.log("registro");
 	$conexion.iniciar();
@@ -18,17 +20,9 @@ app.controller('registro', function ($scope, $conexion) {
 		error : "",
 		isError : false,
 		submit : function () {
-			console.log("cs.submit");
 			$scope.cs.tipo = "Iniciar";
 			$scope.cs.error = "Enviando...";
 			$scope.cs.isError = true;
-			console.log("nom ", $scope.cs.nombre);
-			console.log("app ", $scope.cs.apellido);
-			console.log("tid ", $scope.cs.tipoDocumento);
-			console.log("doc ", $scope.cs.documento);
-			console.log("ema ", $scope.cs.email);
-			console.log("cnt ", $scope.cs.contrasena);
-			console.log("tiu ", $scope.cs.tipoUsuario);
 			$conexion.enviar(
 				"registro",
 				{
@@ -43,15 +37,14 @@ app.controller('registro', function ($scope, $conexion) {
 					7: $scope.cs.tipoUsuario
 				},
 				function(respuesta){
-					console.log("rta: ", respuesta)
 					if(respuesta.data.isError)
 						$scope.cs.error=respuesta.data.errorDescrip;
 					else {
 						$scope.exitoso= true;
 					}
 				}
-			)
+			);
 		}
 	};
 });
-console.log("registrerController cargado")
+console.log("registrerController cargado");

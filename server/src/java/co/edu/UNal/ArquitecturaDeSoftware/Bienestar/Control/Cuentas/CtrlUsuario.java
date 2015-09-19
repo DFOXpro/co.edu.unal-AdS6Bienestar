@@ -36,10 +36,33 @@ public class CtrlUsuario {
 	}
 
 	public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion) {
-		return usr.getUsuarios(posicion, tamano);
-			};
+		return usr.getUsuarios(posicion, tamano);};
 
 	public int obtenerTotalUsuarios() {
 		return usr.getTotalUsuarios();
 	}
+        
+    public static ArrayList abandonarTaller(int ID_USUARIO, int ID_TALLER){
+        String error = UsuarioDAO.delete(ID_USUARIO);
+        ArrayList r = new ArrayList();
+        if(error.equals("OK")){
+			r.add("isExitoso");
+		} else {
+			r.add("error");
+			r.add(error);
+		}
+        return r;
+    }
+    
+    public static ArrayList abandonarConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA){
+        String error = UsuarioDAO.delete(ID_USUARIO);
+        ArrayList r = new ArrayList();
+        if(error.equals("OK")){
+			r.add("isExitoso");
+		} else {
+			r.add("error");
+			r.add(error);
+		}
+        return r;
+    }
 }

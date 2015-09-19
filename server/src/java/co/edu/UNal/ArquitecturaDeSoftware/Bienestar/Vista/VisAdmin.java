@@ -269,6 +269,9 @@ public class VisAdmin extends VisUsuario{
                 case "usuarios":{
                         leerUsuariosMultiplesId(request, response);
                         break;
+                }case "crearUsuario":{
+                        crearUsuario(request, response);
+                        break;
                 }case "talleres":{
                         leerUsuariosMultiplesId(request, response);
                         break;

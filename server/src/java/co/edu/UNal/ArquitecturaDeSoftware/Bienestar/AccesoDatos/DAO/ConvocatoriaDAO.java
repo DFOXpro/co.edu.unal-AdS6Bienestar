@@ -159,7 +159,7 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
     * Retorna la cantidad de convocatorias
     * @return
     */
-    public static int getCountConvoctorias(){
+    public int getCountConvoctorias(){
        ArrayList<Object> param = new ArrayList<>();
 
        int count;
@@ -180,7 +180,7 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
      * @param ID_CONVOCATORIA
      * @return 
      */
-     public static int getCountUsuarioConvocatoria( int ID_CONVOCATORIA ){   
+     public int getCountUsuarioConvocatoria( int ID_CONVOCATORIA ){   
         ArrayList<Object> param = new ArrayList<>();
         param.add(ID_CONVOCATORIA);
 

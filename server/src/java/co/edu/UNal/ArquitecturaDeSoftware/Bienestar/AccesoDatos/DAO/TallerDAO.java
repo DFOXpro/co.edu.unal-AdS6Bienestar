@@ -106,7 +106,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * @param CUPOS
          * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
          */
-	public String update(
+	public static String update(
                         int    ID_TALLER,
 			char   TIPO_TALLER,
 			String NOMBRE,
@@ -149,7 +149,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
 	 * @param ID_TALLER
          * @return 
 	 */
-	public String delete(int ID_TALLER) {
+	public static String delete(int ID_TALLER) {
 		String respuestaSQL = CrudDAO.update(
 				"DELETE FROM TALLER WHERE ID_TALLER = ?;",
 				new String[]{Integer.toString(ID_TALLER)}
@@ -197,7 +197,7 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
          * Retorna la lista de registros de la tabla TALLER en un rango
          * @return 
          */
-        public ArrayList<TallerEntity> getTodosTalleres(int tamano, int pagina){
+        public static ArrayList<TallerEntity> getTodosTalleres(int tamano, int pagina){
             int posicion = pagina * tamano;
             ArrayList<Object> param = new ArrayList<>();
             param.add(posicion);

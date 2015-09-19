@@ -127,7 +127,7 @@ public class VisAdmin extends VisUsuario{
     
     
     protected void eliminarCuenta(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        ArrayList r = CtrlAdmin.eliminarCuenta(Integer.parseInt(request.getParameter("1"))); // id_usuario
+        ArrayList r = CtrlAdmin.eliminarUsuario(Integer.parseInt(request.getParameter("1"))); // id_usuario
 
         response.setContentType("application/json;charset=UTF-8");
             PrintWriter out = response.getWriter();

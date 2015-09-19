@@ -114,6 +114,29 @@ public class CtrlUsuario {
         return r;
     }
     
+    public ArrayList<ConvocatoriaEntity> leerMultiplesConvocatorias(int tamano, int posicion){
+        return conv.getConvocatorias(tamano,posicion);
+    }
+    
+    public int obtenerTotalConvocatorias(){
+        return conv.getCountConvoctorias();        
+    }
+    
+    public int obtenerInscritosConv(int id){
+        return conv.getCountUsuarioConvocatoria(id);
+    }
+        
+    public ArrayList<TallerEntity> leerMultiplesTalleres(int tamano, int posicion){
+        return TallerDAO.getTodosTalleres(tamano,posicion);
+    }
+    
+    public int obtenerTotalTalleres(){
+        return TallerDAO.getCountTodosTalleres();        
+    }
+    
+    public int obtenerInscritosTalleres(int id){
+        return TallerDAO.getCountUsuarioTalleres(id);
+    }
     
     
     //	public UsuarioEntity leerUsuario(String username) {

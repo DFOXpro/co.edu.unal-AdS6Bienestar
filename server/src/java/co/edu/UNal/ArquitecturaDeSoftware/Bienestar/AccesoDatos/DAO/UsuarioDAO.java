@@ -70,7 +70,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 
             return ue;
         } catch (SQLException e) {
-            System.out.println("UsuarioDAO.getById: " + e.getMessage());
+            System.out.println("UsuarioDAO.getByDocumento: " + e.getMessage());
             return new UsuarioEntity();
         }
     }
@@ -318,6 +318,9 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
     }
     
     
+    
+    
+    
     /**
      * Retorna la cantidad de registros en la tabla USUARIOS
      * @return 
@@ -379,6 +382,106 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
         return count;    
      }
     
+     /**
+     * Retorna la lista de usuarios asociados a un taller
+     *
+     * @param ID_TALLER
+     * @param tamano Cantidad de registros a devolver
+     * @param pagina pagina en la que se se está
+     * @return
+     */
+    public static ArrayList<UsuarioEntity> getUsuariosByTaller(int ID_TALLER,int tamano, int pagina) {
+        int posicion = pagina * tamano;
+        
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(ID_TALLER);
+        param.add(posicion);
+        param.add(tamano);
+        
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+        ResultSet rs = CrudDAO.query("select USUARIO.*\n" +
+                                     "FROM USUARIO_TALLER JOIN USUARIO ON (USUARIO_TALLER.ID_USUARIO = USUARIO.ID_USUARIO)\n" +
+                                     "WHERE ID_TALLER = ?\n" +
+                                     "LIMIT ?,?", param);
+        try {
+            while (rs.next()) {
+                UsuarioEntity ue = toEntity(rs);
+                usuarios.add(ue);
+            }
+        } catch (SQLException e) {
+            System.out.println("UsuarioDAO.getUsuariosByTaller: " + e.getMessage());
+            return new ArrayList<>();
+        }
+        return usuarios;
+    }
+    
+    /**
+     * Retorna la lista de profesores asociados a una convocatoria
+     *
+     * @param ID_TALLER
+     * @param tamano Cantidad de registros a devolver
+     * @param pagina pagina en la que se se está
+     * @return
+     */
+    public static ArrayList<UsuarioEntity> getProfesoresByTaller(int ID_TALLER,int tamano, int pagina) {
+        int posicion = pagina * tamano;
+        
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(ID_TALLER);
+        param.add(posicion);
+        param.add(tamano);
+        
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+        ResultSet rs = CrudDAO.query("select USUARIO.*\n" +
+                                     "FROM PROFESOR_TALLER JOIN USUARIO ON (PROFESOR_TALLER.ID_PROFESOR = USUARIO.ID_USUARIO)\n" +
+                                     "WHERE ID_TALLER = ?\n" +
+                                     "LIMIT ?,?", param);
+        try {
+            while (rs.next()) {
+                UsuarioEntity ue = toEntity(rs);
+                usuarios.add(ue);
+            }
+        } catch (SQLException e) {
+            System.out.println("UsuarioDAO.getUsuariosByTaller: " + e.getMessage());
+            return new ArrayList<>();
+        }
+        return usuarios;
+    }
+    
+    
+    /**
+     * Retorna la lista de usuarios asociados a una convocatoria
+     *
+     * @param ID_CONVOCATORIA
+     * @param tamano Cantidad de registros a devolver
+     * @param pagina pagina en la que se se está
+     * @return
+     */
+    public static ArrayList<UsuarioEntity> getUsuariosByConvocatoria(int ID_CONVOCATORIA,int tamano, int pagina) {
+        int posicion = pagina * tamano;
+        
+        ArrayList<Object> param = new ArrayList<>();
+        param.add(ID_CONVOCATORIA);
+        param.add(posicion);
+        param.add(tamano);
+        
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+        ResultSet rs = CrudDAO.query("select USUARIO.*\n" +
+                                     "FROM USUARIO_CONVOCATORIA JOIN USUARIO ON (USUARIO_CONVOCATORIA.ID_USUARIO = USUARIO.ID_USUARIO)\n" +
+                                     "WHERE ID_CONVOCATORIA = ?\n" +
+                                     "LIMIT ?,?", param);
+        try {
+            while (rs.next()) {
+                UsuarioEntity ue = toEntity(rs);
+                usuarios.add(ue);
+            }
+        } catch (SQLException e) {
+            System.out.println("UsuarioDAO.getUsuariosByConvocatoria: " + e.getMessage());
+            return new ArrayList<>();
+        }
+        return usuarios;
+    }
+     
 
     @Override
     protected Class getEntityClass() {
@@ -403,6 +506,8 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
                 rs.getString("ROL").charAt(0)
         );
     }
+    
+    
 
     //Completar por favor esta funcion
     public int getTotalUsuarios() {

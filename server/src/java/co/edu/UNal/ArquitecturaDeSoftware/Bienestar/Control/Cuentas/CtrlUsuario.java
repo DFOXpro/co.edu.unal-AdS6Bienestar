@@ -27,20 +27,20 @@ public class CtrlUsuario {
 		return tall.getByID(id);
 	}
 
-	public UsuarioEntity leerUsuario(String username) {
-		return usr.getByUsername(username);
-	}
-
-	public UsuarioEntity leerUsuarioId(int idUsuario) {
-		return usr.getById(idUsuario);
-	}
-
-	public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion) {
-		return usr.getUsuarios(posicion, tamano);};
-
-	public int obtenerTotalUsuarios() {
-		return usr.getTotalUsuarios();
-	}
+//	public UsuarioEntity leerUsuario(String username) {
+//		return usr.getByUsername(username);
+//	}
+//
+//	public UsuarioEntity leerUsuarioId(int idUsuario) {
+//		return usr.getById(idUsuario);
+//	}
+//
+//	public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion) {
+//		return usr.getUsuarios(posicion, tamano);};
+//
+//	public int obtenerTotalUsuarios() {
+//		return usr.getTotalUsuarios();
+//	}
         
     public static ArrayList abandonarTaller(int ID_USUARIO, int ID_TALLER){
         String error = UsuarioDAO.delete(ID_USUARIO);

@@ -6,6 +6,7 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import static co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlRegistro.isValidEmailAddress;
 import java.util.ArrayList;
 
@@ -14,7 +15,8 @@ import java.util.ArrayList;
  * @author awake
  */
 public class CtrlAdmin extends CtrlUsuario{
-
+    UsuarioDAO usr = new UsuarioDAO();
+    
     public static ArrayList crearUsuario(
                 String nombre,
 		String apellidos,
@@ -155,5 +157,20 @@ public class CtrlAdmin extends CtrlUsuario{
         }
         return r;
     }
+    
+    	public UsuarioEntity leerUsuario(String username) {
+		return usr.getByUsername(username);
+	}
+
+	public UsuarioEntity leerUsuarioId(int idUsuario) {
+		return usr.getById(idUsuario);
+	}
+
+	public ArrayList<UsuarioEntity> leerMultiplesUsuarios(int tamano, int posicion) {
+		return usr.getUsuarios(posicion, tamano);};
+
+	public int obtenerTotalUsuarios() {
+		return usr.getTotalUsuarios();
+	}
     
 }

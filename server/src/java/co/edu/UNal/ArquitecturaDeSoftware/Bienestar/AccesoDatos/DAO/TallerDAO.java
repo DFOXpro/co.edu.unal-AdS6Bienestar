@@ -163,14 +163,14 @@ public class TallerDAO extends CrudDAO<TallerEntity> {
 	/**
 	 * Ingresa un registro en la tabla PROFESOR_TALLER
 	 *
-	 * @param ID_USUARIO
+	 * @param ID_PROFESOR
 	 * @param ID_TALLER
 	 * @return
 	 */
-	public static String registrarProfesor(int ID_USUARIO, int ID_TALLER) {
+	public static String registrarProfesor(int ID_PROFESOR, int ID_TALLER) {
 		String respuestaSQL = CrudDAO.update(
-				"INSERT INTO PROFESOR_TALLER(ID_USUARIO, ID_TALLER) VALUES (?,?);",
-				new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_TALLER)}
+				"INSERT INTO PROFESOR_TALLER(ID_PROFESOR, ID_TALLER) VALUES (?,?);",
+				new String[]{Integer.toString(ID_PROFESOR), Integer.toString(ID_TALLER)}
 		);
 		System.out.println("TallerDAO.registrarProfesor: " + respuestaSQL);
 		return respuestaSQL;

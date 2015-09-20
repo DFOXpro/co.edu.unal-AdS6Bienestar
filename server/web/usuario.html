@@ -8,16 +8,6 @@
     <script src="js/lib/angular-route.min.js"></script>
     <script src="js/lib/cryptico.min.js"></script>
     <link href="css/transdmin.css" rel="stylesheet">
-    <link href="https://rawgit.com/jdewit/ez-dropdown/master/dist/ez-dropdown.min.css" rel="stylesheet">
-    <link href="js/lib/ez-datetime.min.css" rel="stylesheet">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="https://rawgit.com/jdewit/ez-modal/master/dist/ez-modal.min.js"></script>
-    <script src="https://rawgit.com/jdewit/ez-modal/master/dist/ez-modal-tpl.min.js"></script>
-    <script src="https://rawgit.com/jdewit/ez-dropdown/master/dist/ez-dropdown.min.js"></script>
-    <script src="https://rawgit.com/jdewit/ez-transition/master/dist/ez-transition.min.js"></script>
-    <script src="js/lib/jquery.min.js"></script>
-    <script src="js/lib/ez-datetime.min.js"></script>
-    <script src="js/lib/ez-datetime-tpl.js"></script>
     <title>Bienestar - Usuario</title>
   </head>
   <body ng-app="app">
@@ -26,7 +16,7 @@
       <!-- Use the "active" class for the active menu item-->
       <li ng-repeat="ruta in rutas" ng-class="{'active':$last}"><a href="#{{ruta.url}}">{{ruta.nombre}}</a></li>
       <li class="logout"><a ng-click="cerrarSesion()">Salir</a></li>
-      <li class="logout"><a href="#/usuario.html">Entrar como docente</a></li>
+      <li ng-show="link.is" class="logout"><a href="{{link.pagina}}">{{link.texto}}</a></li>
     </ul>
     <div id="containerHolder">
       <div id="container">
@@ -42,7 +32,7 @@
       <p id="footer">Bienestar Universitario - Arquitectura de Software 2015 II</p>
     </div>
     <script type="text/ng-template" id="tablas-tmplt">
-      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}">Crear {{pagina.objeto}}</a>
+      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}" ng-hide="user">Crear {{pagina.objeto}}</a>
       <btabla info="pagina.tabla"></btabla>
       <button ng-show="pagina.pos &gt; 0" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos+1}} de {{pagina.total | ceil}} ({{ pagina.tabla.total }})</span>
       <button ng-show="pagina.pos+1 &lt; pagina.total" ng-click="pagina.get(1)">Siguiente</button>
@@ -51,6 +41,74 @@
       <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2>
       <btabla info="pagina.talleresRecientes"></btabla>
       <btabla info="pagina.convocatoriasRecientes"></btabla>
+    </script>
+    <script type="text/ng-template" id="lee-evento-tmplt">
+      <div ng-show="taller">
+        <form ng-submit="evento.submit()" ng-hide="exitoso" name="isf" novalidate>
+          <input required type="text" name="nombre" placeholder="Nombre" ng-model="evento.nombre" ng-minlength="3" ng-maxlength="100">
+          <div ng-show="isf.nombre.$error.minlength" class="login-help">Nombre muy corto</div>
+          <div ng-show="isf.nombre.$error.maxlength" class="login-help">Nombre muy largo</div>
+          <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="evento.descripcion" ng-minlength="3" ng-maxlength="100">
+          <div ng-show="isf.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
+          <div ng-show="isf.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
+          <input required ez-datetime-control config="configTaller" type="text" name="fechaInicio" placeholder="Inicio del evento" ng-model="evento.fechaInicio" min-date="hoy" max-date="evento.fechaFin">
+          <p>{{ evento.fechaInicio.$error}}</p>
+          <input required ez-datetime-control config="configTaller" type="text" name="fechaFin" placeholder="Finalización del evento" ng-model="evento.fechaFin" min-date="evento.fechaInicio">
+          <p>{{ evento.fechaFin.$error}}</p>
+          <input required type="number" name="costo" placeholder="Costo" ng-model="evento.costo" max="2147483647" min="0">
+          <div ng-show="isf.costo.$error.min" class="login-help">No podemos dar dinero por evento</div>
+          <div ng-show="isf.costo.$error.max" class="login-help">No podemos cobrar tanto</div>
+          <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" max="2147483647" min="1">
+          <div ng-show="isf.cupos.$error.min" class="login-help">Corrija los cupos disponibles</div>
+          <div ng-show="isf.cupos.$error.max" class="login-help">No hay sillas para tanta gente</div>
+          <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" ng-show="crear" class="login login-submit">
+          <input type="submit" name="actualiza" value="Actualizar" ng-disabled="isf.$invalid" ng-show="!crear" class="login login-submit">
+          <div ng-show="isf.nombre.$error.required" class="login-help">Escriba el nombre del taller</div>
+          <div ng-show="isf.descripcion.$error.required" class="login-help">Escriba la descripcion</div>
+          <div ng-show="isf.fechaInicio.$error.required" class="login-help">Indique la fecha de inicio</div>
+          <div ng-show="isf.fechaFin.$error.required" class="login-help">Indique la fecha de cierre</div>
+          <div ng-show="isf.costo.$error.required" class="login-help">Indique el costo del taller</div>
+          <div ng-show="isf.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
+          <div ng-show="con.isError" class="login-help">{{ evento.error}}</div>
+          <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
+          <hr ng-hide="crear">
+          <btabla ng-hide="crear" info="inscritos.tabla"></btabla>
+          <p>total inscritos {{inscritos.total}}</p>
+        </form>
+      </div>
+      <div ng-hide="taller">
+        <form ng-submit="evento.submit()" ng-hide="exitoso" name="isfc" novalidate>
+          <input required type="text" name="nombre" placeholder="Nombre" ng-model="evento.nombre" ng-minlength="3" ng-maxlength="100">
+          <div ng-show="isfc.nombre.$error.minlength" class="login-help">Nombre muy corto</div>
+          <div ng-show="isfc.nombre.$error.maxlength" class="login-help">Nombre muy largo</div>
+          <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="evento.descripcion" ng-minlength="3" ng-maxlength="100">
+          <div ng-show="isfc.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
+          <div ng-show="isfc.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
+          <input required ez-datetime-control config="configConv" type="text" name="fecha" placeholder="Fecha Fin Registro" ng-model="evento.fechaFin" min-date="evento.hoy">
+          <div ng-show="isfc.fechaFin.$error" class="login-help">Fecha invalida</div>
+          <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" min="2" max="2147483647">
+          <div ng-show="isfc.cupos.$error.min" class="login-help">El cupo ingresado es muy pequeño</div>
+          <div ng-show="isfc.cupos.$error.max" class="login-help">Demasiados cupos</div>
+          <input type="submit" name="crear" value="Crear" ng-disabled="isfc.$invalid" ng-show="crear" class="login login-submit">
+          <input type="submit" name="actualiza" value="Actualizar" ng-disabled="isfc.$invalid" ng-show="!crear" class="login login-submit">
+          <div ng-show="isfc.nombre.$error.required" class="login-help">Escriba el nombre del evento</div>
+          <div ng-show="isfc.descripcion.$error.required" class="login-help">Escriba la descripcion</div>
+          <div ng-show="isfc.fechaFin.$error.required" class="login-help">Indique la fecha de cierre</div>
+          <div ng-show="isfc.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
+          <div ng-show="evento.isError" class="login-help">{{ evento.error}}</div>
+          <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
+          <hr ng-hide="crear">
+          <btabla ng-hide="crear" info="inscritos.tabla"></btabla>
+          <p>total inscritos {{inscritos.total}}</p>
+        </form>
+      </div>
+      <div ng-show="exitoso">
+        <div ng-show="!eliminado">
+          <h2 ng-show="!crear">Evento actualizado exitosamente</h2>
+          <h2 ng-show="crear">Evento creado exitosamente</h2>
+        </div>
+        <h2 ng-show="eliminado">Evento eliminado exitosamente</h2>
+      </div>
     </script>
     <script type="text/ng-template" id="btabla-tmplt">
       <h3>{{tabla.titulo}}</h3>
@@ -67,7 +125,6 @@
     <script src="js/control/usuario.js"></script>
     <script src="js/control/usuarios/inicio.js"></script>
     <script src="js/control/usuarios/eventos.js"></script>
-    <script src="js/control/usuarios/usuarios.js"></script>
     <script src="js/servicios/sesion.js"></script>
     <script src="js/servicios/conexion.js"></script>
     <script src="js/control/util/navegacion.js"></script>

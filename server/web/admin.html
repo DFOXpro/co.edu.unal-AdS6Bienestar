@@ -43,7 +43,7 @@
       <p id="footer">Bienestar Universitario - Arquitectura de Software 2015 II</p>
     </div>
     <script type="text/ng-template" id="tablas-tmplt">
-      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}">Crear {{pagina.objeto}}</a>
+      <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}" ng-hide="user">Crear {{pagina.objeto}}</a>
       <btabla info="pagina.tabla"></btabla>
       <button ng-show="pagina.pos &gt; 0" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos+1}} de {{pagina.total | ceil}} ({{ pagina.tabla.total }})</span>
       <button ng-show="pagina.pos+1 &lt; pagina.total" ng-click="pagina.get(1)">Siguiente</button>

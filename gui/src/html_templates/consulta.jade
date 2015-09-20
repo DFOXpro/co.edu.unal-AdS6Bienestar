@@ -5,6 +5,7 @@ script(
 	h2 {{pagina.titulo}} {{pagina.subtitulo}}
 	a(
 		href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}"
+		ng-hide="user"
 	) Crear {{pagina.objeto}}
 	btabla(info="pagina.tabla")
 	button(

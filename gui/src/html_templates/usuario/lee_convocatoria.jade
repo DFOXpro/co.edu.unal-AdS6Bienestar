@@ -1,0 +1,76 @@
+form(
+	ng-submit="evento.submit()"
+	ng-hide="exitoso"
+	name="isfc"
+	novalidate
+)
+	input(
+		required
+		type='text'
+		name='nombre'
+		placeholder='Nombre'
+		ng-model="evento.nombre"
+		ng-minlength=3
+		ng-maxlength=100
+	)
+	.login-help(ng-show="isfc.nombre.$error.minlength") Nombre muy corto
+	.login-help(ng-show="isfc.nombre.$error.maxlength") Nombre muy largo
+	input(
+		required
+		type='text'
+		name='descripcion'
+		placeholder='Descripcion'
+		ng-model="evento.descripcion"
+		ng-minlength=3
+		ng-maxlength=100
+	)
+	.login-help(ng-show="isfc.descripcion.$error.minlength") Descripcion muy corta
+	.login-help(ng-show="isfc.descripcion.$error.maxlength") Descripcion muy larga
+
+	input(
+		required
+		ez-datetime-control
+		config="configConv"
+		type='text'
+		name='fecha'
+		placeholder='Fecha Fin Registro'
+		ng-model="evento.fechaFin"
+		min-date="evento.hoy"
+	)
+	.login-help(ng-show="isfc.fechaFin.$error") Fecha invalida
+
+	input(
+		required
+		type='number'
+		name='cupos'
+		placeholder='Cupos ofertados'
+		ng-model="evento.cupos"
+		min=2
+		max=2147483647
+	)
+	.login-help(ng-show="isfc.cupos.$error.min") El cupo ingresado es muy pequeño
+	.login-help(ng-show="isfc.cupos.$error.max") Demasiados cupos
+
+	input.login.login-submit(
+		type='submit'
+		name='crear'
+		value='Crear'
+		ng-disabled="isfc.$invalid"
+		ng-show="crear"
+	)
+	input.login.login-submit(
+		type='submit'
+		name='actualiza'
+		value='Actualizar'
+		ng-disabled="isfc.$invalid"
+		ng-show="!crear"
+	)
+	.login-help(ng-show="isfc.nombre.$error.required") Escriba el nombre del evento
+	.login-help(ng-show="isfc.descripcion.$error.required") Escriba la descripcion
+	.login-help(ng-show="isfc.fechaFin.$error.required") Indique la fecha de cierre
+	.login-help(ng-show="isfc.cupos.$error.required") Indique el numero de cupos ofertados
+	.login-help(ng-show="evento.isError") {{ evento.error}}
+	button(ng-hide="crear" ng-click="eliminar()") Eliminar
+	hr(ng-hide="crear")
+	btabla(ng-hide="crear" info="inscritos.tabla")
+	p total inscritos {{inscritos.total}}

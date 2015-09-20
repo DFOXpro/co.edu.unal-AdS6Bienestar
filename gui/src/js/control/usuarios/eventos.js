@@ -1,6 +1,7 @@
 /* global app */
 
 app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion, $sesion, $tabla) {
+	$scope.user = true;
 	var get = function (diff) {
 		$scope.pagina.pos += diff;
 		$tabla.get(
@@ -38,12 +39,22 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 	$scope.pagina = {
 		titulo: "Usuario: ",
 		subtitulo: window.atob(localStorage.getItem("6")),
-		pos: 1,
-		total: 0,
+		pos: 0,
 		tabla: {},
 		get: get,
 		objeto: ($routeParams.evento === "talleres")?"taller":"convocatoria"
 	};
 	get(0);
+	$scope.$watch("pagina.tabla.total", function (nuevoValor, viejoValor){
+		if(nuevoValor === undefined) $scope.pagina.tabla.total=viejoValor;
+		else
+		$scope.pagina.total = nuevoValor /10;
+	});
+	$conexion.enviar(
+		"admin",{tipo: ($routeParams.evento === "talleres")?"numTalleres":"numConvocatorias"},
+		function(respuesta){
+			$scope.pagina.tabla.total = respuesta.data.total;
+		}
+	);
 });
 console.log("Usuario cargado");

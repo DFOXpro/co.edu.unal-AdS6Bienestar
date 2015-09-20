@@ -2,52 +2,26 @@
 extends ./user
 block variables
 	- npApp = "app"
-	- npController= "admin"
+	- npController= "usuario"
 
 block scriptHead
 	//- el nombre sería así
-	script(src="js/a.js")
+	script(src="js/u.js")
 block devScriptHead1
-	//-
-		link(
-			href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.css"
-			rel="stylesheet"
-		)
-	link(
-		href="https://rawgit.com/jdewit/ez-dropdown/master/dist/ez-dropdown.min.css"
-		rel="stylesheet"
-	)
-	link(
-		href="js/lib/ez-datetime.min.css"
-		rel="stylesheet"
-	)
-	//- Libreria del datepicker
-	//- Dependencias
-		JQuery para que renderice bien unos botones ¬¬
-		Moment para manipulacion de fechas
-		ez-(modal/dropdown*transition) para no usar angular ui
-	script(src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js")
-	script(src="https://rawgit.com/jdewit/ez-modal/master/dist/ez-modal.min.js")
-	script(src="https://rawgit.com/jdewit/ez-modal/master/dist/ez-modal-tpl.min.js")
-	script(src="https://rawgit.com/jdewit/ez-dropdown/master/dist/ez-dropdown.min.js")
-	script(src="https://rawgit.com/jdewit/ez-transition/master/dist/ez-transition.min.js")
-	script(src="js/lib/jquery.min.js")
-	script(src="js/lib/ez-datetime.min.js")
-	script(src="js/lib/ez-datetime-tpl.js")
-	//- END libreria datepicker
-
+	//- No necesitamos nada serio en el usuario
+	//- el ezDatetime es solo para admin
 block devScriptBody1
 	script(src="js/control/usuario.js")
 	script(src="js/control/usuarios/inicio.js")
 	script(src="js/control/usuarios/eventos.js")
-	script(src="js/control/usuarios/usuarios.js")
+	//- script(src="js/control/usuarios/usuarios.js")
 
 block title
 	title Bienestar - Usuario
 
 block navDerecha
-	li.logout
-		a(href="#/usuario.html") Entrar como docente
+	li.logout(ng-show="link.is")
+		a(href="{{link.pagina}}") {{link.texto}}
 
 block navSideBar
 	li
@@ -58,3 +32,4 @@ block navSideBar
 block templates
 	include html_templates/consulta
 	include html_templates/usuario/inicio
+	include html_templates/usuario/lee_evento

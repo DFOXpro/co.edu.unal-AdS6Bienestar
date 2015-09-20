@@ -338,6 +338,7 @@ public class VisAdmin extends VisUsuario{
     throws ServletException, IOException {
         if (null != request.getParameter("tipo"))
             switch (request.getParameter("tipo")) {
+//CRUD USUARIO
                 case "crearUsuario":{
                         crearUsuario(request, response);
                         break;
@@ -354,13 +355,12 @@ public class VisAdmin extends VisUsuario{
                         leerUsuariosMultiplesId(request, response);
                         break;
                 }
+
+//CRUD CONVOCATORIA
                 case "convocatoria":{
                         leerConvocatoria(request, response);
                         break;
-                }case "taller":{
-                        leerTaller(request, response);
-                        break;
-                }case "convocatorias":{
+                }case "/evento/convocatorias":{
                         leerMultiplesConvocatorias(request, response);
                         break;
                 }case "numConvocatorias":{
@@ -368,15 +368,6 @@ public class VisAdmin extends VisUsuario{
                         break;
                 }case "inscritosConvocatoria":{
                         obtenerInscritosConv(request, response);
-                        break;
-                }case "talleres":{
-                        leerMultiplesTalleres(request, response);
-                        break;
-                } case "numTalleres":{
-                        obtenerTotalTalleres(request,response);
-                        break;
-                } case "inscritosTaller":{
-                        obtenerInscritosTaller(request,response);
                         break;
                 } case "crearConvocatoria":{
                         crearConvocatoria(request,response);
@@ -386,6 +377,26 @@ public class VisAdmin extends VisUsuario{
                         break;
                 } case "eliminarConvocatoria":{
                         eliminarConvocatoria(request,response);
+                        break;
+				} case "regUsuarioConv":{
+                        registrarUsuarioConvocatoria(request,response);
+                        break;
+                } case "eleminarUsuarioConv":{
+                        quitarUsuarioConvocatoria(request, response);
+                        break;
+                }
+
+//CRUD TALLER
+				case "taller":{
+                        leerTaller(request, response);
+                }case "/evento/talleres":{
+                        leerMultiplesTalleres(request, response);
+                        break;
+                } case "numTalleres":{
+                        obtenerTotalTalleres(request,response);
+                        break;
+                } case "inscritosTaller":{
+                        obtenerInscritosTaller(request,response);
                         break;
                 } case "crearTaller":{
                         crearTaller(request,response);
@@ -399,9 +410,6 @@ public class VisAdmin extends VisUsuario{
                 } case "regUsuarioTaller":{
                         registrarUsuarioTaller(request,response);
                         break;
-                } case "regUsuarioConv":{
-                        registrarUsuarioConvocatoria(request,response);
-                        break;
                 } case "regDocente":{
                         registrarDocenteTaller(request, response);
                         break;
@@ -410,9 +418,6 @@ public class VisAdmin extends VisUsuario{
                         break;
                 } case "eliminarUsuarioTaller":{
                         quitarUsuarioTaller(request, response);
-                        break;
-                } case "eleminarUsuarioConv":{
-                        quitarUsuarioConvocatoria(request, response);
                         break;
                 }
                 default:

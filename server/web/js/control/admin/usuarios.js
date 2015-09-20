@@ -169,6 +169,10 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 			objeto: "usuario"
 		};
 		get(0);
+		$conexion.enviar(
+			"admin",{tipo: "numUsuarios"},
+			function(respuesta){$scope.pagina.tabla.total= respuesta.data.total;}
+		);
 	}
 	console.log(
 		$rootScope.nav(ruta)

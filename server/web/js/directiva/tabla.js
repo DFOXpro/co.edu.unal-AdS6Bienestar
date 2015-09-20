@@ -20,19 +20,10 @@ app.filter('ceil', function () {
 app.factory('$tabla', function ($conexion) {
 	var r = {};
 	r.get = function (url, tabla, pos, tamano, accion,callback){
-		var r1 = {
-			titulo: tabla,//"Usuarios"
-			verAccion: accion,//"/usuarios",
-			//editarAccion:"/editareventos",
-			//eliminarAccion:"/eliminareventos",
-			lineas: a,
-			total: 73
-		};
 		$conexion.enviar(
 			url,
 			{
 				tipo: accion,
-				//btoa es un cifrador base64
 				1: pos,
 				2: tamano
 			},
@@ -45,16 +36,10 @@ app.factory('$tabla', function ($conexion) {
 					verAccion: accion,//"/usuarios",
 					//editarAccion:"/editareventos",
 					//eliminarAccion:"/eliminareventos",
-					lineas: respuesta.data,
-					total: 73
+					lineas: respuesta.data
 				});
 			}
 		);
-
-		var a = new Array(tamano);
-		for (i = 0; i < tamano; i++)
-			a[i] = {titulo: $conexion.strAleatorio(20), id: i};
-		return r1;
 	};
 	return r;
 });

@@ -23,7 +23,7 @@ public class CtrlUsuario {
     }
 
     
-    public ArrayList<ConvocatoriaEntity> leerMultiplesConvocatorias(int tamano, int posicion){
+    public ArrayList<ConvocatoriaEntity> leerMultiplesConvocatorias(int posicion, int tamano){
         return conv.getConvocatorias(tamano,posicion);
     }
     

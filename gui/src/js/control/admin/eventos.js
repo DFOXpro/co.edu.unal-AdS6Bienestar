@@ -2,19 +2,6 @@
 app.$inject = ['ngRoute', 'ez.datetime', 'ez.modal', 'ez.dropdown'];
 
 app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion, $tabla) {
-	var get = function (diff) {
-		$scope.pagina.pos += diff;
-		$tabla.get(
-			"admin",
-			$routeParams.evento,
-			$scope.pagina.pos,
-			10,
-			"/evento/"+$routeParams.evento,
-			function (r){$scope.pagina.tabla = r;}
-		);
-		$scope.pagina.total = ($scope.pagina.tabla.total /10);
-	};
-
 	var ruta = [
 		{url:"/inicio",nombre:"Inicio"},
 		{url:"/"+$routeParams.evento,nombre:"Gestión de "+$routeParams.evento}
@@ -141,16 +128,43 @@ $scope.tal.cupos = taller.cupos;
 		};
 	} else {
 //LISTAR EVENTOS
+		var get = function (diff) {
+			$scope.pagina.pos += diff;
+			$tabla.get(
+				"admin",
+				$routeParams.evento,
+				($scope.pagina.pos < 2)?0:$scope.pagina.pos,
+				10,
+				"/evento/"+$routeParams.evento,
+				function (r){$scope.pagina.tabla = r;}
+			);
+		};
+
 		$scope.pagina = {
 			titulo: "Administrador: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
-			pos: 0,
+			pos: 1,
 			total: 0,
 			tabla: {},
 			get: get,
 			objeto: ($routeParams.evento === "talleres")?"taller":"convocatoria"
 		};
 		get(0);
+		$scope.pagina.tabla.total = 0;
+		$conexion.enviar(
+			"admin",{tipo: "numConvocatorias"},
+			function(respuesta){
+				//$scope.pagina.tabla.total = respuesta.data.total//NO SIRVE no digiere el cambio
+				$scope.$watch("pagina.tabla.total", function (nuevoValor){
+					$scope.pagina.total = $scope.pagina.tabla.total /10;
+					console.log("tic");
+				});
+				console.log($scope.pagina.tabla.total = respuesta.data.total);
+				//Valimos barrigas con este scope todos los metodos que se que sirven no sirven aqui T.T
+				//$scope.$apply();// JAJAJA puto angular
+				//$rootScope.$digest()
+			}
+		);
 	}
 	console.log(
 		"eventos",

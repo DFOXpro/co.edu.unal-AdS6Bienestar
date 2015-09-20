@@ -11,7 +11,7 @@ script(
 		ng-show="pagina.pos > 1"
 		ng-click="pagina.get(-1)"
 	) Anterior
-	span {{pagina.pos + 1}} de {{pagina.total | ceil}} 
+	span {{pagina.pos}} de {{pagina.total | ceil}} ({{ pagina.tabla.total }})
 	button(
 		ng-show="pagina.pos < pagina.total"
 		ng-click="pagina.get(1)"

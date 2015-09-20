@@ -54,21 +54,26 @@ script(
 
 		input(
 			required
-			type='text'
-			name='cupos'
+			type='number'
+			name='costo'
 			placeholder='Costo'
 			ng-model="tal.costo"
+			max=2147483647
+			min=0
 		)
+		.login-help(ng-show="isf.costo.$error.min") No podemos dar dinero por evento
+		.login-help(ng-show="isf.costo.$error.max") No podemos cobrar tanto
 
 		input(
 			required
-			type='text'
+			type='number'
 			name='cupos'
 			placeholder='Cupos ofertados'
 			ng-model="tal.cupos"
-			ng-minlength=3
+			max=2147483647
+			min=1
 		)
-		.login-help(ng-show="isf.cupos.$error.minlength") Descripcion muy corta
+		.login-help(ng-show="isf.cupos.$error.min") Corrija los cupos disponibles
 
 		input.login.login-submit(
 			type='submit'

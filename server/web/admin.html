@@ -45,7 +45,7 @@
     <script type="text/ng-template" id="tablas-tmplt">
       <h2>{{pagina.titulo}} {{pagina.subtitulo}}</h2><a href="#{{pagina.tabla.verAccion}}/-1?nombre=Crear {{pagina.objeto}}">Crear {{pagina.objeto}}</a>
       <btabla info="pagina.tabla"></btabla>
-      <button ng-show="pagina.pos &gt; 1" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos + 1}} de {{pagina.total | ceil}} </span>
+      <button ng-show="pagina.pos &gt; 1" ng-click="pagina.get(-1)">Anterior</button><span>{{pagina.pos}} de {{pagina.total | ceil}} ({{ pagina.tabla.total }})</span>
       <button ng-show="pagina.pos &lt; pagina.total" ng-click="pagina.get(1)">Siguiente</button>
     </script>
     <script type="text/ng-template" id="crear-convocatoria-tmplt">
@@ -129,9 +129,11 @@
         <p>{{ tal.fechaInicio.$error}}</p>
         <input required ez-datetime-control type="text" name="fechaFin" placeholder="Fecha Fin Registro" ng-model="tal.fechaFin" min-date="tal.fechaInicio">
         <p>{{ tal.fechaFin.$error}}</p>
-        <input required type="text" name="cupos" placeholder="Costo" ng-model="tal.costo">
-        <input required type="text" name="cupos" placeholder="Cupos ofertados" ng-model="tal.cupos" ng-minlength="3">
-        <div ng-show="isf.cupos.$error.minlength" class="login-help">Descripcion muy corta</div>
+        <input required type="number" name="costo" placeholder="Costo" ng-model="tal.costo" max="2147483647" min="0">
+        <div ng-show="isf.costo.$error.min" class="login-help">No podemos dar dinero por evento</div>
+        <div ng-show="isf.costo.$error.max" class="login-help">No podemos cobrar tanto</div>
+        <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="tal.cupos" max="2147483647" min="1">
+        <div ng-show="isf.cupos.$error.min" class="login-help">Corrija los cupos disponibles</div>
         <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" class="login login-submit">
         <div ng-show="isf.nombre.$error.required" class="login-help">Escriba el nombre del taller</div>
         <div ng-show="isf.descripcion.$error.required" class="login-help">Escriba la descripcion</div>

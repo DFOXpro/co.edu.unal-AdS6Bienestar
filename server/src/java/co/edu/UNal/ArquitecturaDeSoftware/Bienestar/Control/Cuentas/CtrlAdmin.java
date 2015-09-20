@@ -93,6 +93,21 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }    
     
+    // Retorna usuarios en taller
+    public ArrayList<UsuarioEntity> obtenerUsuariosEnTaller(int ID_TALLER,int tamano, int pagina) {
+        return usr.getUsuariosByTaller(ID_TALLER, tamano, pagina);
+    };
+    
+        // Retorna profesores en taller
+    public ArrayList<UsuarioEntity> obtenerProfesoresEnTaller(int ID_TALLER,int tamano, int pagina) {
+        return usr.getProfesoresByTaller(ID_TALLER, tamano, pagina);
+    };
+    
+        // Retorna usuarios en convocatoria
+    public ArrayList<UsuarioEntity> obtenerUsuariosEnConvocatoria(int ID_CONVOCATORIA,int tamano, int pagina) {
+        return usr.getUsuariosByConvocatoria(ID_CONVOCATORIA, tamano, pagina);
+    };
+    
     
     public ArrayList crearConvocatoria(String nombre, String descripcion, String fin, int cupos){
         String error = conv.create(nombre, descripcion, fin, cupos);

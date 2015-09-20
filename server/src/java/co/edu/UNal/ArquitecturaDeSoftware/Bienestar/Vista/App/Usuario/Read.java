@@ -164,7 +164,10 @@ public class Read extends HttpServlet {
 	}
 
 	protected static void registrarUsuarioConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = CtrlUsuario.registrarAConvocatoriaUsuario(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: idUsuario param2: idConv
+		ArrayList r = CtrlUsuario.registrarAConvocatoriaUsuario(
+			Integer.parseInt(request.getParameter("1")),
+			Integer.parseInt(request.getParameter("2"))
+		); // parameter 1: idUsuario param2: idConv
 
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -262,7 +265,10 @@ public class Read extends HttpServlet {
 	}
 
 	protected static void quitarUsuarioTaller(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = CtrlUsuario.abandonarTallerUsuario(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); //1. idUsuario, 2. idEvento
+		ArrayList r = CtrlUsuario.abandonarTallerUsuario(
+			Integer.parseInt(request.getParameter("1")),
+			Integer.parseInt(request.getParameter("2"))
+		); //1. idUsuario, 2. idEvento
 
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();

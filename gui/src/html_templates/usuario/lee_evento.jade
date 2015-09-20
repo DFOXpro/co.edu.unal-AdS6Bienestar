@@ -6,6 +6,19 @@ script(
 		include lee_taller
 	div(ng-hide="taller")
 		include lee_convocatoria
+	input.login.login-submit(
+		type='submit'
+		value='Inscribirse'
+		ng-disabled="sinCupos"
+		ng-hide="inscrito"
+		ng-click="evento.inscribirse(true)"
+	)
+	input.login.login-submit(
+		type='submit'
+		value='Salir del evento'
+		ng-show="inscrito"
+	)
+	.login-help(ng-show="evento.isError") {{ evento.error}}
 	div(ng-show ="exitoso")
 		div(ng-show="!eliminado")
 			h2(ng-show="!crear") Evento actualizado exitosamente

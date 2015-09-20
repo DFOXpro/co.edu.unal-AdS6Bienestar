@@ -95,7 +95,7 @@ form(
 	.login-help(ng-show="isf.fechaFin.$error.required") Indique la fecha de cierre
 	.login-help(ng-show="isf.costo.$error.required") Indique el costo del taller
 	.login-help(ng-show="isf.cupos.$error.required") Indique el numero de cupos ofertados
-	.login-help(ng-show="con.isError") {{ evento.error}}
+	.login-help(ng-show="evento.isError") {{ evento.error}}
 	button(ng-hide="crear" ng-click="eliminar()") Eliminar
 	hr(ng-hide="crear")
 	btabla(ng-hide="crear" info="inscritos.tabla")

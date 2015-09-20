@@ -2,59 +2,106 @@
 
 app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion, $sesion, $tabla) {
 	$scope.user = true;
-	var get = function (diff) {
-		$scope.pagina.pos += diff;
-		$tabla.get(
-			"admin",
-			$routeParams.evento,
-			$scope.pagina.pos,
-			10,
-			"/evento/"+$routeParams.evento,
-			function (r){$scope.pagina.tabla = r;}
-		);
-		$scope.pagina.total = ($scope.pagina.tabla.total /10);
-	};
 
 	var ruta = [
 		{url:"/inicio",nombre:"Inicio"},
 		{url:"/"+$routeParams.evento,nombre:"Consulta de "+$routeParams.evento}
 	];
 
-	if($routeParams.eventoId !== undefined){
-//Crear o editar usuario
+	if($routeParams.eventoId !== undefined){//Consultar evento
 		ruta[2] = {
 			url:"/"+$routeParams.evento+"/"+$routeParams.eventoId,
 			nombre:""+$routeParams.nombre
 		};
+		$scope.taller = false;
+		if($routeParams.evento==="talleres")
+			$scope.taller = true;
+		$scope.evento = {
+			error : "",
+			isError : false,
+			inscribirse : function (b) {
+				$scope.evento.isError = true;
+				$scope.evento.error = "Enviando...";
+				var request ="";
+				if(b)
+					if($routeParams.evento==="talleres") request = "regUsuarioTaller";
+					else request = "regUsuarioConv";
+				else
+					if($routeParams.evento==="talleres") request = "eliminarUsuarioTaller";
+					else request = "eleminarUsuarioConv";
+				$conexion.enviar(
+					"usuario",
+					{
+						tipo: request,
+						2: $scope.evento.id,
+						1: $sesion.getId
+					},
+					function(respuesta){
+						if(respuesta.data.isError)
+							$scope.evento.error=respuesta.data.errorDescrip;
+						else {
+							$scope.inscrito= true;
+						}
+					}
+				);
+			}
+		};
+		$conexion.enviar(
+			"usuario",
+			{
+				tipo: ($scope.taller)? "taller":"convocatoria",
+				1: $routeParams.eventoId
+			},
+			function(respuesta){
+				if(respuesta.data.isError)
+					$scope.evento.error=respuesta.data.errorDescrip;
+				else {
+					$scope.evento.id = respuesta.data.id;
+					$scope.evento.nombre = respuesta.data.nombre;
+					$scope.evento.descripcion = respuesta.data.descripcion;
+					$scope.evento.fechaInicio = new Date(respuesta.data.fechaInicio);
+					$scope.evento.fechaFin = new Date(respuesta.data.fechaFin);
+					$scope.evento.costo = respuesta.data.costo;
+					$scope.evento.cupos = respuesta.data.cupos;
+				}
+			}
+		);
+	} else {//LISTAR EVENTOS
+		var get = function (diff) {
+			$scope.pagina.pos += diff;
+			$tabla.get(
+				"admin",
+				$routeParams.evento,
+				$scope.pagina.pos,
+				10,
+				"/evento/"+$routeParams.evento,
+				function (r){$scope.pagina.tabla = r;}
+			);
+		};
 
+		$scope.pagina = {
+			titulo: "Administrador: ",
+			subtitulo: window.atob(localStorage.getItem("6")),
+			pos: 0,
+			tabla: {},
+			get: get,
+			objeto: ($routeParams.evento === "talleres")?"taller":"convocatoria"
+		};
+		get(0);
+		$scope.$watch("pagina.tabla.total", function (nuevoValor, viejoValor){
+			if(nuevoValor === undefined) $scope.pagina.tabla.total=viejoValor;
+			else
+			$scope.pagina.total = nuevoValor /10;
+		});
+		$conexion.enviar(
+			"admin",{tipo: ($routeParams.evento === "talleres")?"numTalleres":"numConvocatorias"},
+			function(respuesta){
+				$scope.pagina.tabla.total = respuesta.data.total;
+			}
+		);
 	}
-
 	console.log(
-		"eventos",
-		$routeParams,
 		$rootScope.nav(ruta)
 	);
-
-
-	$scope.pagina = {
-		titulo: "Usuario: ",
-		subtitulo: window.atob(localStorage.getItem("6")),
-		pos: 0,
-		tabla: {},
-		get: get,
-		objeto: ($routeParams.evento === "talleres")?"taller":"convocatoria"
-	};
-	get(0);
-	$scope.$watch("pagina.tabla.total", function (nuevoValor, viejoValor){
-		if(nuevoValor === undefined) $scope.pagina.tabla.total=viejoValor;
-		else
-		$scope.pagina.total = nuevoValor /10;
-	});
-	$conexion.enviar(
-		"admin",{tipo: ($routeParams.evento === "talleres")?"numTalleres":"numConvocatorias"},
-		function(respuesta){
-			$scope.pagina.tabla.total = respuesta.data.total;
-		}
-	);
 });
-console.log("Usuario cargado");
+console.log("Admin usuarios cargado");

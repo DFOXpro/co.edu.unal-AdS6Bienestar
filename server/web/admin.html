@@ -121,7 +121,7 @@
           <div ng-show="isf.fechaFin.$error.required" class="login-help">Indique la fecha de cierre</div>
           <div ng-show="isf.costo.$error.required" class="login-help">Indique el costo del taller</div>
           <div ng-show="isf.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
-          <div ng-show="con.isError" class="login-help">{{ evento.error}}</div>
+          <div ng-show="evento.isError" class="login-help">{{ evento.error}}</div>
           <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
           <hr ng-hide="crear">
           <btabla ng-hide="crear" info="inscritos.tabla"></btabla>

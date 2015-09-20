@@ -44,64 +44,18 @@
     </script>
     <script type="text/ng-template" id="lee-evento-tmplt">
       <div ng-show="taller">
-        <form ng-submit="evento.submit()" ng-hide="exitoso" name="isf" novalidate>
-          <input required type="text" name="nombre" placeholder="Nombre" ng-model="evento.nombre" ng-minlength="3" ng-maxlength="100">
-          <div ng-show="isf.nombre.$error.minlength" class="login-help">Nombre muy corto</div>
-          <div ng-show="isf.nombre.$error.maxlength" class="login-help">Nombre muy largo</div>
-          <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="evento.descripcion" ng-minlength="3" ng-maxlength="100">
-          <div ng-show="isf.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
-          <div ng-show="isf.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
-          <input required ez-datetime-control config="configTaller" type="text" name="fechaInicio" placeholder="Inicio del evento" ng-model="evento.fechaInicio" min-date="hoy" max-date="evento.fechaFin">
-          <p>{{ evento.fechaInicio.$error}}</p>
-          <input required ez-datetime-control config="configTaller" type="text" name="fechaFin" placeholder="Finalización del evento" ng-model="evento.fechaFin" min-date="evento.fechaInicio">
-          <p>{{ evento.fechaFin.$error}}</p>
-          <input required type="number" name="costo" placeholder="Costo" ng-model="evento.costo" max="2147483647" min="0">
-          <div ng-show="isf.costo.$error.min" class="login-help">No podemos dar dinero por evento</div>
-          <div ng-show="isf.costo.$error.max" class="login-help">No podemos cobrar tanto</div>
-          <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" max="2147483647" min="1">
-          <div ng-show="isf.cupos.$error.min" class="login-help">Corrija los cupos disponibles</div>
-          <div ng-show="isf.cupos.$error.max" class="login-help">No hay sillas para tanta gente</div>
-          <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" ng-show="crear" class="login login-submit">
-          <input type="submit" name="actualiza" value="Actualizar" ng-disabled="isf.$invalid" ng-show="!crear" class="login login-submit">
-          <div ng-show="isf.nombre.$error.required" class="login-help">Escriba el nombre del taller</div>
-          <div ng-show="isf.descripcion.$error.required" class="login-help">Escriba la descripcion</div>
-          <div ng-show="isf.fechaInicio.$error.required" class="login-help">Indique la fecha de inicio</div>
-          <div ng-show="isf.fechaFin.$error.required" class="login-help">Indique la fecha de cierre</div>
-          <div ng-show="isf.costo.$error.required" class="login-help">Indique el costo del taller</div>
-          <div ng-show="isf.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
-          <div ng-show="con.isError" class="login-help">{{ evento.error}}</div>
-          <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
-          <hr ng-hide="crear">
-          <btabla ng-hide="crear" info="inscritos.tabla"></btabla>
-          <p>total inscritos {{inscritos.total}}</p>
-        </form>
+        <h1>{{evento.nombre}}</h1>
+        <p class="descripcion">{{evento.descripcion}}</p>
+        <p class="fechas">Fecha de inicio del evento: <span class="inicio">{{evento.fechaInicio}}</span>, fecha de finalización: <span class="fin">{{evento.fechaFin}}</span></p><span class="costo">{{evento.costo | currency}}</span><span class="cupos">{{evento.cupos}} cupos</span>
       </div>
       <div ng-hide="taller">
-        <form ng-submit="evento.submit()" ng-hide="exitoso" name="isfc" novalidate>
-          <input required type="text" name="nombre" placeholder="Nombre" ng-model="evento.nombre" ng-minlength="3" ng-maxlength="100">
-          <div ng-show="isfc.nombre.$error.minlength" class="login-help">Nombre muy corto</div>
-          <div ng-show="isfc.nombre.$error.maxlength" class="login-help">Nombre muy largo</div>
-          <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="evento.descripcion" ng-minlength="3" ng-maxlength="100">
-          <div ng-show="isfc.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
-          <div ng-show="isfc.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
-          <input required ez-datetime-control config="configConv" type="text" name="fecha" placeholder="Fecha Fin Registro" ng-model="evento.fechaFin" min-date="evento.hoy">
-          <div ng-show="isfc.fechaFin.$error" class="login-help">Fecha invalida</div>
-          <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" min="2" max="2147483647">
-          <div ng-show="isfc.cupos.$error.min" class="login-help">El cupo ingresado es muy pequeño</div>
-          <div ng-show="isfc.cupos.$error.max" class="login-help">Demasiados cupos</div>
-          <input type="submit" name="crear" value="Crear" ng-disabled="isfc.$invalid" ng-show="crear" class="login login-submit">
-          <input type="submit" name="actualiza" value="Actualizar" ng-disabled="isfc.$invalid" ng-show="!crear" class="login login-submit">
-          <div ng-show="isfc.nombre.$error.required" class="login-help">Escriba el nombre del evento</div>
-          <div ng-show="isfc.descripcion.$error.required" class="login-help">Escriba la descripcion</div>
-          <div ng-show="isfc.fechaFin.$error.required" class="login-help">Indique la fecha de cierre</div>
-          <div ng-show="isfc.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
-          <div ng-show="evento.isError" class="login-help">{{ evento.error}}</div>
-          <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
-          <hr ng-hide="crear">
-          <btabla ng-hide="crear" info="inscritos.tabla"></btabla>
-          <p>total inscritos {{inscritos.total}}</p>
-        </form>
+        <h1>{{evento.nombre}}</h1>
+        <p class="descripcion">{{evento.descripcion}}</p>
+        <p class="fechas">Fecha de finalización: <span class="inicio">{{evento.fechaFin}}</span></p><span class="cupos">{{evento.cupos}} cupos</span>
       </div>
+      <input type="submit" value="Inscribirse" ng-disabled="sinCupos" ng-hide="inscrito" ng-click="evento.inscribirse(true)" class="login login-submit">
+      <input type="submit" value="Salir del evento" ng-show="inscrito" class="login login-submit">
+      <div ng-show="evento.isError" class="login-help">{{ evento.error}}</div>
       <div ng-show="exitoso">
         <div ng-show="!eliminado">
           <h2 ng-show="!crear">Evento actualizado exitosamente</h2>

@@ -263,7 +263,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
     public static String desvincularConvocatoria(int ID_USUARIO, int ID_CONVOCATORIA) {
         
         String respuestaSQL = CrudDAO.update(
-                "DELETE FROM USUARIO_CONVOCATORIA WHERE ID_USUARIO = ? AND ID_CONVOCTORIA = ?;",
+                "DELETE FROM USUARIO_CONVOCATORIA WHERE ID_USUARIO = ? AND ID_CONVOCATORIA = ?;",
                 new String[]{Integer.toString(ID_USUARIO), Integer.toString(ID_CONVOCATORIA)}
         );
         System.out.println("UsuarioDAO.desvincularConvocatoria: " + respuestaSQL);

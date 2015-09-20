@@ -1,8 +1,9 @@
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Usuario;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.ConvocatoriaEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.TallerEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlUsuario;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,7 +44,7 @@ public class VisUsuario extends HttpServlet {
         }
     }
     
-    protected void leerTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void leerTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
         
         TallerEntity e = cU.leerTaller(request.getParameter("1")); // id de la taller
         

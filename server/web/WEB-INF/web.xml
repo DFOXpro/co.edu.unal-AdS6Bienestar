@@ -14,7 +14,11 @@
     </servlet>
     <servlet>
         <servlet-name>Administrador</servlet-name>
-        <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.VisAdmin</servlet-class>
+        <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Admin.VisAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Usuario</servlet-name>
+        <servlet-class>co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Usuario.VisUsuario</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Sesion</servlet-name>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>Administrador</servlet-name>
         <url-pattern>/network/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Usuario</servlet-name>
+        <url-pattern>/network/usuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

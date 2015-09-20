@@ -1,6 +1,6 @@
 /* global app */
 
-app.controller('inicio', function ($rootScope, $scope, $conexion, $sesion, $tabla) {
+app.controller('inicio', function ($rootScope, $scope, $sesion, $tabla) {
 	console.log("inicio", $rootScope.nav([
 		{url:"/inicio",nombre:"Inicio"}
 	]));
@@ -11,7 +11,7 @@ app.controller('inicio', function ($rootScope, $scope, $conexion, $sesion, $tabl
 		convocatoriasRecientes:[],
 		talleresRecientes:[]
 	};
-	$tabla.get("admin", "Convocatorias recientes", 0, 4, "convocatorias",function (r){$scope.pagina.convocatoriasRecientes = r;});
-	$tabla.get("admin", "Talleres recientes", 0, 4, "talleres",function (r){$scope.pagina.talleresRecientes = r;});
+	$tabla.get("usuario", "Convocatorias recientes", 0, 4, "/evento/convocatorias",function (r){$scope.pagina.convocatoriasRecientes = r;});
+	$tabla.get("usuario", "Talleres recientes", 0, 4, "/evento/talleres",function (r){$scope.pagina.talleresRecientes = r;});
 });
 console.log("Admin inicio cargado");

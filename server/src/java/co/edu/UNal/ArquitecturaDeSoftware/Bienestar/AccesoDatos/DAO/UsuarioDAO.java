@@ -510,7 +510,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
     
 
     //Completar por favor esta funcion
-    public int getTotalUsuarios() {
+    public static int getTotalUsuarios() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

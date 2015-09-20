@@ -1,6 +1,6 @@
 /* global app */
 
-app.controller('inicio', function ($rootScope, $scope, $conexion, $sesion, $tabla) {
+app.controller('inicio', function ($rootScope, $scope, $sesion, $tabla) {
 	console.log("inicio", $rootScope.nav([
 		{url:"/inicio",nombre:"Inicio"}
 	]));

@@ -60,22 +60,22 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
          * @param CUPOS
          * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
          */
-	public String create(
-			String NOMBRE,
-			String DESCRIPCION,
-			String FECHA_FIN_REGISTRO,
-                        int CUPOS
+	public static String create(
+	String NOMBRE,
+	String DESCRIPCION,
+	String FECHA_FIN_REGISTRO,
+	int CUPOS
 	) { 
 		String respuestaSQL = update(
 			"insert into CONVOCATORIA values(null,?,?,?,?)",
 			new String[]{
-                                NOMBRE,
-                                DESCRIPCION,
-                                FECHA_FIN_REGISTRO,
-                                Integer.toString(CUPOS)
-                            }
+				NOMBRE,
+				DESCRIPCION,
+				FECHA_FIN_REGISTRO,
+				Integer.toString(CUPOS)
+			}
 		);
-		
+
 		System.out.println("ConvocatoriaDAO.create: "+respuestaSQL);
 		return respuestaSQL;
 	}
@@ -89,30 +89,30 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
          * @param CUPOS
          * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE ERROR.
          */
-	public String update(
-                        int    ID_CONVOCATORIA,
-			String NOMBRE,
-			String DESCRIPCION,
-			String FECHA_FIN_REGISTRO,
-                        int CUPOS
+	public static String update(
+		int ID_CONVOCATORIA,
+		String NOMBRE,
+		String DESCRIPCION,
+		String FECHA_FIN_REGISTRO,
+		int CUPOS
 	) {
-            String respuestaSQL = CrudDAO.update(
-                            "UPDATE CONVOCATORIA\n"
-                            + "SET NOMBRE = ?,\n"
-                            + "DESCRIPCION = ?,\n"
-                            + "FECHA_FIN_REGISTRO = ?,\n"
-                            + "CUPOS = ?\n"
-                            + "WHERE ID_CONVOCATORIA = ?;",
-                            new String[]{
-                                NOMBRE,
-                                DESCRIPCION,
-                                FECHA_FIN_REGISTRO,
-                                Integer.toString(CUPOS),
-                                Integer.toString(ID_CONVOCATORIA)
-                            }
+		String respuestaSQL = CrudDAO.update(
+			"UPDATE CONVOCATORIA\n"
+			+ "SET NOMBRE = ?,\n"
+			+ "DESCRIPCION = ?,\n"
+			+ "FECHA_FIN_REGISTRO = ?,\n"
+			+ "CUPOS = ?\n"
+			+ "WHERE ID_CONVOCATORIA = ?;",
+			new String[]{
+				NOMBRE,
+				DESCRIPCION,
+				FECHA_FIN_REGISTRO,
+				Integer.toString(CUPOS),
+				Integer.toString(ID_CONVOCATORIA)
+			}
 		);
-            System.out.println("ConvocatoriaDAO.update: "+respuestaSQL);
-            return respuestaSQL;
+		System.out.println("ConvocatoriaDAO.update: " + respuestaSQL);
+		return respuestaSQL;
 	}
 
 	/**
@@ -120,13 +120,13 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
 	 * @param ID_CONVOCATORIA
          * @return 
 	 */
-	public String delete(int ID_CONVOCATORIA) {
+	public static String delete(int ID_CONVOCATORIA) {
 		String respuestaSQL = CrudDAO.update(
-				"DELETE FROM CONVOCATORIA WHERE ID_CONVOCATORIA = ?;",
-				new String[]{Integer.toString(ID_CONVOCATORIA)}
+			"DELETE FROM CONVOCATORIA WHERE ID_CONVOCATORIA = ?;",
+			new String[]{Integer.toString(ID_CONVOCATORIA)}
 		);
-                System.out.println("ConvocatoriaDAO.delete: "+respuestaSQL);
-                return respuestaSQL;
+		System.out.println("ConvocatoriaDAO.delete: "+respuestaSQL);
+		return respuestaSQL;
 	}
         
         

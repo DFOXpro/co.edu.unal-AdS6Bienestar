@@ -1,5 +1,6 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
 
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.ConvocatoriaDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.TallerDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.ConvocatoriaEntity;
@@ -77,40 +78,39 @@ public class CtrlAdmin extends CtrlUsuario{
         return usr.getUsuarios(posicion, tamano);
     };
 
-    public int obtenerTotalUsuarios() {
-        return usr.getTotalUsuarios();
-    }
-    
-    public static ArrayList eliminarUsuario(int ID_USUARIO){
-        String error = UsuarioDAO.delete(ID_USUARIO);
-        ArrayList r = new ArrayList();
-        if(error.equals("OK")){
-			r.add("isExitoso");
-		} else {
+    public static int obtenerTotalUsuarios() {
+		return UsuarioDAO.getTotalUsuarios();
+	}
+
+	public static ArrayList eliminarUsuario(int ID_USUARIO) {
+		String error = UsuarioDAO.delete(ID_USUARIO);
+		ArrayList r = new ArrayList();
+		if (error.equals("OK")) r.add("isExitoso");
+		else {
 			r.add("error");
 			r.add(error);
 		}
-        return r;
-    }    
-    
-    // Retorna usuarios en taller
-    public ArrayList<UsuarioEntity> obtenerUsuariosEnTaller(int ID_TALLER,int tamano, int pagina) {
-        return usr.getUsuariosByTaller(ID_TALLER, tamano, pagina);
-    };
-    
-        // Retorna profesores en taller
+		return r;
+	}
+
+	// Retorna usuarios en taller
+	public static ArrayList<UsuarioEntity> obtenerUsuariosEnTaller(int ID_TALLER, int tamano, int pagina) {
+		return UsuarioDAO.getUsuariosByTaller(ID_TALLER, tamano, pagina);
+	}
+
+    // Retorna profesores en taller
     public ArrayList<UsuarioEntity> obtenerProfesoresEnTaller(int ID_TALLER,int tamano, int pagina) {
         return usr.getProfesoresByTaller(ID_TALLER, tamano, pagina);
     };
     
         // Retorna usuarios en convocatoria
-    public ArrayList<UsuarioEntity> obtenerUsuariosEnConvocatoria(int ID_CONVOCATORIA,int tamano, int pagina) {
-        return usr.getUsuariosByConvocatoria(ID_CONVOCATORIA, tamano, pagina);
+    public static ArrayList<UsuarioEntity> obtenerUsuariosEnConvocatoria(int ID_CONVOCATORIA,int tamano, int pagina) {
+        return UsuarioDAO.getUsuariosByConvocatoria(ID_CONVOCATORIA, tamano, pagina);
     };
     
     
-    public ArrayList crearConvocatoria(String nombre, String descripcion, String fin, int cupos){
-        String error = conv.create(nombre, descripcion, fin, cupos);
+    public static ArrayList crearConvocatoria(String nombre, String descripcion, String fin, int cupos){
+        String error = ConvocatoriaDAO.create(nombre, descripcion, fin, cupos);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){
             r.add("isExitoso");
@@ -121,8 +121,8 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
     
-    public ArrayList actualizarConvocatoria(int id, String nombre, String descripcion, String fin, int cupos){
-        String error = conv.update(id, nombre, descripcion, fin, cupos);
+    public static ArrayList actualizarConvocatoria(int id, String nombre, String descripcion, String fin, int cupos){
+        String error = ConvocatoriaDAO.update(id, nombre, descripcion, fin, cupos);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){
             r.add("isExitoso");
@@ -133,8 +133,8 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
     
-    public ArrayList eliminarConvocatoria(int id){
-        String error = conv.delete(id);
+    public static ArrayList eliminarConvocatoria(int id){
+        String error = ConvocatoriaDAO.delete(id);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){
             r.add("isExitoso");
@@ -146,7 +146,7 @@ public class CtrlAdmin extends CtrlUsuario{
     }
       
         
-    public ArrayList crearTaller(String nombre, String descripcion, String finR, String inicio, String fin, int costo, int cupos){
+    public static ArrayList crearTaller(String nombre, String descripcion, String finR, String inicio, String fin, int costo, int cupos){
         String error = TallerDAO.create('t', nombre, descripcion, finR, inicio, fin, costo, cupos);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){
@@ -158,7 +158,7 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
     
-    public ArrayList actualizarTaller(
+    public static ArrayList actualizarTaller(
 		int ID_TALLER, String NOMBRE,
 		String DESCRIPCION,
 		String FECHA_INICIO,
@@ -177,7 +177,7 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
     
-    public ArrayList eliminarTaller(int id){
+    public static ArrayList eliminarTaller(int id){
         String error = TallerDAO.delete(id);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){

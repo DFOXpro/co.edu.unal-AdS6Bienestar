@@ -1,7 +1,9 @@
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Admin;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlAdmin;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Usuario.VisUsuario;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -190,206 +192,6 @@ public class VisAdmin extends VisUsuario {
 		out.print(list1);
 	}
 
-	//Para contar usuarios en convocatoria pasando Id la misma
-	protected void consultarUsuariosEnConvocatoriaId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
-		usuarios = ctrlAdmin.obtenerUsuariosEnConvocatoria(
-			Integer.parseInt(request.getParameter("3")),//id evento
-			Integer.parseInt(request.getParameter("2")),//tamaño tabla
-			Integer.parseInt(request.getParameter("1"))//pagina
-		);
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-
-		JSONArray list1 = new JSONArray();
-		for (UsuarioEntity usuario : usuarios) {
-			JSONObject obj = new JSONObject();
-			obj.put("id", usuario.getIdUsuario());
-			obj.put("titulo", usuario.getNombres() + " " + usuario.getApellidos());
-			list1.add(obj);
-		}
-		out.print(list1);
-	}
-
-	//Para contar usuarios en taller pasando Id la misma
-	protected void consultarUsuariosEnTallerId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
-		usuarios = ctrlAdmin.obtenerUsuariosEnTaller(
-			Integer.parseInt(request.getParameter("3")),
-			Integer.parseInt(request.getParameter("2")),
-			Integer.parseInt(request.getParameter("1"))
-		);
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-
-		JSONArray list1 = new JSONArray();
-		for (UsuarioEntity usuario : usuarios) {
-			JSONObject obj = new JSONObject();
-			obj.put("id", usuario.getIdUsuario());
-			obj.put("titulo", usuario.getNombres() + " " + usuario.getApellidos());
-			list1.add(obj);
-		}
-		out.print(list1);
-	}
-
-	//Para contar usuarios en convocatoria pasando Id la misma
-	protected void consultarDocentesEnTallerId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
-		usuarios = ctrlAdmin.obtenerUsuariosEnTaller(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2")), Integer.parseInt(request.getParameter("3"))); // id del usuario
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-
-		JSONArray list1 = new JSONArray();
-		for (UsuarioEntity usuario : usuarios) {
-			JSONObject obj = new JSONObject();
-			obj.put("id", usuario.getIdUsuario());
-			obj.put("titulo", usuario.getNombres() + " " + usuario.getApellidos());
-			list1.add(obj);
-		}
-		out.print(list1);
-	}
-
-	protected void obtenerTotalUsuarios(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int numC = ctrlAdmin.obtenerTotalUsuarios();
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		JSONObject obj = new JSONObject();
-		obj.put("total", numC);
-		out.print(obj);
-	}
-
-	protected void crearConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = ctrlAdmin.crearConvocatoria(
-			request.getParameter("1"), // nombre
-			request.getParameter("2"), // descripción
-			request.getParameter("4"), // fin
-			Integer.parseInt(request.getParameter("6")) // cupos
-		);
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (r.get(0) == "error") {
-			JSONObject obj = new JSONObject();
-			obj.put("isError", true);
-			obj.put("errorDescrip", r.get(1));
-			out.print(obj);
-		} else if (r.get(0) == "isExitoso") {
-			JSONObject obj = new JSONObject();
-			obj.put("Exitoso", true);
-			out.print(obj);
-		} else Util.errordeRespuesta(r, out);
-	}
-
-	protected void actualizarConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = ctrlAdmin.actualizarConvocatoria(
-			Integer.parseInt(request.getParameter("0")), // id
-			request.getParameter("1"), // nombre
-			request.getParameter("2"), // descripción
-			request.getParameter("4"), // fin
-			Integer.parseInt(request.getParameter("6")) // cupos
-		);
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (r.get(0) == "error") {
-			JSONObject obj = new JSONObject();
-			obj.put("isError", true);
-			obj.put("errorDescrip", r.get(1));
-			out.print(obj);
-		} else if (r.get(0) == "isExitoso") {
-			JSONObject obj = new JSONObject();
-			obj.put("Exitoso", true);
-			out.print(obj);
-		} else Util.errordeRespuesta(r, out);
-	}
-
-	protected void eliminarConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = ctrlAdmin.eliminarConvocatoria(Integer.parseInt(request.getParameter("1"))); // id
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (r.get(0) == "error") {
-			JSONObject obj = new JSONObject();
-			obj.put("isError", true);
-			obj.put("errorDescrip", r.get(1));
-			out.print(obj);
-		} else if (r.get(0) == "isExitoso") {
-			JSONObject obj = new JSONObject();
-			obj.put("Exitoso", true);
-			out.print(obj);
-		} else Util.errordeRespuesta(r, out);
-	}
-
-	protected void crearTaller(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = ctrlAdmin.crearTaller(
-			request.getParameter("1"), // nombre
-			request.getParameter("2"), // descripción
-			request.getParameter("4"), // fin registro (Fecha hasta donde está permitido registrarse)
-			request.getParameter("3"), // inicio del taller
-			request.getParameter("4"), // fin del taller
-			Integer.parseInt(request.getParameter("5")), // costo
-			Integer.parseInt(request.getParameter("6")) // cupos
-		);
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (r.get(0) == "error") {
-			JSONObject obj = new JSONObject();
-			obj.put("isError", true);
-			obj.put("errorDescrip", r.get(1));
-			out.print(obj);
-		} else if (r.get(0) == "isExitoso") {
-			JSONObject obj = new JSONObject();
-			obj.put("Exitoso", true);
-			out.print(obj);
-		} else Util.errordeRespuesta(r, out);
-	}
-
-	protected void actualizarTaller(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = ctrlAdmin.actualizarTaller(
-			Integer.parseInt(request.getParameter("0")), // id
-			request.getParameter("1"), // nombre
-			request.getParameter("2"), // descripción
-			request.getParameter("3"), // fin registro (Fecha hasta donde está permitido registrarse)
-			request.getParameter("4"), // inicio del taller
-			Integer.parseInt(request.getParameter("5")), // costo
-			Integer.parseInt(request.getParameter("6")) // cupos
-		);
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (r.get(0) == "error") {
-			JSONObject obj = new JSONObject();
-			obj.put("isError", true);
-			obj.put("errorDescrip", r.get(1));
-			out.print(obj);
-		} else if (r.get(0) == "isExitoso") {
-			JSONObject obj = new JSONObject();
-			obj.put("Exitoso", true);
-			out.print(obj);
-		} else Util.errordeRespuesta(r, out);
-	}
-
-	protected void eliminarTaller(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = ctrlAdmin.eliminarTaller(Integer.parseInt(request.getParameter("1"))); // id
-
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (r.get(0) == "error") {
-			JSONObject obj = new JSONObject();
-			obj.put("isError", true);
-			obj.put("errorDescrip", r.get(1));
-			out.print(obj);
-		} else if (r.get(0) == "isExitoso") {
-			JSONObject obj = new JSONObject();
-			obj.put("Exitoso", true);
-			out.print(obj);
-		} else Util.errordeRespuesta(r, out);
-	}
-
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 *
@@ -400,7 +202,7 @@ public class VisAdmin extends VisUsuario {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	throws ServletException, IOException {
+	throws ServletException, IOException{
 		if (null != request.getParameter("tipo"))
 			switch (request.getParameter("tipo")) {
 //CRUD USUARIO
@@ -435,16 +237,16 @@ public class VisAdmin extends VisUsuario {
 					obtenerInscritosConv(request, response);
 					break;
 				} case "crearConvocatoria": {
-					crearConvocatoria(request, response);
+					CRUDEventos.crearConvocatoria(request, response);
 					break;
 				} case "editarconvocatorias": {
-					actualizarConvocatoria(request, response);
+					CRUDEventos.actualizarConvocatoria(request, response);
 					break;
 				} case "eliminarconvocatorias": {
-					eliminarConvocatoria(request, response);
+					CRUDEventos.eliminarConvocatoria(request, response);
 					break;
 				} case "usuariosEnConvocatoria": {
-					consultarUsuariosEnConvocatoriaId(request, response);
+					CRUDEventos.consultarUsuariosEnConvocatoriaId(request, response);
 					break;
 				} case "eliminarUsuarioConv": {
 					quitarUsuarioConvocatoria(request, response);
@@ -468,23 +270,23 @@ public class VisAdmin extends VisUsuario {
 					obtenerInscritosTaller(request, response);
 					break;
 				} case "crearTaller": {
-					crearTaller(request, response);
+					CRUDEventos.crearTaller(request, response);
 					break;
 				} case "editartalleres": {
-					actualizarTaller(request, response);
+					CRUDEventos.actualizarTaller(request, response);
 					break;
 				} case "eliminartalleres": {
-					eliminarTaller(request, response);
+					CRUDEventos.eliminarTaller(request, response);
 					break;
 					//Relaciones
 				} case "usuariosEnTaller": {
-					consultarUsuariosEnTallerId(request, response);
+					CRUDEventos.consultarUsuariosEnTallerId(request, response);
 					break;
 				} case "eliminarUsuarioTaller": {
 					quitarUsuarioTaller(request, response);
 					break;
 				} case "docentesEnTaller": {
-					consultarDocentesEnTallerId(request, response);
+					CRUDEventos.consultarDocentesEnTallerId(request, response);
 					break;
 				} case "regUsuarioTaller": {
 					registrarUsuarioTaller(request, response);

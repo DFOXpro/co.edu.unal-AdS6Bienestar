@@ -45,6 +45,7 @@ public class CtrlAutenticacion {
 				r.add("exitoso");
 				r.add(u.getNombres());
 				r.add(u.getRol());
+				r.add(u.getIdUsuario());
 				//r.add(s.getLlavesServer().publicaToStr());//Devuelve la llave publica generada
 				return r;
 			} else {

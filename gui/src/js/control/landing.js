@@ -49,6 +49,7 @@ app.controller('landing', function ($scope, $conexion) {
 								localStorage.setItem("4", respuesta.data.b);//ROL
 								localStorage.setItem("5", window.btoa($scope.is.usuario));//usuario
 								localStorage.setItem("6", window.btoa($scope.usr));//Nombre de usuario
+								localStorage.setItem("7", window.btoa(respuesta.data.d));//Id de usuario
 								$conexion.pdc(respuesta.data.c);
 								$conexion.enviar(
 										"sesion", {

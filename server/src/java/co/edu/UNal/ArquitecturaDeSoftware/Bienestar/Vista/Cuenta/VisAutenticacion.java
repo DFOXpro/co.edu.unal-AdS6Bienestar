@@ -56,6 +56,7 @@ public class VisAutenticacion extends HttpServlet {
 			obj.put("a", r.get(1));//nombre
 			obj.put("b", "" + r.get(2));//rol
 			obj.put("c", "" + "asd");//r.get(3));//llave publica
+			obj.put("d", r.get(3));//Id
 			out.print(obj);
 		} else {
 			Util.errordeRespuesta(r, out);

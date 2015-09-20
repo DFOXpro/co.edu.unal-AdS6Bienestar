@@ -17,6 +17,7 @@ script(
 		type='submit'
 		value='Salir del evento'
 		ng-show="inscrito"
+		ng-click="evento.inscribirse(false)"
 	)
 	.login-help(ng-show="evento.isError") {{ evento.error}}
 	div(ng-show ="exitoso")

@@ -7,6 +7,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		{url:"/inicio",nombre:"Inicio"},
 		{url:"/"+$routeParams.evento,nombre:"Consulta de "+$routeParams.evento}
 	];
+	var d = (localStorage.getItem("4")==="A" | localStorage.getItem("4")==="P");
 
 	if($routeParams.eventoId !== undefined){//Consultar evento
 		ruta[2] = {
@@ -14,20 +15,26 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 			nombre:""+$routeParams.nombre
 		};
 		$scope.taller = false;
-		if($routeParams.evento==="talleres")
+		if($routeParams.evento==="talleres"){
 			$scope.taller = true;
+		}
 		$scope.evento = {
 			error : "",
 			isError : false,
-			inscribirse : function (b) {
+			inscribirse : function (boolInscribeODesiste) {
 				$scope.evento.isError = true;
 				$scope.evento.error = "Enviando...";
 				var request ="";
-				if(b)
-					if($routeParams.evento==="talleres") request = "regUsuarioTaller";
-					else request = "regUsuarioConv";
+				var dd= false;
+				if(boolInscribeODesiste)
+					if($routeParams.evento==="talleres"){
+						if(d) dd= confirm("¿Desea inscribirse como profesor?");
+						if(dd) request = "regDocenteTaller";
+						else request = "regUsuarioTaller";
+					} else request = "regUsuarioConv";
 				else
 					if($routeParams.evento==="talleres") request = "eliminarUsuarioTaller";
+					//else if(dd) request = "regUsuarioConv";//NO por que que falta de respeto señores
 					else request = "eleminarUsuarioConv";
 				$conexion.enviar(
 					"usuario",
@@ -37,9 +44,12 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 						1: $sesion.getId
 					},
 					function(respuesta){
-						if(respuesta.data.isError)
+						if(respuesta.data.isError){
+							if(respuesta.data.errorDescrip==="Ya estás inscrito")
+								$scope.inscrito= true;
 							$scope.evento.error=respuesta.data.errorDescrip;
-						else {
+						} else {
+							$scope.evento.error = "Listo, estás inscrito!";
 							$scope.inscrito= true;
 						}
 					}
@@ -80,7 +90,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		};
 
 		$scope.pagina = {
-			titulo: "Administrador: ",
+			titulo: (d)?"Profesor: ":"Estudiante: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
 			pos: 0,
 			tabla: {},

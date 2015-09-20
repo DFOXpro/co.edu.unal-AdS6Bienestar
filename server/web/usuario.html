@@ -54,7 +54,7 @@
         <p class="fechas">Fecha de finalización: <span class="inicio">{{evento.fechaFin}}</span></p><span class="cupos">{{evento.cupos}} cupos</span>
       </div>
       <input type="submit" value="Inscribirse" ng-disabled="sinCupos" ng-hide="inscrito" ng-click="evento.inscribirse(true)" class="login login-submit">
-      <input type="submit" value="Salir del evento" ng-show="inscrito" class="login login-submit">
+      <input type="submit" value="Salir del evento" ng-show="inscrito" ng-click="evento.inscribirse(false)" class="login login-submit">
       <div ng-show="evento.isError" class="login-help">{{ evento.error}}</div>
       <div ng-show="exitoso">
         <div ng-show="!eliminado">

@@ -26,6 +26,7 @@ app.factory('$sesion', function ($conexion) {
 	};
 	r.setRutas = function (rut){rutas = rut;};
 	r.getRutas = rutas;
+	r.getId = window.atob(localStorage.getItem("7"));
 	return r;
 });
 console.log("sesiónFactory cargado");

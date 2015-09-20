@@ -58,7 +58,7 @@ public class VisUsuario extends Read {
 					registrarUsuarioConvocatoria(request, response);
 					break;
 				}
-				case "regDocente": {
+				case "regDocenteTaller": {
 					registrarDocenteTaller(request, response);
 					break;
 				}

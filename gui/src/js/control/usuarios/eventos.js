@@ -16,7 +16,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 
 	var ruta = [
 		{url:"/inicio",nombre:"Inicio"},
-		{url:"/"+$routeParams.evento,nombre:"Gestión de "+$routeParams.evento}
+		{url:"/"+$routeParams.evento,nombre:"Consulta de "+$routeParams.evento}
 	];
 
 	if($routeParams.eventoId !== undefined){
@@ -36,7 +36,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 
 
 	$scope.pagina = {
-		titulo: "Administrador: ",
+		titulo: "Usuario: ",
 		subtitulo: window.atob(localStorage.getItem("6")),
 		pos: 0,
 		total: 0,
@@ -46,74 +46,4 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 	};
 	get(0);
 });
-console.log("Admin usuarios cargado");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log("Usuario cargado");

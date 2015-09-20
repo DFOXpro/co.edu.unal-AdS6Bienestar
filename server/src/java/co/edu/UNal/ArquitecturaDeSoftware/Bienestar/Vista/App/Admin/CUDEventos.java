@@ -20,7 +20,7 @@ import org.json.simple.JSONObject;
  *
  * @author dfoxpro
  */
-public class CRUDEventos {
+public class CUDEventos {
 
 	//Para contar usuarios en convocatoria pasando Id la misma
 	protected static void consultarUsuariosEnConvocatoriaId(HttpServletRequest request, HttpServletResponse response) throws IOException {

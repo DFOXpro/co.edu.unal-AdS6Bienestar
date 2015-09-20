@@ -29,7 +29,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
      * @param username String containing the username
      * @return Value object with required user information
      */
-    public UsuarioEntity getByUsername(String username) {
+    public static UsuarioEntity getByUsername(String username) {
         ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO WHERE LOWER(EMAIL) =LOWER(?)", new String[]{username});
         try {
             
@@ -363,6 +363,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
     
     /**
      * Retorna la cantidad de USUARIOS inscritos en un Taller
+	 * @param ID_TALLER
      * @return 
      */
      public static int getCountUsuarioTalleres( int ID_TALLER ){   

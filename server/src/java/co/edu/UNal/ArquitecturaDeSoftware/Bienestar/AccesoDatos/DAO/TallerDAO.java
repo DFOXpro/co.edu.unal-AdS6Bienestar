@@ -33,12 +33,12 @@ public class TallerDAO extends CrudDAO<TallerEntity>  {
     
 
 	/**
-	 * Returns a value object 
+	 * Returns a value object
 	 *
-         * @param ID
+	 * @param ID
 	 * @return Value object with required user information
 	 */
-	public TallerEntity getByID(String ID) {
+	public static TallerEntity getByID(String ID) {
 		ResultSet rs = CrudDAO.query("SELECT * FROM TALLER WHERE ID_TALLER =?", new String[]{ID});
 		try {
 			rs.first();

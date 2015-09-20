@@ -160,7 +160,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 	} else {
 //LISTAR USUARIOS
 		$scope.pagina = {
-			titulo: "Administrador: ",
+			titulo: "Usuario: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
 			pos: 0,
 			total: 0,

@@ -1,9 +1,10 @@
-package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas;
+package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Admin;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.ConvocatoriaDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.TallerDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Usuario.CtrlUsuario;
 import static co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlRegistro.isValidEmailAddress;
 import java.util.ArrayList;
 
@@ -114,7 +115,7 @@ public class CtrlAdmin extends CtrlUsuario {
 	;
 
     public static int obtenerTotalUsuarios() {
-		return UsuarioDAO.getTotalUsuarios();
+		return UsuarioDAO.getCountUsuarios();
 	}
 
 	public static ArrayList eliminarUsuario(int ID_USUARIO) {

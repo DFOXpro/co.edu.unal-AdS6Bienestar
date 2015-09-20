@@ -26,7 +26,16 @@ public class VisAdmin extends VisUsuario {
 		if (null != request.getParameter("tipo"))
 			switch (request.getParameter("tipo")) {
 //CRUD USUARIO
-				case "crearUsuario": {
+				case "Usuario": {
+					CRUDUsuarios.leerUsuarioId(request, response);
+					break;
+				} case "usuarios": {
+					CRUDUsuarios.leerUsuariosMultiplesId(request, response);
+					break;
+				} case "numUsuarios": {
+					CRUDUsuarios.obtenerTotalUsuarios(request, response);
+					break;
+				} case "crearUsuario": {
 					CRUDUsuarios.crearUsuario(request, response);
 					break;
 				} case "editarUsuario": {
@@ -34,12 +43,6 @@ public class VisAdmin extends VisUsuario {
 					break;
 				} case "eliminarUsuario": {
 					CRUDUsuarios.eliminarUsuario(request, response);
-					break;
-				} case "Usuario": {
-					CRUDUsuarios.leerUsuarioId(request, response);
-					break;
-				} case "usuarios": {
-					CRUDUsuarios.leerUsuariosMultiplesId(request, response);
 					break;
 				}
 

@@ -6,7 +6,7 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Admin;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlAdmin;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Admin.CtrlAdmin;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -192,6 +192,15 @@ public class CRUDUsuarios {
 			list1.add(obj);
 		}
 		out.print(list1);
+	}
+
+	protected static void obtenerTotalUsuarios(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int numC = CtrlAdmin.obtenerTotalUsuarios();
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("total", numC);
+		out.print(obj);
 	}
 
 }

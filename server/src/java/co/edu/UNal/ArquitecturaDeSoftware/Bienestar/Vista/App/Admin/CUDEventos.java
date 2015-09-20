@@ -6,7 +6,7 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Admin;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlAdmin;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Admin.CtrlAdmin;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;

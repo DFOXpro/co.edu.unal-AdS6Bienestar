@@ -19,7 +19,8 @@ app.filter('ceil', function () {
 
 app.factory('$tabla', function ($conexion) {
 	var r = {};
-	r.get = function (url, tabla, pos, tamano, accion,callback){
+	r.get = function (url, tabla, pos, tamano, accion,callback,accion2Fun,accion2Texto){
+		console.log("tabla.get: ",accion);
 		$conexion.enviar(
 			url,
 			{
@@ -36,7 +37,12 @@ app.factory('$tabla', function ($conexion) {
 					verAccion: accion,//"/usuarios",
 					//editarAccion:"/editareventos",
 					//eliminarAccion:"/eliminareventos",
-					lineas: respuesta.data
+					lineas: respuesta.data,
+					accion2: (accion2Fun)?{
+						exist : true,
+						fun : accion2Fun,
+						texto : accion2Texto,
+					}:{exist : false}
 				});
 			}
 		);

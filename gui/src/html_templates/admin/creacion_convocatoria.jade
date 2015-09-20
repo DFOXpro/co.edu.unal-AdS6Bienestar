@@ -70,5 +70,6 @@ form(
 	.login-help(ng-show="isfc.cupos.$error.required") Indique el numero de cupos ofertados
 	.login-help(ng-show="evento.isError") {{ evento.error}}
 	button(ng-hide="crear" ng-click="eliminar()") Eliminar
-	hr
-	btabla()
+	hr(ng-hide="crear")
+	btabla(ng-hide="crear" info="inscritos")
+	p total inscritos {{totalInscritos}}

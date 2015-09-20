@@ -128,6 +128,21 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 						$scope.evento.cupos = evento1.cupos;
 					}
 				}
+			);$conexion.enviar(
+				"admin",
+				{
+					tipo: ($scope.taller)? "inscritosTaller":"inscritosConvocatoria",
+					1: $routeParams.eventoId
+				},
+				function(respuesta){
+					$scope.totalInscritos=respuesta.data.inscritos;
+				}
+			);
+			$tabla.get(
+				"admin", "Usuarios inscritos", 0, 10,
+				($scope.taller)? "listaInscritosTaller":"listaInscritosConvocatoria",
+				function (r){$scope.inscritos = r;},
+				"expulsar","Expulsar"
 			);
 		} else{//CREAR
 			$scope.evento.tipo = "crearTaller";

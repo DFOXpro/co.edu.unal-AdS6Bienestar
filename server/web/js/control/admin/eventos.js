@@ -134,27 +134,16 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 							2: eventoId
 						},
 						function(respuesta){
-							$scope.totalInscritos=respuesta.data.inscritos;
-							$conexion.enviar(
+							$tabla.get(
 								$scope.inscritos.url,
-								{
-									tipo: $scope.inscritos.tipo,
-									1: $scope.inscritos.pos,
-									2: $scope.inscritos.tamano,
-									3: $scope.inscritos.id
-								},
-								function (respuesta) {
-									if (respuesta.data.isError)
-										console.log("Error:", respuesta.data.errorDescrip) ;
-									else $scope.inscritos.callback({
-										titulo: $scope.inscritos.titulo,//"Usuarios"
-										lineas: respuesta.data,
-										exist : true,
-										fun : $scope.inscritos.eliminar,
-										texto : $scope.inscritos.tituloAccion2,
-										id : $scope.inscritos.id
-									});
-								}
+								$scope.inscritos.titulo,
+								$scope.inscritos.pos,
+								$scope.inscritos.tamano,
+								$scope.inscritos.tipo,
+								$scope.inscritos.callback,
+								$scope.inscritos.eliminar,
+								$scope.inscritos.tituloAccion2,
+								$scope.inscritos.id
 							);
 						}
 					);

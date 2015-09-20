@@ -16,13 +16,9 @@ app.config(['$routeProvider',
 				controller: 'eventos'
 			}).
 			when('/evento/:evento/:eventoId', {
-				templateUrl: 'crear-taller-tmplt',
+				templateUrl: 'crear-evento-tmplt',
 				controller: 'eventos'
 			}).
-//			when('/evento/convocatorias/:eventoId', {
-//				templateUrl: 'crear-convocatoria-tmplt',
-//				controller: 'eventos'
-//			}).
 			when('/inicio', {
 				templateUrl: 'inicio-tmplt',
 				controller: 'inicio'

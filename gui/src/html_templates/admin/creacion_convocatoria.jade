@@ -72,5 +72,5 @@ form(
 	.login-help(ng-show="evento.isError") {{ evento.error}}
 	button(ng-hide="crear" ng-click="eliminar()") Eliminar
 	hr(ng-hide="crear")
-	btabla(ng-hide="crear" info="inscritos")
-	p total inscritos {{totalInscritos}}
+	btabla(ng-hide="crear" info="inscritos.tabla")
+	p total inscritos {{inscritos.total}}

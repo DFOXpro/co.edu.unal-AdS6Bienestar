@@ -19,19 +19,29 @@ app.filter('ceil', function () {
 
 app.factory('$tabla', function ($conexion) {
 	var r = {};
-	r.get = function (url, tabla, pos, tamano, accion,callback,accion2Fun,accion2Texto){
+	r.get = function (
+		url,
+		tabla,
+		pos,
+		tamano,
+		accion,
+		callback,
+		accion2Fun,
+		accion2Texto,
+		accion2id
+	){
 		console.log("tabla.get: ",accion);
 		$conexion.enviar(
 			url,
 			{
 				tipo: accion,
 				1: pos,
-				2: tamano
+				2: tamano,
+				3: accion2id
 			},
 			function (respuesta) {
 				if (respuesta.data.isError)
 					console.log("Error:", respuesta.data.errorDescrip) ;
-				//else callback(respuesta.data);
 				else callback({
 					titulo: tabla,//"Usuarios"
 					verAccion: accion,//"/usuarios",
@@ -42,6 +52,7 @@ app.factory('$tabla', function ($conexion) {
 						exist : true,
 						fun : accion2Fun,
 						texto : accion2Texto,
+						id : accion2id
 					}:{exist : false}
 				});
 			}

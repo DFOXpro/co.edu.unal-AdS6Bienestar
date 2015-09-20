@@ -64,26 +64,9 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 				}
 			}
 		};
-		
+
 		if($routeParams.eventoId > 0){//EDITAR
 			var evento1 = {};
-			console.log("Editar");
-//TEST
-//evento1.nombre="qwer";
-//evento1.descripcion="zxcv";
-//evento1.fechaInicio= new Date(2015, 10, 19, 7, 00);
-//evento1.fechaFin=new Date(2015, 10, 20, 15, 00);
-//evento1.costo=10000;
-//evento1.cupos=30;
-//
-//$scope.evento.nombre = evento1.nombre;
-//$scope.evento.descripcion = evento1.descripcion;
-//$scope.evento.fechaInicio = evento1.fechaInicio;
-//$scope.evento.fechaFin = evento1.fechaFin;
-//$scope.evento.costo = evento1.costo;
-//$scope.evento.cupos = evento1.cupos;
-//END TEST
-
 			$scope.crear = false;
 			$scope.eliminado = false;
 			$scope.evento.tipo = "editar"+$routeParams.evento;
@@ -129,21 +112,76 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 						$scope.evento.cupos = evento1.cupos;
 					}
 				}
-			);$conexion.enviar(
-				"admin",
-				{
-					tipo: ($scope.taller)? "inscritosTaller":"inscritosConvocatoria",
-					1: $routeParams.eventoId
-				},
-				function(respuesta){
-					$scope.totalInscritos=respuesta.data.inscritos;
-				}
 			);
+			$scope.inscritos ={
+				url: "admin",
+				titulo: "Usuarios inscritos",
+				pos: 0,
+				tamano: 10,
+				tipo: ($scope.taller)? "usuariosEnTaller":"usuariosEnConvocatoria",
+				tituloAccion2: "Expulsar",
+				id:$routeParams.eventoId,
+				callback : function (r){
+					$scope.inscritos.tabla = r;
+					$scope.inscritos.getTamano();
+				},
+				eliminar: function(usuarioId, eventoId){
+					$conexion.enviar(
+						"admin",
+						{
+							tipo: ($scope.taller)? "eliminarUsuarioTaller":"eliminarUsuarioConv",
+							1: usuarioId,
+							2: eventoId
+						},
+						function(respuesta){
+							$scope.totalInscritos=respuesta.data.inscritos;
+							$conexion.enviar(
+								$scope.inscritos.url,
+								{
+									tipo: $scope.inscritos.tipo,
+									1: $scope.inscritos.pos,
+									2: $scope.inscritos.tamano,
+									3: $scope.inscritos.id
+								},
+								function (respuesta) {
+									if (respuesta.data.isError)
+										console.log("Error:", respuesta.data.errorDescrip) ;
+									else $scope.inscritos.callback({
+										titulo: $scope.inscritos.titulo,//"Usuarios"
+										lineas: respuesta.data,
+										exist : true,
+										fun : $scope.inscritos.eliminar,
+										texto : $scope.inscritos.tituloAccion2,
+										id : $scope.inscritos.id
+									});
+								}
+							);
+						}
+					);
+				},
+				getTamano: function(){
+					$conexion.enviar(
+						$scope.inscritos.url,
+						{
+							tipo: ($scope.taller)? "inscritosTaller":"inscritosConvocatoria",
+							1: $scope.inscritos.id
+						},
+						function(respuesta){
+							$scope.inscritos.total=respuesta.data.inscritos;
+						}
+					);
+				}
+			};
 			$tabla.get(
-				"admin", "Usuarios inscritos", 0, 10,
-				($scope.taller)? "listaInscritosTaller":"listaInscritosConvocatoria",
-				function (r){$scope.inscritos = r;},
-				"expulsar","Expulsar"
+				$scope.inscritos.url,
+				$scope.inscritos.titulo,
+				$scope.inscritos.pos,
+				$scope.inscritos.tamano,
+				$scope.inscritos.tipo,
+				$scope.inscritos.callback,
+				$scope.inscritos.eliminar,
+				$scope.inscritos.tituloAccion2,
+				$scope.inscritos.id
 			);
 		} else{//CREAR
 			$scope.evento.tipo = ($scope.taller)? "crearTaller":"crearConvocatoria";
@@ -189,8 +227,6 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		);
 	}
 	console.log(
-		"eventos",
-		$routeParams,
 		$rootScope.nav(ruta)
 	);
 
@@ -201,7 +237,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		modelFormat:'YYYY/MM/DD',
 		headingText: 'Escoje una fecha',
 		okBtnText: 'Aceptar',
-		cancelBtnText: 'Cancelar',
+		cancelBtnText: 'Cancelar'
 	};
 	$scope.hoy = new Date();
 	$scope.configConv = confGeneral;

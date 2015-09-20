@@ -242,8 +242,11 @@ public class VisUsuario extends HttpServlet {
     }
     
     protected void quitarUsuarioConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        ArrayList r = cU.abandonarConvocatoria(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); //1. idUsuario, 2. idEvento
-         
+		ArrayList r = CtrlUsuario.abandonarConvocatoria(
+			Integer.parseInt(request.getParameter("1")),//1. idUsuario
+			Integer.parseInt(request.getParameter("2"))// 2. idEvento
+		);
+
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         if(r.get(0)=="error"){

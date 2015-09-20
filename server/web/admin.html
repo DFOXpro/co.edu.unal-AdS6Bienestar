@@ -26,7 +26,7 @@
       <!-- Use the "active" class for the active menu item-->
       <li ng-repeat="ruta in rutas" ng-class="{'active':$last}"><a href="#{{ruta.url}}">{{ruta.nombre}}</a></li>
       <li class="logout"><a ng-click="cerrarSesion()">Salir</a></li>
-      <li class="logout"><a href="#/usuario.html">Entrar como usuario</a></li>
+      <li class="logout"><a href="/usuario.html">Entrar como usuario</a></li>
     </ul>
     <div id="containerHolder">
       <div id="container">
@@ -112,7 +112,7 @@
           <div ng-show="isf.costo.$error.max" class="login-help">No podemos cobrar tanto</div>
           <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" max="2147483647" min="1">
           <div ng-show="isf.cupos.$error.min" class="login-help">Corrija los cupos disponibles</div>
-          <div ng-show="isf.cupos.$error.max" class="login-help">No hay sillas para tanta gente</div><span>{{evento}}</span>
+          <div ng-show="isf.cupos.$error.max" class="login-help">No hay sillas para tanta gente</div>
           <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" ng-show="crear" class="login login-submit">
           <input type="submit" name="actualiza" value="Actualizar" ng-disabled="isf.$invalid" ng-show="!crear" class="login login-submit">
           <div ng-show="isf.nombre.$error.required" class="login-help">Escriba el nombre del taller</div>
@@ -124,8 +124,8 @@
           <div ng-show="con.isError" class="login-help">{{ evento.error}}</div>
           <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
           <hr ng-hide="crear">
-          <btabla ng-hide="crear" info="inscritos"></btabla>
-          <p>total inscritos {{totalInscritos}}</p>
+          <btabla ng-hide="crear" info="inscritos.tabla"></btabla>
+          <p>total inscritos {{inscritos.total}}</p>
         </form>
       </div>
       <div ng-hide="taller">
@@ -150,8 +150,8 @@
           <div ng-show="evento.isError" class="login-help">{{ evento.error}}</div>
           <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
           <hr ng-hide="crear">
-          <btabla ng-hide="crear" info="inscritos"></btabla>
-          <p>total inscritos {{totalInscritos}}</p>
+          <btabla ng-hide="crear" info="inscritos.tabla"></btabla>
+          <p>total inscritos {{inscritos.total}}</p>
         </form>
       </div>
       <div ng-show="exitoso">
@@ -173,7 +173,7 @@
       <table cellpadding="0" cellspacing="0">
         <tr ng-repeat="linea in tabla.lineas" ng-class-odd="'odd'">
           <td>{{linea.titulo}}</td>
-          <td><a href="#{{tabla.verAccion}}/{{linea.id}}?nombre={{linea.titulo}}" ng-hide="tabla.accion2.exist" class="view">Ver</a><a ng-show="tabla.accion2.exist" ng-click="tabla.accion2.fun(linea.id)" class="edit">{{tabla.accion2.texto}}</a>
+          <td><a href="#{{tabla.verAccion}}/{{linea.id}}?nombre={{linea.titulo}}" ng-hide="tabla.accion2.exist" class="view">Ver</a><a ng-show="tabla.accion2.exist" ng-click="tabla.accion2.fun(linea.id, tabla.accion2.id)" class="edit">{{tabla.accion2.texto}}</a>
             <!-- a.delete(href='#{{eliminarAccion}}/{{linea.id}}') Eliminar-->
             
           </td>

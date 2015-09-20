@@ -16,7 +16,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 
 	var ruta = [
 		{url:"/inicio",nombre:"Inicio"},
-		{url:"/usuarios",nombre:"Gestión de usuarios."}
+		{url:"/usuarios",nombre:"Gestión de usuarios"}
 	];
 
 	if($routeParams.usuarioId !== undefined) {
@@ -85,26 +85,6 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		};
 		if($routeParams.usuarioId > 0){//EDITAR
 			var usuario = {};
-//TEST
-//usuario.nombre="qwer";
-//usuario.apellido="zxcv";
-//usuario.tipoDocumento="TI";
-//usuario.documento=1234243;
-//usuario.email="asdf@qwer";
-//usuario.contrasena="poiuy";
-//usuario.rol="A";
-//
-//$scope.cu.nombre = usuario.nombre;
-//$scope.cu.apellido = usuario.apellido;
-//$scope.cu.tipoDocumento = usuario.tipoDocumento;
-//$scope.cu.documento = usuario.documento;
-//$scope.cu.email = usuario.email;
-//$scope.cu.contrasena = usuario.contrasena;
-//$scope.cu.rol = usuario.rol;
-//$scope.cu.contrasena_2 = usuario.contrasena;
-//END TEST
-//{"nombre":"Taller1","id":1,"cupos":5,"descrip":"Taller1 Desc","fin":2015-09-28}
-
 			$scope.crear = false;
 			$scope.eliminado = false;
 			$scope.cu.tipo = "editarUsuario";

@@ -16,7 +16,7 @@ script(
 				) Ver
 				a.edit(
 					ng-show="tabla.accion2.exist"
-					ng-click='tabla.accion2.fun(linea.id)'
+					ng-click='tabla.accion2.fun(linea.id, tabla.accion2.id)'
 				) {{tabla.accion2.texto}}
 				// a.delete(href='#{{eliminarAccion}}/{{linea.id}}') Eliminar
 

@@ -74,7 +74,7 @@ form(
 	)
 	.login-help(ng-show="isf.cupos.$error.min") Corrija los cupos disponibles
 	.login-help(ng-show="isf.cupos.$error.max") No hay sillas para tanta gente
-	span {{evento}}
+
 	input.login.login-submit(
 		type='submit'
 		name='crear'
@@ -98,5 +98,5 @@ form(
 	.login-help(ng-show="con.isError") {{ evento.error}}
 	button(ng-hide="crear" ng-click="eliminar()") Eliminar
 	hr(ng-hide="crear")
-	btabla(ng-hide="crear" info="inscritos")
-	p total inscritos {{totalInscritos}}
+	btabla(ng-hide="crear" info="inscritos.tabla")
+	p total inscritos {{inscritos.total}}

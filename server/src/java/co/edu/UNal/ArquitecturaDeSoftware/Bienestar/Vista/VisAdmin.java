@@ -219,11 +219,11 @@ public class VisAdmin extends VisUsuario{
     
     protected void actualizarConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ArrayList r = ctrlAdmin.actualizarConvocatoria(
-            Integer.parseInt(request.getParameter("1")), // id
-            request.getParameter("2"), // nombre
-            request.getParameter("3"), // descripción
+            Integer.parseInt(request.getParameter("0")), // id
+            request.getParameter("1"), // nombre
+            request.getParameter("2"), // descripción
             request.getParameter("4"), // fin
-            Integer.parseInt(request.getParameter("5")) // cupos
+            Integer.parseInt(request.getParameter("6")) // cupos
         );
          
         response.setContentType("application/json;charset=UTF-8");

@@ -36,6 +36,10 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 					$scope.evento.error = "No hay ningún cambio";
 				} else {
 					$scope.evento.error = "Enviando...";
+					var castFecha = function (f){
+						return f.getFullYear()+"/"+f.getMonth()+"/"+f.getDay()
+					};
+					//2015/10/20
 					$conexion.enviar(
 						"admin",
 						{
@@ -43,8 +47,8 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 							0: $scope.evento.id,
 							1: $scope.evento.nombre,
 							2: $scope.evento.descripcion,
-							3: $scope.evento.fechaInicio,
-							4: $scope.evento.fechaFin,
+							3: castFecha($scope.evento.fechaInicio),
+							4: castFecha($scope.evento.fechaFin),
 							5: $scope.evento.costo,
 							6: $scope.evento.cupos
 						},

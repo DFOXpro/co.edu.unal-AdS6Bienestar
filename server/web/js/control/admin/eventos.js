@@ -182,7 +182,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 			$tabla.get(
 				"admin",
 				$routeParams.evento,
-				($scope.pagina.pos < 2)?0:$scope.pagina.pos,
+				$scope.pagina.pos,
 				10,
 				"/evento/"+$routeParams.evento,
 				function (r){$scope.pagina.tabla = r;}
@@ -192,26 +192,21 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		$scope.pagina = {
 			titulo: "Administrador: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
-			pos: 1,
-			total: 0,
+			pos: 0,
 			tabla: {},
 			get: get,
 			objeto: ($routeParams.evento === "talleres")?"taller":"convocatoria"
 		};
 		get(0);
-		$scope.pagina.tabla.total = 0;
+		$scope.$watch("pagina.tabla.total", function (nuevoValor, viejoValor){
+			if(nuevoValor === undefined) $scope.pagina.tabla.total=viejoValor;
+			else
+			$scope.pagina.total = nuevoValor /10;
+		});
 		$conexion.enviar(
-			"admin",{tipo: "numConvocatorias"},
+			"admin",{tipo: ($routeParams.evento === "talleres")?"numTalleres":"numConvocatorias"},
 			function(respuesta){
-				//$scope.pagina.tabla.total = respuesta.data.total//NO SIRVE no digiere el cambio
-				$scope.$watch("pagina.tabla.total", function (nuevoValor){
-					$scope.pagina.total = $scope.pagina.tabla.total /10;
-					console.log("tic");
-				});
-				console.log($scope.pagina.tabla.total = respuesta.data.total);
-				//Valimos barrigas con este scope todos los metodos que se que sirven no sirven aqui T.T
-				//$scope.$apply();// JAJAJA puto angular
-				//$rootScope.$digest()
+				$scope.pagina.tabla.total = respuesta.data.total;
 			}
 		);
 	}

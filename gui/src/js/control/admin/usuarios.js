@@ -1,19 +1,6 @@
 /* global app */
 
 app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion, $tabla) {
-	var get = function (diff) {
-		$scope.pagina.pos += diff;
-		$tabla.get(
-			"admin",
-			"Usuarios",
-			$scope.pagina.pos,
-			10,
-			"usuarios",
-			function (r){$scope.pagina.tabla = r;}
-		);
-		$scope.pagina.total = ($scope.pagina.tabla.total /10);
-	};
-
 	var ruta = [
 		{url:"/inicio",nombre:"Inicio"},
 		{url:"/usuarios",nombre:"Gestión de usuarios"}
@@ -140,19 +127,37 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		};
 	} else {
 //LISTAR USUARIOS
+		var get = function (diff) {
+			$scope.pagina.pos += diff;
+			$tabla.get(
+				"admin",
+				"Usuarios",
+				$scope.pagina.pos,
+				10,
+				"usuarios",
+				function (r){$scope.pagina.tabla = r;}
+			);
+		};
+
 		$scope.pagina = {
 			titulo: "Administrador: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
 			pos: 0,
-			total: 0,
 			tabla: {},
 			get: get,
 			objeto: "usuario"
 		};
 		get(0);
+		$scope.$watch("pagina.tabla.total", function (nuevoValor, viejoValor){
+			if(nuevoValor === undefined) $scope.pagina.tabla.total=viejoValor;
+			else
+			$scope.pagina.total = nuevoValor /10;
+		});
 		$conexion.enviar(
 			"admin",{tipo: "numUsuarios"},
-			function(respuesta){$scope.pagina.tabla.total= respuesta.data.total;}
+			function(respuesta){
+				$scope.pagina.tabla.total = respuesta.data.total;
+			}
 		);
 	}
 	console.log(

@@ -30,7 +30,6 @@ app.factory('$tabla', function ($conexion) {
 		accion2Texto,
 		accion2id
 	){
-		console.log("tabla.get: ",accion);
 		$conexion.enviar(
 			url,
 			{

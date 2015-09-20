@@ -202,6 +202,7 @@ public class TallerDAO extends CrudDAO<TallerEntity> {
 	 */
 	public static ArrayList<TallerEntity> getTodosTalleres(int tamano, int pagina) {
 		int posicion = pagina * tamano;
+
 		ArrayList<Object> param = new ArrayList<>();
 		param.add(posicion);
 		param.add(tamano);

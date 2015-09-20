@@ -34,8 +34,8 @@ public class CtrlUsuario {
 		return ConvocatoriaDAO.getCountUsuarioConvocatoria(id);
 	}
 
-	public static ArrayList<TallerEntity> leerMultiplesTalleres(int tamano, int posicion) {
-		return TallerDAO.getTodosTalleres(posicion, tamano);
+	public static ArrayList<TallerEntity> leerMultiplesTalleres(int posicion, int tamano) {
+		return TallerDAO.getTodosTalleres(tamano, posicion);
 	}
 
 	public static int obtenerTotalTalleres() {

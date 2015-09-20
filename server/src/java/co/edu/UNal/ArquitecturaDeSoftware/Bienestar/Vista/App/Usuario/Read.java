@@ -90,7 +90,10 @@ public class Read extends HttpServlet {
 
 	protected static void leerMultiplesTalleres(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ArrayList<TallerEntity> talleres = new ArrayList<>();
-		talleres = CtrlUsuario.leerMultiplesTalleres(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // tamaño y posición
+		talleres = CtrlUsuario.leerMultiplesTalleres(
+			Integer.parseInt(request.getParameter("1")),
+			Integer.parseInt(request.getParameter("2"))
+		); // posición y tamaño
 
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();

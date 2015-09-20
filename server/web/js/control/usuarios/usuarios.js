@@ -162,7 +162,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		$scope.pagina = {
 			titulo: "Usuario: ",
 			subtitulo: window.atob(localStorage.getItem("6")),
-			pos: 0,
+			pos: 1,
 			total: 0,
 			tabla: {},
 			get: get,

@@ -36,9 +36,9 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 
 
 	$scope.pagina = {
-		titulo: "Administrador: ",
+		titulo: "Usuario: ",
 		subtitulo: window.atob(localStorage.getItem("6")),
-		pos: 0,
+		pos: 1,
 		total: 0,
 		tabla: {},
 		get: get,
@@ -46,74 +46,4 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 	};
 	get(0);
 });
-console.log("Admin usuarios cargado");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log("Usuario cargado");

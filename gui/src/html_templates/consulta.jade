@@ -8,11 +8,11 @@ script(
 	) Crear {{pagina.objeto}}
 	btabla(info="pagina.tabla")
 	button(
-		ng-show="pagina.pos > 1"
+		ng-show="pagina.pos > 0"
 		ng-click="pagina.get(-1)"
 	) Anterior
-	span {{pagina.pos}} de {{pagina.total | ceil}} ({{ pagina.tabla.total }})
+	span {{pagina.pos+1}} de {{pagina.total | ceil}} ({{ pagina.tabla.total }})
 	button(
-		ng-show="pagina.pos < pagina.total"
+		ng-show="pagina.pos+1 < pagina.total"
 		ng-click="pagina.get(1)"
 	) Siguiente

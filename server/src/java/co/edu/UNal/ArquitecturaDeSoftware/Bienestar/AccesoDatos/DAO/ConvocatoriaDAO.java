@@ -141,6 +141,7 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
 	 */
 	public static ArrayList<ConvocatoriaEntity> getConvocatorias(int tamano, int pagina) {
 		int posicion = pagina * tamano;
+
 		ArrayList<Object> param = new ArrayList<>();
 		param.add(posicion);
 		param.add(tamano);

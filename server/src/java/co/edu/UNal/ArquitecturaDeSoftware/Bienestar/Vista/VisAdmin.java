@@ -186,6 +186,63 @@ public class VisAdmin extends VisUsuario{
         out.print(list1);
     }
     
+    //Para contar usuarios en convocatoria pasando Id la misma
+        protected void consultarUsuariosEnConvocatoriaId(HttpServletRequest request, HttpServletResponse response) throws IOException{  
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+        usuarios = ctrlAdmin.obtenerUsuariosEnConvocatoria(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2")), Integer.parseInt(request.getParameter("3"))); // id del usuario
+        
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        JSONArray list1 = new JSONArray();
+        for(int i = 0; i < usuarios.size(); i++)
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("id", usuarios.get(i).getIdUsuario());
+            obj.put("titulo", usuarios.get(i).getNombres() +" "+usuarios.get(i).getApellidos());
+            list1.add(obj);
+        }
+        out.print(list1);
+    }
+        
+        //Para contar usuarios en taller pasando Id la misma
+        protected void consultarUsuariosEnTallerId(HttpServletRequest request, HttpServletResponse response) throws IOException{  
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+        usuarios = ctrlAdmin.obtenerUsuariosEnTaller(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2")), Integer.parseInt(request.getParameter("3"))); // id del usuario
+        
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        JSONArray list1 = new JSONArray();
+        for(int i = 0; i < usuarios.size(); i++)
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("id", usuarios.get(i).getIdUsuario());
+            obj.put("titulo", usuarios.get(i).getNombres() +" "+usuarios.get(i).getApellidos());
+            list1.add(obj);
+        }
+        out.print(list1);
+    }
+        
+                //Para contar usuarios en convocatoria pasando Id la misma
+        protected void consultarDocentesEnTallerId(HttpServletRequest request, HttpServletResponse response) throws IOException{  
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+        usuarios = ctrlAdmin.obtenerUsuariosEnTaller(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2")), Integer.parseInt(request.getParameter("3"))); // id del usuario
+        
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        JSONArray list1 = new JSONArray();
+        for(int i = 0; i < usuarios.size(); i++)
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("id", usuarios.get(i).getIdUsuario());
+            obj.put("titulo", usuarios.get(i).getNombres() +" "+usuarios.get(i).getApellidos());
+            list1.add(obj);
+        }
+        out.print(list1);
+    }
+    
     protected void obtenerTotalUsuarios(HttpServletRequest request, HttpServletResponse response) throws IOException{
         int numC = ctrlAdmin.obtenerTotalUsuarios();
         response.setContentType("application/json;charset=UTF-8");
@@ -352,6 +409,15 @@ public class VisAdmin extends VisUsuario{
                         break;
                 }case "usuarios":{
                         leerUsuariosMultiplesId(request, response);
+                        break;
+                }case "consultarUsuariosEnTallerId":{
+                        consultarUsuariosEnTallerId(request, response);
+                        break;
+                }case "consultarDocentesEnTallerId":{
+                        consultarDocentesEnTallerId(request, response);
+                        break;
+                }case "consultarUsuariosEnConvocatoriaId":{
+                        consultarUsuariosEnConvocatoriaId(request, response);
                         break;
                 }
 

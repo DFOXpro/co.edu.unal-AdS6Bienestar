@@ -1,5 +1,5 @@
 form(
-	ng-submit="tal.submit()"
+	ng-submit="evento.submit()"
 	ng-hide="exitoso"
 	name="isf"
 	novalidate
@@ -9,7 +9,7 @@ form(
 		type='text'
 		name='nombre'
 		placeholder='Nombre'
-		ng-model="tal.nombre"
+		ng-model="evento.nombre"
 		ng-minlength=3
 		ng-maxlength=100
 	)
@@ -20,7 +20,7 @@ form(
 		type='text'
 		name='descripcion'
 		placeholder='Descripcion'
-		ng-model="tal.descripcion"
+		ng-model="evento.descripcion"
 		ng-minlength=3
 		ng-maxlength=100
 	)
@@ -32,28 +32,28 @@ form(
 		ez-datetime-control
 		type='text'
 		name='fechaInicio'
-		placeholder='Fecha Inicio Registro'
-		ng-model="tal.fechaInicio"
-		min-date="tal.fechaFin"
+		placeholder='Inicio del evento'
+		ng-model="evento.fechaInicio"
+		min-date="evento.fechaFin"
 	)
-	p {{ tal.fechaInicio.$error}}
+	p {{ evento.fechaInicio.$error}}
 	input(
 		required
 		ez-datetime-control
 		type='text'
 		name='fechaFin'
-		placeholder='Fecha Fin Registro'
-		ng-model="tal.fechaFin"
-		min-date="tal.fechaInicio"
+		placeholder='Finalización del evento'
+		ng-model="evento.fechaFin"
+		min-date="evento.fechaInicio"
 	)
-	p {{ tal.fechaFin.$error}}
+	p {{ evento.fechaFin.$error}}
 
 	input(
 		required
 		type='number'
 		name='costo'
 		placeholder='Costo'
-		ng-model="tal.costo"
+		ng-model="evento.costo"
 		max=2147483647
 		min=0
 	)
@@ -65,17 +65,26 @@ form(
 		type='number'
 		name='cupos'
 		placeholder='Cupos ofertados'
-		ng-model="tal.cupos"
+		ng-model="evento.cupos"
 		max=2147483647
 		min=1
 	)
 	.login-help(ng-show="isf.cupos.$error.min") Corrija los cupos disponibles
+	.login-help(ng-show="isf.cupos.$error.max") No hay sillas para tanta gente
 
 	input.login.login-submit(
 		type='submit'
 		name='crear'
 		value='Crear'
 		ng-disabled="isf.$invalid"
+		ng-show="crear"
+	)
+	input.login.login-submit(
+		type='submit'
+		name='actualiza'
+		value='Actualizar'
+		ng-disabled="isf.$invalid"
+		ng-show="!crear"
 	)
 	.login-help(ng-show="isf.nombre.$error.required") Escriba el nombre del taller
 	.login-help(ng-show="isf.descripcion.$error.required") Escriba la descripcion
@@ -83,12 +92,7 @@ form(
 	.login-help(ng-show="isf.fechaFin.$error.required") Indique la fecha de cierre
 	.login-help(ng-show="isf.costo.$error.required") Indique el costo del taller
 	.login-help(ng-show="isf.cupos.$error.required") Indique el numero de cupos ofertados
-	.login-help(ng-show="con.isError") {{ tal.error}}
+	.login-help(ng-show="con.isError") {{ evento.error}}
 	button(ng-hide="crear" ng-click="eliminar()") Eliminar
 	hr
 	btabla()
-div(ng-show ="exitoso")
-	div(ng-show="!eliminado")
-		h2(ng-show="!crear") Evento actualizado exitosamente
-		h2(ng-show="crear") Evento creado exitosamente
-	h2(ng-show="eliminado") Evento eliminado exitosamente

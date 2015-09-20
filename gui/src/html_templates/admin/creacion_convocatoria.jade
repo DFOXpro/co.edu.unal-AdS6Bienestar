@@ -1,7 +1,7 @@
 form(
-	ng-submit="con.submit()"
+	ng-submit="evento.submit()"
 	ng-hide="exitoso"
-	name="isf"
+	name="isfc"
 	novalidate
 )
 	input(
@@ -9,56 +9,66 @@ form(
 		type='text'
 		name='nombre'
 		placeholder='Nombre'
-		ng-model="con.nombre"
+		ng-model="evento.nombre"
 		ng-minlength=3
 		ng-maxlength=100
 	)
-	.login-help(ng-show="isf.nombre.$error.minlength") Nombre muy corto
-	.login-help(ng-show="isf.nombre.$error.maxlength") Nombre muy largo
+	.login-help(ng-show="isfc.nombre.$error.minlength") Nombre muy corto
+	.login-help(ng-show="isfc.nombre.$error.maxlength") Nombre muy largo
 	input(
 		required
 		type='text'
 		name='descripcion'
 		placeholder='Descripcion'
-		ng-model="con.descripcion"
+		ng-model="evento.descripcion"
 		ng-minlength=3
 		ng-maxlength=100
 	)
-	.login-help(ng-show="isf.descripcion.$error.minlength") Descripcion muy corta
-	.login-help(ng-show="isf.descripcion.$error.maxlength") Descripcion muy larga
+	.login-help(ng-show="isfc.descripcion.$error.minlength") Descripcion muy corta
+	.login-help(ng-show="isfc.descripcion.$error.maxlength") Descripcion muy larga
 
 	input(
 		required
-		type='date'
+		ez-datetime-control
+		type='text'
 		name='fecha'
 		placeholder='Fecha Fin Registro'
-		ng-model="con.fechaFin"
-		ng-minlength=3
+		ng-model="evento.fechaFin"
+		min-date="evento.hoy"
 	)
-	.login-help(ng-show="isf.fechaFin.$error.minlength") Fecha invalida
+	.login-help(ng-show="isfc.fechaFin.$error") Fecha invalida
 
 	input(
 		required
-		type='text'
+		type='number'
 		name='cupos'
 		placeholder='Cupos ofertados'
-		ng-model="con.cupos"
-		ng-minlength=3
+		ng-model="evento.cupos"
+		min=2
+		max=2147483647
 	)
-	.login-help(ng-show="isf.cupos.$error.minlength") Descripcion muy corta
+	.login-help(ng-show="isfc.cupos.$error.min") El cupo ingresado es muy pequeño
+	.login-help(ng-show="isfc.cupos.$error.max") Demasiados cupos
 
 	input.login.login-submit(
 		type='submit'
 		name='crear'
 		value='Crear'
-		ng-disabled="isf.$invalid"
+		ng-disabled="isfc.$invalid"
+		ng-show="crear"
 	)
-	.login-help(ng-show="isf.nombre.$error.required") Escriba el nombre de la convocatoria
-	.login-help(ng-show="isf.descripcion.$error.required") Escriba la descripcion
-	.login-help(ng-show="isf.fechaFin.$error.required") Indique la fecha de cierre
-	.login-help(ng-show="isf.cupos.$error.required") Indique el numero de cupos ofertados
-	.login-help(ng-show="con.isError") {{ con.error}}
-	a(href	='/') Iniciar sesión
-div(ng-show ="exitoso")
-	h2 {{con.nombre}} Registro exitoso de la convocatoria, ya puedes
-		a(href	='/') ver y administrar este evento
+	input.login.login-submit(
+		type='submit'
+		name='actualiza'
+		value='Actualizar'
+		ng-disabled="isfc.$invalid"
+		ng-show="!crear"
+	)
+	.login-help(ng-show="isfc.nombre.$error.required") Escriba el nombre del evento
+	.login-help(ng-show="isfc.descripcion.$error.required") Escriba la descripcion
+	.login-help(ng-show="isfc.fechaFin.$error.required") Indique la fecha de cierre
+	.login-help(ng-show="isfc.cupos.$error.required") Indique el numero de cupos ofertados
+	.login-help(ng-show="evento.isError") {{ evento.error}}
+	button(ng-hide="crear" ng-click="eliminar()") Eliminar
+	hr
+	btabla()

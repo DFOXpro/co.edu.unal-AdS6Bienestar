@@ -1,4 +1,4 @@
-/* global app */
+/* global app, moment */
 app.$inject = ['ngRoute', 'ez.datetime', 'ez.modal', 'ez.dropdown'];
 
 app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion, $tabla) {
@@ -6,7 +6,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		{url:"/inicio",nombre:"Inicio"},
 		{url:"/evento/"+$routeParams.evento,nombre:"Gestión de "+$routeParams.evento}
 	];
-
+	$scope.taller = $routeParams.evento === "talleres";
 	if($routeParams.eventoId !== undefined){
 //Crear o editar usuario
 		ruta[2] = {
@@ -17,39 +17,40 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		$scope.crear = true;
 		var revisarCambios = function (){
 			if($scope.crear) return false;
-			else if(
-				$scope.tal.nombre !== taller.nombre |
-				$scope.tal.descripcion !== taller.descripcion |
-				$scope.tal.fechaInicio !== taller.fechaInicio |
-				$scope.tal.fechaFin !== taller.fechaFin |
-				$scope.tal.costo !== taller.costo |
-				$scope.tal.cupos !== taller.cupos
+			if(
+				$scope.evento.nombre !== evento1.nombre |
+				$scope.evento.descripcion !== evento1.descripcion |
+				$scope.evento.fechaInicio !== evento1.fechaInicio |
+				$scope.evento.fechaFin !== evento1.fechaFin |
+				$scope.evento.costo !== evento1.costo |
+				$scope.evento.cupos !== evento1.cupos
 			) return false;
 			else return true;
 		};
-		$scope.tal = {
+		$scope.evento = {
 			error : "",
 			isError : false,
 			submit : function () {
-				$scope.tal.isError = true;
+				$scope.evento.isError = true;
 				if(!$scope.crear & revisarCambios()){
-					$scope.tal.error = "No hay ningún cambio";
+					$scope.evento.error = "No hay ningún cambio";
 				} else {
-					$scope.tal.error = "Enviando...";
+					$scope.evento.error = "Enviando...";
 					$conexion.enviar(
 						"admin",
 						{
-							tipo: $scope.tal.tipo,
-							1: $scope.tal.nombre,
-							2: $scope.tal.descripcion,
-							3: $scope.tal.fechaInicio,
-							4: $scope.tal.fechaFin,
-							5: $scope.tal.costo,
-							6: $scope.tal.cupos
+							tipo: $scope.evento.tipo,
+							0: $scope.evento.id,
+							1: $scope.evento.nombre,
+							2: $scope.evento.descripcion,
+							3: $scope.evento.fechaInicio,
+							4: $scope.evento.fechaFin,
+							5: $scope.evento.costo,
+							6: $scope.evento.cupos
 						},
 						function(respuesta){
 							if(respuesta.data.isError)
-								$scope.tal.error=respuesta.data.errorDescrip;
+								$scope.evento.error=respuesta.data.errorDescrip;
 							else {
 								$scope.exitoso= true;
 							}
@@ -60,27 +61,27 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 		};
 		
 		if($routeParams.eventoId > 0){//EDITAR
-			var taller = {};
+			var evento1 = {};
 			console.log("Editar");
 //TEST
-taller.nombre="qwer";
-taller.descripcion="zxcv";
-taller.fechaInicio= new Date(2015, 10, 19, 7, 00);
-taller.fechaFin=new Date(2015, 10, 20, 15, 00);
-taller.costo=10000;
-taller.cupos=30;
-
-$scope.tal.nombre = taller.nombre;
-$scope.tal.descripcion = taller.descripcion;
-$scope.tal.fechaInicio = taller.fechaInicio;
-$scope.tal.fechaFin = taller.fechaFin;
-$scope.tal.costo = taller.costo;
-$scope.tal.cupos = taller.cupos;
+//evento1.nombre="qwer";
+//evento1.descripcion="zxcv";
+//evento1.fechaInicio= new Date(2015, 10, 19, 7, 00);
+//evento1.fechaFin=new Date(2015, 10, 20, 15, 00);
+//evento1.costo=10000;
+//evento1.cupos=30;
+//
+//$scope.evento.nombre = evento1.nombre;
+//$scope.evento.descripcion = evento1.descripcion;
+//$scope.evento.fechaInicio = evento1.fechaInicio;
+//$scope.evento.fechaFin = evento1.fechaFin;
+//$scope.evento.costo = evento1.costo;
+//$scope.evento.cupos = evento1.cupos;
 //END TEST
 
 			$scope.crear = false;
 			$scope.eliminado = false;
-			$scope.tal.tipo = "editarTaller";
+			$scope.evento.tipo = "editar"+$routeParams.evento;
 			$scope.eliminar = function (){
 				var tA = $conexion.strAleatorio(5);
 				var tB = prompt("Escriba "+tA+" para confirmar");
@@ -88,12 +89,12 @@ $scope.tal.cupos = taller.cupos;
 					$conexion.enviar(
 						"admin",
 						{
-							tipo: "eliminarTausuariller",
-							1: $scope.tal.id
+							tipo: "eliminar"+$routeParams.evento,
+							1: $scope.evento.id
 						},
 						function(respuesta){
 							if(respuesta.data.isError)
-								$scope.tal.error=respuesta.data.errorDescrip;
+								$scope.evento.error=respuesta.data.errorDescrip;
 							else {
 								$scope.exitoso= true;
 								$scope.eliminado = true;
@@ -106,25 +107,26 @@ $scope.tal.cupos = taller.cupos;
 			$conexion.enviar(
 				"admin",
 				{
-					tipo: "taller",
+					tipo: ($scope.taller)? "taller":"convocatoria",
 					1: $routeParams.eventoId
 				},
 				function(respuesta){
 					if(respuesta.data.isError)
-						$scope.tal.error=respuesta.data.errorDescrip;
+						$scope.evento.error=respuesta.data.errorDescrip;
 					else {
-						taller = respuesta.data;
-						$scope.tal.nombre = taller.nombre;
-						$scope.tal.descripcion = taller.descripcion;
-						$scope.tal.fechaInicio = new Date(taller.fechaInicio);
-						$scope.tal.fechaFin = new Date(taller.fechaFin);
-						$scope.tal.costo = taller.costo;
-						$scope.tal.cupos = taller.cupos;
+						evento1 = respuesta.data;
+						$scope.evento.id = evento1.id;
+						$scope.evento.nombre = evento1.nombre;
+						$scope.evento.descripcion = evento1.descripcion;
+						$scope.evento.fechaInicio = new Date(evento1.fechaInicio);
+						$scope.evento.fechaFin = new Date(evento1.fechaFin);
+						$scope.evento.costo = evento1.costo;
+						$scope.evento.cupos = evento1.cupos;
 					}
 				}
 			);
 		} else{//CREAR
-			$scope.tal.tipo = "crearTaller";
+			$scope.evento.tipo = "crearTaller";
 		};
 	} else {
 //LISTAR EVENTOS

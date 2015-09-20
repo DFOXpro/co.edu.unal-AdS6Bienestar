@@ -143,8 +143,15 @@ public class CtrlAdmin extends CtrlUsuario{
         return r;
     }
     
-    public ArrayList actualizarTaller(int ID_TALLER, String NOMBRE, String DESCRIPCION, String FECHA_FIN_REGISTRO, String FECHA_INICIO, String FECHA_FIN, int COSTO, int CUPOS){
-        String error = TallerDAO.update(ID_TALLER, 't', NOMBRE, DESCRIPCION, FECHA_FIN_REGISTRO, FECHA_INICIO, FECHA_FIN, COSTO, CUPOS);
+    public ArrayList actualizarTaller(
+		int ID_TALLER, String NOMBRE,
+		String DESCRIPCION,
+		String FECHA_INICIO,
+		String FECHA_FIN,
+		int COSTO,
+		int CUPOS
+	){
+        String error = TallerDAO.update(ID_TALLER, 't', NOMBRE, DESCRIPCION, FECHA_INICIO, FECHA_INICIO, FECHA_FIN, COSTO, CUPOS);
         ArrayList r = new ArrayList();
         if(error.equals("OK")){
             r.add("isExitoso");
@@ -169,6 +176,3 @@ public class CtrlAdmin extends CtrlUsuario{
     
     
 }
-
-
-

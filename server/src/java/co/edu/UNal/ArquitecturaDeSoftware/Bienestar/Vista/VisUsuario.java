@@ -36,10 +36,9 @@ public class VisUsuario extends HttpServlet {
                 JSONObject obj = new JSONObject();
                 obj.put("id", e.getIdConvocatoria());
                 obj.put("nombre", e.getNombre());
-                obj.put("descrip", e.getDescripcion());
+                obj.put("descripcion", e.getDescripcion());
                 obj.put("cupos", e.getCupos());
-                obj.put("fin", e.getFechaFinRegistro());
-                
+                obj.put("fechaFin", ""+e.getFechaFinRegistro());
                 out.print(obj);
         }
     }

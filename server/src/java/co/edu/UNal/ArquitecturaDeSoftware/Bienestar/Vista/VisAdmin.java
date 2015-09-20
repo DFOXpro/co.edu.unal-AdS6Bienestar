@@ -284,14 +284,13 @@ public class VisAdmin extends VisUsuario{
     
     protected void actualizarTaller(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ArrayList r = ctrlAdmin.actualizarTaller(
-            Integer.parseInt(request.getParameter("1")), // id
-            request.getParameter("2"), // nombre
-            request.getParameter("3"), // descripción
-            request.getParameter("4"), // fin registro (Fecha hasta donde está permitido registrarse)
-            request.getParameter("5"), // inicio del taller
-            request.getParameter("6"), // fin del taller
-            Integer.parseInt(request.getParameter("6")), // costo
-            Integer.parseInt(request.getParameter("7")) // cupos
+            Integer.parseInt(request.getParameter("0")), // id
+            request.getParameter("1"), // nombre
+            request.getParameter("2"), // descripción
+            request.getParameter("3"), // fin registro (Fecha hasta donde está permitido registrarse)
+            request.getParameter("4"), // inicio del taller
+            Integer.parseInt(request.getParameter("5")), // costo
+            Integer.parseInt(request.getParameter("6")) // cupos
         );
          
         response.setContentType("application/json;charset=UTF-8");
@@ -372,10 +371,10 @@ public class VisAdmin extends VisUsuario{
                 } case "crearConvocatoria":{
                         crearConvocatoria(request,response);
                         break;
-                } case "actualizarConvocatoria":{
+                } case "editarconvocatorias":{
                         actualizarConvocatoria(request,response);
                         break;
-                } case "eliminarConvocatoria":{
+                } case "eliminarconvocatorias":{
                         eliminarConvocatoria(request,response);
                         break;
 				} case "regUsuarioConv":{
@@ -402,10 +401,10 @@ public class VisAdmin extends VisUsuario{
                 } case "crearTaller":{
                         crearTaller(request,response);
                         break;
-                } case "actualizarTaller":{
+                } case "editartalleres":{
                         actualizarTaller(request,response);
                         break;
-                } case "eliminarTaller":{
+                } case "eliminartalleres":{
                         eliminarTaller(request,response);
                         break;
                 } case "regUsuarioTaller":{

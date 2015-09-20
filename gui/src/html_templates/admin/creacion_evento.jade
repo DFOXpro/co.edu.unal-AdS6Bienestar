@@ -2,5 +2,12 @@ script(
 	type="text/ng-template"
 	id="crear-evento-tmplt"
 )
-	include creacion_convocatoria
-	include creacion_taller
+	div(ng-show="taller")
+		include creacion_taller
+	div(ng-hide="taller")
+		include creacion_convocatoria
+	div(ng-show ="exitoso")
+		div(ng-show="!eliminado")
+			h2(ng-show="!crear") Evento actualizado exitosamente
+			h2(ng-show="crear") Evento creado exitosamente
+		h2(ng-show="eliminado") Evento eliminado exitosamente

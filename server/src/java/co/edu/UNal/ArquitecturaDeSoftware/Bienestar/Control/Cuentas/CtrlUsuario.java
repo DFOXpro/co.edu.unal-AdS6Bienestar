@@ -36,7 +36,7 @@ public class CtrlUsuario {
     }
         
     public ArrayList<TallerEntity> leerMultiplesTalleres(int tamano, int posicion){
-        return TallerDAO.getTodosTalleres(tamano,posicion);
+        return TallerDAO.getTodosTalleres(posicion,tamano);
     }
     
     public int obtenerTotalTalleres(){

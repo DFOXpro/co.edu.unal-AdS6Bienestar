@@ -142,11 +142,16 @@
         <div ng-show="isf.costo.$error.required" class="login-help">Indique el costo del taller</div>
         <div ng-show="isf.cupos.$error.required" class="login-help">Indique el numero de cupos ofertados</div>
         <div ng-show="con.isError" class="login-help">{{ tal.error}}</div>
+        <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
         <hr>
         <btabla></btabla>
       </form>
       <div ng-show="exitoso">
-        <h2>{{con.nombre}} Registro exitoso de la convocatoria, ya puedes<a href="/">ver y administrar este evento</a></h2>
+        <div ng-show="!eliminado">
+          <h2 ng-show="!crear">Evento actualizado exitosamente</h2>
+          <h2 ng-show="crear">Evento creado exitosamente</h2>
+        </div>
+        <h2 ng-show="eliminado">Evento eliminado exitosamente</h2>
       </div>
     </script>
     <script type="text/ng-template" id="inicio-tmplt">

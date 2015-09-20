@@ -389,6 +389,7 @@ public class VisAdmin extends VisUsuario{
 //CRUD TALLER
 				case "taller":{
                         leerTaller(request, response);
+						break;
                 }case "/evento/talleres":{
                         leerMultiplesTalleres(request, response);
                         break;

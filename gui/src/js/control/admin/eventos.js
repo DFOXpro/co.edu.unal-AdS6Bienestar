@@ -4,7 +4,7 @@ app.$inject = ['ngRoute', 'ez.datetime', 'ez.modal', 'ez.dropdown'];
 app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion, $tabla) {
 	var ruta = [
 		{url:"/inicio",nombre:"Inicio"},
-		{url:"/"+$routeParams.evento,nombre:"Gestión de "+$routeParams.evento}
+		{url:"/evento/"+$routeParams.evento,nombre:"Gestión de "+$routeParams.evento}
 	];
 
 	if($routeParams.eventoId !== undefined){
@@ -59,16 +59,16 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 			}
 		};
 		
-		if($routeParams.usuarioId > 0){//EDITAR
+		if($routeParams.eventoId > 0){//EDITAR
 			var taller = {};
-
+			console.log("Editar");
 //TEST
 taller.nombre="qwer";
 taller.descripcion="zxcv";
 taller.fechaInicio= new Date(2015, 10, 19, 7, 00);
 taller.fechaFin=new Date(2015, 10, 20, 15, 00);
-taller.costo="10000";
-taller.cupos="30";
+taller.costo=10000;
+taller.cupos=30;
 
 $scope.tal.nombre = taller.nombre;
 $scope.tal.descripcion = taller.descripcion;
@@ -88,7 +88,7 @@ $scope.tal.cupos = taller.cupos;
 					$conexion.enviar(
 						"admin",
 						{
-							tipo: "eliminarTaller",
+							tipo: "eliminarTausuariller",
 							1: $scope.tal.id
 						},
 						function(respuesta){
@@ -106,7 +106,7 @@ $scope.tal.cupos = taller.cupos;
 			$conexion.enviar(
 				"admin",
 				{
-					tipo: "Taller",
+					tipo: "taller",
 					1: $routeParams.eventoId
 				},
 				function(respuesta){
@@ -116,8 +116,8 @@ $scope.tal.cupos = taller.cupos;
 						taller = respuesta.data;
 						$scope.tal.nombre = taller.nombre;
 						$scope.tal.descripcion = taller.descripcion;
-						$scope.tal.fechaInicio = taller.fechaInicio;
-						$scope.tal.fechaFin = taller.fechaFin;
+						$scope.tal.fechaInicio = new Date(taller.fechaInicio);
+						$scope.tal.fechaFin = new Date(taller.fechaFin);
 						$scope.tal.costo = taller.costo;
 						$scope.tal.cupos = taller.cupos;
 					}

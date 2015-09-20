@@ -103,6 +103,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 //$scope.cu.rol = usuario.rol;
 //$scope.cu.contrasena_2 = usuario.contrasena;
 //END TEST
+//{"nombre":"Taller1","id":1,"cupos":5,"descrip":"Taller1 Desc","fin":2015-09-28}
 
 			$scope.crear = false;
 			$scope.eliminado = false;

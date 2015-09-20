@@ -59,9 +59,11 @@ public class VisUsuario extends HttpServlet {
                 JSONObject obj = new JSONObject();
                 obj.put("id", e.getIdTaller());
                 obj.put("nombre", e.getNombre());
-                obj.put("descrip", e.getDescripcion());
+                obj.put("descripcion", e.getDescripcion());
                 obj.put("cupos", e.getCupos());
-                obj.put("fin", e.getFechaFinRegistro());
+                obj.put("costo", e.getCosto());
+                obj.put("fechaFin", ""+e.getFechaFinRegistro());
+                obj.put("fechaInicio", ""+e.getFechaInicio());
                 
                 out.print(obj);
         }
@@ -106,18 +108,17 @@ public class VisUsuario extends HttpServlet {
     protected void leerMultiplesTalleres(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ArrayList<TallerEntity> talleres = new ArrayList<>();
         talleres = cU.leerMultiplesTalleres(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // tamaño y posición
-        
+
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+		System.out.println("Talleres: "+talleres.size());
         JSONArray list1 = new JSONArray();
-        for(int i = 0; i < talleres.size(); i++)
-        {
-            JSONObject obj = new JSONObject();
-            obj.put("id", talleres.get(i).getIdTaller());
-            obj.put("titulo", talleres.get(i).getNombre());
-            list1.add(obj);
-        }
+		for (TallerEntity taller : talleres) {
+			JSONObject obj = new JSONObject();
+			obj.put("id", taller.getIdTaller());
+			obj.put("titulo", taller.getNombre());
+			list1.add(obj);
+		}
         out.print(list1);
     }
     

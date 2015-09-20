@@ -5,7 +5,7 @@ app.controller('usuarios', function ($rootScope, $routeParams, $scope, $conexion
 		$scope.pagina.pos += diff;
 		$tabla.get(
 			"admin",
-			"Usuarios",
+			"usuarios",
 			$scope.pagina.pos,
 			10,
 			"usuarios",

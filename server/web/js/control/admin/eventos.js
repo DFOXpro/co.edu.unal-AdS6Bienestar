@@ -37,7 +37,8 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 				} else {
 					$scope.evento.error = "Enviando...";
 					var castFecha = function (f){
-						return f.getFullYear()+"/"+f.getMonth()+"/"+f.getDay()
+						console.log("CastFecha: ",f);
+						return f.getFullYear()+"/"+f.getMonth()+"/"+f.getDay();
 					};
 					//2015/10/20
 					$conexion.enviar(
@@ -47,8 +48,8 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 							0: $scope.evento.id,
 							1: $scope.evento.nombre,
 							2: $scope.evento.descripcion,
-							3: castFecha($scope.evento.fechaInicio),
-							4: castFecha($scope.evento.fechaFin),
+							3: $scope.evento.fechaInicio,
+							4: $scope.evento.fechaFin,
 							5: $scope.evento.costo,
 							6: $scope.evento.cupos
 						},
@@ -145,7 +146,7 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 				"expulsar","Expulsar"
 			);
 		} else{//CREAR
-			$scope.evento.tipo = "crearTaller";
+			$scope.evento.tipo = ($scope.taller)? "crearTaller":"crearConvocatoria";
 		};
 	} else {
 //LISTAR EVENTOS
@@ -194,19 +195,16 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 	);
 
 //Configuraciones del date picker
-	$scope.config1 = {
-		format: 'MMMM Do YYYY, h:mma',
-		ranges: [
-			{
-				name: 'Today',
-				from: moment().startOf('day'),
-				to: moment().endOf('day')
-			}, {
-				name: 'Yesterday',
-				from: moment().subtract(1, 'days').startOf('day'),
-				to: moment().subtract(1, 'days').endOf('day')
-			}
-		]
+	var confGeneral ={
+		viewFormat: 'DD MMMM YYYY',
+		timepickerEnabled: false,
+		modelFormat:'YYYY/MM/DD',
+		headingText: 'Escoje una fecha',
+		okBtnText: 'Aceptar',
+		cancelBtnText: 'Cancelar',
 	};
+	$scope.hoy = new Date();
+	$scope.configConv = confGeneral;
+	$scope.configTaller = confGeneral;
 });
 console.log("Admin usuarios cargado");

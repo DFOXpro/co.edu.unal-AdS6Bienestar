@@ -199,8 +199,8 @@ public class VisAdmin extends VisUsuario{
         ArrayList r = ctrlAdmin.crearConvocatoria(
             request.getParameter("1"), // nombre
             request.getParameter("2"), // descripción
-            request.getParameter("3"), // fin
-            Integer.parseInt(request.getParameter("4")) // cupos
+            request.getParameter("4"), // fin
+            Integer.parseInt(request.getParameter("6")) // cupos
         );
          
         response.setContentType("application/json;charset=UTF-8");
@@ -261,11 +261,11 @@ public class VisAdmin extends VisUsuario{
         ArrayList r = ctrlAdmin.crearTaller(
             request.getParameter("1"), // nombre
             request.getParameter("2"), // descripción
-            request.getParameter("3"), // fin registro (Fecha hasta donde está permitido registrarse)
-            request.getParameter("4"), // inicio del taller
-            request.getParameter("5"), // fin del taller
-            Integer.parseInt(request.getParameter("6")), // costo
-            Integer.parseInt(request.getParameter("7")) // cupos
+            request.getParameter("4"), // fin registro (Fecha hasta donde está permitido registrarse)
+            request.getParameter("3"), // inicio del taller
+            request.getParameter("4"), // fin del taller
+            Integer.parseInt(request.getParameter("5")), // costo
+            Integer.parseInt(request.getParameter("6")) // cupos
         );
          
         response.setContentType("application/json;charset=UTF-8");

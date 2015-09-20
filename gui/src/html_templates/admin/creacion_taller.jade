@@ -30,16 +30,19 @@ form(
 	input(
 		required
 		ez-datetime-control
+		config="configTaller"
 		type='text'
 		name='fechaInicio'
 		placeholder='Inicio del evento'
 		ng-model="evento.fechaInicio"
-		min-date="evento.fechaFin"
+		min-date="hoy"
+		max-date="evento.fechaFin"
 	)
 	p {{ evento.fechaInicio.$error}}
 	input(
 		required
 		ez-datetime-control
+		config="configTaller"
 		type='text'
 		name='fechaFin'
 		placeholder='Finalización del evento'
@@ -71,7 +74,7 @@ form(
 	)
 	.login-help(ng-show="isf.cupos.$error.min") Corrija los cupos disponibles
 	.login-help(ng-show="isf.cupos.$error.max") No hay sillas para tanta gente
-
+	span {{evento}}
 	input.login.login-submit(
 		type='submit'
 		name='crear'

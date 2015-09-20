@@ -103,16 +103,16 @@
           <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="evento.descripcion" ng-minlength="3" ng-maxlength="100">
           <div ng-show="isf.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
           <div ng-show="isf.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
-          <input required ez-datetime-control type="text" name="fechaInicio" placeholder="Inicio del evento" ng-model="evento.fechaInicio" min-date="evento.fechaFin">
+          <input required ez-datetime-control config="configTaller" type="text" name="fechaInicio" placeholder="Inicio del evento" ng-model="evento.fechaInicio" min-date="hoy" max-date="evento.fechaFin">
           <p>{{ evento.fechaInicio.$error}}</p>
-          <input required ez-datetime-control type="text" name="fechaFin" placeholder="Finalización del evento" ng-model="evento.fechaFin" min-date="evento.fechaInicio">
+          <input required ez-datetime-control config="configTaller" type="text" name="fechaFin" placeholder="Finalización del evento" ng-model="evento.fechaFin" min-date="evento.fechaInicio">
           <p>{{ evento.fechaFin.$error}}</p>
           <input required type="number" name="costo" placeholder="Costo" ng-model="evento.costo" max="2147483647" min="0">
           <div ng-show="isf.costo.$error.min" class="login-help">No podemos dar dinero por evento</div>
           <div ng-show="isf.costo.$error.max" class="login-help">No podemos cobrar tanto</div>
           <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" max="2147483647" min="1">
           <div ng-show="isf.cupos.$error.min" class="login-help">Corrija los cupos disponibles</div>
-          <div ng-show="isf.cupos.$error.max" class="login-help">No hay sillas para tanta gente</div>
+          <div ng-show="isf.cupos.$error.max" class="login-help">No hay sillas para tanta gente</div><span>{{evento}}</span>
           <input type="submit" name="crear" value="Crear" ng-disabled="isf.$invalid" ng-show="crear" class="login login-submit">
           <input type="submit" name="actualiza" value="Actualizar" ng-disabled="isf.$invalid" ng-show="!crear" class="login login-submit">
           <div ng-show="isf.nombre.$error.required" class="login-help">Escriba el nombre del taller</div>
@@ -136,7 +136,7 @@
           <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="evento.descripcion" ng-minlength="3" ng-maxlength="100">
           <div ng-show="isfc.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
           <div ng-show="isfc.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
-          <input required ez-datetime-control type="text" name="fecha" placeholder="Fecha Fin Registro" ng-model="evento.fechaFin" min-date="evento.hoy">
+          <input required ez-datetime-control config="configConv" type="text" name="fecha" placeholder="Fecha Fin Registro" ng-model="evento.fechaFin" min-date="evento.hoy">
           <div ng-show="isfc.fechaFin.$error" class="login-help">Fecha invalida</div>
           <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" min="2" max="2147483647">
           <div ng-show="isfc.cupos.$error.min" class="login-help">El cupo ingresado es muy pequeño</div>
@@ -173,7 +173,7 @@
       <table cellpadding="0" cellspacing="0">
         <tr ng-repeat="linea in tabla.lineas" ng-class-odd="'odd'">
           <td>{{linea.titulo}}</td>
-          <td><a href="#{{tabla.verAccion}}/{{linea.id}}?nombre={{linea.titulo}}" ng-hide="tabla.accion2.exist" class="view">Ver</a><a ng-show="tabla.accion2.exist" ng-click="{{tabla.accion2.fun}}({{linea.id}})" class="edit">{{tabla.accion2.texto}}</a>
+          <td><a href="#{{tabla.verAccion}}/{{linea.id}}?nombre={{linea.titulo}}" ng-hide="tabla.accion2.exist" class="view">Ver</a><a ng-show="tabla.accion2.exist" ng-click="tabla.accion2.fun(linea.id)" class="edit">{{tabla.accion2.texto}}</a>
             <!-- a.delete(href='#{{eliminarAccion}}/{{linea.id}}') Eliminar-->
             
           </td>

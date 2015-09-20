@@ -46,7 +46,8 @@ button.close {
 .modal {
 	position: fixed;
 	top: 0;
-	right: 50%;
+	right: 10%;
+	left: 10%;
 	bottom: 0;
 	z-index: 1050;
 	display: none;

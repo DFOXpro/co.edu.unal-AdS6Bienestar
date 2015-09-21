@@ -82,6 +82,61 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 				}
 			}
 		);
+		$conexion.enviar(
+			"usuario",
+			{
+				tipo: ($scope.taller)? "taller":"convocatoria",
+				1: $routeParams.eventoId
+			},
+			function(respuesta){
+				if(respuesta.data.isError)
+					$scope.evento.error=respuesta.data.errorDescrip;
+				else {
+					$scope.evento.id = respuesta.data.id;
+					$scope.evento.nombre = respuesta.data.nombre;
+					$scope.evento.descripcion = respuesta.data.descripcion;
+					$scope.evento.fechaInicio = new Date(respuesta.data.fechaInicio);
+					$scope.evento.fechaFin = new Date(respuesta.data.fechaFin);
+					$scope.evento.costo = respuesta.data.costo;
+					$scope.evento.cupos = respuesta.data.cupos;
+				}
+			}
+		);
+		$conexion.enviar(
+			"usuario",
+			{
+				tipo: ($scope.taller)? "taller":"convocatoria",
+				1: $routeParams.eventoId
+			},
+			function(respuesta){
+				if(respuesta.data.isError)
+					$scope.evento.error=respuesta.data.errorDescrip;
+				else {
+					$scope.evento.id = respuesta.data.id;
+					$scope.evento.nombre = respuesta.data.nombre;
+					$scope.evento.descripcion = respuesta.data.descripcion;
+					$scope.evento.fechaInicio = new Date(respuesta.data.fechaInicio);
+					$scope.evento.fechaFin = new Date(respuesta.data.fechaFin);
+					$scope.evento.costo = respuesta.data.costo;
+					$scope.evento.cupos = respuesta.data.cupos;
+				}
+			}
+		);
+		$conexion.enviar(
+			"usuario",
+			{
+				tipo: ($scope.taller)? "isInscritoTaller":"isInscritoconvocatoria",
+				1: $sesion.getId,
+				2: $routeParams.eventoId
+			},
+			function(respuesta){
+				if(respuesta.data.isError)
+					$scope.evento.error=respuesta.data.errorDescrip;
+				else {
+					$scope.inscrito = respuesta.data.is;
+				}
+			}
+		);
 	} else {//LISTAR EVENTOS
 		var get = function (diff) {
 			$scope.pagina.pos += diff;

@@ -27,6 +27,12 @@ public class VisUsuario extends Read {
 				} case "taller": {
 					leerTaller(request, response);
 					break;
+				} case "isInscritoTaller": {
+					isInscritoTaller(request, response);
+					break;
+				} case "isInscritoconvocatoria": {
+					isInscritoconvocatoria(request, response);
+					break;
 				} case "/evento/convocatorias": {
 					leerMultiplesConvocatorias(request, response);
 					break;

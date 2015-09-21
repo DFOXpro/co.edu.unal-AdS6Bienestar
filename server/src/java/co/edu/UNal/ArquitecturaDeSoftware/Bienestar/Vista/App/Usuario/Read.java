@@ -126,6 +126,30 @@ public class Read extends HttpServlet {
 		out.print(obj);
 	}
 
+	protected static void isInscritoTaller(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		boolean b = CtrlUsuario.isInscritoTaller(
+			Integer.parseInt(request.getParameter("1")),
+			Integer.parseInt(request.getParameter("2"))
+		);
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("is", b);
+		out.print(obj);
+	}
+
+	protected static void isInscritoconvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		boolean b = CtrlUsuario.isInscritoconvocatoria(
+			Integer.parseInt(request.getParameter("1")),
+			Integer.parseInt(request.getParameter("2"))
+		);
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("is", b);
+		out.print(obj);
+	}
+
 	protected static void obtenerInscritosConv(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int numC = CtrlUsuario.obtenerInscritosConv(Integer.parseInt(request.getParameter("1")));
 		response.setContentType("application/json;charset=UTF-8");

@@ -10,6 +10,14 @@ import java.util.ArrayList;
  */
 public class CtrlUsuario {
 
+	public static boolean isInscritoTaller(int idusuario, int idtaller) {
+		return UsuarioDAO.asociadoConTaller(idusuario,idtaller);
+	}
+
+	public static boolean isInscritoconvocatoria(int idusuario, int idconvocatoria) {
+		return UsuarioDAO.asociadoConConvocatoria(idusuario,idconvocatoria);
+	}
+
 	UsuarioDAO usr = new UsuarioDAO();
 	ConvocatoriaDAO conv = new ConvocatoriaDAO();
 	TallerDAO tall = new TallerDAO();

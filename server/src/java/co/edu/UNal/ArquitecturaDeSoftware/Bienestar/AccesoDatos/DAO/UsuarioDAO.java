@@ -474,6 +474,65 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 		}
 		return usuarios;
 	}
+        
+        
+        /**
+         * Determina si un usuario está asociado o no a un taller, ya sea como profesor o como usuario
+         * @param ID_USUARIO
+         * @param ID_TALLER
+         * @return 
+         */
+        public static boolean asociadoConTaller( int ID_USUARIO, int ID_TALLER ){
+            
+
+		ArrayList<Object> param = new ArrayList<>();
+		param.add(ID_USUARIO);
+		param.add(ID_TALLER);
+                int count;
+                ResultSet rs = CrudDAO.query("select count(*) 'c' from USUARIO_PROFESOR_TALLER\n" +
+                                             "where ID_USUARIO = ? and ID_TALLER = ? ", param);
+                try {
+			rs.first();
+			count = rs.getInt("c");
+                        if(count == 0)
+                            return false;
+                        else
+                            return true;
+		} catch (SQLException e) {
+			System.out.println("UsuarioDAO.asociadoConTaller: " + e.getMessage());
+			return false;
+		}
+        }
+        
+        
+        /**
+         * Determina si un usuario está asociado o no a una convocatoria
+         * @param ID_USUARIO
+         * @param ID_CONVOCATORIA
+         * @return 
+         */
+        public static boolean asociadoConConvocatoria( int ID_USUARIO, int ID_CONVOCATORIA ){
+            
+
+		ArrayList<Object> param = new ArrayList<>();
+		param.add(ID_USUARIO);
+		param.add(ID_CONVOCATORIA);
+                int count;
+                ResultSet rs = CrudDAO.query("select count(*) 'c' from USUARIO_CONVOCATORIA\n" +
+                                             "where ID_USUARIO = ? and ID_CONVOCATORIA = ? ", param);
+                try {
+			rs.first();
+			count = rs.getInt("c");
+                        if(count == 0)
+                            return false;
+                        else
+                            return true;
+		} catch (SQLException e) {
+			System.out.println("UsuarioDAO.asociadoConConvocatoria: " + e.getMessage());
+			return false;
+		}
+        }
+        
 
 	@Override
 	protected Class getEntityClass() {

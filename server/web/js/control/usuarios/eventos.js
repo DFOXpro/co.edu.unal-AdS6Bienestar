@@ -49,8 +49,14 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 								$scope.inscrito= true;
 							$scope.evento.error=respuesta.data.errorDescrip;
 						} else {
-							$scope.evento.error = "Listo, estás inscrito!";
-							$scope.inscrito= true;
+							if(!boolInscribeODesiste){
+								$scope.evento.error = "Listo, estás fuera del evento";
+								$scope.inscrito= false;
+							} else{
+								var s = (dd)?"como profesor":"como estudiante"
+								$scope.evento.error = "Listo, estás inscrito "+s+"!";
+								$scope.inscrito= true;
+							}
 						}
 					}
 				);

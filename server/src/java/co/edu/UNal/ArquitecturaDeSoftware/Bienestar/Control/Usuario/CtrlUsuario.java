@@ -66,6 +66,9 @@ public class CtrlUsuario {
 		ArrayList r = new ArrayList();
 		if (error.equals("OK")) {
 			r.add("isExitoso");
+		} else if(error.contains("Duplicate entry")){
+			r.add("error");
+			r.add("Ya estás inscrito");
 		} else {
 			r.add("error");
 			r.add(error);
@@ -95,6 +98,9 @@ public class CtrlUsuario {
 		ArrayList r = new ArrayList();
 		if (error.equals("OK")) {
 			r.add("isExitoso");
+		} else if(error.contains("Duplicate entry")){
+			r.add("error");
+			r.add("Ya estás inscrito");
 		} else {
 			r.add("error");
 			r.add(error);

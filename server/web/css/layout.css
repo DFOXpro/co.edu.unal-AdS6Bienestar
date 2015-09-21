@@ -172,6 +172,31 @@ h3 {
 	margin: 20px 0 10px;
 }
 
+#main h1 {
+	font-size: 2rem;
+}
+#main p.descripcion {
+	margin: 2rem;
+}
+
+#main .costo {
+	font-size: 1.5em;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	margin-bottom: 2em;
+}
+#main .cupos {
+	font-size: 1.5em;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	margin-bottom: 2em;
+}
+
+#main p .cupos {
+	font-size: 1.5em;
+	padding-right: 3em;
+}
+
 #main table {
 	border-top: 1px solid #ddd;
 	width: 700px;

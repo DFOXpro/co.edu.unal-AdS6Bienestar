@@ -6,7 +6,7 @@ app.controller('inicio', function ($rootScope, $scope, $sesion, $tabla) {
 	]));
 
 	$scope.pagina = {
-		titulo: "Usuario: ",
+		titulo: (localStorage.getItem("4")==="A" | localStorage.getItem("4")==="P")?"Profesor: ":"Estudiante: ",
 		subtitulo: window.atob(localStorage.getItem("6")),
 		convocatoriasRecientes:[],
 		talleresRecientes:[]

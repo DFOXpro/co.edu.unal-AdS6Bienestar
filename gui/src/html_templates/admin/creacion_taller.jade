@@ -38,7 +38,7 @@ form(
 		min-date="hoy"
 		max-date="evento.fechaFin"
 	)
-	p {{ evento.fechaInicio.$error}}
+	p {{ evento.fechaInicio}}
 	input(
 		required
 		ez-datetime-control
@@ -49,7 +49,7 @@ form(
 		ng-model="evento.fechaFin"
 		min-date="evento.fechaInicio"
 	)
-	p {{ evento.fechaFin.$error}}
+	p {{ evento.fechaFin}}
 
 	input(
 		required

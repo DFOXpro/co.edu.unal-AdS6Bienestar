@@ -104,9 +104,9 @@
           <div ng-show="isf.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
           <div ng-show="isf.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
           <input required ez-datetime-control config="configTaller" type="text" name="fechaInicio" placeholder="Inicio del evento" ng-model="evento.fechaInicio" min-date="hoy" max-date="evento.fechaFin">
-          <p>{{ evento.fechaInicio.$error}}</p>
+          <p>{{ evento.fechaInicio}}</p>
           <input required ez-datetime-control config="configTaller" type="text" name="fechaFin" placeholder="Finalización del evento" ng-model="evento.fechaFin" min-date="evento.fechaInicio">
-          <p>{{ evento.fechaFin.$error}}</p>
+          <p>{{ evento.fechaFin}}</p>
           <input required type="number" name="costo" placeholder="Costo" ng-model="evento.costo" max="2147483647" min="0">
           <div ng-show="isf.costo.$error.min" class="login-help">No podemos dar dinero por evento</div>
           <div ng-show="isf.costo.$error.max" class="login-help">No podemos cobrar tanto</div>
@@ -136,7 +136,7 @@
           <input required type="text" name="descripcion" placeholder="Descripcion" ng-model="evento.descripcion" ng-minlength="3" ng-maxlength="100">
           <div ng-show="isfc.descripcion.$error.minlength" class="login-help">Descripcion muy corta</div>
           <div ng-show="isfc.descripcion.$error.maxlength" class="login-help">Descripcion muy larga</div>
-          <input required ez-datetime-control config="configConv" type="text" name="fecha" placeholder="Fecha Fin Registro" ng-model="evento.fechaFin" min-date="evento.hoy">
+          <input required ez-datetime-control config="configConv" type="text" name="fecha" placeholder="Fecha Fin Registro" ng-model="evento.fechaFin" min-date="hoy">
           <div ng-show="isfc.fechaFin.$error" class="login-help">Fecha invalida</div>
           <input required type="number" name="cupos" placeholder="Cupos ofertados" ng-model="evento.cupos" min="2" max="2147483647">
           <div ng-show="isfc.cupos.$error.min" class="login-help">El cupo ingresado es muy pequeño</div>

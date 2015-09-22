@@ -42,6 +42,7 @@ module.exports = function (grunt) {
 					'angular/angular.min.js',
 					'angular-route/angular-route.min.js',
 					'jquery/dist/jquery.min.js',
+					'moment/min/moment.min.js',
 					'ez-datetime/dist/ez-datetime*',
 					'livereload-js/dist/livereload.js',
 					'cryptico/cryptico.min.js'

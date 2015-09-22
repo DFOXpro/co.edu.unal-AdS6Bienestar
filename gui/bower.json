@@ -23,6 +23,7 @@
     "bootstrap": "~3.3.5",
     "cryptico": "*",
     "ez-datetime": "~0.1.7",
-    "livereload-js": "~2.2.1"
+    "livereload-js": "~2.2.1",
+    "moment": "~2.10.6"
   }
 }

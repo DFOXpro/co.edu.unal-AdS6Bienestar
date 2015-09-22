@@ -18,7 +18,7 @@ public class CtrlRegistro {
 		String nombre,
 		String apellidos,
 		String tipoDeDocumento,
-		int documento,
+		String documento,
 		String correo,
 		String contrasena,
 		char rol
@@ -27,7 +27,7 @@ public class CtrlRegistro {
 		if(nombre.length()>100)nombre = nombre.substring(0, 99);
 		if(apellidos.length()>100)apellidos = apellidos.substring(0, 99);
 		if(tipoDeDocumento.length()!=2)error="tipoD";
-		if(documento>Integer.MAX_VALUE || documento <1)error="documento";
+		if(documento.length() < 5 || documento.length() > 30)error="documento";
 		if(contrasena.length()<5 || contrasena.length()>999)error="contraseña";
 		if(nombre.isEmpty() || apellidos.isEmpty())error="nombre";
 		if(!(rol =='A' || rol=='P' || rol=='E'))error="rol";

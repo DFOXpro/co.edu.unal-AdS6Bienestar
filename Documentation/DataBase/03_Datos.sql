@@ -28,7 +28,7 @@ insert into TALLER values('9' ,'C','Curso4' ,'Curso4 Desc' ,CURDATE() + INTERVAL
 insert into TALLER values('10','C','Curso5' ,'Curso5 Desc' ,CURDATE() + INTERVAL 10 DAY,CURDATE() + INTERVAL 20 DAY,CURDATE() + INTERVAL 40 DAY,'0'	,'5');
 
 
---INGRESAR CONVOCATORIAS
+-- INGRESAR CONVOCATORIAS
 delete from CONVOCATORIA;
 
 insert into CONVOCATORIA values('1' ,'Convocatoria1' ,'Convocatoria1 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');
@@ -52,7 +52,7 @@ insert into PROFESOR_TALLER values(3, 8);
 insert into PROFESOR_TALLER values(4, 9);
 insert into PROFESOR_TALLER values(5, 10);
 
---INGRESAR USUARIO_TALLER
+-- INGRESAR USUARIO_TALLER
 delete from USUARIO_TALLER;
 
 insert into USUARIO_TALLER values( 6, 1, CURDATE());

@@ -12,6 +12,7 @@ import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -188,7 +189,17 @@ public class Read extends HttpServlet {
 	}
 
 	protected static void registrarUsuarioConvocatoria(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = CtrlUsuario.registrarAConvocatoriaUsuario(
+            
+            /*Enumeration<String> parameterNames = request.getParameterNames();
+            String param;
+            while(parameterNames.hasMoreElements()){
+                param = parameterNames.nextElement();
+                System.out.print(param);
+                System.out.print(": ");
+                System.out.print(request.getParameter(param));
+            }*/
+            
+            ArrayList r = CtrlUsuario.registrarAConvocatoriaUsuario(
 			Integer.parseInt(request.getParameter("1")),
 			Integer.parseInt(request.getParameter("2"))
 		); // parameter 1: idUsuario param2: idConv
@@ -229,7 +240,7 @@ public class Read extends HttpServlet {
 	}
 
 	protected static void registrarATallerDocenteByDoc(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ArrayList r = CtrlUsuario.registrarATallerDocenteByDoc(Integer.parseInt(request.getParameter("1")), Integer.parseInt(request.getParameter("2"))); // parameter 1: documentoDocente param2: idTaller
+		ArrayList r = CtrlUsuario.registrarATallerDocenteByDoc(request.getParameter("1"), Integer.parseInt(request.getParameter("2"))); // parameter 1: documentoDocente param2: idTaller
 
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();

@@ -29,7 +29,7 @@ public class CRUDUsuarios {
 			request.getParameter("1"),//Nombre
 			request.getParameter("2"),//Apellidos
 			request.getParameter("3"),//Tipo de documento
-			Integer.parseInt(request.getParameter("4")),//documento
+			request.getParameter("4"),//documento
 			request.getParameter("5"),//Correo= usuario
 			request.getParameter("6"),//passworld
 			request.getParameter("7").charAt(0)//rol
@@ -79,7 +79,7 @@ public class CRUDUsuarios {
 			request.getParameter("1"),//Nombre
 			request.getParameter("2"),//Apellidos
 			request.getParameter("3"),//Tipo de documento
-			Integer.parseInt(request.getParameter("4")),//documento
+			request.getParameter("4"),//documento
 			request.getParameter("5"),//Correo= usuario
 			request.getParameter("6"),//passworld
 			request.getParameter("7").charAt(0)//rol

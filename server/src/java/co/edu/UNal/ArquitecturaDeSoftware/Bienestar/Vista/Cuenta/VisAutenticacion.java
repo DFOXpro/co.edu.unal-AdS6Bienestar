@@ -46,7 +46,7 @@ public class VisAutenticacion extends HttpServlet {
 			} else if (r.get(1) == "contrasena") {
 				JSONObject obj = new JSONObject();
 				obj.put("isError", true);
-				obj.put("errorDescrip", "La contraseña no coinside");
+				obj.put("errorDescrip", "La contraseña no coincide");
 				out.print(obj);
 			} else {
 				Util.errordeRespuesta(r, out);

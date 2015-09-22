@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class CtrlAdmin extends CtrlUsuario {
 
-	public static ArrayList crearUsuario(String nombre, String apellidos, String tipoDeDocumento, int documento, String correo, String contrasena, char rol) {
+	public static ArrayList crearUsuario(String nombre, String apellidos, String tipoDeDocumento, String documento, String correo, String contrasena, char rol) {
 		String error = "";
 		if (nombre.length() > 100) {
 			nombre = nombre.substring(0, 99);
@@ -25,7 +25,7 @@ public class CtrlAdmin extends CtrlUsuario {
 		if (tipoDeDocumento.length() != 2) {
 			error = "tipoD";
 		}
-		if (documento > Integer.MAX_VALUE || documento < 1) {
+		if (documento.length() < 5 || documento.length() > 30) {
 			error = "documento";
 		}
 		if (contrasena.length() < 5 || contrasena.length() > 999) {
@@ -57,7 +57,7 @@ public class CtrlAdmin extends CtrlUsuario {
 		return r;
 	}
 
-	public static ArrayList editarUsuario(int idUsuario, String nombre, String apellidos, String tipoDeDocumento, int documento, String correo, String contrasena, char rol) {
+	public static ArrayList editarUsuario(int idUsuario, String nombre, String apellidos, String tipoDeDocumento, String documento, String correo, String contrasena, char rol) {
 		String error = "";
 		if (nombre.length() > 100) {
 			nombre = nombre.substring(0, 99);
@@ -68,7 +68,7 @@ public class CtrlAdmin extends CtrlUsuario {
 		if (tipoDeDocumento.length() != 2) {
 			error = "tipoD";
 		}
-		if (documento > Integer.MAX_VALUE || documento < 1) {
+		if (documento.length() < 5 || documento.length() > 30) {
 			error = "documento";
 		}
 		if (contrasena.length() < 5 || contrasena.length() > 999) {

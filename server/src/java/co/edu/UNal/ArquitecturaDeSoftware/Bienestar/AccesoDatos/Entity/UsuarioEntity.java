@@ -49,7 +49,7 @@ public class UsuarioEntity implements Serializable, Entity{
     @Basic(optional = false)
     @NotNull
     @Column(name = "DOCUMENTO")
-    private int documento;
+    private String documento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
@@ -85,7 +85,7 @@ public class UsuarioEntity implements Serializable, Entity{
     public UsuarioEntity() {
     }
 
-    public UsuarioEntity(Integer idUsuario, int documento, String tDocumento, String nombres, String apellidos, String username, String password, Character rol) {
+    public UsuarioEntity(Integer idUsuario, String documento, String tDocumento, String nombres, String apellidos, String username, String password, Character rol) {
         this.idUsuario = idUsuario;
         this.documento = documento;
         this.tDocumento = tDocumento;
@@ -142,11 +142,11 @@ public class UsuarioEntity implements Serializable, Entity{
         this.idUsuario = idUsuario;
     }
 
-    public int getDocumento() {
+    public String getDocumento() {
         return documento;
     }
 
-    public void setDocumento(int documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
 

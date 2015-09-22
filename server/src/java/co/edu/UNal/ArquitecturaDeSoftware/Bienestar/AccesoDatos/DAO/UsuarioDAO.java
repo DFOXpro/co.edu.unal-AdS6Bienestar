@@ -62,8 +62,8 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @param DOCUMENTO
 	 * @return
 	 */
-	public static UsuarioEntity getByDocumento(int DOCUMENTO) {
-		ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO WHERE DOCUMENTO = ?;", new String[]{Integer.toString(DOCUMENTO)});
+	public static UsuarioEntity getByDocumento(String DOCUMENTO) {
+		ResultSet rs = CrudDAO.query("SELECT * FROM USUARIO WHERE DOCUMENTO = ?;", new String[]{DOCUMENTO});
 		try {
 			rs.first();
 			UsuarioEntity ue = toEntity(rs);
@@ -89,7 +89,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * ERROR.
 	 */
 	public static String create(
-			int DOCUMENTO,
+			String DOCUMENTO,
 			String T_DOCUMENTO,
 			String NOMBRES,
 			String APELLIDOS,
@@ -100,7 +100,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 		String respuestaSQL = update(
 				"insert into USUARIO values(null,?,?,?,?,?,?,?)",
 				new String[]{
-					Integer.toString(DOCUMENTO),
+					DOCUMENTO,
 					T_DOCUMENTO,
 					NOMBRES,
 					APELLIDOS,
@@ -136,7 +136,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 */
 	public static String update(
 			int ID_USUARIO,
-			int DOCUMENTO,
+			String DOCUMENTO,
 			String T_DOCUMENTO,
 			String NOMBRES,
 			String APELLIDOS,
@@ -155,7 +155,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 				+ "ROL = ?\n"
 				+ "WHERE ID_USUARIO = ?;",
 				new String[]{
-					Integer.toString(DOCUMENTO),
+					DOCUMENTO,
 					T_DOCUMENTO,
 					NOMBRES,
 					APELLIDOS,
@@ -214,7 +214,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @param ID_TALLER
 	 * @return
 	 */
-	public static String registrarTallerByDocumento(int DOCUMENTO, int ID_TALLER) {
+	public static String registrarTallerByDocumento(String DOCUMENTO, int ID_TALLER) {
 
 		UsuarioEntity us = getByDocumento(DOCUMENTO);
 		return registrarTaller(us.getIdUsuario(), ID_TALLER);
@@ -228,7 +228,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	 * @param ID_TALLER
 	 * @return
 	 */
-	public static String registrarConvocatoriaByDocumento(int DOCUMENTO, int ID_TALLER) {
+	public static String registrarConvocatoriaByDocumento(String DOCUMENTO, int ID_TALLER) {
 
 		UsuarioEntity us = getByDocumento(DOCUMENTO);
 		return registrarTaller(us.getIdUsuario(), ID_TALLER);
@@ -548,7 +548,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 	protected static UsuarioEntity toEntity(ResultSet rs) throws SQLException {
 		return new UsuarioEntity(
 			rs.getInt("ID_USUARIO"),
-			rs.getInt("DOCUMENTO"),
+			rs.getString("DOCUMENTO"),
 			rs.getString("T_DOCUMENTO"),
 			rs.getString("NOMBRES"),
 			rs.getString("APELLIDOS"),

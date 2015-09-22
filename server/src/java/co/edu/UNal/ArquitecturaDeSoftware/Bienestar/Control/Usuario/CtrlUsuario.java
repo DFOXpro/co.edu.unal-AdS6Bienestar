@@ -117,7 +117,7 @@ public class CtrlUsuario {
 	}
 
 	//Para registrar  docente a talleres por cédula (desde el administrador) 
-	public static ArrayList registrarATallerDocenteByDoc(int documento, int ID_TALLER) {
+	public static ArrayList registrarATallerDocenteByDoc(String documento, int ID_TALLER) {
 		UsuarioEntity u = UsuarioDAO.getByDocumento(documento);
 		return registrarATallerDocente(u.getIdUsuario(), ID_TALLER);
 	}

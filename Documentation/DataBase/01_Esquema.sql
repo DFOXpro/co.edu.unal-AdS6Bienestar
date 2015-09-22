@@ -11,7 +11,7 @@ USE `bienestar` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bienestar`.`USUARIO` (
   `ID_USUARIO` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `DOCUMENTO` INT UNSIGNED NOT NULL COMMENT 'NUMERO DE DOCUMENTO DEL USUARIO',
+  `DOCUMENTO` VARCHAR(30) NOT NULL COMMENT 'NUMERO DE DOCUMENTO DEL USUARIO',
   `T_DOCUMENTO` VARCHAR(2) NOT NULL DEFAULT 'CC' COMMENT 'TIPO DE DOCUMENTO DEL USUARIO, \nCC=CEDULA \nTI= TARJETA DE IDENTIDAD, \nCE=CEDULA DE EXTRANJERIA',
   `NOMBRES` VARCHAR(100) NOT NULL,
   `APELLIDOS` VARCHAR(100) NOT NULL,
@@ -131,7 +131,7 @@ USE `bienestar`$$
 CREATE TRIGGER `USUARIO_BINS` BEFORE INSERT ON `USUARIO` FOR EACH ROW
 begin
 	declare msg varchar(255);
-    if new.T_DOCUMENTO not in ('CC','TI','CE') then
+    if new.T_DOCUMENTO not in ('CC','TI','PP') then
         set msg = concat('USUARIO_BINS Error: el tipo de Documento no es válido : ', cast(new.ID_USUARIO as char));
         signal sqlstate '45000' set message_text = msg;
     end if;
@@ -146,7 +146,7 @@ USE `bienestar`$$
 CREATE TRIGGER `USUARIO_BUPD` BEFORE UPDATE ON `USUARIO` FOR EACH ROW
 begin
 	declare msg varchar(255);
-    if new.T_DOCUMENTO not in ('CC','TI','CE') then
+    if new.T_DOCUMENTO not in ('CC','TI','PP') then
         set msg = concat('USUARIO_BUPD Error: el tipo de Documento no es válido : ', cast(new.T_DOCUMENTO as char));
         signal sqlstate '45000' set message_text = msg;
     end if;

@@ -33,7 +33,7 @@ public class VisRegistro extends HttpServlet {
 	 * @throws ServletException if a servlet-specific error occurs
 	 * @throws IOException if an I/O error occurs
 	 */
-	protected void crearSesion(HttpServletRequest request, HttpServletResponse response)
+	private void crearSesion(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 		System.out.println(request.getParameter("5"));
 		ArrayList r = CtrlRegistro.crearCuenta(

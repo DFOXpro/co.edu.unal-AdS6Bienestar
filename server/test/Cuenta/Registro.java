@@ -17,12 +17,12 @@ import static org.junit.Assert.*;
  *
  * @author dfoxpro
  */
-public class Autenticacion {
+public class Registro {
 	
         private ArrayList testList = new ArrayList();;
 
     
-	public Autenticacion() {
+	public Registro() {
             
 	}
 	

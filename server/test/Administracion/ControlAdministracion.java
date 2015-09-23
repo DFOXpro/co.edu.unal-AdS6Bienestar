@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cuenta;
+package Administracion;
 
+import Cuenta.*;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,12 +18,12 @@ import static org.junit.Assert.*;
  *
  * @author dfoxpro
  */
-public class Autenticacion {
+public class ControlAdministracion {
 	
         private ArrayList testList = new ArrayList();;
 
     
-	public Autenticacion() {
+	public ControlAdministracion() {
             
 	}
 	

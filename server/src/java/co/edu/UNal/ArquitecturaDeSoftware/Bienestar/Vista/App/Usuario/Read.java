@@ -12,7 +12,6 @@ import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +33,7 @@ public class Read extends HttpServlet {
 		if (e.getNombre().isEmpty()) {
 			JSONObject obj = new JSONObject();
 			obj.put("isError", true);
-			obj.put("errorDescrip", "La convocatoria no existe");
+			obj.put("errorDescrip", "El taller ya no esta disponible");
 			out.print(obj);
 		} else {
 			JSONObject obj = new JSONObject();
@@ -59,7 +58,7 @@ public class Read extends HttpServlet {
 		if (e.getNombre().isEmpty()) {
 			JSONObject obj = new JSONObject();
 			obj.put("isError", true);
-			obj.put("errorDescrip", "La convocatoria no existe");
+			obj.put("errorDescrip", "La convocatoria ya no existe");
 			out.print(obj);
 		} else {
 			JSONObject obj = new JSONObject();

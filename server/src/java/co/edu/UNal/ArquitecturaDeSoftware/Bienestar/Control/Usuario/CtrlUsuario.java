@@ -3,6 +3,7 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Usuario;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.*;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -23,11 +24,23 @@ public class CtrlUsuario {
 	TallerDAO tall = new TallerDAO();
 
 	public static ConvocatoriaEntity leerConvocatoria(String id) {
-		return ConvocatoriaDAO.getByID(id);
+		ConvocatoriaEntity t = ConvocatoriaDAO.getByID(id);
+		if (new Date().after(t.getFechaFinRegistro())){
+			ConvocatoriaDAO.delete(t.getIdConvocatoria());
+			t=new ConvocatoriaEntity();
+			t.setNombre("");
+		}
+		return t;
 	}
 
 	public static TallerEntity leerTaller(String id) {
-		return TallerDAO.getByID(id);
+		TallerEntity t = TallerDAO.getByID(id);
+		if (new Date().after(t.getFechaInicio())){
+			TallerDAO.delete(t.getIdTaller());
+			t=new TallerEntity();
+			t.setNombre("");
+		}
+		return t;
 	}
 
 	public static ArrayList<ConvocatoriaEntity> leerMultiplesConvocatorias(int posicion, int tamano) {

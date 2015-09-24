@@ -50,11 +50,14 @@ public class ControlUsuarios {
     // TODO add test methods here.
 	// The methods must be annotated with annotation @Test. For example:
 	//
+        // Registrar usuarios taller
+	//             
 	@Test
 	public void registrarUsuarioTaller() {
             System.out.println("yugh");
         }
-        
+                // Abandonar Taller - Usuario
+	//     
         @Test
 	public void abandonarTallerUsuario() {
             System.out.println("yugh");

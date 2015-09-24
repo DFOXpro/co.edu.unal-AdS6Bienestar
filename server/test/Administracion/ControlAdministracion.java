@@ -50,21 +50,21 @@ public class ControlAdministracion {
 	// Crear usuario
 	//
 	@Test
-	public void hello() {
+	public void crearUser() {
             System.out.println("yugh");
         }
         
 	// Editar usuario
 	//        
         @Test
-	public void hello2() {
+	public void editUser() {
             System.out.println("yugh");
         }
 
         // Consultar usuario
 	//        
         @Test
-	public void hello3() {
+	public void consultUser() {
             System.out.println("yugh");
         }
         
@@ -72,7 +72,7 @@ public class ControlAdministracion {
         // Eliminar usuario
 	//        
         @Test
-	public void hello4() {
+	public void deleteUser() {
             System.out.println("yugh");
         }
         

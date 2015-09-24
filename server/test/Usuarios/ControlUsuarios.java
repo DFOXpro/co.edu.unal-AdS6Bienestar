@@ -31,12 +31,12 @@ public class ControlUsuarios {
         
 	@BeforeClass
 	public static void setUpClass() {
-            System.out.println("Se da inicio a las pruebas unitarias para el módulo de Autenticación");
+            System.out.println("Se da inicio a las pruebas unitarias para el módulo de Usuarios");
 	}
 	
 	@AfterClass
 	public static void tearDownClass() {
-            System.out.println("Se concluyen las pruebas unitarias para el módulo de Autenticación");
+            System.out.println("Se concluyen las pruebas unitarias para el módulo de Usuarios");
 	}
 	
 	@Before
@@ -51,12 +51,50 @@ public class ControlUsuarios {
 	// The methods must be annotated with annotation @Test. For example:
 	//
 	@Test
-	public void hello() {
+	public void registrarUsuarioTaller() {
             System.out.println("yugh");
         }
         
         @Test
-	public void hello2() {
+	public void abandonarTallerUsuario() {
+            System.out.println("yugh");
+        }
+	@Test
+	public void registrarConvocatoriaUsuario() {
+            System.out.println("yugh");
+        }
+        
+        @Test
+	public void abandonarConvocatoriaUsuario() {
+            System.out.println("yugh");
+        }
+	@Test
+	public void registrarTallerDocente() {
+            System.out.println("yugh");
+        }
+	@Test
+	public void registrarTallerDocenteDocumento() {
+            System.out.println("yugh");
+        }
+        
+        @Test
+	public void abandonarTallerDocente() {
+            System.out.println("yugh");
+        }
+        @Test
+	public void obtenerInscritosTallerId() {
+            System.out.println("yugh");
+        }
+        @Test
+	public void obtenerInscritosConvocatoriaId() {
+            System.out.println("yugh");
+        }
+        @Test
+	public void consultarConvocatoriaId() {
+            System.out.println("yugh");
+        }
+        @Test
+	public void consultarTallerId() {
             System.out.println("yugh");
         }
 

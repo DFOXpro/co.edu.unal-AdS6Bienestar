@@ -155,8 +155,8 @@ public class Autenticacion {
                     rol);
             System.out.println(r);
             if(r.equals("isExitoso")){
-                 //ArrayList v = CtrlAutenticacion.autenticar(correo, contrasena, cookieHashCode);
-                //assertEquals("isExitoso", v.get(0));  
+//                ArrayList v = CtrlAutenticacion.autenticar(correo, contrasena, Cifrar.get);
+//                assertEquals("isExitoso", p.get(0));  
             }
             
         }

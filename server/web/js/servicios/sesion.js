@@ -5,7 +5,7 @@ app.factory('$sesion', function ($conexion) {
 	rutas = [];
 	r.verificarSesion = function ($scope) {
 		if(!$conexion.iniciar()){
-			location.replace("/");
+			location.replace("/bienestar");
 			return true;
 		} else return false;
 	};
@@ -20,7 +20,7 @@ app.factory('$sesion', function ($conexion) {
 			},
 			function(){
 				$conexion.terminar();
-				location.replace("/");
+				location.replace("/bienestar");
 			}
 		);
 	};

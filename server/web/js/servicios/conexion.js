@@ -6,7 +6,7 @@
  **/
 app.factory('$conexion', function ($http) {
 //PRIVATE STATIC FINAL
-	var ruta = "/network/",
+	var ruta = "/bienestar/network/",
 		semilla = "",
 		cookieHashCode = "",
 		llavePrivada = "",

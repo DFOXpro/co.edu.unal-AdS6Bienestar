@@ -5,16 +5,17 @@
  */
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
+import javax.sql.DataSource;
 
 /**
  *
@@ -37,6 +38,27 @@ public abstract class CrudDAO<E extends Entity> {
     //protected abstract E toEntity(ResultSet rs )throws Exception;
 
     private static boolean iniciarConeccion(){
+        
+        System.out.println("iniciarConeccion");
+
+        ////CONECCIÓN CON BASE DE DATOS A TRAVÉS DE UN JDBC DEFINIDO EN GLASSFISH
+        try {
+        InitialContext ctx = new InitialContext();
+        DataSource ds = (DataSource)ctx.lookup("jdbc/bienestar");
+
+        conn = ds.getConnection();
+        if(conn == null )
+        System.out.println("CONNECTION NULL");
+        return true;
+        } catch (NamingException ex) {
+        Logger.getLogger(CrudDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+        /*
+        //CONECCIÓN DIRECTA CON BASE DE DATOS
         System.out.println("iniciarConeccion");
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -50,7 +72,7 @@ public abstract class CrudDAO<E extends Entity> {
         ) {
             Logger.getLogger(CrudDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }
+        }*/
     }
 
     private boolean cerrarConeccion(){

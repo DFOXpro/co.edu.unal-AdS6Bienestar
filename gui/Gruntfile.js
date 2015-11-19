@@ -145,15 +145,13 @@ module.exports = function (grunt) {
 			'copy:devLib',
 			'copy:devSrc',
 			'copy:devThemes',
-			'watch:views',
-			'watch:css',
-			'watch:js',
-			'watch:Client'
+			'watch'
 		]
 	);
 	grunt.registerTask(
 		'toServer', [
-			'jade:dev',
+			'jade',
+			'stylus',
 			'copy'//,
 			//'watch'
 		]

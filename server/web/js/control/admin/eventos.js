@@ -48,7 +48,9 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 							0: $scope.evento.id,
 							1: $scope.evento.nombre,
 							2: $scope.evento.descripcion,
-							3: $scope.evento.fechaInicio.toString('yyyy-MM-dd'),
+							3: ($scope.evento.fechaInicio)?
+							$scope.evento.fechaInicio.toString('yyyy-MM-dd'):
+							new Date().toString('yyyy-MM-dd'),
 							4: $scope.evento.fechaFin.toString('yyyy-MM-dd'),
 							5: $scope.evento.costo,
 							6: $scope.evento.cupos

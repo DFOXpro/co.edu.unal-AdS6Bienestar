@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://Service/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Service/">
+
+<xs:element name="getBestStudents" type="tns:getBestStudents"/>
+
+<xs:element name="getBestStudentsResponse" type="tns:getBestStudentsResponse"/>
+
+<xs:element name="student" type="tns:student"/>
+
+<xs:complexType name="getBestStudents">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getBestStudentsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:student" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="student">
+<xs:sequence>
+<xs:element name="estAddress" type="xs:string" minOccurs="0"/>
+<xs:element name="estAge" type="xs:int" minOccurs="0"/>
+<xs:element name="estBenefit" type="xs:string" minOccurs="0"/>
+<xs:element name="estDocument" type="xs:long"/>
+<xs:element name="estEmail" type="xs:string" minOccurs="0"/>
+<xs:element name="estGender" type="xs:string" minOccurs="0"/>
+<xs:element name="estId" type="xs:int" minOccurs="0"/>
+<xs:element name="estLastName" type="xs:string" minOccurs="0"/>
+<xs:element name="estName" type="xs:string" minOccurs="0"/>
+<xs:element name="estPassword" type="xs:string" minOccurs="0"/>
+<xs:element name="estRoll" type="xs:string" minOccurs="0"/>
+<xs:element name="estTelephone" type="xs:long"/>
+<xs:element name="estUsername" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

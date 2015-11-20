@@ -75,7 +75,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 		}
 	}
 
-	/**
+        /**
 	 * Crea un usuario
 	 *
 	 * @param DOCUMENTO
@@ -96,9 +96,37 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 			String EMAIL,
 			String PASSWORD,
 			char ROL
+	){
+            return create(DOCUMENTO, T_DOCUMENTO, NOMBRES, APELLIDOS, EMAIL, PASSWORD, ROL, null);
+        }
+        
+        
+	/**
+	 * Crea un usuario
+	 *
+	 * @param DOCUMENTO
+	 * @param T_DOCUMENTO
+	 * @param NOMBRES
+	 * @param APELLIDOS
+	 * @param EMAIL
+	 * @param PASSWORD
+	 * @param ROL
+         * @param ExtraData
+	 * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE
+	 * ERROR.
+	 */
+	public static String create(
+			String DOCUMENTO,
+			String T_DOCUMENTO,
+			String NOMBRES,
+			String APELLIDOS,
+			String EMAIL,
+			String PASSWORD,
+			char ROL,
+                        String ExtraData
 	) {
 		String respuestaSQL = update(
-				"insert into USUARIO values(null,?,?,?,?,?,?,?)",
+				"insert into USUARIO values(null,?,?,?,?,?,?,?,?)",
 				new String[]{
 					DOCUMENTO,
 					T_DOCUMENTO,
@@ -106,7 +134,8 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 					APELLIDOS,
 					EMAIL,
 					PASSWORD,
-					ROL + ""
+					ROL + "",
+                                        ExtraData
 				}
 		);
 		if (respuestaSQL.contains("Duplicate entry")) {
@@ -120,7 +149,8 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 		return respuestaSQL;
 	}
 
-	/**
+        
+        /**
 	 * Actualiza un usuario
 	 *
 	 * @param ID_USUARIO
@@ -143,6 +173,36 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 			String EMAIL,
 			String PASSWORD,
 			char ROL
+	){
+            return update(ID_USUARIO, DOCUMENTO, T_DOCUMENTO, NOMBRES, APELLIDOS, EMAIL, PASSWORD, ROL, null);
+        }
+        
+        
+	/**
+	 * Actualiza un usuario
+	 *
+	 * @param ID_USUARIO
+	 * @param DOCUMENTO
+	 * @param T_DOCUMENTO
+	 * @param NOMBRES
+	 * @param APELLIDOS
+	 * @param EMAIL
+	 * @param PASSWORD
+	 * @param ROL
+         * @param ExtraData
+	 * @return OK SI EL REGISTRO EN LA BD ES CORRECTO, SI NO DEVOLVER EL TIPO DE
+	 * ERROR.
+	 */
+	public static String update(
+			int ID_USUARIO,
+			String DOCUMENTO,
+			String T_DOCUMENTO,
+			String NOMBRES,
+			String APELLIDOS,
+			String EMAIL,
+			String PASSWORD,
+			char ROL,
+                        String ExtraData
 	) {
 		String respuestaSQL = CrudDAO.update(
 				"UPDATE USUARIO\n"
@@ -153,6 +213,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 				+ "EMAIL = ?,\n"
 				+ "PASSWORD = ?,\n"
 				+ "ROL = ?\n"
+                                + "DATOS_EXTRA = ?\n"
 				+ "WHERE ID_USUARIO = ?;",
 				new String[]{
 					DOCUMENTO,
@@ -162,6 +223,7 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 					EMAIL,
 					PASSWORD,
 					ROL + "",
+                                        ExtraData,
 					Integer.toString(ID_USUARIO)
 				}
 		);
@@ -554,7 +616,8 @@ public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 			rs.getString("APELLIDOS"),
 			rs.getString("EMAIL"),
 			rs.getString("PASSWORD"),
-			rs.getString("ROL").charAt(0)
+			rs.getString("ROL").charAt(0),
+                        rs.getString("DATOS_EXTRA")
 		);
 	}
 }

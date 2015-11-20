@@ -7,7 +7,6 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
-import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,17 +28,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USUARIO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM USUARIO u"),
-    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM USUARIO u WHERE u.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Usuario.findByDocumento", query = "SELECT u FROM USUARIO u WHERE u.documento = :documento"),
-    @NamedQuery(name = "Usuario.findByTDocumento", query = "SELECT u FROM USUARIO u WHERE u.tDocumento = :tDocumento"),
-    @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM USUARIO u WHERE u.nombres = :nombres"),
-    @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM USUARIO u WHERE u.apellidos = :apellidos"),
-    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM USUARIO u WHERE u.email = :username"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM USUARIO u WHERE u.password = :password"),
-    @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM USUARIO u WHERE u.rol = :rol")})
-
-public class UsuarioEntity implements Serializable, Entity{
+    @NamedQuery(name = "UsuarioEntity.findAll", query = "SELECT u FROM UsuarioEntity u"),
+    @NamedQuery(name = "UsuarioEntity.findByIdUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.idUsuario = :idUsuario"),
+    @NamedQuery(name = "UsuarioEntity.findByDocumento", query = "SELECT u FROM UsuarioEntity u WHERE u.documento = :documento"),
+    @NamedQuery(name = "UsuarioEntity.findByTDocumento", query = "SELECT u FROM UsuarioEntity u WHERE u.tDocumento = :tDocumento"),
+    @NamedQuery(name = "UsuarioEntity.findByNombres", query = "SELECT u FROM UsuarioEntity u WHERE u.nombres = :nombres"),
+    @NamedQuery(name = "UsuarioEntity.findByApellidos", query = "SELECT u FROM UsuarioEntity u WHERE u.apellidos = :apellidos"),
+    @NamedQuery(name = "UsuarioEntity.findByEmail", query = "SELECT u FROM UsuarioEntity u WHERE u.email = :email"),
+    @NamedQuery(name = "UsuarioEntity.findByPassword", query = "SELECT u FROM UsuarioEntity u WHERE u.password = :password"),
+    @NamedQuery(name = "UsuarioEntity.findByRol", query = "SELECT u FROM UsuarioEntity u WHERE u.rol = :rol"),
+    @NamedQuery(name = "UsuarioEntity.findByDatosExtra", query = "SELECT u FROM UsuarioEntity u WHERE u.datosExtra = :datosExtra")})
+public class UsuarioEntity implements Serializable, Entity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +47,7 @@ public class UsuarioEntity implements Serializable, Entity{
     private Integer idUsuario;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "DOCUMENTO")
     private String documento;
     @Basic(optional = false)
@@ -65,11 +65,12 @@ public class UsuarioEntity implements Serializable, Entity{
     @Size(min = 1, max = 100)
     @Column(name = "APELLIDOS")
     private String apellidos;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "EMAIL")
-    private String username;
+    private String email;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
@@ -79,64 +80,43 @@ public class UsuarioEntity implements Serializable, Entity{
     @NotNull
     @Column(name = "ROL")
     private Character rol;
-
-
+    @Size(max = 2000)
+    @Column(name = "DATOS_EXTRA")
+    private String datosExtra;
 
     public UsuarioEntity() {
     }
 
-    public UsuarioEntity(Integer idUsuario, String documento, String tDocumento, String nombres, String apellidos, String username, String password, Character rol) {
+    public UsuarioEntity(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public UsuarioEntity(Integer idUsuario, String documento, String tDocumento, String nombres, String apellidos, String email, String password, Character rol) {
         this.idUsuario = idUsuario;
         this.documento = documento;
         this.tDocumento = tDocumento;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.rol = rol;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.username);
-        return hash;
+    public UsuarioEntity(Integer idUsuario, String documento, String tDocumento, String nombres, String apellidos, String email, String password, Character rol, String datosExtra) {
+        this.idUsuario = idUsuario;
+        this.documento = documento;
+        this.tDocumento = tDocumento;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
+        this.datosExtra = datosExtra;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final UsuarioEntity other = (UsuarioEntity) obj;
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "UsuarioEntity{" + "idUsuario=" + idUsuario + ", documento=" + documento + ", tDocumento=" + tDocumento + ", nombres=" + nombres + ", apellidos=" + apellidos + ", username=" + username + ", password=" + password + ", rol=" + rol + '}';
-    }
-
-    
-    
-    
-    
-    
-// GETTER AND SETTER
-    
     public Integer getIdUsuario() {
         return idUsuario;
     }
-    
-//    public int getIdUsuario() {
-//        return idUsuario;
-//    }
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
@@ -154,7 +134,7 @@ public class UsuarioEntity implements Serializable, Entity{
         return tDocumento;
     }
 
-    public void settDocumento(String tDocumento) {
+    public void setTDocumento(String tDocumento) {
         this.tDocumento = tDocumento;
     }
 
@@ -175,11 +155,11 @@ public class UsuarioEntity implements Serializable, Entity{
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -197,7 +177,39 @@ public class UsuarioEntity implements Serializable, Entity{
     public void setRol(Character rol) {
         this.rol = rol;
     }
-    
+
+    public String getDatosExtra() {
+        return datosExtra;
+    }
+
+    public void setDatosExtra(String datosExtra) {
+        this.datosExtra = datosExtra;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof UsuarioEntity)) {
+            return false;
+        }
+        UsuarioEntity other = (UsuarioEntity) object;
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity[ idUsuario=" + idUsuario + " ]";
+    }
 
     @Override
     public String name() {
@@ -208,7 +220,5 @@ public class UsuarioEntity implements Serializable, Entity{
     public Class<? extends Annotation> annotationType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
     
 }

@@ -150,7 +150,7 @@ module.exports = function (grunt) {
 	);
 	grunt.registerTask(
 		'toServer', [
-			'jade',
+			'jade:dev',
 			'stylus',
 			'copy'//,
 			//'watch'

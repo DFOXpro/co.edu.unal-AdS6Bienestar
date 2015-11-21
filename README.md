@@ -16,7 +16,8 @@ Proyecto Bienestar Grupo 6
 
 ### Librerias
 * Mysql/jdbc (disponible en cualquier IDE)
-* jsonSimple (disponible en ´´´ ./server/src/lib/json-simple/json-simple-1.1.1.jar ´´´)
+* jsonSimple (disponible en ./server/src/lib/json-simple/json-simple-1.1.1.jar)
+* ldap (disponible en ./server/src/lib/ldap.jar)
 
 ### BD
 Ver instrucciones en ./Documentation/DataBase/README.md

@@ -93,6 +93,22 @@ app.controller('eventos', function ($rootScope, $scope, $routeParams, $conexion,
 					);
 				}
 			};
+			$scope.beneficiarios = function (){
+				$tabla.get(
+					"admin",
+					$scope.inscritos.titulo,
+					$scope.inscritos.pos,
+					$scope.inscritos.tamano,
+					"beneficiarios",
+					function (r){
+						$scope.inscritos.tabla = r;
+						$scope.inscritos.getTamano();
+					},
+					$scope.inscritos.eliminar,
+					$scope.inscritos.tituloAccion2,
+					$scope.inscritos.id
+				);
+			};
 
 			$conexion.enviar(
 				"admin",

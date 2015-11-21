@@ -46,6 +46,10 @@ public class CtrlUsuario {
 	public static ArrayList<ConvocatoriaEntity> leerMultiplesConvocatorias(int posicion, int tamano) {
 		return ConvocatoriaDAO.getConvocatorias(tamano, posicion);
 	}
+        
+        public static ArrayList<ConvocatoriaEntity> leerConvocatoriasApoyo() {
+		return ConvocatoriaDAO.getConvocatoriasApoyo();
+	}
 
 	public static int obtenerTotalConvocatorias() {
 		return ConvocatoriaDAO.getCountConvoctorias();

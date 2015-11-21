@@ -6,6 +6,7 @@ import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Usuario.CtrlUsuario;
 import static co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlRegistro.isValidEmailAddress;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicio.ROB;
 import java.util.ArrayList;
 
 /**
@@ -129,7 +130,26 @@ public class CtrlAdmin extends CtrlUsuario {
 		}
 		return r;
 	}
-
+        // Se verifica si el correo recibido a traves del webservice corresponde, primero, a un usuario en la aplicacion, segundo,
+        // a un usuario asociado a una convocatoria        
+        public static ROB verificarUsuarioConvocatoriaViajes(String correo){
+            ROB result = new ROB();
+            int r = UsuarioDAO.verificarUsuarioConvocatoriaViajes(correo);
+            
+            if (r>0){
+                result.setSuccess(true);
+                result.setData("BOGOTA"+","+"PAIPA");
+                result.setErr_message("Su transaccion fue exitosa");
+            }else{
+                result.setSuccess(false);
+                result.setErr_message("Error en la transaccion");
+            }
+            
+            return result;
+        }
+        
+        
+        
 	// Retorna usuarios en taller
 	public static ArrayList<UsuarioEntity> obtenerUsuariosEnTaller(int ID_TALLER, int tamano, int pagina) {
 		return UsuarioDAO.getUsuariosByTaller(ID_TALLER, tamano, pagina);

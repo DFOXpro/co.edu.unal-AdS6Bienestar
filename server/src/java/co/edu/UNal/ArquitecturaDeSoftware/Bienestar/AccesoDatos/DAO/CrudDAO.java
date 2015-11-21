@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.naming.InitialContext;
@@ -72,7 +73,7 @@ public abstract class CrudDAO<E extends Entity> {
         ) {
             Logger.getLogger(CrudDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }*/
+        }/**/
     }
 
     private boolean cerrarConeccion(){
@@ -121,9 +122,13 @@ public abstract class CrudDAO<E extends Entity> {
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             for (int i = 0; i < param.size(); i++){
-                if(param.get(i).getClass() == Integer.class);
-                    ps.setInt(i+1, (int) param.get(i));
-                if(param.get(i).getClass() == String.class);
+                String className = param.get(i).getClass().getName();
+                String clString = String.class.getName();
+                String clInteger = Integer.class.getName();
+                
+                if(className.matches(clString))
+                    ps.setString(i+1, (String)param.get(i));
+                if(className.matches(clInteger))
                     ps.setInt(i+1, (int) param.get(i));
             }
             return ps.executeQuery();

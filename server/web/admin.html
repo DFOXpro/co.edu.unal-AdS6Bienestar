@@ -27,6 +27,7 @@
       <!-- Use the "active" class for the active menu item-->
       <li ng-repeat="ruta in rutas" ng-class="{'active':$last}"><a href="#{{ruta.url}}">{{ruta.nombre}}</a></li>
       <li class="logout"><a ng-click="cerrarSesion()">Salir</a></li>
+      <li class="consumir"><a ng-click="consumirServicio()">Consumir</a></li>
       <li class="logout"><a href="/usuario.html">Entrar como usuario</a></li>
     </ul>
     <div id="containerHolder">

@@ -160,6 +160,33 @@ public class ConvocatoriaDAO extends CrudDAO<ConvocatoriaEntity> {
 		return convocatorias;
 	}
 
+                /**
+	 * Retorna la lista de convocatorias que tengan la palabra 'Apoyo'
+	 *
+	 * 
+	 * @return
+	 */
+	public static ArrayList<ConvocatoriaEntity> getConvocatoriasApoyo() {
+		int posicion = 1;
+
+		ArrayList<Object> param = new ArrayList<>();
+		param.add(posicion);
+		param.add(0);
+
+		ArrayList<ConvocatoriaEntity> convocatorias = new ArrayList<>();
+		ResultSet rs = CrudDAO.query("select * from CONVOCATORIA where upper(NOMBRE) like '%APOYO%' ", param);
+		try {
+			while (rs.next()) {
+				ConvocatoriaEntity ue = toEntity(rs);
+				convocatorias.add(ue);
+			}
+		} catch (SQLException e) {
+			System.out.println("ConvocatoriasDAO.getConvocatoriasApoyo: " + e.getMessage());
+			return new ArrayList<>();
+		}
+		return convocatorias;
+	}
+        
 	/**
 	 * Retorna la cantidad de convocatorias
 	 *

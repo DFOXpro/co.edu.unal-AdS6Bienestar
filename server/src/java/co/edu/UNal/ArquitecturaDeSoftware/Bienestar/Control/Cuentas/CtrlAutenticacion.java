@@ -4,6 +4,7 @@ import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Sesion;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Activas;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Cifrado;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicio.ConsumoRecurso;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,9 @@ public class CtrlAutenticacion {
 			String usuario,
 			String contrasena,
 			String cookieHashCode
-	) {
+	) 
+        {
+            ConsumoRecurso.RegistrarEstudiantesEntidad(4);
 		try {
 			usuario = new String(Cifrado.decodeBASE64(usuario), "UTF-8");
 			contrasena = new String(Cifrado.decodeBASE64(contrasena), "UTF-8");

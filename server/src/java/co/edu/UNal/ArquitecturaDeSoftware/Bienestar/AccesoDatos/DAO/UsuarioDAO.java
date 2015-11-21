@@ -16,6 +16,28 @@ import java.util.ArrayList;
  */
 public class UsuarioDAO extends CrudDAO<UsuarioEntity> {
 
+    public static int verificarUsuarioConvocatoriaViajes(String correo) {
+        	ArrayList<Object> param = new ArrayList<>();
+		param.add(correo);
+
+		int count;
+		ResultSet rs = CrudDAO.query("SELECT COUNT(*) c\n" +
+                                            "FROM USUARIO US JOIN USUARIO_CONVOCATORIA REL\n" +
+                                            "        ON(US.ID_USUARIO = REL.ID_USUARIO) JOIN CONVOCATORIA CON\n" +
+                                            "        ON(CON.ID_CONVOCATORIA = REL.ID_CONVOCATORIA)\n" +
+                                            "WHERE   UPPER(CON.NOMBRE) LIKE '%VIAJE%'\n" +
+                                            "        AND US.EMAIL = ?", param);
+
+		try {
+			rs.first();
+			count = rs.getInt("c");
+		} catch (SQLException e) {
+			System.out.println("UsuarioDAO.verificarUsuarioConvocatoriaViajes: " + e.getMessage());
+			return 0;
+		}
+		return count;
+    }
+
 	public UsuarioDAO() {
 	}
 

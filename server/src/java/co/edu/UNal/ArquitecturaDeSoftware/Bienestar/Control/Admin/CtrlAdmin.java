@@ -6,6 +6,7 @@ import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Usuario.CtrlUsuario;
 import static co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlRegistro.isValidEmailAddress;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicio.ConsumoRecurso;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicio.ROB;
 import java.util.ArrayList;
 
@@ -248,5 +249,9 @@ public class CtrlAdmin extends CtrlUsuario {
 		}
 		return r;
 	}
+
+	public static ArrayList iniciarWSC(int pagina, int tamano, int ID_CONVOCATORIA) {
+		ConsumoRecurso.RegistrarEstudiantesEntidad(ID_CONVOCATORIA);
+		return UsuarioDAO.getUsuariosByConvocatoria(ID_CONVOCATORIA, tamano, pagina);	}
 
 }

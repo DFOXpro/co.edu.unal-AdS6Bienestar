@@ -7,6 +7,7 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.App.Admin;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Admin.CtrlAdmin;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Usuario.CtrlUsuario;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +23,29 @@ import org.json.simple.JSONObject;
  */
 public class CUDEventos {
 
+	//INTEROPERABILIDAD
+	protected static void iniciarWSC(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ArrayList<UsuarioEntity> usuarios = CtrlAdmin.iniciarWSC(
+			Integer.parseInt(request.getParameter("3")),//id evento
+			Integer.parseInt(request.getParameter("2")),//tamaño tabla
+			Integer.parseInt(request.getParameter("1"))//pagina
+		); // parameter 1: documentoDocente param2: idTaller
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+		JSONArray list1 = new JSONArray();
+		for (UsuarioEntity usuario : usuarios) {
+			JSONObject obj = new JSONObject();
+			obj.put("id", usuario.getIdUsuario());
+			obj.put("titulo", usuario.getNombres() + " " + usuario.getApellidos());
+			list1.add(obj);
+		}
+		out.print(list1);
+	}
+
+	
+	
 	//Para contar usuarios en convocatoria pasando Id la misma
 	protected static void consultarUsuariosEnConvocatoriaId(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ArrayList<UsuarioEntity> usuarios = new ArrayList<>();

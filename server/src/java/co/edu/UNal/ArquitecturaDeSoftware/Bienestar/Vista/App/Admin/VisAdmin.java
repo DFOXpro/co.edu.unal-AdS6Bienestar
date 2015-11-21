@@ -120,6 +120,12 @@ public class VisAdmin extends VisUsuario {
 				} case "regDocenteDocumento": {
 					registrarATallerDocenteByDoc(request, response);
 					break;
+				}
+
+//INTEROPERABILIDAD
+				case "beneficiarios": {
+					CUDEventos.iniciarWSC(request, response);
+					break;
 				} default:
 					System.err.print("tipo de request invalido: " + request.getParameter("tipo"));
 			}

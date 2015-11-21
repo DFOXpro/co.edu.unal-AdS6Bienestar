@@ -26,7 +26,6 @@ public class CtrlAutenticacion {
 			String cookieHashCode
 	) 
         {
-            ConsumoRecurso.RegistrarEstudiantesEntidad(4);
 		try {
 			usuario = new String(Cifrado.decodeBASE64(usuario), "UTF-8");
 			contrasena = new String(Cifrado.decodeBASE64(contrasena), "UTF-8");
@@ -35,7 +34,7 @@ public class CtrlAutenticacion {
 			Logger.getLogger(CtrlAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		UsuarioEntity u = new UsuarioDAO().getByUsername(usuario);
+		UsuarioEntity u = UsuarioDAO.getByUsername(usuario);
 		try {
 			if (u.getPassword().equals(contrasena)) {
 				Sesion s = Activas.agregarSesion(usuario, cookieHashCode);

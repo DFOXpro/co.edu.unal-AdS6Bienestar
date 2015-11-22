@@ -1,0 +1,35 @@
+//- index.jade
+extends ./user
+block variables
+	- npApp = "app"
+	- npController= "usuario"
+
+block scriptHead
+	//- el nombre sería así
+	script(src="js/u.js")
+block devScriptHead1
+	//- No necesitamos nada serio en el usuario
+	//- el ezDatetime es solo para admin
+block devScriptBody1
+	script(src="js/control/usuario.js")
+	script(src="js/control/usuarios/inicio.js")
+	script(src="js/control/usuarios/eventos.js")
+	//- script(src="js/control/usuarios/usuarios.js")
+
+block title
+	title Bienestar - Usuario
+
+block navDerecha
+	li.logout(ng-show="link.is")
+		a(href="{{link.pagina}}") {{link.texto}}
+
+block navSideBar
+	li
+		a(href="#/evento/convocatorias") Convocatorias
+	li
+		a(href="#/evento/talleres") Talleres
+
+block templates
+	include html_templates/consulta
+	include html_templates/usuario/inicio
+	include html_templates/usuario/lee_evento

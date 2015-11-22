@@ -1,0 +1,60 @@
+//- index.jade
+extends ./user
+block variables
+	- npApp = "app"
+	- npController= "admin"
+
+block scriptHead
+	//- el nombre sería así
+	script(src="js/a.js")
+block devScriptHead1
+	link(
+		href="https://rawgit.com/jdewit/ez-dropdown/master/dist/ez-dropdown.min.css"
+		rel="stylesheet"
+	)
+	link(
+		href="js/lib/ez-datetime.min.css"
+		rel="stylesheet"
+	)
+	//- Libreria del datepicker
+	//- Dependencias
+		JQuery para que renderice bien unos botones ¬¬
+		Moment para manipulacion de fechas
+		ez-(modal/dropdown*transition) para no usar angular ui
+	script(src="js/lib/moment.min.js")
+	script(src="https://rawgit.com/jdewit/ez-modal/master/dist/ez-modal.min.js")
+	script(src="https://rawgit.com/jdewit/ez-modal/master/dist/ez-modal-tpl.min.js")
+	script(src="https://rawgit.com/jdewit/ez-dropdown/master/dist/ez-dropdown.min.js")
+	script(src="https://rawgit.com/jdewit/ez-transition/master/dist/ez-transition.min.js")
+	script(src="js/lib/jquery.min.js")
+	script(src="js/lib/ez-datetime.min.js")
+	script(src="js/lib/ez-datetime-tpl.js")
+	//- END libreria datepicker
+
+block devScriptBody1
+	script(src="js/control/admin.js")
+	script(src="js/control/admin/inicio.js")
+	script(src="js/control/admin/eventos.js")
+	script(src="js/control/admin/usuarios.js")
+	script(src="js/directiva/contrasena_igual.js")
+
+block title
+	title Bienestar - Administración
+
+block navDerecha
+	li.logout
+		a(href="/usuario.html") Entrar como usuario
+
+block navSideBar
+	li
+		a(href="#/usuarios") Gestion de usuarios
+	li
+		a(href="#/evento/convocatorias") Convocatorias
+	li
+		a(href="#/evento/talleres") Talleres
+
+block templates
+	include html_templates/consulta
+	include html_templates/admin/creacion_usuario
+	include html_templates/admin/creacion_evento
+	include html_templates/admin/inicio

@@ -1,0 +1,29 @@
+{
+  "name": "co.edu.unal-AdS6Bienestar/ClienteWEB",
+  "version": "0.0.1",
+  "authors": [
+    "Grupo 6 Arquitectura de Software semestre 2 2015 Bogotá Universidad Nacional de Colombia."
+  ],
+  "main": "build/main.index",
+  "moduleType": [
+    "node"
+  ],
+  "license": "../LICENCE",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "~1.4.6",
+    "bootstrap": "~3.3.5",
+    "cryptico": "*",
+    "ez-datetime": "~0.1.7",
+    "livereload-js": "~2.2.1",
+    "moment": "~2.10.6"
+  }
+}

@@ -1,0 +1,19 @@
+nbproject/
+build/
+dist/
+build.xml
+nbbuild.xml
+#Se hace push a los estaticos compilados por si las moscas
+#web/js/
+#web/index.html
+
+#Librerias que netbean puede agregar de alegre
+src/lib/CopyLibs/
+src/lib/javaee-endorsed-api-6.0/
+src/lib/hibernate4-persistence/
+
+#Configuraciones del glashfish
+setup/
+
+#Conf de la bd
+src/conf/

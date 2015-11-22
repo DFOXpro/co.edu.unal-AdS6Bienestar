@@ -1,0 +1,8 @@
+h1 {{evento.nombre}}
+p.descripcion {{evento.descripcion}}
+p.fechas Fecha de inicio del evento: 
+	span.inicio {{evento.fechaInicio}}
+	|, fecha de finalización: 
+	span.fin {{evento.fechaFin}}
+span.costo {{evento.costo | currency}}
+span.cupos {{evento.cupos}} cupos

@@ -1,0 +1,54 @@
+//- BASE PARA (PROFESORES, ESTUDIANTES, ADMIN).HTML
+extends ./main
+block variables
+	- npApp = "app"
+
+block devScriptHead
+	link(
+		href='css/transdmin.css'
+		rel='stylesheet'
+	)
+	block devScriptHead1
+
+block devScriptBody
+	block devScriptBody1
+	script(src="js/servicios/sesion.js")
+	script(src="js/servicios/conexion.js")
+	script(src="js/control/util/navegacion.js")
+	script(src="js/directiva/tabla.js")
+
+
+block title
+	title Bienestar - Administración
+
+block content
+	// You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet
+	ul#mainNav(ng-controller="nav")
+		//- Este navegador tendrá la ruta, ejemplo: Inicio/Gestion de usuarios/Pepito
+		// Use the "active" class for the active menu item
+		li(
+			ng-repeat="ruta in rutas"
+			ng-class="{'active':$last}"
+		)
+			a(href='#{{ruta.url}}') {{ruta.nombre}}
+
+		li.logout
+			a(ng-click="cerrarSesion()") Salir
+		block navDerecha
+	#containerHolder
+		#container
+			//- SideNav
+			#sidebar
+				ul.sideNav
+					block navSideBar
+			//- Contenido
+			#main(ng-view)
+			//- #main
+			.clear
+		//- #container
+		p#footer Bienestar Universitario - Arquitectura de Software 2015 II
+	//- #containerHolder
+
+	//- Templates para angular:
+	block templates
+	include html_templates/tabla

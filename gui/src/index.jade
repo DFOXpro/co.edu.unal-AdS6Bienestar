@@ -1,0 +1,63 @@
+//- index.jade
+extends ./main
+block variables
+	- npApp = "app"
+
+block devScriptHead
+	script(src="js/control/landing.js")
+block scriptHead
+	//- el nombre sería así
+	script(src="js/landing.js")
+block devScriptBody
+	script(src="js/servicios/conexion.js")
+
+block title
+	title Bienestar
+
+block content
+	.login-card(
+		ng-controller="landing"
+	)
+		h1 Log-in Bienestar
+		form(
+			ng-submit="is.submit()"
+			name="isf"
+			ng-hide="is.escojeRol"
+			novalidate
+		)
+			input(
+				required
+				type='email'
+				name='usuario'
+				placeholder='Correo Electronico'
+				ng-model="is.usuario"
+			)
+			.login-help(ng-show="isf.usuario.$error.email") Usuario no valido, debe ser un correo
+			input(
+				required
+				type='password'
+				name='contrasena'
+				placeholder='Contraseña'
+				ng-model="is.contrasena"
+				ng-minlength=5
+			)
+			.login-help(ng-show="isf.contrasena.$error.minlength") Contraseña muy corta
+			input.login.login-submit(
+				type='submit'
+				name='login'
+				value='Iniciar sesión'
+				ng-disabled="isf.$invalid"
+			)
+			.login-help(ng-show="is.isError") {{ is.error}}
+			a(href	='registro_general.html') Registrarse
+		div(
+			ng-show="is.escojeRol"
+		)
+			h2 Bienvenido {{usr}} ¿Qué rol deseas usar?
+			a(
+				href="admin.html"
+			) Administrador
+			br
+			a(
+				href="usuario.html"
+			) Profesor o Estudiante

@@ -5,8 +5,8 @@
  */
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicio;
 
-import EntidadPrueba.ListStudents;
-import EntidadPrueba.Student;
+//import EntidadPrueba.ListStudents;
+//import EntidadPrueba.Student;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 public class ConsumoRecurso {
 
 	public static void RegistrarEstudiantesEntidad(int idConvocatoria) {
-		ListStudents objectReceived = getBestStudents(1);
+		/*ListStudents objectReceived = getBestStudents(1);
 		List<Student> lista = objectReceived.getStudents();
 		int cuposLibres = lista.size();
 
@@ -39,15 +39,15 @@ public class ConsumoRecurso {
 
 			}
 			UsuarioDAO.registrarConvocatoria(id, idConvocatoria);
-		}
+		}*/
 	}
 
     //Si no existe, agregar       
         //return null;
-	private static ListStudents getBestStudents(int arg0) {
+	/*private static ListStudents getBestStudents(int arg0) {
 		EntidadPrueba.BestStudents_Service service = new EntidadPrueba.BestStudents_Service();
 		EntidadPrueba.BestStudents port = service.getBestStudentsPort();
 		return port.getBestStudents(arg0);
-	}
+	}*/
 
 }

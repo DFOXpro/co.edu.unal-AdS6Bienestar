@@ -7,12 +7,9 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta;
  */
 
 
-import com.novell.ldap.LDAPAttributeSet;
 import com.novell.ldap.LDAPConnection;
-import com.novell.ldap.LDAPEntry;
 import com.novell.ldap.LDAPException;
 import java.io.UnsupportedEncodingException;
-import java.util.jar.Attributes;
 
 /**
  *

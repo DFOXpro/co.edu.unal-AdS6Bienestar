@@ -1,10 +1,13 @@
 package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta;
 
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.CtrlAutenticacion;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Cifrado;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -29,12 +32,14 @@ public class VisAutenticacion extends HttpServlet {
 	 */
 	protected void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
+            
+                
+            
 		ArrayList r = CtrlAutenticacion.autenticar(
 				request.getParameter("1"),
 				request.getParameter("2"),
 				request.getParameter("3")
 		);
-
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		if (r.get(0) == "error") {

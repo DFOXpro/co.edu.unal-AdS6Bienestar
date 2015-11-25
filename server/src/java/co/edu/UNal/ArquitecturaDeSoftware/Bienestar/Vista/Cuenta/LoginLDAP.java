@@ -41,7 +41,7 @@ public class LoginLDAP {
     
     public Boolean conectar(){
         
-        String ldapHost = "192.168.43.100"; //ID SErvidor LDAP
+        String ldapHost = "192.168.0.17"; //ID SErvidor LDAP
         String dn = "cn=admin,dc=arqsoft";
         String password = "arqsoft2015";
         
@@ -63,16 +63,15 @@ public class LoginLDAP {
     }
     
     public Boolean validarContrasena(String nombreUsuario, String contrasena){
-        
-            String dn = "cn="+nombreUsuario+",ou=Usuarios,dc=arqsoft";
+            String dn = "cn="+nombreUsuario+",ou=Bienestar,dc=arqsoft";
+            System.out.println(dn+" - "+contrasena);
         try {
-            
             lc.bind(dn, contrasena);
            
             System.out.println("====Contrasena Validada====");
             return true;
         } catch (LDAPException ex) {
-            System.out.println("====ERROR al validar la contrasena====");
+            System.out.println("====ERROR al validar la contrasena===="+ex.getMessage());
             return false;
         }
         

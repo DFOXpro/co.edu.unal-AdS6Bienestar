@@ -4,8 +4,8 @@ import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Sesion;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Activas;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Cuentas.Util.Cifrado;
-import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicio.ConsumoRecurso;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Vista.Cuenta.LoginLDAP;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +34,19 @@ public class CtrlAutenticacion {
 			Logger.getLogger(CtrlAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		UsuarioEntity u = UsuarioDAO.getByUsername(usuario);
+		UsuarioEntity u = UsuarioDAO.getByUsername(usuario);                
 		try {
-			if (u.getPassword().equals(contrasena)) {
+                    
+                    //String usuario="Daito Manabe";
+                    //String contrasena="12345";
+            
+
+                    LoginLDAP ldap = new LoginLDAP();
+                    String nombreLDAP = u.getNombres()+" "+u.getApellidos();
+                    String message = ldap.login(nombreLDAP, contrasena);
+                    System.out.println(message);
+                    
+			if (message.equals("Login exitoso")) {
 				Sesion s = Activas.agregarSesion(usuario, cookieHashCode);
 				if (esperandoLlave == null) {
 					esperandoLlave = new HashMap<>();

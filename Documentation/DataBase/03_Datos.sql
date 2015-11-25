@@ -12,6 +12,7 @@ insert into USUARIO values('7','7','CC','Nombre 7','Apellido 7','user7@unal.edu.
 insert into USUARIO values('8','8','CC','Nombre 8','Apellido 8','user8@unal.edu.co','user8','E',null);
 insert into USUARIO values('9','9','CC','Nombre 9','Apellido 9','user9@unal.edu.co','user9','E',null);
 insert into USUARIO values('10','10','CC','Nombre 10','Apellido 10','user10@unal.edu.co','user10','E',null);
+insert into USUARIO values('11','11','CC','Daito','Manabe','dmanabe@unal.edu.co','12345','A',null);
 
 -- INGRESAR TALLERES Y CURSOS LIBRES
 delete from TALLER;
@@ -34,7 +35,7 @@ delete from CONVOCATORIA;
 insert into CONVOCATORIA values('1' ,'Convocatoria1' ,'Convocatoria1 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');
 insert into CONVOCATORIA values('2' ,'Convocatoria2' ,'Convocatoria2 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');
 insert into CONVOCATORIA values('3' ,'Convocatoria3' ,'Convocatoria3 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');
-insert into CONVOCATORIA values('4' ,'Convocatoria4' ,'Convocatoria4 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');
+insert into CONVOCATORIA values('4' ,'Convocatoria Viaje' ,'Convocatoria4 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');
 insert into CONVOCATORIA values('5' ,'Convocatoria5' ,'Convocatoria5  Desc',CURDATE() + INTERVAL 10 DAY,'5');
 insert into CONVOCATORIA values('6' ,'Convocatoria6' ,'Convocatoria6 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');
 insert into CONVOCATORIA values('7' ,'Convocatoria7' ,'Convocatoria7 Desc' ,CURDATE() + INTERVAL 10 DAY,'5');

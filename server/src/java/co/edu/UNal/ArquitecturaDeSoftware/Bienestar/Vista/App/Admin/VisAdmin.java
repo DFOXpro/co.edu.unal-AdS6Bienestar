@@ -125,6 +125,7 @@ public class VisAdmin extends VisUsuario {
 //INTEROPERABILIDAD
 				case "beneficiarios": {
 					CUDEventos.iniciarWSC(request, response);
+                                        //obtenerInscritosConv(request, response);
 					break;
 				} default:
 					System.err.print("tipo de request invalido: " + request.getParameter("tipo"));

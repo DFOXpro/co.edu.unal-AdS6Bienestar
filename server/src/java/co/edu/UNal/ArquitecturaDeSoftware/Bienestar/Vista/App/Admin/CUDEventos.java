@@ -26,11 +26,13 @@ public class CUDEventos {
 	//INTEROPERABILIDAD
 	protected static void iniciarWSC(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ArrayList<UsuarioEntity> usuarios = CtrlAdmin.iniciarWSC(
-			Integer.parseInt(request.getParameter("3")),//id evento
+			Integer.parseInt(request.getParameter("1")),//id evento
 			Integer.parseInt(request.getParameter("2")),//tamaño tabla
-			Integer.parseInt(request.getParameter("1"))//pagina
+			Integer.parseInt(request.getParameter("3"))//pagina
 		); // parameter 1: documentoDocente param2: idTaller
 		
+                
+                
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 

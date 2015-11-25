@@ -152,9 +152,9 @@
           <button ng-hide="crear" ng-click="eliminar()">Eliminar</button>
           <hr ng-hide="crear">
           <btabla ng-hide="crear" info="inscritos.tabla"></btabla>
-          <button ng-click="beneficiarios()">Pedir beneficiarios</button>
           <p>total inscritos {{inscritos.total}}</p>
         </form>
+        <button ng-hide="exitoso" ng-click="beneficiarios()">Pedir Beneficiarios</button>
       </div>
       <div ng-show="exitoso">
         <div ng-show="!eliminado">

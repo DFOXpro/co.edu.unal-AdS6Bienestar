@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class ConsumoRecurso {
 
+        
+    
 	public static void RegistrarEstudiantesEntidad(int idConvocatoria) {
 		/*ListStudents objectReceived = getBestStudents(1);
 		List<Student> lista = objectReceived.getStudents();
@@ -36,15 +38,16 @@ public class ConsumoRecurso {
 
 				newUsr = UsuarioDAO.getByUsername(est.getEstEmail());
 				id = newUsr.getIdUsuario();
-
 			}
+                        
 			UsuarioDAO.registrarConvocatoria(id, idConvocatoria);
 		}*/
 	}
 
     //Si no existe, agregar       
         //return null;
-	/*private static ListStudents getBestStudents(int arg0) {
+        /*
+	private static ListStudents getBestStudents(int arg0) {
 		EntidadPrueba.BestStudents_Service service = new EntidadPrueba.BestStudents_Service();
 		EntidadPrueba.BestStudents port = service.getBestStudentsPort();
 		return port.getBestStudents(arg0);

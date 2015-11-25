@@ -251,6 +251,7 @@ public class CtrlAdmin extends CtrlUsuario {
 	}
 
 	public static ArrayList iniciarWSC(int pagina, int tamano, int ID_CONVOCATORIA) {
+                System.out.println("Convocatoria "+ID_CONVOCATORIA);
 		ConsumoRecurso.RegistrarEstudiantesEntidad(ID_CONVOCATORIA);
 		return UsuarioDAO.getUsuariosByConvocatoria(ID_CONVOCATORIA, tamano, pagina);	}
 

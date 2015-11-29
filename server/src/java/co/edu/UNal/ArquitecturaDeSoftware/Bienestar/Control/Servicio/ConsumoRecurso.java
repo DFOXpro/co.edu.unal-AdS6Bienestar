@@ -9,6 +9,8 @@ package co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicio;
 //import EntidadPrueba.Student;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.DAO.UsuarioDAO;
 import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.AccesoDatos.Entity.UsuarioEntity;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicios.ListStudents;
+import co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicios.Student;
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ public class ConsumoRecurso {
         
     
 	public static void RegistrarEstudiantesEntidad(int idConvocatoria) {
-		/*ListStudents objectReceived = getBestStudents(1);
+		ListStudents objectReceived = bienestarESBOperation(1);
 		List<Student> lista = objectReceived.getStudents();
 		int cuposLibres = lista.size();
 
@@ -41,7 +43,7 @@ public class ConsumoRecurso {
 			}
                         
 			UsuarioDAO.registrarConvocatoria(id, idConvocatoria);
-		}*/
+		}
 	}
 
     //Si no existe, agregar       
@@ -52,5 +54,11 @@ public class ConsumoRecurso {
 		EntidadPrueba.BestStudents port = service.getBestStudentsPort();
 		return port.getBestStudents(arg0);
 	}*/
+
+    private static ListStudents bienestarESBOperation(int inputfal) {
+        co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicios.BienestarESBService service = new co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicios.BienestarESBService();
+        co.edu.UNal.ArquitecturaDeSoftware.Bienestar.Control.Servicios.BienestarESBPortType port = service.getBienestarESBPort();
+        return port.bienestarESBOperation(inputfal);
+    }
 
 }

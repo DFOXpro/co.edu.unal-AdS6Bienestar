@@ -56,6 +56,7 @@
       </div>
       <input type="submit" value="Inscribirse" ng-disabled="sinCupos" ng-hide="inscrito" ng-click="evento.inscribirse(true)" class="login login-submit">
       <input type="submit" value="Salir del evento" ng-show="inscrito" ng-click="evento.inscribirse(false)" class="login login-submit">
+      <button  ng-click="beneficiarios()">Pedir Beneficiarios</button>
       <div ng-show="evento.isError" class="login-help">{{ evento.error}}</div>
       <div ng-show="exitoso">
         <div ng-show="!eliminado">

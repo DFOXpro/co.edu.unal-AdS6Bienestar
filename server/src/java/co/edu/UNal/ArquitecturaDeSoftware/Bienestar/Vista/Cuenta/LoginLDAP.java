@@ -41,7 +41,7 @@ public class LoginLDAP {
     
     public Boolean conectar(){
         
-        String ldapHost = "192.168.0.17"; //ID SErvidor LDAP
+        String ldapHost = "192.168.43.100"; //ID SErvidor LDAP
         String dn = "cn=admin,dc=arqsoft";
         String password = "arqsoft2015";
         

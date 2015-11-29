@@ -2,13 +2,13 @@
 -- INGRESAR DATOS TABLA USUARIO
 delete from USUARIO;
 
-insert into USUARIO values('1','12345678','CC','Nombre 1','Apellido 1','user1@unal.edu.co','user1','A',null);
-insert into USUARIO values('2','23456789','CC','Nombre 2','Apellido 2','user2@unal.edu.co','user2','P',null);
+insert into USUARIO values('1','12345678','CC','Diego','Gerena','dagerenaq@unal.edu.co','user1','A',null);
+insert into USUARIO values('2','23456789','CC','Carlos','Mahecha','cmahechap@unal.edu.co','user2','P',null);
 insert into USUARIO values('3','34567891','CC','Nombre 3','Apellido 3','user3@unal.edu.co','user3','P',null);
 insert into USUARIO values('4','45678912','CC','Nombre 4','Apellido 4','user4@unal.edu.co','user4','P',null);
 insert into USUARIO values('5','56789123','CC','Nombre 5','Apellido 5','user5@unal.edu.co','user5','P',null);
 insert into USUARIO values('6','67891234','CC','Nombre 6','Apellido 6','user6@unal.edu.co','user6','E',null);
-insert into USUARIO values('7','78912345','CC','Nombre 7','Apellido 7','user7@unal.edu.co','user7','E',null);
+insert into USUARIO values('7','78912345','CC','Andres','Diaz','andres@unal.edu.co','user7','E',null);
 insert into USUARIO values('8','89123456','CC','Nombre 8','Apellido 8','user8@unal.edu.co','user8','E',null);
 insert into USUARIO values('9','91234567','CC','Nombre 9','Apellido 9','user9@unal.edu.co','user9','E',null);
 insert into USUARIO values('10','101234567','CC','Nombre 10','Apellido 10','user10@unal.edu.co','user10','E',null);
